@@ -69,6 +69,8 @@ function toThemeVariable(path: string[]): string {
           return `--font-weight-${n}`;
         case "leading":
           return `--leading-${n}`;
+        case "tracking":
+          return `--tracking-${n}`;
         default:
           throw new Error(
             `Unmapped font subgroup "${subgroup}" at token path ${path.join(".")}. ` +

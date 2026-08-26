@@ -17,6 +17,7 @@ export interface JobListItem {
   company_slug: string;
   source: string;
   department: string | null;
+  employment_type: string | null;
   location_raw: string | null;
   remote_policy: string | null;
   comp_min: number | null;
@@ -36,7 +37,7 @@ export interface JobListItem {
 // from the select string at the type level, and `a + b` widens it to `string`,
 // which silently degrades the result to an untyped error shape.
 const LIST_COLUMNS =
-  "id,title,url,company_name,company_slug,source,department,location_raw,remote_policy,comp_min,comp_max,comp_currency,comp_period,comp_source,years_min,years_max,years_source,first_seen_at,interaction_state,application_id";
+  "id,title,url,company_name,company_slug,source,department,employment_type,location_raw,remote_policy,comp_min,comp_max,comp_currency,comp_period,comp_source,years_min,years_max,years_source,first_seen_at,interaction_state,application_id";
 
 export async function listJobs(options: {
   limit?: number;

@@ -23,13 +23,17 @@ const STATUS_LABEL: Record<string, string> = {
 /*
  * Status is carried by the label itself, never by color alone — DESIGN.md §9 is
  * DECIDED on that. The token only reinforces what the word already says.
+ *
+ * Both attention states use status/stale because it is the only attention color
+ * the Figma palette defines. DESIGN.md §7 lists the failed-run treatment as
+ * OPEN and there is no danger token, so nothing is invented here.
  */
 const STATUS_TONE: Record<string, string> = {
   success: "text-content-secondary",
-  empty_suspect: "text-feedback-warning",
+  empty_suspect: "text-status-stale",
   not_modified: "text-content-tertiary",
   skipped_unresolved: "text-content-tertiary",
-  failure: "text-feedback-danger",
+  failure: "text-status-stale",
 };
 
 export default async function RunsPage() {
@@ -69,7 +73,7 @@ export default async function RunsPage() {
               >
                 <span className="font-medium">{company.name}</span>
                 <span className="text-content-tertiary">{company.slug}</span>
-                <span className="text-feedback-warning">
+                <span className="text-status-stale">
                   {company.ats_resolution_error ?? company.ats_resolution_status}
                 </span>
               </li>
@@ -173,7 +177,7 @@ export default async function RunsPage() {
         {needsAttention.length > 0 && (
           <ul className="flex flex-col gap-tight">
             {needsAttention.map((run) => (
-              <li key={run.id} className="text-small text-feedback-warning">
+              <li key={run.id} className="text-small text-status-stale">
                 {run.company_name}: {run.error_message ?? run.status}
               </li>
             ))}

@@ -94,3 +94,24 @@ export function formatDuration(ms: number | null): string {
   if (ms < 1000) return `${ms}ms`;
   return `${(ms / 1000).toFixed(1)}s`;
 }
+
+/**
+ * Ultra-compact age, for card meta and the sidebar footer: "2d", "14m", "4h".
+ * Distinct from relativeDays, which is prose for list rows.
+ */
+export function relativeShort(iso: string | null): string {
+  if (!iso) return "—";
+  const mins = Math.floor((Date.now() - new Date(iso).getTime()) / 60_000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins}m ago`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days}d ago`;
+  return `${Math.floor(days / 30)}mo ago`;
+}
+
+/** Age with no "ago" — the card meta slot, which sits beside the company name. */
+export function ageBadge(iso: string | null): string {
+  return relativeShort(iso).replace(" ago", "");
+}

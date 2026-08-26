@@ -1258,6 +1258,7 @@ export type Database = {
           comp_currency: string | null
           comp_max: number | null
           comp_min: number | null
+          comp_note: string | null
           comp_period: string | null
           comp_source: string | null
           company_id: string | null
@@ -1265,6 +1266,7 @@ export type Database = {
           company_slug: string | null
           department: string | null
           dismissal_reason_code: string | null
+          employment_type: string | null
           first_seen_at: string | null
           id: string | null
           interaction_state: string | null
@@ -1279,6 +1281,7 @@ export type Database = {
           role_type: string | null
           seniority: string | null
           source: Database["public"]["Enums"]["ats_source"] | null
+          team: string | null
           title: string | null
           url: string | null
           years_max: number | null
