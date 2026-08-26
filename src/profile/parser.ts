@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { anthropicApiKey } from "@/lib/env";
-import { RESUME_SCHEMA, type ParsedResume } from "./schema";
+import { RESUME_SCHEMA, emptyToNull, type ParsedResume } from "./schema";
 
 /**
  * Resume parsing, behind an interface.
@@ -26,9 +26,14 @@ const MODEL = "claude-opus-5";
 
 const SYSTEM = `You extract structured data from resumes.
 
-Transcribe, do not infer. If the resume does not state something, the field is
-null — an invented start date or an assumed seniority is worse than an absent
-one, because everything downstream will treat it as fact.
+Transcribe, do not infer. If the resume does not state something, leave the
+field empty — "" for text, null for a number. An invented start date or an
+assumed seniority is worse than an absent one, because everything downstream
+will treat it as fact.
+
+Never write "N/A", "unknown", "none" or a dash to mean absent. The empty string
+is the only way to say it; anything else is indistinguishable from something the
+resume actually said.
 
 Two things do warrant computation rather than transcription:
 - yearsExperienceTotal, from the role dates. Null if the dates do not support it.
@@ -51,6 +56,10 @@ resume is many skills, not one.`;
  * is guaranteed to match the shape. No response validation library is involved,
  * and there is no parse-retry loop, because there is nothing for the model to
  * get structurally wrong.
+ *
+ * The one thing the schema cannot express is null-for-absent on a text field —
+ * see the note on RESUME_SCHEMA — so the response is passed through emptyToNull
+ * before it leaves this class. Callers get ParsedResume as documented.
  */
 export class AnthropicResumeParser implements ResumeParser {
   readonly id = "anthropic";
@@ -93,7 +102,10 @@ export class AnthropicResumeParser implements ResumeParser {
       );
     }
 
-    return JSON.parse(text.text) as ParsedResume;
+    // The schema's text fields are plain strings carrying "" for absent, which
+    // is a concession to the API's cap on union-typed parameters and not
+    // something any caller should have to know. This is where that ends.
+    return emptyToNull(JSON.parse(text.text)) as ParsedResume;
   }
 }
 

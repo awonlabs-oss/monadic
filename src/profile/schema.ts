@@ -64,9 +64,22 @@ export interface ParsedResume {
  * The output contract handed to the model.
  *
  * Every object carries `additionalProperties: false` and lists every key in
- * `required` — structured outputs demand both, and it also means a field the
- * resume does not mention comes back explicitly null rather than absent, so the
+ * `required`. Both are load-bearing: omitting a key from `required` is rejected
+ * outright ("Schema is too complex"), and requiring all of them means a field
+ * the resume does not mention comes back explicitly rather than absent, so the
  * caller never has to tell "not on the resume" from "the parser forgot".
+ *
+ * Absent text is the empty string, not null — the one place this schema does
+ * not say what it means. Structured outputs cap a schema at 16 union-typed
+ * parameters, and every field here being nullable put it at 25, so the request
+ * was refused before the model ever saw it. Making the text fields plain
+ * strings takes it to four unions: the two year integers, the total, and the
+ * skill category.
+ *
+ * Nothing outside this module sees an empty string. `emptyToNull` below is
+ * applied to every parse before it is returned, so ParsedResume means null the
+ * way it always did, and the conflation of "absent" with "blank" costs nothing
+ * because none of these fields has a meaningful empty-but-present value.
  */
 export const RESUME_SCHEMA = {
   type: "object",
@@ -76,27 +89,28 @@ export const RESUME_SCHEMA = {
     "yearsExperienceTotal", "senioritySignal", "experiences", "education", "skills",
   ],
   properties: {
-    fullName: { type: ["string", "null"], description: "Full name as written." },
-    email: { type: ["string", "null"] },
-    phone: { type: ["string", "null"] },
-    location: { type: ["string", "null"], description: "City and region as written." },
+    fullName: { type: "string", description: "Full name as written." },
+    email: { type: "string" },
+    phone: { type: "string" },
+    location: { type: "string", description: "City and region as written." },
     links: {
       type: "object",
       additionalProperties: false,
       required: ["linkedin", "github", "portfolio"],
       properties: {
-        linkedin: { type: ["string", "null"] },
-        github: { type: ["string", "null"] },
-        portfolio: { type: ["string", "null"] },
+        linkedin: { type: "string" },
+        github: { type: "string" },
+        portfolio: { type: "string" },
       },
     },
     headline: {
-      type: ["string", "null"],
+      type: "string",
       description: "The one-line title under the name, if there is one. Not invented.",
     },
     summary: {
-      type: ["string", "null"],
-      description: "The resume's own summary or objective paragraph, verbatim. Null if absent.",
+      type: "string",
+      description:
+        "The resume's own summary or objective paragraph, verbatim. Empty string if absent.",
     },
     yearsExperienceTotal: {
       type: ["number", "null"],
@@ -104,7 +118,7 @@ export const RESUME_SCHEMA = {
         "Total professional years, computed from the role dates. Null when the dates do not support a figure.",
     },
     senioritySignal: {
-      type: ["string", "null"],
+      type: "string",
       description: "Overall level the resume reads at, e.g. 'senior', 'staff', 'entry'.",
     },
     experiences: {
@@ -119,20 +133,20 @@ export const RESUME_SCHEMA = {
         ],
         properties: {
           company: { type: "string" },
-          title: { type: ["string", "null"] },
-          location: { type: ["string", "null"] },
+          title: { type: "string" },
+          location: { type: "string" },
           startDate: {
-            type: ["string", "null"],
+            type: "string",
             description:
               "ISO 8601 date. Use the first of the month when only a month is given, the first of January when only a year is.",
           },
-          startText: { type: ["string", "null"], description: "The date exactly as written." },
-          endDate: { type: ["string", "null"] },
-          endText: { type: ["string", "null"] },
+          startText: { type: "string", description: "The date exactly as written." },
+          endDate: { type: "string" },
+          endText: { type: "string" },
           isCurrent: { type: "boolean" },
-          seniority: { type: ["string", "null"] },
+          seniority: { type: "string" },
           summary: {
-            type: ["string", "null"],
+            type: "string",
             description: "What the role involved, condensed from its bullets.",
           },
         },
@@ -146,11 +160,11 @@ export const RESUME_SCHEMA = {
         required: ["institution", "degree", "field", "startYear", "endYear", "notes"],
         properties: {
           institution: { type: "string" },
-          degree: { type: ["string", "null"] },
-          field: { type: ["string", "null"] },
+          degree: { type: "string" },
+          field: { type: "string" },
           startYear: { type: ["integer", "null"] },
           endYear: { type: ["integer", "null"] },
-          notes: { type: ["string", "null"] },
+          notes: { type: "string" },
         },
       },
     },
@@ -164,12 +178,69 @@ export const RESUME_SCHEMA = {
         required: ["name", "category"],
         properties: {
           name: { type: "string" },
+          /*
+           * anyOf rather than a union type carrying a nullable enum.
+           *
+           * The API validates each enum member against the declared type, and a
+           * union type fails that check outright — "Enum value 'language' does
+           * not match declared type '['string', 'null']'" — whether or not null
+           * is itself in the enum. So the two halves have to be expressed as
+           * separate branches.
+           *
+           * Dropping the enum is the other way to make the request legal and it
+           * is the wrong one: asked to categorise an unfamiliar skill without a
+           * vocabulary, the model answers "Programming Language" where the rest
+           * of the parse says "language", and the categories stop being a set
+           * anything can group by.
+           */
           category: {
-            type: ["string", "null"],
-            enum: ["language", "framework", "tool", "platform", "domain", "other", null],
+            anyOf: [
+              {
+                type: "string",
+                enum: ["language", "framework", "tool", "platform", "domain", "other"],
+              },
+              { type: "null" },
+            ],
           },
         },
       },
     },
   },
 } as const;
+
+/**
+ * Keys the schema declares as genuinely required strings. Everything else that
+ * comes back blank means "not on the resume" and becomes null.
+ *
+ * A blank one of these is a broken row rather than an absent field, and it is
+ * left as the empty string on purpose: the columns behind them are NOT NULL, so
+ * nulling them would trade a visibly empty entry for a failed insert. There is
+ * no key collision — `company` appears only on an experience, `institution`
+ * only on an education, `name` only on a skill.
+ */
+const REQUIRED_STRINGS = new Set(["company", "institution", "name"]);
+
+/**
+ * Turns the wire representation into the documented one: blank text becomes
+ * null, everywhere, at any depth.
+ *
+ * Trims on the way through, so a field padded to " " counts as absent too —
+ * the model is being asked for a sentinel and " " is the same intent.
+ */
+export function emptyToNull<T>(value: T): T {
+  if (typeof value === "string") {
+    return (value.trim() === "" ? null : value.trim()) as T;
+  }
+  if (Array.isArray(value)) {
+    return value.map((v) => emptyToNull(v)) as T;
+  }
+  if (value !== null && typeof value === "object") {
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+      out[k] =
+        REQUIRED_STRINGS.has(k) && typeof v === "string" ? v.trim() : emptyToNull(v);
+    }
+    return out as T;
+  }
+  return value;
+}
