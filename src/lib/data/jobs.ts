@@ -72,14 +72,32 @@ export async function jobFacets(filters: JobFilters): Promise<Facets> {
 }
 
 export interface FeedStats {
+  /** Open postings within the current geographic scope. */
   openJobs: number;
+  /** Open postings ignoring scope, so the opt-out can say what it would add. */
+  openJobsAllCountries: number;
   companies: number;
 }
 
-export async function feedStats(): Promise<FeedStats> {
+/**
+ * Header counts.
+ *
+ * openJobs respects the US default. It has to: the feed is US-scoped out of the
+ * box, and a header reading "2,380 open roles" above a list containing 1,618 of
+ * them is simply wrong — and wrong in the direction that looks like postings
+ * have gone missing.
+ */
+export async function feedStats(usOnly: boolean): Promise<FeedStats> {
   const db = await getServerClient();
 
-  const [open, companies] = await Promise.all([
+  let scoped = db
+    .from("jobs")
+    .select("id", { count: "exact", head: true })
+    .is("closed_at", null);
+  if (usOnly) scoped = scoped.eq("us_eligible", true);
+
+  const [open, all, companies] = await Promise.all([
+    scoped,
     db.from("jobs").select("id", { count: "exact", head: true }).is("closed_at", null),
     db
       .from("companies")
@@ -87,5 +105,9 @@ export async function feedStats(): Promise<FeedStats> {
       .eq("ats_resolution_status", "resolved"),
   ]);
 
-  return { openJobs: open.count ?? 0, companies: companies.count ?? 0 };
+  return {
+    openJobs: open.count ?? 0,
+    openJobsAllCountries: all.count ?? 0,
+    companies: companies.count ?? 0,
+  };
 }

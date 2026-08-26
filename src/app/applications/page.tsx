@@ -41,7 +41,7 @@ export default async function ApplicationsPage({
   const needing = live.filter((a) => needsAction(a).needed).length;
 
   return (
-    <div className="mx-auto flex max-w-content flex-col gap-loose">
+    <div className="flex flex-col gap-loose">
       <header className="flex flex-wrap items-start justify-between gap-snug">
         <div className="flex flex-col gap-tight">
           <h1 className="text-title font-semibold tracking-tight text-content-primary">

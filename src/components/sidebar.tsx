@@ -50,10 +50,10 @@ function NavRow({
       <Link
         href={href}
         aria-current={active ? "page" : undefined}
-        className={`flex items-center justify-between rounded-default px-compact h-9 text-body ${
+        className={`flex items-center justify-between rounded-default px-compact h-9 text-body transition-colors ${
           active
             ? "bg-surface-base text-content-primary font-medium shadow-raised"
-            : "text-content-secondary"
+            : "text-content-secondary hover:bg-surface-hover hover:text-content-primary"
         }`}
       >
         <span>{label}</span>

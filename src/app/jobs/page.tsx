@@ -8,12 +8,15 @@ import Link from "next/link";
 /*
  * /jobs — the feed.
  *
- * Default sort is the board's own posted date, not first_seen_at. Everything
- * currently in the database was first seen inside one 53-second ingestion run,
- * so first_seen_at ordering returned whichever company was pulled last rather
- * than anything resembling recency — the first page was 48 Vercel postings.
- * "Newest to me" keeps first_seen_at available, because once ingestion runs
- * regularly that becomes a genuinely different and useful question.
+ * One ordering, newest posted first. Not first_seen_at: everything in the
+ * database was first seen inside a single 53-second ingestion run, so ordering
+ * by it returned whichever company was pulled last rather than anything
+ * resembling recency.
+ *
+ * The main column fills the viewport rather than sitting inside a max-width.
+ * The cap was mine, not the design's — DESIGN.md §4 specifies the sidebar width
+ * and the main column's padding and says nothing about capping it — and on a
+ * wide screen it left most of the display empty.
  */
 
 export const dynamic = "force-dynamic";
@@ -31,16 +34,25 @@ export default async function JobsPage({
 
   const [{ jobs, total }, stats, facets] = await Promise.all([
     searchJobs(filters, PAGE_SIZE, offset),
-    feedStats(),
+    feedStats(filters.usOnly),
     jobFacets(filters),
   ]);
+
+  // Cities, most-common first. Capped because the long tail is one-offs like
+  // "Foster City" that nobody scrolls a filter list to find, and any currently
+  // selected city is kept regardless so a filter can always be switched off.
+  const cities = Object.entries(facets.city ?? {})
+    .map(([name, n]) => ({ name, n }))
+    .filter((c) => c.n >= 3 || filters.cities.includes(c.name))
+    .sort((a, b) => b.n - a.n || a.name.localeCompare(b.name))
+    .slice(0, 20);
 
   // A filter change can shorten the result set below the current page.
   const lastPage = Math.max(1, Math.ceil(total / PAGE_SIZE));
   const pastEnd = jobs.length === 0 && total > 0 && filters.page > lastPage;
 
   return (
-    <div className="mx-auto flex max-w-content flex-col gap-loose">
+    <div className="flex flex-col gap-loose">
       <header className="flex flex-col gap-tight">
         <h1 className="text-title font-semibold tracking-tight text-content-primary">
           New jobs
@@ -53,7 +65,8 @@ export default async function JobsPage({
             </>
           ) : (
             <>
-              {stats.openJobs.toLocaleString()} open roles from {stats.companies} companies
+              {stats.openJobs.toLocaleString()} open {filters.usOnly ? "US " : ""}
+              roles from {stats.companies} companies
             </>
           )}
         </p>
@@ -72,7 +85,7 @@ export default async function JobsPage({
             placeholder="Search roles and companies"
             className="w-72 max-w-full rounded-subtle border border-border-subtle bg-surface-base px-default py-compact text-small text-content-primary placeholder:text-content-tertiary"
           />
-          {/* Filters and sort survive a search submit. */}
+          {/* Filters survive a search submit. */}
           {filters.years && <input type="hidden" name="years" value={filters.years} />}
           {filters.comp && <input type="hidden" name="comp" value={filters.comp} />}
           {filters.remote.map((r) => (
@@ -81,10 +94,14 @@ export default async function JobsPage({
           {!filters.includeYearsUnknown && <input type="hidden" name="yrsunk" value="0" />}
           {!filters.includeCompUnknown && <input type="hidden" name="compunk" value="0" />}
           {filters.searchDescriptions && <input type="hidden" name="desc" value="1" />}
-          {filters.sort !== "posted" && <input type="hidden" name="sort" value={filters.sort} />}
+          {filters.recency && <input type="hidden" name="recency" value={filters.recency} />}
+          {filters.cities.map((c) => (
+            <input key={c} type="hidden" name="city" value={c} />
+          ))}
+          {!filters.usOnly && <input type="hidden" name="intl" value="1" />}
           <button
             type="submit"
-            className="rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse"
+            className="rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover"
           >
             Search
           </button>
@@ -95,10 +112,10 @@ export default async function JobsPage({
                 page: 1,
               })}
               aria-pressed={filters.searchDescriptions}
-              className={`rounded-subtle px-compact py-tight text-small font-medium ${
+              className={`rounded-subtle px-compact py-tight text-small font-medium transition-colors ${
                 filters.searchDescriptions
-                  ? "bg-accent-default text-content-inverse"
-                  : "border border-border-subtle bg-surface-base text-content-secondary"
+                  ? "bg-accent-default text-content-inverse hover:bg-accent-hover"
+                  : "border border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
               }`}
             >
               {filters.searchDescriptions ? "Searching descriptions" : "Search descriptions too"}
@@ -106,7 +123,7 @@ export default async function JobsPage({
           )}
         </form>
 
-        <FilterPanel filters={filters} facets={facets} total={total} />
+        <FilterPanel filters={filters} facets={facets} total={total} cities={cities} />
       </search>
 
       {jobs.length === 0 ? (

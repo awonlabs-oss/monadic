@@ -92,10 +92,10 @@ export function JobCard({ job }: { job: JobListItem }) {
                     : `Save ${job.title} at ${job.company_name}`
                 }
                 aria-pressed={saved}
-                className={`rounded-subtle border px-control py-tight text-caption font-medium leading-none ${
+                className={`rounded-subtle border px-control py-tight text-caption font-medium leading-none transition-colors ${
                   saved
-                    ? "border-border-default bg-surface-sunken text-content-primary"
-                    : "border-border-subtle bg-surface-base text-content-secondary"
+                    ? "border-border-default bg-surface-sunken text-content-primary hover:bg-surface-hover"
+                    : "border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
                 }`}
               >
                 {saved ? "Saved" : "Save"}
@@ -105,7 +105,7 @@ export function JobCard({ job }: { job: JobListItem }) {
 
           <h3 className="text-lead font-semibold leading-default tracking-snug text-content-primary">
             {job.url ? (
-              <a href={job.url} target="_blank" rel="noreferrer noopener">
+              <a href={job.url} target="_blank" rel="noreferrer noopener" className="hover:underline hover:underline-offset-2">
                 {job.title}
               </a>
             ) : (
@@ -159,7 +159,7 @@ export function JobCard({ job }: { job: JobListItem }) {
         {tracked ? (
           <Link
             href="/applications"
-            className="shrink-0 rounded-subtle border border-border-default bg-surface-sunken px-default py-compact text-small font-medium leading-none text-content-primary"
+            className="shrink-0 rounded-subtle border border-border-default bg-surface-sunken px-default py-compact text-small font-medium leading-none text-content-primary transition-colors hover:bg-surface-hover"
           >
             Tracked
           </Link>
@@ -168,7 +168,7 @@ export function JobCard({ job }: { job: JobListItem }) {
             <input type="hidden" name="jobId" value={job.id} />
             <button
               type="submit"
-              className="rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse"
+              className="rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover"
               aria-label={`Track ${job.title} at ${job.company_name}`}
             >
               Track

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import {
   COMP_BUCKETS,
+  RECENCY,
   REMOTE_OPTIONS,
-  SORTS,
   YEARS_BUCKETS,
   activeCount,
   hrefFor,
@@ -11,36 +11,28 @@ import {
 import type { Facets } from "@/lib/data/jobs";
 
 /**
- * The filter panel.
+ * Filter controls: a recency row, then a disclosure holding the rest.
  *
- * Replaces a row of eighteen loose pills, which showed every option at equal
- * weight, gave no sense of what any of them would yield, and navigated on every
- * single click.
+ * Recency sits outside the panel because it is reached for most often and
+ * should cost one click. The three windows select a subset rather than reorder
+ * one, so they are filters — the feed always orders newest posted first
+ * underneath.
  *
- * Three things drive the structure, following the reference patterns supplied:
+ * The pay sort is gone. Ordering by pay put every posting that states a salary
+ * above every posting that does not, which is 59% of the feed pushed below the
+ * fold for a reason that has nothing to do with the job. Pay is a filter.
  *
- *  1. One entry point carrying a count, not a wall of controls. The panel is a
- *     native <details> disclosure — accessible and keyboard-operable with no
- *     JavaScript, and not a hand-rolled dropdown, which DESIGN.md §9 forbids.
- *     Its open state rides in the URL so it survives the round trip.
- *
- *  2. Every option shows how many roles it would return, computed with the
- *     other dimensions already applied. Choosing "Remote" reprices the pay
- *     counts. An option that would yield nothing is visibly zero before it is
- *     clicked rather than after.
- *
- *  3. One submit, not a navigation per toggle. It is a plain GET form, so
- *     several choices are made and applied together, and the result is still an
- *     ordinary shareable URL.
- *
- * The include-unknown checkboxes are prominent on purpose. 59% of these
- * postings state no pay and 30% no years — hiding them is a big decision, and
- * making it silently would look like ingestion had lost half the feed.
+ * Every option carries a count computed with the other dimensions applied, so a
+ * choice that would return nothing reads as zero before it is clicked.
  */
 
 function Count({ n }: { n: number | undefined }) {
   return (
-    <span className={`ml-auto text-caption tabular-nums ${n ? "text-content-tertiary" : "text-content-tertiary/60"}`}>
+    <span
+      className={`ml-auto pl-tight text-caption tabular-nums ${
+        n ? "text-content-tertiary" : "text-content-tertiary/50"
+      }`}
+    >
       {n ?? 0}
     </span>
   );
@@ -62,7 +54,7 @@ function Choice({
   count?: number;
 }) {
   return (
-    <label className="flex cursor-pointer items-center gap-tight rounded-tag px-tight py-xtight text-body text-content-primary hover:bg-surface-sunken">
+    <label className="flex items-center gap-tight rounded-tag px-tight py-xtight text-body text-content-primary transition-colors hover:bg-surface-hover">
       <input
         type={type}
         name={name}
@@ -79,7 +71,7 @@ function Choice({
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <fieldset className="flex min-w-0 flex-col gap-hair">
-      <legend className="pb-tight text-caption font-medium uppercase tracking-none text-content-tertiary">
+      <legend className="pb-tight text-caption font-medium uppercase text-content-tertiary">
         {title}
       </legend>
       {children}
@@ -87,156 +79,180 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
+/**
+ * Chevron mirroring the disclosure state — pointing down when the panel is
+ * closed and there is more to open, flipping up when it is open and the click
+ * will collapse it.
+ */
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 12 12"
+      className={`size-icon-xs shrink-0 text-content-tertiary transition-transform duration-150 ${
+        open ? "rotate-180" : ""
+      }`}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 4.5 6 7.5 9 4.5" />
+    </svg>
+  );
+}
+
 export function FilterPanel({
   filters,
   facets,
   total,
+  cities,
 }: {
   filters: JobFilters;
   facets: Facets;
   total: number;
+  cities: Array<{ name: string; n: number }>;
 }) {
   const active = activeCount(filters);
 
   return (
-    <div className="flex flex-wrap items-start justify-between gap-snug">
+    <div className="flex flex-col gap-snug">
+      <div className="flex flex-wrap items-center gap-tight">
+        {RECENCY.map((r) => {
+          const on = filters.recency === r.key;
+          return (
+            <Link
+              key={r.key}
+              href={hrefFor(filters, { recency: on ? null : r.key, page: 1 })}
+              aria-pressed={on}
+              className={`inline-flex items-center gap-tight rounded-subtle px-default py-compact text-small font-medium transition-colors ${
+                on
+                  ? "bg-accent-default text-content-inverse hover:bg-accent-hover"
+                  : "border border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
+              }`}
+            >
+              {r.label}
+              <span className="tabular-nums opacity-70">
+                {facets.recency?.[r.key] ?? 0}
+              </span>
+            </Link>
+          );
+        })}
+
+        <span className="flex-1" />
+
+        {active > 0 && (
+          <Link
+            href="/jobs"
+            className="rounded-subtle px-compact py-tight text-small text-content-secondary underline underline-offset-2 transition-colors hover:bg-surface-hover hover:text-content-primary"
+          >
+            Clear {active} filter{active === 1 ? "" : "s"}
+          </Link>
+        )}
+      </div>
+
       <details
         open={filters.panelOpen}
         className="min-w-0 rounded-default border border-border-subtle bg-surface-base"
       >
-        <summary className="flex cursor-pointer list-none items-center gap-tight px-default py-compact text-small font-medium text-content-primary">
+        <summary className="flex list-none items-center gap-tight rounded-default px-default py-compact text-small font-medium text-content-primary transition-colors hover:bg-surface-hover">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 14 14"
+            className="size-icon-sm shrink-0 text-content-secondary"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+          >
+            <path d="M1.5 3h11M3.5 7h7M6 11h2" />
+          </svg>
           Filters
           {active > 0 && (
             <span className="rounded-tag bg-accent-default px-tight py-hairline text-caption tabular-nums text-content-inverse">
               {active}
             </span>
           )}
-          <span aria-hidden="true" className="text-content-tertiary">
-            {filters.panelOpen ? "▲" : "▼"}
-          </span>
+          <Chevron open={filters.panelOpen} />
         </summary>
 
-        <form method="get" action="/jobs" className="flex flex-col gap-body border-t border-border-subtle p-default">
-          {/* Keeps the panel open across the submit. */}
+        <form
+          method="get"
+          action="/jobs"
+          className="flex flex-col gap-body border-t border-border-subtle p-default"
+        >
           <input type="hidden" name="panel" value="1" />
           {filters.q && <input type="hidden" name="q" value={filters.q} />}
           {filters.searchDescriptions && <input type="hidden" name="desc" value="1" />}
-          {filters.sort !== "posted" && (
-            <input type="hidden" name="sort" value={filters.sort} />
+          {filters.recency && (
+            <input type="hidden" name="recency" value={filters.recency} />
           )}
 
-          <div className="grid grid-cols-1 gap-body sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-body sm:grid-cols-2 lg:grid-cols-4">
             <Section title="Experience">
-              <Choice
-                type="radio"
-                name="years"
-                value=""
-                checked={!filters.years}
-                label="Any"
-                count={facets.total?.all}
-              />
+              <Choice type="radio" name="years" value="" checked={!filters.years} label="Any" count={facets.total?.all} />
               {YEARS_BUCKETS.map((b) => (
-                <Choice
-                  key={b.key}
-                  type="radio"
-                  name="years"
-                  value={b.key}
-                  checked={filters.years === b.key}
-                  label={b.label}
-                  count={facets.years?.[b.key]}
-                />
+                <Choice key={b.key} type="radio" name="years" value={b.key} checked={filters.years === b.key} label={b.label} count={facets.years?.[b.key]} />
               ))}
               <input type="hidden" name="yrsunk" value="0" />
-              <Choice
-                type="checkbox"
-                name="yrsunk"
-                value="1"
-                checked={filters.includeYearsUnknown}
-                label="Include unstated"
-                count={facets.years?.unstated}
-              />
+              <Choice type="checkbox" name="yrsunk" value="1" checked={filters.includeYearsUnknown} label="Include unstated" count={facets.years?.unstated} />
             </Section>
 
             <Section title="Pay">
-              <Choice
-                type="radio"
-                name="comp"
-                value=""
-                checked={!filters.comp}
-                label="Any"
-                count={facets.total?.all}
-              />
+              <Choice type="radio" name="comp" value="" checked={!filters.comp} label="Any" count={facets.total?.all} />
               {COMP_BUCKETS.map((b) => (
-                <Choice
-                  key={b.key}
-                  type="radio"
-                  name="comp"
-                  value={b.key}
-                  checked={filters.comp === b.key}
-                  label={b.label}
-                  count={facets.comp?.[b.key]}
-                />
+                <Choice key={b.key} type="radio" name="comp" value={b.key} checked={filters.comp === b.key} label={b.label} count={facets.comp?.[b.key]} />
               ))}
               <input type="hidden" name="compunk" value="0" />
-              <Choice
-                type="checkbox"
-                name="compunk"
-                value="1"
-                checked={filters.includeCompUnknown}
-                label="Include unlisted"
-                count={facets.comp?.unlisted}
-              />
+              <Choice type="checkbox" name="compunk" value="1" checked={filters.includeCompUnknown} label="Include unlisted" count={facets.comp?.unlisted} />
             </Section>
 
             <Section title="Workplace">
               {REMOTE_OPTIONS.map((o) => (
-                <Choice
-                  key={o.key}
-                  type="checkbox"
-                  name="remote"
-                  value={o.key}
-                  checked={filters.remote.includes(o.key)}
-                  label={o.label}
-                  count={facets.remote?.[o.key]}
-                />
+                <Choice key={o.key} type="checkbox" name="remote" value={o.key} checked={filters.remote.includes(o.key)} label={o.label} count={facets.remote?.[o.key]} />
               ))}
+              {/*
+                US-only is the default, shown as an explicit opt-out rather than
+                applied invisibly. 762 of 2,380 open postings are elsewhere, and
+                a quarter of the feed vanishing with nothing on screen to explain
+                it reads as a bug rather than a setting.
+              */}
+              <input type="hidden" name="intl" value="0" />
+              <Choice type="checkbox" name="intl" value="1" checked={!filters.usOnly} label="Include non-US roles" />
+            </Section>
+
+            <Section title="City">
+              <div className="flex max-h-52 flex-col gap-hair overflow-y-auto">
+                {cities.length === 0 ? (
+                  <p className="px-tight text-caption text-content-tertiary">
+                    No cities in this result set.
+                  </p>
+                ) : (
+                  cities.map((c) => (
+                    <Choice key={c.name} type="checkbox" name="city" value={c.name} checked={filters.cities.includes(c.name)} label={c.name} count={c.n} />
+                  ))
+                )}
+              </div>
             </Section>
           </div>
 
           <div className="flex items-center justify-between gap-snug border-t border-border-subtle pt-default">
             <Link
               href="/jobs?panel=1"
-              className="text-small text-content-secondary underline underline-offset-2"
+              className="rounded-subtle px-compact py-tight text-small text-content-secondary underline underline-offset-2 transition-colors hover:bg-surface-hover hover:text-content-primary"
             >
               Clear all
             </Link>
             <button
               type="submit"
-              className="rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse"
+              className="rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover"
             >
               Show {total.toLocaleString()} {total === 1 ? "role" : "roles"}
             </button>
           </div>
         </form>
       </details>
-
-      <nav aria-label="Sort" className="flex items-center gap-tight">
-        <span className="text-caption text-content-tertiary">Sort</span>
-        {SORTS.map((s) => (
-          <Link
-            key={s.key}
-            href={hrefFor(filters, { sort: s.key, page: 1 })}
-            aria-current={filters.sort === s.key ? "true" : undefined}
-            className={`rounded-subtle px-compact py-tight text-small font-medium ${
-              filters.sort === s.key
-                ? "bg-accent-default text-content-inverse"
-                : "border border-border-subtle bg-surface-base text-content-secondary"
-            }`}
-          >
-            {s.label}
-          </Link>
-        ))}
-      </nav>
     </div>
   );
 }

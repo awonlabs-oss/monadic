@@ -623,7 +623,9 @@ export type Database = {
           id: string
           is_open: boolean | null
           last_seen_at: string
+          location_cities: string[]
           location_city: string | null
+          location_countries: string[]
           location_country: string | null
           location_raw: string | null
           location_region: string | null
@@ -639,6 +641,7 @@ export type Database = {
           title: string
           updated_at: string
           url: string | null
+          us_eligible: boolean
           years_max: number | null
           years_min: number | null
           years_source: string
@@ -662,7 +665,9 @@ export type Database = {
           id?: string
           is_open?: boolean | null
           last_seen_at?: string
+          location_cities?: string[]
           location_city?: string | null
+          location_countries?: string[]
           location_country?: string | null
           location_raw?: string | null
           location_region?: string | null
@@ -678,6 +683,7 @@ export type Database = {
           title: string
           updated_at?: string
           url?: string | null
+          us_eligible?: boolean
           years_max?: number | null
           years_min?: number | null
           years_source?: string
@@ -701,7 +707,9 @@ export type Database = {
           id?: string
           is_open?: boolean | null
           last_seen_at?: string
+          location_cities?: string[]
           location_city?: string | null
+          location_countries?: string[]
           location_country?: string | null
           location_raw?: string | null
           location_region?: string | null
@@ -717,6 +725,7 @@ export type Database = {
           title?: string
           updated_at?: string
           url?: string | null
+          us_eligible?: boolean
           years_max?: number | null
           years_min?: number | null
           years_source?: string
@@ -1370,13 +1379,16 @@ export type Database = {
       }
       job_facets: {
         Args: {
+          p_cities?: string[]
           p_comp_min?: number
           p_company?: string
           p_include_comp_unknown?: boolean
           p_include_years_unknown?: boolean
+          p_posted_within?: number
           p_query?: string
           p_remote?: string[]
           p_search_descriptions?: boolean
+          p_us_only?: boolean
           p_years_max?: number
           p_years_min?: number
         }
@@ -1445,17 +1457,19 @@ export type Database = {
       }
       search_jobs: {
         Args: {
+          p_cities?: string[]
           p_comp_min?: number
           p_company?: string
           p_include_comp_unknown?: boolean
           p_include_years_unknown?: boolean
           p_limit?: number
           p_offset?: number
+          p_posted_within?: number
           p_query?: string
           p_remote?: string[]
           p_saved_only?: boolean
           p_search_descriptions?: boolean
-          p_sort?: string
+          p_us_only?: boolean
           p_years_max?: number
           p_years_min?: number
         }
@@ -1474,6 +1488,7 @@ export type Database = {
           first_seen_at: string
           id: string
           interaction_state: string
+          location_cities: string[]
           location_raw: string
           posted_at: string
           remote_policy: string

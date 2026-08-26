@@ -41,3 +41,49 @@
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * Interaction affordances, applied globally rather than per component.
+ *
+ * Two problems this fixes. Buttons gave no hover feedback at all, so there was
+ * nothing to confirm the pointer was over a target; and the pointer stayed an
+ * arrow over things that are clickable, which reads as "not interactive".
+ *
+ * Focus is included because DESIGN.md §9 is DECIDED that focus must be visible,
+ * and until now that relied on the browser default. Figma defines no hover or
+ * focus states, so surface/hover, accent/hover and border/focus are derived
+ * tokens and want confirming — but leaving DECIDED accessibility unimplemented
+ * was the worse of the two options.
+ */
+
+@layer base {
+  button,
+  summary,
+  [role="button"],
+  a[href],
+  label:has(input[type="checkbox"]),
+  label:has(input[type="radio"]),
+  input[type="checkbox"],
+  input[type="radio"],
+  select {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  /* Keyboard focus only — a visible ring on every mouse click is noise. */
+  :focus-visible {
+    outline: var(--spacing-focus-ring) solid var(--color-border-focus);
+    outline-offset: var(--spacing-focus-offset);
+    border-radius: var(--radius-subtle);
+  }
+
+  summary::-webkit-details-marker,
+  summary::marker {
+    display: none;
+    content: "";
+  }
+}

@@ -61,7 +61,7 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
 
       <h3 className="text-body font-semibold leading-default tracking-snug text-content-primary">
         {app.job_url ? (
-          <a href={app.job_url} target="_blank" rel="noreferrer noopener">
+          <a href={app.job_url} target="_blank" rel="noreferrer noopener" className="hover:underline hover:underline-offset-2">
             {app.job_title}
           </a>
         ) : (
@@ -72,7 +72,7 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
       <p className="flex items-center gap-tight text-caption leading-none text-content-tertiary">
         <span
           aria-hidden="true"
-          className={`size-[0.3125rem] shrink-0 rounded-full ${statusTone(app.status)}`}
+          className={`size-dot-sm shrink-0 rounded-full ${statusTone(app.status)}`}
         />
         <span className="truncate">{stageLine(app)}</span>
       </p>
@@ -89,7 +89,7 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
       {attention.needed && attention.reason && <StatusBadge label={attention.reason} />}
 
       <details className="group">
-        <summary className="cursor-pointer list-none text-caption text-content-tertiary underline underline-offset-2">
+        <summary className="list-none text-caption text-content-tertiary underline underline-offset-2 transition-colors hover:text-content-primary">
           Update
         </summary>
 
@@ -106,7 +106,7 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
                   type="submit"
                   name="status"
                   value={status}
-                  className="rounded-tag border border-border-subtle bg-surface-base px-tight py-hair text-caption text-content-secondary"
+                  className="rounded-tag border border-border-subtle bg-surface-base px-tight py-hair text-caption text-content-secondary transition-colors hover:bg-surface-hover hover:text-content-primary"
                 >
                   {STATUS_LABELS[status as Status]}
                 </button>
@@ -142,7 +142,7 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
               />
               <button
                 type="submit"
-                className="shrink-0 rounded-tag bg-accent-default px-tight py-hair text-caption font-medium text-content-inverse"
+                className="shrink-0 rounded-tag bg-accent-default px-tight py-hair text-caption font-medium text-content-inverse transition-colors hover:bg-accent-hover"
               >
                 Set
               </button>

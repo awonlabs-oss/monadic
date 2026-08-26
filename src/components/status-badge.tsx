@@ -12,7 +12,7 @@ export function StatusBadge({ label }: { label: string }) {
       <svg
         aria-hidden="true"
         viewBox="0 0 16 16"
-        className="size-[0.9375rem] shrink-0"
+        className="size-icon shrink-0"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.5"

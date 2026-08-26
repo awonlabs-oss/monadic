@@ -11,15 +11,22 @@
  * and would read as broken ingestion rather than as a filter doing its job.
  */
 
-export const SORTS = [
-  { key: "posted", label: "Newest posted" },
-  { key: "seen", label: "Newest to me" },
-  { key: "pay", label: "Highest pay" },
+/**
+ * Recency windows. These select a subset rather than reorder one, so they are
+ * filters despite reading like a sort. The feed keeps a single ordering
+ * underneath: newest posted first.
+ */
+export const RECENCY = [
+  { key: "1", label: "Posted today", days: 1 },
+  { key: "7", label: "Past week", days: 7 },
+  { key: "30", label: "Past month", days: 30 },
 ] as const;
 
 export interface JobFilters {
   q: string | null;
-  sort: string;
+  recency: string | null;
+  cities: string[];
+  usOnly: boolean;
   page: number;
   years: string | null;
   comp: string | null;
@@ -74,7 +81,12 @@ export function parseFilters(params: RawParams): JobFilters {
   const page = Number(one(params.page) ?? "1");
   return {
     q: one(params.q),
-    sort: SORTS.some((s) => s.key === one(params.sort)) ? one(params.sort)! : "posted",
+    recency: RECENCY.some((r) => r.key === one(params.recency)) ? one(params.recency) : null,
+    cities: (Array.isArray(params.city) ? params.city : one(params.city)?.split(",") ?? [])
+      .map((c) => c.trim())
+      .filter(Boolean),
+    // US-only by default. 762 of 2,380 open postings are elsewhere.
+    usOnly: one(params.intl) !== "1",
     page: Number.isFinite(page) && page > 0 ? Math.floor(page) : 1,
     years: YEARS_BUCKETS.some((b) => b.key === one(params.years)) ? one(params.years) : null,
     comp: COMP_BUCKETS.some((b) => b.key === one(params.comp)) ? one(params.comp) : null,
@@ -114,7 +126,9 @@ export function toRpcArgs(filters: JobFilters, limit: number, offset = 0) {
     p_company: filters.company ?? undefined,
     p_saved_only: filters.savedOnly,
     p_search_descriptions: filters.searchDescriptions,
-    p_sort: filters.sort,
+    p_cities: filters.cities.length > 0 ? filters.cities : undefined,
+    p_us_only: filters.usOnly,
+    p_posted_within: RECENCY.find((r) => r.key === filters.recency)?.days ?? undefined,
     p_limit: limit,
     p_offset: offset,
   };
@@ -134,6 +148,9 @@ export function toFacetArgs(filters: JobFilters) {
     p_remote: filters.remote.length > 0 ? filters.remote : undefined,
     p_company: filters.company ?? undefined,
     p_search_descriptions: filters.searchDescriptions,
+    p_cities: filters.cities.length > 0 ? filters.cities : undefined,
+    p_us_only: filters.usOnly,
+    p_posted_within: RECENCY.find((r) => r.key === filters.recency)?.days ?? undefined,
   };
 }
 
@@ -156,7 +173,9 @@ export function hrefFor(
   if (!f.includeYearsUnknown) params.set("yrsunk", "0");
   if (!f.includeCompUnknown) params.set("compunk", "0");
   if (f.searchDescriptions) params.set("desc", "1");
-  if (f.sort !== "posted") params.set("sort", f.sort);
+  if (f.recency) params.set("recency", f.recency);
+  if (f.cities.length > 0) params.set("city", f.cities.join(","));
+  if (!f.usOnly) params.set("intl", "1");
   if (f.panelOpen) params.set("panel", "1");
   if (f.savedOnly) params.set("saved", "1");
   if (overrides.page && overrides.page > 1) params.set("page", String(overrides.page));
@@ -220,6 +239,9 @@ export function activeCount(filters: JobFilters): number {
     filters.remote.length +
     (filters.includeYearsUnknown ? 0 : 1) +
     (filters.includeCompUnknown ? 0 : 1) +
-    (filters.savedOnly ? 1 : 0)
+    (filters.savedOnly ? 1 : 0) +
+    (filters.recency ? 1 : 0) +
+    filters.cities.length +
+    (filters.usOnly ? 0 : 1)
   );
 }

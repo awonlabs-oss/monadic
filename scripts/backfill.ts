@@ -13,6 +13,7 @@
 import { createServiceClient } from "@/lib/supabase/service";
 import { SOURCES } from "@/ingest/sources";
 import type { AtsSource } from "@/ingest/types";
+import { parseLocation } from "@/ingest/location";
 
 const dryRun = process.argv.includes("--dry");
 const CHUNK = 200;
@@ -28,12 +29,13 @@ async function main() {
   let yearsLost = 0;
   let yearsChanged = 0;
   let compGained = 0;
+  let usEligible = 0;
   let updated = 0;
 
   for (let offset = 0; ; offset += CHUNK) {
     const { data: rows, error } = await db
       .from("jobs")
-      .select("id, source, source_job_id, raw, years_min, years_max, years_source, comp_min, comp_source")
+      .select("id, source, source_job_id, raw, years_min, years_max, years_source, comp_min, comp_source, location_raw, us_eligible, location_cities")
       .order("id")
       .range(offset, offset + CHUNK - 1);
     if (error) throw new Error(error.message);
@@ -51,6 +53,9 @@ async function main() {
       comp_period: string | null;
       comp_source: string;
       comp_note: string | null;
+      location_cities: string[];
+      location_countries: string[];
+      us_eligible: boolean;
     };
     const updates: Derived[] = [];
 
@@ -75,7 +80,18 @@ async function main() {
 
       if (row.comp_source === "none" && parsed.compSource !== "none") compGained += 1;
 
+      const loc = parseLocation(row.location_raw);
+      if (loc.usEligible) usEligible += 1;
+
+      // The city array has to be compared too. An earlier version only checked
+      // us_eligible, so a fix that corrected which cities were extracted
+      // rewrote nothing and reported "0 rows written" while looking successful.
+      const citiesChanged =
+        JSON.stringify(row.location_cities ?? []) !== JSON.stringify(loc.cities);
+
       const changed =
+        citiesChanged ||
+        row.us_eligible !== loc.usEligible ||
         row.years_source !== parsed.yearsSource ||
         row.years_min !== parsed.yearsMin ||
         row.years_max !== parsed.yearsMax ||
@@ -95,6 +111,9 @@ async function main() {
         comp_period: parsed.compPeriod,
         comp_source: parsed.compSource,
         comp_note: parsed.compNote,
+        location_cities: loc.cities,
+        location_countries: loc.countries,
+        us_eligible: loc.usEligible,
       });
     }
 
@@ -120,6 +139,7 @@ async function main() {
   console.log(`  years changed   ${yearsChanged}`);
   console.log(`  years lost      ${yearsLost}`);
   console.log(`  comp gained     ${compGained}`);
+  console.log(`  US-eligible     ${usEligible}`);
   console.log(`  rows ${dryRun ? "that would change" : "written"}   ${updated}`);
 }
 

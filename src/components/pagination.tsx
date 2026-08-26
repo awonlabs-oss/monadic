@@ -49,7 +49,7 @@ export function Pagination({
   const to = Math.min(current * pageSize, total);
 
   const linkClass =
-    "rounded-subtle border border-border-subtle bg-surface-base px-compact py-tight text-small font-medium text-content-secondary";
+    "rounded-subtle border border-border-subtle bg-surface-base px-compact py-tight text-small font-medium text-content-secondary transition-colors hover:bg-surface-hover hover:text-content-primary";
   const disabledClass =
     "rounded-subtle border border-border-subtle px-compact py-tight text-small font-medium text-content-tertiary/60";
 
