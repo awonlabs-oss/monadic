@@ -67,47 +67,31 @@ export function JobCard({ job }: { job: JobListItem }) {
       <div className="flex items-start gap-body">
         <CompanyLogo name={job.company_name} src={job.company_logo_url} />
 
-        <div className="flex min-w-0 flex-1 flex-col gap-row">
-          <div className="flex items-center justify-between gap-snug">
-            <p className="flex min-w-0 items-center gap-row text-small leading-none">
-              <span className="truncate font-medium text-content-secondary">
-                {job.company_name}
-              </span>
-              <span
-                aria-hidden="true"
-                className="size-hair shrink-0 rounded-full bg-content-tertiary"
-              />
-              <span className="shrink-0 text-content-tertiary">
-                {posted.verb} {posted.date}{" "}
-                <span className="text-content-tertiary/80">[{posted.elapsed}]</span>
-              </span>
-            </p>
+        {/*
+          Save is a sibling of this column, not a row inside it.
 
-            {/*
-              Save is a bookmark; it does not put the job on the pipeline board.
-              Track does. Keeping them separate is what stops a browsing session
-              of forty saves from flooding the pipeline.
-            */}
-            <form action={saveJobAction} className="shrink-0">
-              <input type="hidden" name="jobId" value={job.id} />
-              <button
-                type="submit"
-                aria-label={
-                  saved
-                    ? `${job.title} at ${job.company_name} is saved`
-                    : `Save ${job.title} at ${job.company_name}`
-                }
-                aria-pressed={saved}
-                className={`rounded-subtle border px-control py-tight text-caption font-medium leading-none transition-colors ${
-                  saved
-                    ? "border-border-default bg-surface-sunken text-content-primary hover:bg-surface-hover"
-                    : "border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
-                }`}
-              >
-                {saved ? "Saved" : "Save"}
-              </button>
-            </form>
-          </div>
+          Inside it, the button set the height of the line it shared with the
+          company name: a 23px control wrapping an 12px label, so the name was
+          centred in a box half again its own height and sat a good 6px below
+          the top of the logo beside it, with the same 6px opening up again
+          between it and the title. Hoisting the button out leaves the column as
+          three text rows one gap apart, and its first line now starts where the
+          logo does.
+        */}
+        <div className="flex min-w-0 flex-1 flex-col gap-row">
+          <p className="flex min-w-0 items-center gap-row text-small leading-none">
+            <span className="truncate font-medium text-content-secondary">
+              {job.company_name}
+            </span>
+            <span
+              aria-hidden="true"
+              className="size-hair shrink-0 rounded-full bg-content-tertiary"
+            />
+            <span className="shrink-0 text-content-tertiary">
+              {posted.verb} {posted.date}{" "}
+              <span className="text-content-tertiary/80">[{posted.elapsed}]</span>
+            </span>
+          </p>
 
           <h3 className="text-lead font-semibold leading-default tracking-snug text-content-primary">
             {job.url ? (
@@ -135,6 +119,31 @@ export function JobCard({ job }: { job: JobListItem }) {
             )}
           </ul>
         </div>
+
+        {/*
+          Save is a bookmark; it does not put the job on the pipeline board.
+          Track does. Keeping them separate is what stops a browsing session of
+          forty saves from flooding the pipeline.
+        */}
+        <form action={saveJobAction} className="shrink-0">
+          <input type="hidden" name="jobId" value={job.id} />
+          <button
+            type="submit"
+            aria-label={
+              saved
+                ? `${job.title} at ${job.company_name} is saved`
+                : `Save ${job.title} at ${job.company_name}`
+            }
+            aria-pressed={saved}
+            className={`rounded-subtle border px-control py-tight text-caption font-medium leading-none transition-colors ${
+              saved
+                ? "border-border-default bg-surface-sunken text-content-primary hover:bg-surface-hover"
+                : "border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
+            }`}
+          >
+            {saved ? "Saved" : "Save"}
+          </button>
+        </form>
       </div>
 
       <div aria-hidden="true" className="h-px w-full bg-border-subtle" />
