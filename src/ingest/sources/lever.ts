@@ -102,7 +102,7 @@ export const lever: JobSource = {
         remotePolicy: remotePolicyFrom(job.workplaceType, locationRaw),
 
         ...(structuredComp(job.salaryRange) ?? compFromDescription(text)),
-        ...yearsFromDescription(text),
+        ...yearsFromDescription(text, job.text ?? null),
 
         descriptionHtml: job.description ?? null,
         descriptionText: text,

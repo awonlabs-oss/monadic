@@ -1,26 +1,32 @@
-import { listJobs, feedStats } from "@/lib/data/jobs";
+import { searchJobs, feedStats } from "@/lib/data/jobs";
+import { parseFilters, activeCount } from "@/lib/filters";
 import { JobCard } from "@/components/job-card";
+import { FilterBar } from "@/components/filter-bar";
 
 /*
- * /jobs — the feed. Figma frame `Screen / Jobs feed` (3:2), page `monadic — v0`.
+ * /jobs — the feed.
  *
- * Two-column card grid at 1440, single column below 1100, per DESIGN.md
- * section 4. The 22px gutter is space/loose.
- *
- * Not built here, and deliberately not faked:
- *  - The filter bar. Filters are real work over real columns and the pills would
- *    otherwise be decorative controls that do nothing.
- *  - The search field, for the same reason.
- *  - "6 match your saved criteria" in the subtitle — that is a scoring claim,
- *    and scoring is out of Phase 1 scope.
- * The subtitle states only what can actually be counted.
+ * The subtitle says what a person looking for work would want to know: how many
+ * roles are here and how many the current filters left. It used to report the
+ * share of postings stating compensation, which is a fact about the ingestion
+ * pipeline, not about the job hunt — it belongs on /settings/runs and now
+ * lives only there.
  */
 
 export const dynamic = "force-dynamic";
 
-export default async function JobsPage() {
+const PAGE_SIZE = 48;
+
+export default async function JobsPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const filters = parseFilters(await searchParams);
+  const filtered = activeCount(filters) > 0;
+
   const [{ jobs, total }, stats] = await Promise.all([
-    listJobs({ limit: 48 }),
+    searchJobs(filters, PAGE_SIZE),
     feedStats(),
   ]);
 
@@ -31,20 +37,33 @@ export default async function JobsPage() {
           New jobs
         </h1>
         <p className="text-body text-content-secondary">
-          {stats.openJobs.toLocaleString()} open postings across {stats.companies}{" "}
-          boards · {stats.withComp.toLocaleString()} state compensation
+          {filtered ? (
+            <>
+              {total.toLocaleString()} matching{" "}
+              {total === 1 ? "role" : "roles"} of{" "}
+              {stats.openJobs.toLocaleString()}
+            </>
+          ) : (
+            <>
+              {stats.openJobs.toLocaleString()} open roles from {stats.companies}{" "}
+              companies
+            </>
+          )}
         </p>
       </header>
 
+      <FilterBar filters={filters} />
+
       {jobs.length === 0 ? (
         <p className="text-body text-content-secondary">
-          No open postings yet. Run <code>npm run resolve</code>, then{" "}
-          <code>npm run ingest</code>.
+          {filtered
+            ? "No roles match these filters. Try widening the experience or pay range."
+            : "No open postings yet. Run npm run resolve, then npm run ingest."}
         </p>
       ) : (
         <section aria-labelledby="feed-heading" className="flex flex-col gap-snug">
           <h2 id="feed-heading" className="sr-only">
-            Job postings, newest first
+            {filtered ? "Matching job postings" : "Job postings, newest first"}
           </h2>
 
           <ul className="grid grid-cols-1 gap-loose min-[1100px]:grid-cols-2">
@@ -55,9 +74,11 @@ export default async function JobsPage() {
             ))}
           </ul>
 
-          <p className="text-caption text-content-tertiary">
-            Showing {jobs.length} of {total.toLocaleString()}
-          </p>
+          {total > jobs.length && (
+            <p className="text-caption text-content-tertiary">
+              Showing {jobs.length} of {total.toLocaleString()}
+            </p>
+          )}
         </section>
       )}
     </div>

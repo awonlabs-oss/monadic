@@ -142,7 +142,7 @@ export const ashby: JobSource = {
           (job.isRemote === true ? "remote" : null),
 
         ...(structuredComp(job) ?? compFromDescription(text)),
-        ...yearsFromDescription(text),
+        ...yearsFromDescription(text, job.title ?? null),
 
         descriptionHtml: job.descriptionHtml ?? null,
         descriptionText: text,

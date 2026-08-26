@@ -1,21 +1,22 @@
 import { getServerClient } from "@/lib/supabase/server";
+import { toRpcArgs, type JobFilters } from "@/lib/filters";
 
 /**
  * The only place the app queries jobs.
  *
- * Reads go through the job_feed view, which already joins company and the
- * current user's interaction state and is declared security_invoker, so RLS
- * still applies. Routes and components never build queries themselves — that is
- * what keeps the policy surface to one auditable layer.
+ * Filtering goes through the search_jobs function rather than being assembled
+ * here, so the predicate exists once. The row count comes back on every row via
+ * a window function, which means "showing 48 of 312" is computed from the same
+ * evaluation of the same WHERE clause as the rows themselves and cannot drift.
  */
 
 export interface JobListItem {
   id: string;
-  title: string;
-  url: string | null;
   company_name: string;
   company_slug: string;
-  source: string;
+  company_logo_url: string | null;
+  title: string;
+  url: string | null;
   department: string | null;
   employment_type: string | null;
   location_raw: string | null;
@@ -31,72 +32,38 @@ export interface JobListItem {
   first_seen_at: string;
   interaction_state: string;
   application_id: string | null;
+  total_count: number;
 }
 
-// Written as one literal, not concatenated: supabase-js infers the row type
-// from the select string at the type level, and `a + b` widens it to `string`,
-// which silently degrades the result to an untyped error shape.
-const LIST_COLUMNS =
-  "id,title,url,company_name,company_slug,source,department,employment_type,location_raw,remote_policy,comp_min,comp_max,comp_currency,comp_period,comp_source,years_min,years_max,years_source,first_seen_at,interaction_state,application_id";
-
-export async function listJobs(options: {
-  limit?: number;
-  company?: string | null;
-} = {}): Promise<{ jobs: JobListItem[]; total: number }> {
+export async function searchJobs(
+  filters: JobFilters,
+  limit = 48,
+  offset = 0,
+): Promise<{ jobs: JobListItem[]; total: number }> {
   const db = await getServerClient();
-  const limit = options.limit ?? 50;
 
-  let query = db
-    .from("job_feed")
-    .select(LIST_COLUMNS, { count: "exact" })
-    .eq("is_open", true)
-    .neq("interaction_state", "dismissed")
-    .order("first_seen_at", { ascending: false })
-    .limit(limit);
+  const { data, error } = await db.rpc("search_jobs", toRpcArgs(filters, limit, offset));
+  if (error) throw new Error(`searchJobs: ${error.message}`);
 
-  if (options.company) query = query.eq("company_slug", options.company);
-
-  const { data, error, count } = await query;
-  if (error) throw new Error(`listJobs: ${error.message}`);
-
-  return { jobs: (data ?? []) as unknown as JobListItem[], total: count ?? 0 };
+  const jobs = (data ?? []) as unknown as JobListItem[];
+  return { jobs, total: jobs[0]?.total_count ?? 0 };
 }
 
 export interface FeedStats {
   openJobs: number;
   companies: number;
-  withComp: number;
-  addedThisWeek: number;
 }
 
-/**
- * Counts for the feed header. `withComp` is here because the share of postings
- * that state pay is a fact worth seeing constantly rather than discovering by
- * scrolling — it is currently well under half.
- */
 export async function feedStats(): Promise<FeedStats> {
   const db = await getServerClient();
-  const weekAgo = new Date(Date.now() - 7 * 86_400_000).toISOString();
 
-  const [open, companies, withComp, recent] = await Promise.all([
+  const [open, companies] = await Promise.all([
     db.from("jobs").select("id", { count: "exact", head: true }).is("closed_at", null),
-    db.from("companies").select("id", { count: "exact", head: true }).eq("ats_resolution_status", "resolved"),
     db
-      .from("jobs")
+      .from("companies")
       .select("id", { count: "exact", head: true })
-      .is("closed_at", null)
-      .neq("comp_source", "none"),
-    db
-      .from("jobs")
-      .select("id", { count: "exact", head: true })
-      .is("closed_at", null)
-      .gte("first_seen_at", weekAgo),
+      .eq("ats_resolution_status", "resolved"),
   ]);
 
-  return {
-    openJobs: open.count ?? 0,
-    companies: companies.count ?? 0,
-    withComp: withComp.count ?? 0,
-    addedThisWeek: recent.count ?? 0,
-  };
+  return { openJobs: open.count ?? 0, companies: companies.count ?? 0 };
 }

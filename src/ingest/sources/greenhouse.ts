@@ -90,7 +90,7 @@ export const greenhouse: JobSource = {
 
         // No structured comp exists on this endpoint. Prose is all there is.
         ...compFromDescription(text),
-        ...yearsFromDescription(text),
+        ...yearsFromDescription(text, job.title ?? null),
 
         descriptionHtml: html,
         descriptionText: text,

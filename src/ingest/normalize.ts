@@ -117,16 +117,34 @@ export function compFromDescription(text: string | null): Pick<
 }
 
 /**
- * Years of experience required, from prose.
+ * Years of experience required, from the title or the description.
  *
- * Anchored on the word "experience" within a short window, because bare digits
- * followed by "years" catch company age, tenure of the team, and "5 years of
- * runway" just as readily as a requirement.
+ * An earlier version required the literal word "experience" within 40
+ * characters of the figure. Measured against 2,380 real postings it missed 397
+ * that plainly stated a requirement, because the common phrasings do not use
+ * that word at all:
+ *
+ *   "3–5 years in a client-facing delivery role"
+ *   "5+ years managing technical delivery"
+ *   "7+ years in client-facing delivery, consulting, or enterprise software"
+ *
+ * So the anchor is now a window test in both directions: accept when the
+ * surrounding text looks like a requirement, reject when it looks like one of
+ * the phrases that reliably produces a false positive. Those matter — "over the
+ * past 5 years", "vesting over 4 years" and "founded 6 years ago" all sit near
+ * the word "years" in job descriptions, and reading any of them as a
+ * requirement would put a confident wrong number on the card.
  */
 const YEARS_RE =
-  /(\d{1,2})\s*(?:\+|plus)?\s*(?:-|–|to)?\s*(\d{1,2})?\s*(?:\+)?\s*years?[^.]{0,40}?experience/gi;
+  /(\d{1,2})\s*(?:\+|plus)?\s*(?:[-–—]|\s+to\s+)?\s*(\d{1,2})?\s*(?:\+)?\s*(?:years?|yrs?)\b/gi;
 
-export function yearsFromDescription(text: string | null): Pick<
+const REQUIREMENT_CONTEXT =
+  /experience|background|proven|track record|minimum|at least|relevant|professional|industry|working|building|managing|leading|developing|designing|shipping|practicing|in\s+(?:a|an|the)\b|of\s+(?:engineering|software|product|design|data|sales|marketing|research|security|infrastructure)/i;
+
+const FALSE_POSITIVE_CONTEXT =
+  /(?:past|last|next|previous|recent|first)\s+\d{1,2}\s*(?:years?|yrs?)|\d{1,2}\s*(?:years?|yrs?)\s+ago|vest|founded|anniversar|over the (?:past|last)|every\s+\d{1,2}\s*years?|\d{1,2}\s*[-–]\s*year\s+(?:program|degree|visa)/i;
+
+export function yearsFromText(text: string | null): Pick<
   NormalizedJob,
   "yearsMin" | "yearsMax" | "yearsSource"
 > {
@@ -138,9 +156,29 @@ export function yearsFromDescription(text: string | null): Pick<
     const b = match[2] ? Number(match[2]) : null;
     if (!Number.isFinite(a) || a < 0 || a > 40) continue;
     if (b !== null && (!Number.isFinite(b) || b < a || b > 40)) continue;
+
+    const start = Math.max(0, match.index - 90);
+    const window = text.slice(start, match.index + match[0].length + 120);
+
+    if (FALSE_POSITIVE_CONTEXT.test(window)) continue;
+    if (!REQUIREMENT_CONTEXT.test(window)) continue;
+
     return { yearsMin: a, yearsMax: b, yearsSource: "description" };
   }
   return none;
+}
+
+/**
+ * Title first, then description. A title that states the requirement outright
+ * ("Engineer, 5+ years") is more reliable than anything in the prose below it.
+ */
+export function yearsFromDescription(
+  text: string | null,
+  title?: string | null,
+): Pick<NormalizedJob, "yearsMin" | "yearsMax" | "yearsSource"> {
+  const fromTitle = title ? yearsFromText(title) : null;
+  if (fromTitle && fromTitle.yearsSource !== "none") return fromTitle;
+  return yearsFromText(text);
 }
 
 /**

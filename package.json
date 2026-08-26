@@ -15,7 +15,9 @@
     "seed:user": "NODE_OPTIONS=--experimental-websocket tsx scripts/seed-user.ts",
     "check:rls": "NODE_OPTIONS=--experimental-websocket tsx scripts/check-rls.ts",
     "resolve": "NODE_OPTIONS=--experimental-websocket tsx scripts/resolve.ts",
-    "ingest": "NODE_OPTIONS=--experimental-websocket tsx scripts/ingest.ts"
+    "ingest": "NODE_OPTIONS=--experimental-websocket tsx scripts/ingest.ts",
+    "backfill": "NODE_OPTIONS=--experimental-websocket tsx scripts/backfill.ts",
+    "logos": "NODE_OPTIONS=--experimental-websocket tsx scripts/logos.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.109.0",

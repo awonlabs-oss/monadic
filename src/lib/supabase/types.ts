@@ -261,6 +261,7 @@ export type Database = {
           careers_url: string | null
           created_at: string
           id: string
+          logo_url: string | null
           name: string
           raw: Json
           slug: string
@@ -280,6 +281,7 @@ export type Database = {
           careers_url?: string | null
           created_at?: string
           id?: string
+          logo_url?: string | null
           name: string
           raw?: Json
           slug: string
@@ -299,6 +301,7 @@ export type Database = {
           careers_url?: string | null
           created_at?: string
           id?: string
+          logo_url?: string | null
           name?: string
           raw?: Json
           slug?: string
@@ -1262,6 +1265,7 @@ export type Database = {
           comp_period: string | null
           comp_source: string | null
           company_id: string | null
+          company_logo_url: string | null
           company_name: string | null
           company_slug: string | null
           department: string | null
@@ -1413,6 +1417,46 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      search_jobs: {
+        Args: {
+          p_comp_min?: number
+          p_company?: string
+          p_include_comp_unknown?: boolean
+          p_include_years_unknown?: boolean
+          p_limit?: number
+          p_offset?: number
+          p_query?: string
+          p_remote?: string[]
+          p_saved_only?: boolean
+          p_search_descriptions?: boolean
+          p_years_max?: number
+          p_years_min?: number
+        }
+        Returns: {
+          application_id: string
+          comp_currency: string
+          comp_max: number
+          comp_min: number
+          comp_period: string
+          comp_source: string
+          company_logo_url: string
+          company_name: string
+          company_slug: string
+          department: string
+          employment_type: string
+          first_seen_at: string
+          id: string
+          interaction_state: string
+          location_raw: string
+          remote_policy: string
+          title: string
+          total_count: number
+          url: string
+          years_max: number
+          years_min: number
+          years_source: string
+        }[]
       }
       set_application_status: {
         Args: {
