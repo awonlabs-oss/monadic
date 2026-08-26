@@ -33,7 +33,7 @@ function Pill({
     <Link
       href={href}
       aria-pressed={active}
-      className={`inline-flex items-center rounded-full px-default py-compact text-small font-medium leading-none ${
+      className={`inline-flex items-center rounded-subtle px-default py-compact text-small font-medium leading-none ${
         active
           ? "bg-accent-default text-content-inverse"
           : "border border-border-subtle bg-surface-base text-content-secondary"
@@ -82,7 +82,7 @@ export function FilterBar({ filters }: { filters: JobFilters }) {
             name="q"
             defaultValue={filters.q ?? ""}
             placeholder="Search roles and companies"
-            className="w-72 max-w-full rounded-full border border-border-subtle bg-surface-base px-default py-compact text-small text-content-primary placeholder:text-content-tertiary"
+            className="w-72 max-w-full rounded-subtle border border-border-subtle bg-surface-base px-default py-compact text-small text-content-primary placeholder:text-content-tertiary"
           />
           {/* Filters survive a search submit. */}
           {filters.years && <input type="hidden" name="years" value={filters.years} />}
@@ -95,7 +95,7 @@ export function FilterBar({ filters }: { filters: JobFilters }) {
           {filters.searchDescriptions && <input type="hidden" name="desc" value="1" />}
           <button
             type="submit"
-            className="rounded-full bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse"
+            className="rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse"
           >
             Search
           </button>

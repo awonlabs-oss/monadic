@@ -29,6 +29,7 @@ export interface JobListItem {
   years_min: number | null;
   years_max: number | null;
   years_source: string;
+  posted_at: string | null;
   first_seen_at: string;
   interaction_state: string;
   application_id: string | null;

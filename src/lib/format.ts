@@ -115,3 +115,31 @@ export function relativeShort(iso: string | null): string {
 export function ageBadge(iso: string | null): string {
   return relativeShort(iso).replace(" ago", "");
 }
+
+/**
+ * The card's date line. "Posted 21 Aug" when the board told us when the posting
+ * went up, "Seen 21 Aug" when it did not.
+ *
+ * The distinction is not pedantry. On the first pull of a new board every row
+ * gets the same first_seen_at, so labelling that as "Posted" would have every
+ * card claim to have been posted the day ingestion happened to run. The year is
+ * shown only when it is not the current one.
+ */
+export function postedLabel(
+  postedAt: string | null,
+  firstSeenAt: string,
+): { verb: "Posted" | "Seen"; date: string } {
+  const iso = postedAt ?? firstSeenAt;
+  const d = new Date(iso);
+  const now = new Date();
+  const sameYear = d.getFullYear() === now.getFullYear();
+
+  return {
+    verb: postedAt ? "Posted" : "Seen",
+    date: d.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      ...(sameYear ? {} : { year: "numeric" }),
+    }),
+  };
+}

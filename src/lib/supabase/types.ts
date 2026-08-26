@@ -1449,6 +1449,7 @@ export type Database = {
           id: string
           interaction_state: string
           location_raw: string
+          posted_at: string
           remote_policy: string
           title: string
           total_count: number

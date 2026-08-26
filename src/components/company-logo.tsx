@@ -3,17 +3,25 @@
 import { useState } from "react";
 
 /**
- * Company logo, falling back to a monogram.
+ * CompanyPreview tile. Figma node 12:142 inside JobCardWide.
  *
- * The URL is resolved from the company's own site, so it can 404, expire, or be
- * a format the browser rejects. The monogram is the designed fallback rather
- * than an error state — a card with a letter tile looks intentional, a card
- * with a broken-image glyph looks broken.
+ * 68px wide, surface/sunken, 7px radius, with a border/subtle outline — the
+ * outline matters when a logo is itself near-white, which several are.
  *
- * Client component solely for the onError swap; there is no other state here.
+ * One deliberate deviation from the frame: the tile is 68px square there, but
+ * self-stretches here so its top and bottom land exactly on the top and bottom
+ * of the detail column beside it. That was an explicit request, and it is also
+ * the only version that survives real data — a job title that wraps to two
+ * lines makes the detail column taller than 68px, and a fixed square would
+ * float short of the bottom edge on exactly those cards. Width stays fixed so
+ * the grid does not shift.
  *
- * Plain <img> rather than next/image: these are arbitrary third-party hosts, and
- * next/image would need every one added to remotePatterns, so a newly ingested
+ * The monogram is the designed fallback rather than an error state: the URL is
+ * resolved from the company's own site, so it can 404 or change format, and a
+ * letter tile reads as intentional where a broken-image glyph reads as broken.
+ *
+ * Plain <img> rather than next/image because these are arbitrary third-party
+ * hosts; next/image would need each one in remotePatterns, so a newly ingested
  * company would silently fail to render until config caught up.
  */
 export function CompanyLogo({
@@ -28,23 +36,21 @@ export function CompanyLogo({
 
   return (
     <span
-      className="flex size-logo shrink-0 items-center justify-center overflow-hidden rounded-logo bg-surface-sunken"
       aria-hidden="true"
+      className="flex w-logo min-h-logo shrink-0 self-stretch items-center justify-center overflow-hidden rounded-preview border border-border-subtle bg-surface-sunken"
     >
       {src && !failed ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={src}
           alt=""
-          width={56}
-          height={56}
           loading="lazy"
           decoding="async"
-          className="size-full object-contain p-tight"
+          className="size-full max-h-logo object-contain p-compact"
           onError={() => setFailed(true)}
         />
       ) : (
-        <span className="text-lead font-semibold leading-none text-content-secondary">
+        <span className="text-monogram font-semibold leading-none tracking-mid text-content-primary">
           {initial}
         </span>
       )}
