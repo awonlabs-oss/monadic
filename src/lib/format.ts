@@ -21,24 +21,42 @@ function short(n: number): string {
   return String(n);
 }
 
-export function formatComp(job: {
-  comp_min: number | null;
-  comp_max: number | null;
-  comp_currency: string | null;
-  comp_period: string | null;
-  comp_source: string;
-}): Presence<string> {
+/** Full figures, for the detail page's facts list: "$140,000 – $170,000". */
+function exact(n: number): string {
+  return n.toLocaleString("en-US", { maximumFractionDigits: 0 });
+}
+
+export function formatComp(
+  job: {
+    comp_min: number | null;
+    comp_max: number | null;
+    comp_currency: string | null;
+    comp_period: string | null;
+    comp_source: string;
+  },
+  /**
+   * `precise` writes the figures out in full. The feed abbreviates because a
+   * card is scanned; the detail page does not, because it is the page you read
+   * before deciding, and "$169.2k" is a rounded number pretending to be the
+   * posting's own.
+   */
+  options: { precise?: boolean } = {},
+): Presence<string> {
   if (job.comp_source === "none" || (job.comp_min === null && job.comp_max === null)) {
     return { known: false, reason: "Not listed" };
   }
 
   const sym = currency(job.comp_currency);
   const per = job.comp_period && job.comp_period !== "year" ? ` / ${job.comp_period}` : "";
+  const write = options.precise ? exact : short;
 
+  // A band whose ends are equal is a single figure, not a range. 63 open
+  // postings state one number, and "$320k – $320k" reads as a formatting fault
+  // rather than as a fixed salary.
   const range =
-    job.comp_min !== null && job.comp_max !== null
-      ? `${sym}${short(job.comp_min)} – ${sym}${short(job.comp_max)}`
-      : `${sym}${short((job.comp_min ?? job.comp_max) as number)}`;
+    job.comp_min !== null && job.comp_max !== null && job.comp_min !== job.comp_max
+      ? `${sym}${write(job.comp_min)} – ${sym}${write(job.comp_max)}`
+      : `${sym}${write((job.comp_min ?? job.comp_max) as number)}`;
 
   return {
     known: true,

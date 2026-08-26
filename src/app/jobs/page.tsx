@@ -3,6 +3,7 @@ import { parseFilters, activeCount, hrefFor } from "@/lib/filters";
 import { JobCard } from "@/components/job-card";
 import { FilterPanel } from "@/components/filter-panel";
 import { Pagination } from "@/components/pagination";
+import { ProfileDock } from "@/components/profile-dock";
 import Link from "next/link";
 
 /*
@@ -13,8 +14,8 @@ import Link from "next/link";
  * by it returned whichever company was pulled last rather than anything
  * resembling recency.
  *
- * One column of full-width cards, with the profile dock supplied by the route's
- * layout to the right (frame `Screen / Home (feed + profile dock)`, 22:471).
+ * One column of full-width cards, with the profile dock docked to the right
+ * (frame `Screen / Home (feed + profile dock)`, 22:471).
  * The column fills what is left rather than sitting inside a max-width.
  *
  * "For You" rather than "New jobs": the ordering is recency, but what makes the
@@ -55,166 +56,206 @@ export default async function JobsPage({
   const pastEnd = jobs.length === 0 && total > 0 && filters.page > lastPage;
 
   return (
-    <div className="flex flex-col gap-snug">
-      {/*
+    /*
+      The dock lives here rather than in a layout. A layout at this segment also
+      wraps /jobs/[id], and the job detail frame (50:348) has no dock — it is
+      sidebar and content. The cost is that the dock's two single-row queries
+      re-run on a filter change instead of being held across it.
+    */
+    <div className="flex min-h-screen">
+      <div className="flex min-w-0 flex-1 flex-col gap-snug px-page pt-section pb-page">
+        {/*
         Title left, search right, on one line — frame 22:471. The search box was
         on its own row under the heading; it is the same size as the filter
         controls and there is nothing else at the top of the page competing for
         that space.
       */}
-      <header className="flex flex-wrap items-start justify-between gap-snug pb-tight">
-        <div className="flex flex-col gap-tight">
-          <h1 className="text-title font-semibold tracking-tight text-content-primary">
-            For You
-          </h1>
-          <p className="text-body text-content-secondary">
-            {filtered ? (
-              <>
-                {total.toLocaleString()} matching {total === 1 ? "role" : "roles"} of{" "}
-                {stats.openJobs.toLocaleString()}
-              </>
-            ) : (
-              <>
-                {stats.openJobs.toLocaleString()} open {filters.usOnly ? "US " : ""}
-                roles from {stats.companies} companies
-              </>
-            )}
-          </p>
-        </div>
+        <header className="flex flex-wrap items-start justify-between gap-snug pb-tight">
+          <div className="flex flex-col gap-tight">
+            <h1 className="text-title font-semibold tracking-tight text-content-primary">
+              For You
+            </h1>
+            <p className="text-body text-content-secondary">
+              {filtered ? (
+                <>
+                  {total.toLocaleString()} matching{" "}
+                  {total === 1 ? "role" : "roles"} of{" "}
+                  {stats.openJobs.toLocaleString()}
+                </>
+              ) : (
+                <>
+                  {stats.openJobs.toLocaleString()} open{" "}
+                  {filters.usOnly ? "US " : ""}
+                  roles from {stats.companies} companies
+                </>
+              )}
+            </p>
+          </div>
 
-        <div className="flex min-w-0 flex-col items-end gap-tight">
-        <form
-          method="get"
-          action="/jobs"
-          role="search"
-          className="flex flex-wrap items-center justify-end gap-tight"
-        >
-          <label htmlFor="job-search" className="sr-only">
-            Search job titles
-          </label>
-          <input
-            id="job-search"
-            type="search"
-            name="q"
-            defaultValue={filters.q ?? ""}
-            placeholder="Search roles and companies"
-            className="w-64 max-w-full rounded-subtle border border-border-subtle bg-surface-base px-default py-compact text-small text-content-primary placeholder:text-content-tertiary"
-          />
-          {/* Filters survive a search submit. */}
-          {filters.years && <input type="hidden" name="years" value={filters.years} />}
-          {filters.comp && <input type="hidden" name="comp" value={filters.comp} />}
-          {filters.remote.map((r) => (
-            <input key={r} type="hidden" name="remote" value={r} />
-          ))}
-          {!filters.includeYearsUnknown && <input type="hidden" name="yrsunk" value="0" />}
-          {!filters.includeCompUnknown && <input type="hidden" name="compunk" value="0" />}
-          {filters.searchDescriptions && <input type="hidden" name="desc" value="1" />}
-          {filters.recency && <input type="hidden" name="recency" value={filters.recency} />}
-          {filters.cities.map((c) => (
-            <input key={c} type="hidden" name="city" value={c} />
-          ))}
-          {!filters.usOnly && <input type="hidden" name="intl" value="1" />}
-          {!filters.diversify && <input type="hidden" name="mix" value="0" />}
-          <button
-            type="submit"
-            className="rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover"
-          >
-            Search
-          </button>
-        </form>
+          <div className="flex min-w-0 flex-col items-end gap-tight">
+            <form
+              method="get"
+              action="/jobs"
+              role="search"
+              className="flex flex-wrap items-center justify-end gap-tight"
+            >
+              <label htmlFor="job-search" className="sr-only">
+                Search job titles
+              </label>
+              <input
+                id="job-search"
+                type="search"
+                name="q"
+                defaultValue={filters.q ?? ""}
+                placeholder="Search roles and companies"
+                className="w-64 max-w-full rounded-subtle border border-border-subtle bg-surface-base px-default py-compact text-small text-content-primary placeholder:text-content-tertiary"
+              />
+              {/* Filters survive a search submit. */}
+              {filters.years && (
+                <input type="hidden" name="years" value={filters.years} />
+              )}
+              {filters.comp && (
+                <input type="hidden" name="comp" value={filters.comp} />
+              )}
+              {filters.remote.map((r) => (
+                <input key={r} type="hidden" name="remote" value={r} />
+              ))}
+              {!filters.includeYearsUnknown && (
+                <input type="hidden" name="yrsunk" value="0" />
+              )}
+              {!filters.includeCompUnknown && (
+                <input type="hidden" name="compunk" value="0" />
+              )}
+              {filters.searchDescriptions && (
+                <input type="hidden" name="desc" value="1" />
+              )}
+              {filters.recency && (
+                <input type="hidden" name="recency" value={filters.recency} />
+              )}
+              {filters.cities.map((c) => (
+                <input key={c} type="hidden" name="city" value={c} />
+              ))}
+              {!filters.usOnly && <input type="hidden" name="intl" value="1" />}
+              {!filters.diversify && (
+                <input type="hidden" name="mix" value="0" />
+              )}
+              <button
+                type="submit"
+                className="rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover"
+              >
+                Search
+              </button>
+            </form>
 
-        {/*
+            {/*
           Outside the form: it is a link that re-runs the search with the
           descriptions included, not a control the form submits.
         */}
-        {filters.q && (
-          <Link
-            href={hrefFor(filters, {
-              searchDescriptions: !filters.searchDescriptions,
-              page: 1,
-            })}
-            aria-pressed={filters.searchDescriptions}
-            className={`rounded-subtle px-compact py-tight text-small font-medium transition-colors ${
-              filters.searchDescriptions
-                ? "bg-accent-default text-content-inverse hover:bg-accent-hover"
-                : "border border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
-            }`}
-          >
-            {filters.searchDescriptions ? "Searching descriptions" : "Search descriptions too"}
-          </Link>
-        )}
-        </div>
-      </header>
-
-      <FilterPanel filters={filters} facets={facets} total={total} cities={cities} />
-
-      {jobs.length === 0 ? (
-        <p className="text-body text-content-secondary">
-          {pastEnd ? (
-            <>
-              That page no longer exists — this search has {total.toLocaleString()}{" "}
-              {total === 1 ? "result" : "results"}.{" "}
-              <Link href={hrefFor(filters, { page: 1 })} className="underline underline-offset-2">
-                Back to the first page
+            {filters.q && (
+              <Link
+                href={hrefFor(filters, {
+                  searchDescriptions: !filters.searchDescriptions,
+                  page: 1,
+                })}
+                aria-pressed={filters.searchDescriptions}
+                className={`rounded-subtle px-compact py-tight text-small font-medium transition-colors ${
+                  filters.searchDescriptions
+                    ? "bg-accent-default text-content-inverse hover:bg-accent-hover"
+                    : "border border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
+                }`}
+              >
+                {filters.searchDescriptions
+                  ? "Searching descriptions"
+                  : "Search descriptions too"}
               </Link>
-              .
-            </>
-          ) : filtered ? (
-            "No roles match these filters. The counts in the panel show what each option would return."
-          ) : (
-            "No open postings yet. Run npm run resolve, then npm run ingest."
-          )}
-        </p>
-      ) : (
-        <section aria-labelledby="feed-heading" className="flex flex-col gap-snug">
-          <h2 id="feed-heading" className="sr-only">
-            {filtered ? "Matching job postings" : "Job postings"}
-          </h2>
+            )}
+          </div>
+        </header>
 
-          {/*
+        <FilterPanel
+          filters={filters}
+          facets={facets}
+          total={total}
+          cities={cities}
+        />
+
+        {jobs.length === 0 ? (
+          <p className="text-body text-content-secondary">
+            {pastEnd ? (
+              <>
+                That page no longer exists — this search has{" "}
+                {total.toLocaleString()} {total === 1 ? "result" : "results"}.{" "}
+                <Link
+                  href={hrefFor(filters, { page: 1 })}
+                  className="underline underline-offset-2"
+                >
+                  Back to the first page
+                </Link>
+                .
+              </>
+            ) : filtered ? (
+              "No roles match these filters. The counts in the panel show what each option would return."
+            ) : (
+              "No open postings yet. Run npm run resolve, then npm run ingest."
+            )}
+          </p>
+        ) : (
+          <section
+            aria-labelledby="feed-heading"
+            className="flex flex-col gap-snug"
+          >
+            <h2 id="feed-heading" className="sr-only">
+              {filtered ? "Matching job postings" : "Job postings"}
+            </h2>
+
+            {/*
             One column, 14px apart (frame 22:471). The two-column grid fit more
             cards on screen and made every one of them worse: each card had to
             stretch to the height of its neighbour, and the title — the thing
             you actually scan — had half the width to sit on.
           */}
-          <ul className="flex flex-col gap-snug">
-            {jobs.map((job) => (
-              <li key={job.id}>
-                <JobCard job={job} />
-              </li>
-            ))}
-          </ul>
+            <ul className="flex flex-col gap-snug">
+              {jobs.map((job) => (
+                <li key={job.id}>
+                  <JobCard job={job} />
+                </li>
+              ))}
+            </ul>
 
-          {/*
+            {/*
             Said out loud because it is a real deviation from "newest first" and
             an unexplained reordering is indistinguishable from a bug.
           */}
-          {filters.diversify && !filters.q && (
-            <p className="text-caption text-content-tertiary">
-              Showing at most 2 roles per company so more companies fit on a page.{" "}
-              <Link
-                href={hrefFor(filters, { diversify: false, page: 1 })}
-                className="underline underline-offset-2 hover:text-content-primary"
-              >
-                Order strictly by date
-              </Link>
-            </p>
-          )}
-          {!filters.diversify && (
-            <p className="text-caption text-content-tertiary">
-              Ordered strictly by date, so one company can fill the page.{" "}
-              <Link
-                href={hrefFor(filters, { diversify: true, page: 1 })}
-                className="underline underline-offset-2 hover:text-content-primary"
-              >
-                Mix companies
-              </Link>
-            </p>
-          )}
+            {filters.diversify && !filters.q && (
+              <p className="text-caption text-content-tertiary">
+                Showing at most 2 roles per company so more companies fit on a
+                page.{" "}
+                <Link
+                  href={hrefFor(filters, { diversify: false, page: 1 })}
+                  className="underline underline-offset-2 hover:text-content-primary"
+                >
+                  Order strictly by date
+                </Link>
+              </p>
+            )}
+            {!filters.diversify && (
+              <p className="text-caption text-content-tertiary">
+                Ordered strictly by date, so one company can fill the page.{" "}
+                <Link
+                  href={hrefFor(filters, { diversify: true, page: 1 })}
+                  className="underline underline-offset-2 hover:text-content-primary"
+                >
+                  Mix companies
+                </Link>
+              </p>
+            )}
 
-          <Pagination filters={filters} total={total} pageSize={PAGE_SIZE} />
-        </section>
-      )}
+            <Pagination filters={filters} total={total} pageSize={PAGE_SIZE} />
+          </section>
+        )}
+      </div>
+
+      <ProfileDock />
     </div>
   );
 }

@@ -36,20 +36,24 @@ import { useState } from "react";
 export function CompanyLogo({
   name,
   src,
+  size = "default",
 }: {
   name: string;
   src: string | null;
+  /** `small` is the 34px tile a rail panel uses; `default` is the 68px feed tile. */
+  size?: "default" | "small";
 }) {
   const [failed, setFailed] = useState(false);
   const initial = name.trim().charAt(0).toUpperCase();
   const hasImage = Boolean(src) && !failed;
+  const small = size === "small";
 
   return (
     <span
       aria-hidden="true"
-      className={`flex size-logo shrink-0 items-center justify-center overflow-hidden rounded-preview ${
-        hasImage ? "" : "border border-border-subtle bg-surface-sunken"
-      }`}
+      className={`flex shrink-0 items-center justify-center overflow-hidden rounded-preview ${
+        small ? "size-logo-sm" : "size-logo"
+      } ${hasImage ? "" : "border border-border-subtle bg-surface-sunken"}`}
     >
       {hasImage ? (
         // eslint-disable-next-line @next/next/no-img-element
@@ -62,7 +66,11 @@ export function CompanyLogo({
           onError={() => setFailed(true)}
         />
       ) : (
-        <span className="text-monogram font-semibold leading-none tracking-mid text-content-primary">
+        <span
+          className={`font-semibold leading-none tracking-mid text-content-primary ${
+            small ? "text-body" : "text-monogram"
+          }`}
+        >
           {initial}
         </span>
       )}

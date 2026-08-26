@@ -63,7 +63,10 @@ export function JobCard({ job }: { job: JobListItem }) {
     // all they did was stretch every card to the tallest one on the page and
     // push the divider away from the content it separates. That stretch was
     // the dead space.
-    <article className="flex flex-col gap-snug rounded-default border border-border-subtle bg-surface-base px-default pt-default pb-body">
+    // `relative` plus the stretched link on the title below: the whole card is
+    // one click target without nesting anything inside an anchor, which would be
+    // invalid markup and would swallow the Save and Track buttons.
+    <article className="relative flex flex-col gap-snug rounded-default border border-border-subtle bg-surface-base px-default pt-default pb-body transition-colors hover:border-border-default">
       <div className="flex items-start gap-body">
         <CompanyLogo name={job.company_name} src={job.company_logo_url} />
 
@@ -93,14 +96,23 @@ export function JobCard({ job }: { job: JobListItem }) {
             </span>
           </p>
 
+          {/*
+            The title links to the detail page, not to the posting. Applying
+            happens there, behind an Apply button that says where it goes; a card
+            title that silently threw you onto a third-party board was the wrong
+            default.
+
+            after:absolute after:inset-0 is what makes the card clickable — the
+            anchor's own box stays around the text, so the accessible name is the
+            title rather than the whole card read aloud.
+          */}
           <h3 className="text-lead font-semibold leading-default tracking-snug text-content-primary">
-            {job.url ? (
-              <a href={job.url} target="_blank" rel="noreferrer noopener" className="hover:underline hover:underline-offset-2">
-                {job.title}
-              </a>
-            ) : (
-              job.title
-            )}
+            <Link
+              href={`/jobs/${job.id}`}
+              className="after:absolute after:inset-0 after:rounded-default hover:underline hover:underline-offset-2"
+            >
+              {job.title}
+            </Link>
           </h3>
 
           <ul className="flex flex-wrap items-start gap-tight">
@@ -125,7 +137,8 @@ export function JobCard({ job }: { job: JobListItem }) {
           Track does. Keeping them separate is what stops a browsing session of
           forty saves from flooding the pipeline.
         */}
-        <form action={saveJobAction} className="shrink-0">
+        {/* z-10 keeps the buttons above the title's stretched overlay. */}
+        <form action={saveJobAction} className="relative z-10 shrink-0">
           <input type="hidden" name="jobId" value={job.id} />
           <button
             type="submit"
@@ -174,12 +187,12 @@ export function JobCard({ job }: { job: JobListItem }) {
         {tracked ? (
           <Link
             href="/applications"
-            className="shrink-0 rounded-subtle border border-border-default bg-surface-sunken px-default py-compact text-small font-medium leading-none text-content-primary transition-colors hover:bg-surface-hover"
+            className="relative z-10 shrink-0 rounded-subtle border border-border-default bg-surface-sunken px-default py-compact text-small font-medium leading-none text-content-primary transition-colors hover:bg-surface-hover"
           >
             Tracked
           </Link>
         ) : (
-          <form action={trackJobAction} className="shrink-0">
+          <form action={trackJobAction} className="relative z-10 shrink-0">
             <input type="hidden" name="jobId" value={job.id} />
             <button
               type="submit"

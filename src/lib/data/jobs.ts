@@ -57,6 +57,101 @@ export async function searchJobs(
  * A filter that silently leads to zero results is the standard way filter UI
  * wastes people's time, and a count is what shows the dead end beforehand.
  */
+export interface JobDetail {
+  id: string;
+  title: string;
+  url: string | null;
+  department: string | null;
+  team: string | null;
+  employment_type: string | null;
+  location_raw: string | null;
+  location_cities: string[] | null;
+  remote_policy: string | null;
+  comp_min: number | null;
+  comp_max: number | null;
+  comp_currency: string | null;
+  comp_period: string | null;
+  comp_source: string;
+  comp_note: string | null;
+  years_min: number | null;
+  years_max: number | null;
+  years_source: string;
+  description_html: string | null;
+  posted_at: string | null;
+  first_seen_at: string;
+  last_seen_at: string;
+  closed_at: string | null;
+  source: string;
+  company: {
+    id: string;
+    name: string;
+    slug: string;
+    logo_url: string | null;
+    website_url: string | null;
+  };
+  interaction_state: string;
+  application_id: string | null;
+  other_open_roles: number;
+}
+
+/**
+ * One posting, with everything the detail page shows.
+ *
+ * Not read through job_feed: that view exists to render a card and carries
+ * neither the description nor the company's website, and widening it would make
+ * every feed query haul a description column it never displays.
+ *
+ * The interaction and application lookups stay separate rather than joined.
+ * Both are user-scoped and go through RLS on their own tables; folding them
+ * into the job query would mean an outer join against tables the anon role
+ * cannot see, which is a policy question rather than a query-shape one.
+ */
+export async function getJob(id: string): Promise<JobDetail | null> {
+  const db = await getServerClient();
+
+  const { data: job, error } = await db
+    .from("jobs")
+    .select(
+      "id,company_id,title,url,department,team,employment_type,location_raw,location_cities,remote_policy,comp_min,comp_max,comp_currency,comp_period,comp_source,comp_note,years_min,years_max,years_source,description_html,posted_at,first_seen_at,last_seen_at,closed_at,source,companies(id,name,slug,logo_url,website_url)",
+    )
+    .eq("id", id)
+    .maybeSingle();
+
+  // A malformed uuid is a 400 from PostgREST rather than an empty result, and
+  // it reaches here from a hand-edited URL. Treated as "no such job".
+  if (error) {
+    if (error.code === "22P02") return null;
+    throw new Error(`getJob: ${error.message}`);
+  }
+  if (!job) return null;
+
+  const row = job as unknown as Record<string, unknown>;
+  const company = row.companies as JobDetail["company"] | null;
+  if (!company) return null;
+
+  const [interaction, application, siblings] = await Promise.all([
+    db.from("job_interactions").select("state").eq("job_id", id).maybeSingle(),
+    db.from("applications").select("id").eq("job_id", id).maybeSingle(),
+    db
+      .from("jobs")
+      .select("id", { count: "exact", head: true })
+      .eq("company_id", row.company_id as string)
+      .is("closed_at", null)
+      .neq("id", id),
+  ]);
+
+  return {
+    ...(row as unknown as Omit<
+      JobDetail,
+      "company" | "interaction_state" | "application_id" | "other_open_roles"
+    >),
+    company,
+    interaction_state: (interaction.data?.state as string | undefined) ?? "none",
+    application_id: (application.data?.id as string | undefined) ?? null,
+    other_open_roles: siblings.count ?? 0,
+  };
+}
+
 export type Facets = Record<string, Record<string, number>>;
 
 export async function jobFacets(filters: JobFilters): Promise<Facets> {
