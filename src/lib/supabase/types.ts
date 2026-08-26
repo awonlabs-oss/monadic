@@ -1381,7 +1381,7 @@ export type Database = {
         Args: {
           p_cities?: string[]
           p_comp_min?: number
-          p_company?: string
+          p_companies?: string[]
           p_include_comp_unknown?: boolean
           p_include_years_unknown?: boolean
           p_posted_within?: number
@@ -1459,7 +1459,7 @@ export type Database = {
         Args: {
           p_cities?: string[]
           p_comp_min?: number
-          p_company?: string
+          p_companies?: string[]
           p_include_comp_unknown?: boolean
           p_include_years_unknown?: boolean
           p_limit?: number

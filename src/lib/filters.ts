@@ -31,7 +31,7 @@ export interface JobFilters {
   years: string | null;
   comp: string | null;
   remote: string[];
-  company: string | null;
+  companies: string[];
   includeYearsUnknown: boolean;
   includeCompUnknown: boolean;
   searchDescriptions: boolean;
@@ -95,7 +95,10 @@ export function parseFilters(params: RawParams): JobFilters {
       ? params.remote
       : (remote?.split(",") ?? [])
     ).filter((r) => REMOTE_OPTIONS.some((o) => o.key === r)),
-    company: one(params.company),
+    companies: (Array.isArray(params.company)
+      ? params.company
+      : one(params.company)?.split(",") ?? []
+    ).map((c) => c.trim()).filter(Boolean),
     // Absent means included. Only an explicit "0" excludes.
     includeYearsUnknown: last(params.yrsunk) !== "0",
     includeCompUnknown: last(params.compunk) !== "0",
@@ -123,7 +126,7 @@ export function toRpcArgs(filters: JobFilters, limit: number, offset = 0) {
     p_comp_min: comp?.min ?? undefined,
     p_include_comp_unknown: filters.includeCompUnknown,
     p_remote: filters.remote.length > 0 ? filters.remote : undefined,
-    p_company: filters.company ?? undefined,
+    p_companies: filters.companies.length > 0 ? filters.companies : undefined,
     p_saved_only: filters.savedOnly,
     p_search_descriptions: filters.searchDescriptions,
     p_cities: filters.cities.length > 0 ? filters.cities : undefined,
@@ -146,7 +149,7 @@ export function toFacetArgs(filters: JobFilters) {
     p_comp_min: comp?.min ?? undefined,
     p_include_comp_unknown: filters.includeCompUnknown,
     p_remote: filters.remote.length > 0 ? filters.remote : undefined,
-    p_company: filters.company ?? undefined,
+    p_companies: filters.companies.length > 0 ? filters.companies : undefined,
     p_search_descriptions: filters.searchDescriptions,
     p_cities: filters.cities.length > 0 ? filters.cities : undefined,
     p_us_only: filters.usOnly,
@@ -168,7 +171,7 @@ export function hrefFor(
   if (f.q) params.set("q", f.q);
   if (f.years) params.set("years", f.years);
   if (f.comp) params.set("comp", f.comp);
-  if (f.company) params.set("company", f.company);
+  if (f.companies.length > 0) params.set("company", f.companies.join(","));
   if (f.remote.length > 0) params.set("remote", f.remote.join(","));
   if (!f.includeYearsUnknown) params.set("yrsunk", "0");
   if (!f.includeCompUnknown) params.set("compunk", "0");
@@ -204,9 +207,6 @@ export function toggleHref(
   const comp = "comp" in change ? change.comp : current.comp;
   if (comp) params.set("comp", comp);
 
-  const company = "company" in change ? change.company : current.company;
-  if (company) params.set("company", company);
-
   let remote = current.remote;
   if (change.remote) {
     remote = remote.includes(change.remote)
@@ -235,7 +235,7 @@ export function activeCount(filters: JobFilters): number {
     (filters.q ? 1 : 0) +
     (filters.years ? 1 : 0) +
     (filters.comp ? 1 : 0) +
-    (filters.company ? 1 : 0) +
+    filters.companies.length +
     filters.remote.length +
     (filters.includeYearsUnknown ? 0 : 1) +
     (filters.includeCompUnknown ? 0 : 1) +

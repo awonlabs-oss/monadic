@@ -85,6 +85,24 @@ const HARD_SEPARATORS = /\s*(?:\||;|•|·|\/{1,2}|\bor\b|\n)\s*/i;
 
 const NOISE = /\((hq|remote|hybrid|onsite|on-site|primary|preferred)\)/gi;
 
+/**
+ * Suffixes companies bolt onto a city name. Plaid writes "San Francisco HQ" and
+ * "New York City Office", which without stripping become the cities
+ * "San Francisco Hq" and "New York City Office" — neither of which matches
+ * anything, so 98 of Plaid's 103 US roles were being read as non-US.
+ */
+const PLACE_SUFFIX = /\s+(hq|headquarters|office|campus|hub|metro(\s+area)?|area)$/i;
+
+/**
+ * Leading workplace type. Vercel writes
+ * "Hybrid - San Francisco, New York City, Austin", where the prefix otherwise
+ * swallows the first city.
+ */
+const WORKPLACE_PREFIX = /^\s*(hybrid|remote|onsite|on-site|in-office)\s*[-–—:]\s*/i;
+
+/** Regions broad enough that a US-based person is inside them. */
+const US_REGIONS = /^\s*(north america|americas|us|usa|united states|nationwide)\s*$/i;
+
 export interface ParsedLocation {
   cities: string[];
   /** ISO-2 where confident. Empty when nothing could be identified. */
@@ -118,10 +136,15 @@ const US_CITIES = new Set([
   "cleveland", "kansas city", "indianapolis", "tampa", "orlando", "sacramento",
   "irvine", "san mateo", "foster city", "redwood city", "culver city",
   "santa monica", "bentonville", "madison", "ann arbor", "chapel hill",
+  "raleigh", "san antonio", "las vegas", "portland", "st. louis", "st louis",
+  "colorado springs", "provo", "lehi", "reston", "mclean", "cupertino",
+  "sunnyvale", "fremont", "pasadena", "long beach", "newark", "hoboken",
+  "stamford", "greenwich", "princeton", "richmond", "baltimore", "louisville",
+  "cincinnati", "milwaukee", "omaha", "tucson", "albuquerque", "boise",
 ]);
 
 const COUNTRY_WORDS =
-  /^(united states|usa|united kingdom|canada|germany|france|india|japan|singapore|australia|ireland|netherlands|spain|portugal|poland|switzerland|sweden|norway|denmark|brazil|mexico|israel|china|korea|new zealand|remote|anywhere|global|worldwide|americas|emea|apac|latam)$/i;
+  /^(united states|usa|united kingdom|canada|germany|france|india|japan|singapore|australia|ireland|netherlands|spain|portugal|poland|switzerland|sweden|norway|denmark|brazil|mexico|israel|china|korea|new zealand|remote|anywhere|global|worldwide|americas|emea|apac|latam|europe|asia|africa|north america|south america|oceania|middle east|nationwide|multiple locations)$/i;
 
 /**
  * Canonical city name, so "New York City" and "New York, NY" group together.
@@ -132,7 +155,7 @@ const COUNTRY_WORDS =
  * the state; anchored by ", NY" it is unambiguously the city.
  */
 function canonicalCity(raw: string, anchored = false): string | null {
-  const city = raw.replace(NOISE, "").replace(/[.]+$/, "").trim();
+  const city = raw.replace(NOISE, "").replace(PLACE_SUFFIX, "").replace(/[.]+$/, "").trim();
   if (!city || city.length < 2 || city.length > 40) return null;
   if (/^\d+$/.test(city)) return null;
   // A country name is never a city. "SF, CA • New York, NY • United States"
@@ -189,9 +212,15 @@ export function parseLocation(raw: string | null | undefined): ParsedLocation {
   const countries = new Set<string>();
   let sawUsSignal = false;
 
-  for (const chunk of text.split(HARD_SEPARATORS)) {
-    const part = chunk.trim();
+  for (const rawChunk of text.split(HARD_SEPARATORS)) {
+    const part = rawChunk.replace(WORKPLACE_PREFIX, "").trim();
     if (!part) continue;
+
+    if (US_REGIONS.test(part)) {
+      sawUsSignal = true;
+      countries.add("US");
+      continue;
+    }
 
     // Country markers first — they are the most reliable signal in the string,
     // and one non-US marker in a chunk means that chunk is not a US location.
@@ -211,6 +240,8 @@ export function parseLocation(raw: string | null | undefined): ParsedLocation {
 
     // Walk comma tokens, anchoring each city on a following state.
     const tokens = part.split(",").map((t) => t.replace(NOISE, "").trim()).filter(Boolean);
+    const consumed = new Set<number>();
+
     for (let i = 0; i < tokens.length; i += 1) {
       const next = tokens[i + 1];
       if (!next) continue;
@@ -228,21 +259,30 @@ export function parseLocation(raw: string | null | undefined): ParsedLocation {
           sawUsSignal = true;
           countries.add("US");
         }
+        consumed.add(i);
+        consumed.add(i + 1);
         i += 1; // consume the state token
       }
     }
 
-    // A chunk with no state and no country, e.g. "San Francisco" alone.
-    if (!chunkCountry && tokens.length === 1) {
-      const city = canonicalCity(tokens[0]);
-      if (city) {
-        cities.add(city);
-        // Only a US signal when the city is one we actually recognise. An
-        // unrecognised bare city name is exactly where a wrong country guess
-        // would come from, so it contributes a city and no country.
+    // Tokens no state claimed. Covers both a lone "San Francisco" and a
+    // comma-separated list with no states at all, which is how Vercel writes
+    // "Hybrid - San Francisco, New York City, Austin".
+    if (!chunkCountry) {
+      for (let i = 0; i < tokens.length; i += 1) {
+        if (consumed.has(i)) continue;
+        const city = canonicalCity(tokens[i]);
+        if (!city) continue;
+
+        // A recognised US city is a US signal. An unrecognised one contributes
+        // a city and no country — that is where a wrong country guess would
+        // come from, and a wrong country silently hides a real job.
         if (US_CITIES.has(city.toLowerCase())) {
+          cities.add(city);
           sawUsSignal = true;
           countries.add("US");
+        } else if (tokens.length === 1) {
+          cities.add(city);
         }
       }
     }

@@ -5,16 +5,14 @@ import { useState } from "react";
 /**
  * CompanyPreview tile. Figma node 12:142 inside JobCardWide.
  *
- * 68px wide, surface/sunken, 7px radius, with a border/subtle outline — the
- * outline matters when a logo is itself near-white, which several are.
+ * A 68px square on surface/sunken with a 7px radius and a border/subtle
+ * outline — the outline matters because several of these logos are themselves
+ * near-white and would otherwise dissolve into the tile.
  *
- * One deliberate deviation from the frame: the tile is 68px square there, but
- * self-stretches here so its top and bottom land exactly on the top and bottom
- * of the detail column beside it. That was an explicit request, and it is also
- * the only version that survives real data — a job title that wraps to two
- * lines makes the detail column taller than 68px, and a fixed square would
- * float short of the bottom edge on exactly those cards. Width stays fixed so
- * the grid does not shift.
+ * The image fills the tile via object-cover rather than being letterboxed
+ * inside padding. Cover crops rather than shrinks, so a non-square logo loses
+ * its edges instead of floating in a sea of grey; favicons and apple-touch
+ * icons are square almost without exception, so in practice nothing is lost.
  *
  * The monogram is the designed fallback rather than an error state: the URL is
  * resolved from the company's own site, so it can 404 or change format, and a
@@ -37,7 +35,7 @@ export function CompanyLogo({
   return (
     <span
       aria-hidden="true"
-      className="flex w-logo min-h-logo shrink-0 self-stretch items-center justify-center overflow-hidden rounded-preview border border-border-subtle bg-surface-sunken"
+      className="flex size-logo shrink-0 items-center justify-center overflow-hidden rounded-preview border border-border-subtle bg-surface-sunken"
     >
       {src && !failed ? (
         // eslint-disable-next-line @next/next/no-img-element
@@ -46,7 +44,7 @@ export function CompanyLogo({
           alt=""
           loading="lazy"
           decoding="async"
-          className="size-full max-h-logo object-contain p-compact"
+          className="size-full object-cover"
           onError={() => setFailed(true)}
         />
       ) : (

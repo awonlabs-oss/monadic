@@ -48,7 +48,7 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
               alt=""
               loading="lazy"
               decoding="async"
-              className="size-full object-contain p-hair"
+              className="size-full object-cover"
             />
           ) : (
             initial

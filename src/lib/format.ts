@@ -117,29 +117,46 @@ export function ageBadge(iso: string | null): string {
 }
 
 /**
- * The card's date line. "Posted 21 Aug" when the board told us when the posting
- * went up, "Seen 21 Aug" when it did not.
+ * The card's date line: an absolute date with the elapsed time beside it, as in
+ * "Posted Aug 25 [1 day ago]".
  *
- * The distinction is not pedantry. On the first pull of a new board every row
- * gets the same first_seen_at, so labelling that as "Posted" would have every
- * card claim to have been posted the day ingestion happened to run. The year is
- * shown only when it is not the current one.
+ * Both halves earn their place. The date is what you quote when you talk to
+ * someone about the role; the elapsed time is what you actually scan for when
+ * deciding whether it is worth applying to. Either alone makes you compute the
+ * other.
+ *
+ * "Seen" rather than "Posted" when the board supplied no publication date. On
+ * the first pull of a new board every row shares first_seen_at, so labelling
+ * that "Posted" would have every card claim to have been posted the day
+ * ingestion happened to run.
  */
 export function postedLabel(
   postedAt: string | null,
   firstSeenAt: string,
-): { verb: "Posted" | "Seen"; date: string } {
+): { verb: "Posted" | "Seen"; date: string; elapsed: string } {
   const iso = postedAt ?? firstSeenAt;
   const d = new Date(iso);
   const now = new Date();
   const sameYear = d.getFullYear() === now.getFullYear();
 
+  const days = Math.floor((now.getTime() - d.getTime()) / 86_400_000);
+  let elapsed: string;
+  if (days <= 0) elapsed = "today";
+  else if (days === 1) elapsed = "1 day ago";
+  else if (days < 30) elapsed = `${days} days ago`;
+  else if (days < 60) elapsed = "1 month ago";
+  else if (days < 365) elapsed = `${Math.floor(days / 30)} months ago`;
+  else if (days < 730) elapsed = "1 year ago";
+  else elapsed = `${Math.floor(days / 365)} years ago`;
+
   return {
     verb: postedAt ? "Posted" : "Seen",
-    date: d.toLocaleDateString("en-GB", {
-      day: "numeric",
+    // "Aug 25", month first, and the year only when it is not this one.
+    date: d.toLocaleDateString("en-US", {
       month: "short",
+      day: "numeric",
       ...(sameYear ? {} : { year: "numeric" }),
     }),
+    elapsed,
   };
 }

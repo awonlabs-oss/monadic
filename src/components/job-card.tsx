@@ -73,7 +73,8 @@ export function JobCard({ job }: { job: JobListItem }) {
                 className="size-hair shrink-0 rounded-full bg-content-tertiary"
               />
               <span className="shrink-0 text-content-tertiary">
-                {posted.verb} {posted.date}
+                {posted.verb} {posted.date}{" "}
+                <span className="text-content-tertiary/80">[{posted.elapsed}]</span>
               </span>
             </p>
 
