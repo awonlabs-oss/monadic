@@ -19,31 +19,43 @@ import { ALL_STATUSES, type Status } from "@/lib/applications/pipeline";
  * these writes exactly as it does to reads.
  */
 
+/**
+ * Save: bookmark it and put it on the board, in one action.
+ *
+ * These used to be two buttons. Save wrote a bookmark and Track opened a
+ * pipeline entry, and the split existed so that a browsing session of forty
+ * saves could not flood the board. That is not how the feed is actually used —
+ * saving a job *is* deciding to come back to it, which is what the board's
+ * first column already means. Its label has read "Saved" since it was built.
+ *
+ * Both writes still happen. The interaction is what the feed reads to render
+ * the button and what the sidebar's "Saved jobs" view filters on; the
+ * application is the board row. Dropping either would break a surface that
+ * currently works.
+ *
+ * Not atomic across the two, and it does not need to be: each RPC is atomic
+ * with the row it owns, and the failure mode is a bookmark without a board
+ * entry, which the next press repairs. A transaction spanning both would mean
+ * a third SQL function whose only purpose is to call the other two.
+ */
 export async function saveJobAction(formData: FormData) {
   const jobId = String(formData.get("jobId") ?? "");
   if (!jobId) return;
 
   const db = await getServerClient();
+
   const { error } = await db.rpc("save_job", { p_job_id: jobId });
   if (error) throw new Error(`Could not save job: ${error.message}`);
 
-  revalidatePath("/jobs");
-}
-
-export async function trackJobAction(formData: FormData) {
-  const jobId = String(formData.get("jobId") ?? "");
-  if (!jobId) return;
-
-  const db = await getServerClient();
-  const { error } = await db.rpc("create_application", {
+  const { error: applicationError } = await db.rpc("create_application", {
     p_job_id: jobId,
     p_source: "job_feed",
   });
 
-  // A second Track on the same job hits the unique (user_id, job_id) index.
+  // A second Save on the same job hits the unique (user_id, job_id) index.
   // That is the constraint doing its job, not a failure worth showing.
-  if (error && !/duplicate key|unique/i.test(error.message)) {
-    throw new Error(`Could not track job: ${error.message}`);
+  if (applicationError && !/duplicate key|unique/i.test(applicationError.message)) {
+    throw new Error(`Could not track job: ${applicationError.message}`);
   }
 
   revalidatePath("/jobs");

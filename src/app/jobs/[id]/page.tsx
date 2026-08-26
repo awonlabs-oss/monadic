@@ -10,7 +10,8 @@ import {
   relativeShort,
 } from "@/lib/format";
 import { CompanyLogo } from "@/components/company-logo";
-import { saveJobAction, trackJobAction } from "@/app/actions";
+import { saveJobAction } from "@/app/actions";
+import { BookmarkIcon, SendIcon } from "@/components/icons";
 
 /*
  * /jobs/[id] — one posting. Figma frame `Screen / Job detail`, node 50:348.
@@ -139,8 +140,8 @@ export default async function JobDetailPage({
   const compFull = formatComp(job, { precise: true });
   const years = formatYears(job);
   const posted = postedLabel(job.posted_at, job.first_seen_at);
-  const saved = job.interaction_state === "saved";
-  const tracked = job.application_id !== null;
+  const saved =
+    job.interaction_state === "saved" || job.application_id !== null;
   const blocks = parseDescription(job.description_html);
 
   const remote =
@@ -211,45 +212,31 @@ export default async function JobDetailPage({
           </ul>
 
           <div className="flex flex-wrap items-center gap-compact">
-            <form action={saveJobAction}>
-              <input type="hidden" name="jobId" value={job.id} />
-              <button
-                type="submit"
-                aria-pressed={saved}
-                className={`rounded-subtle border px-body py-compact text-small font-medium leading-none transition-colors ${
-                  saved
-                    ? "border-border-default bg-surface-sunken text-content-primary hover:bg-surface-hover"
-                    : "border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
-                }`}
-              >
-                {saved ? "Saved" : "Save"}
-              </button>
-            </form>
-
-            {tracked ? (
+            {saved ? (
               <Link
                 href="/applications"
-                className="rounded-subtle border border-border-default bg-surface-sunken px-body py-compact text-small font-medium leading-none text-content-primary transition-colors hover:bg-surface-hover"
+                className="inline-flex items-center gap-tight rounded-subtle border border-border-default bg-surface-sunken px-body py-compact text-small font-medium leading-none text-content-primary transition-colors hover:bg-surface-hover"
               >
-                Tracked
+                <BookmarkIcon className="size-icon-sm shrink-0" />
+                Saved
               </Link>
             ) : (
-              <form action={trackJobAction}>
+              <form action={saveJobAction}>
                 <input type="hidden" name="jobId" value={job.id} />
                 <button
                   type="submit"
-                  className="rounded-subtle border border-border-subtle bg-surface-base px-body py-compact text-small font-medium leading-none text-content-secondary transition-colors hover:bg-surface-hover hover:text-content-primary"
+                  className="inline-flex items-center gap-tight rounded-subtle border border-border-subtle bg-surface-base px-body py-compact text-small font-medium leading-none text-content-secondary transition-colors hover:bg-surface-hover hover:text-content-primary"
                 >
-                  Track this
+                  <BookmarkIcon className="size-icon-sm shrink-0" />
+                  Save
                 </button>
               </form>
             )}
 
             {/*
-              The frame's ink button is "Track this" and its third button is
-              "Open original". Applying is the action that actually moves this
-              job forward and the only one that leaves the app, so it takes the
-              emphasis; tracking is one click away either side of it.
+              Applying is the action that moves this forward and the only one
+              that leaves the app, so it carries the emphasis the frame gives
+              "Track this". The glyph is the one the Applied status wears.
 
               Every application happens on the company's own board. There is no
               in-app apply to fall back to, so a posting whose URL never came
@@ -262,19 +249,8 @@ export default async function JobDetailPage({
                 rel="noreferrer noopener"
                 className="inline-flex items-center gap-tight rounded-subtle bg-accent-default px-body py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover"
               >
+                <SendIcon className="size-icon-sm shrink-0" />
                 Apply
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 12 12"
-                  className="size-icon-xs"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M4.5 2.5h5v5M9.5 2.5 4 8M9 7.5v2h-7v-7h2" />
-                </svg>
                 <span className="sr-only">
                   {" "}
                   on {job.company.name}&rsquo;s site, opens in a new tab

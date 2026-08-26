@@ -2,7 +2,8 @@ import Link from "next/link";
 import type { JobListItem } from "@/lib/data/jobs";
 import { formatComp, formatYears, postedLabel } from "@/lib/format";
 import { CompanyLogo } from "./company-logo";
-import { saveJobAction, trackJobAction } from "@/app/actions";
+import { saveJobAction } from "@/app/actions";
+import { BookmarkIcon, SendIcon } from "./icons";
 
 /**
  * JobCard — the feed card. Figma component `JobCardWide`, node 12:140.
@@ -21,7 +22,13 @@ import { saveJobAction, trackJobAction } from "@/app/actions";
  * than collapsing the row (DESIGN.md §7).
  */
 
-function Tag({ children, muted = false }: { children: React.ReactNode; muted?: boolean }) {
+function Tag({
+  children,
+  muted = false,
+}: {
+  children: React.ReactNode;
+  muted?: boolean;
+}) {
   return (
     <li
       className={`rounded-tag px-chip py-xtight text-caption font-medium leading-none ${
@@ -36,8 +43,10 @@ function Tag({ children, muted = false }: { children: React.ReactNode; muted?: b
 }
 
 export function JobCard({ job }: { job: JobListItem }) {
-  const saved = job.interaction_state === "saved";
-  const tracked = job.application_id !== null;
+  // Either write means it is saved. Save performs both, but a job tracked
+  // before they were merged has only the application row.
+  const saved =
+    job.interaction_state === "saved" || job.application_id !== null;
   const comp = formatComp(job);
   const years = formatYears(job);
   const posted = postedLabel(job.posted_at, job.first_seen_at);
@@ -55,7 +64,9 @@ export function JobCard({ job }: { job: JobListItem }) {
         : job.remote_policy === "onsite"
           ? "On-site"
           : null;
-  const locationTag = [primaryLocation, remoteLabel].filter(Boolean).join(" · ");
+  const locationTag = [primaryLocation, remoteLabel]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     // No h-full and no growing body. Both existed to equalise card heights
@@ -92,7 +103,9 @@ export function JobCard({ job }: { job: JobListItem }) {
             />
             <span className="shrink-0 text-content-tertiary">
               {posted.verb} {posted.date}{" "}
-              <span className="text-content-tertiary/80">[{posted.elapsed}]</span>
+              <span className="text-content-tertiary/80">
+                [{posted.elapsed}]
+              </span>
             </span>
           </p>
 
@@ -121,7 +134,11 @@ export function JobCard({ job }: { job: JobListItem }) {
               Years renders even when unknown. DESIGN.md §7: an absent tag would
               imply the field was checked and did not apply.
             */}
-            {years.known ? <Tag>{years.value}</Tag> : <Tag muted>Yrs not stated</Tag>}
+            {years.known ? (
+              <Tag>{years.value}</Tag>
+            ) : (
+              <Tag muted>Yrs not stated</Tag>
+            )}
             {locationTag ? (
               <Tag>
                 <span title={job.location_raw ?? undefined}>{locationTag}</span>
@@ -131,32 +148,6 @@ export function JobCard({ job }: { job: JobListItem }) {
             )}
           </ul>
         </div>
-
-        {/*
-          Save is a bookmark; it does not put the job on the pipeline board.
-          Track does. Keeping them separate is what stops a browsing session of
-          forty saves from flooding the pipeline.
-        */}
-        {/* z-10 keeps the buttons above the title's stretched overlay. */}
-        <form action={saveJobAction} className="relative z-10 shrink-0">
-          <input type="hidden" name="jobId" value={job.id} />
-          <button
-            type="submit"
-            aria-label={
-              saved
-                ? `${job.title} at ${job.company_name} is saved`
-                : `Save ${job.title} at ${job.company_name}`
-            }
-            aria-pressed={saved}
-            className={`rounded-subtle border px-control py-tight text-caption font-medium leading-none transition-colors ${
-              saved
-                ? "border-border-default bg-surface-sunken text-content-primary hover:bg-surface-hover"
-                : "border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
-            }`}
-          >
-            {saved ? "Saved" : "Save"}
-          </button>
-        </form>
       </div>
 
       <div aria-hidden="true" className="h-px w-full bg-border-subtle" />
@@ -184,25 +175,63 @@ export function JobCard({ job }: { job: JobListItem }) {
           )}
         </div>
 
-        {tracked ? (
-          <Link
-            href="/applications"
-            className="relative z-10 shrink-0 rounded-subtle border border-border-default bg-surface-sunken px-default py-compact text-small font-medium leading-none text-content-primary transition-colors hover:bg-surface-hover"
-          >
-            Tracked
-          </Link>
-        ) : (
-          <form action={trackJobAction} className="relative z-10 shrink-0">
-            <input type="hidden" name="jobId" value={job.id} />
-            <button
-              type="submit"
-              className="rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover"
-              aria-label={`Track ${job.title} at ${job.company_name}`}
+        {/*
+          Save and Apply, together, because they are the two things you do with
+          a posting. Save was previously a bookmark in the top-right corner and
+          Track a separate button down here; one of them putting the job on the
+          board and the other not was a distinction that had to be explained.
+
+          z-10 keeps both above the title's stretched overlay.
+        */}
+        <div className="relative z-10 flex shrink-0 items-center gap-compact">
+          {saved ? (
+            <Link
+              href="/applications"
+              className="inline-flex items-center gap-tight rounded-subtle border border-border-default bg-surface-sunken px-default py-compact text-small font-medium leading-none text-content-primary transition-colors hover:bg-surface-hover"
             >
-              Track
-            </button>
-          </form>
-        )}
+              <BookmarkIcon className="size-icon-sm shrink-0" />
+              Saved
+            </Link>
+          ) : (
+            <form action={saveJobAction}>
+              <input type="hidden" name="jobId" value={job.id} />
+              <button
+                type="submit"
+                aria-label={`Save ${job.title} at ${job.company_name}`}
+                className="inline-flex items-center gap-tight rounded-subtle border border-border-subtle bg-surface-base px-default py-compact text-small font-medium leading-none text-content-secondary transition-colors hover:bg-surface-hover hover:text-content-primary"
+              >
+                <BookmarkIcon className="size-icon-sm shrink-0" />
+                Save
+              </button>
+            </form>
+          )}
+
+          {/*
+            Applying leaves the app, so the link says where it goes rather than
+            relying on the icon alone. A posting that arrived without a URL has
+            nothing to link to and says so.
+          */}
+          {job.url ? (
+            <a
+              href={job.url}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center gap-tight rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover"
+            >
+              <SendIcon className="size-icon-sm shrink-0" />
+              Apply
+              <span className="sr-only">
+                {" "}
+                to {job.title} at {job.company_name} on their site, opens in a
+                new tab
+              </span>
+            </a>
+          ) : (
+            <span className="rounded-subtle border border-border-subtle bg-surface-sunken px-default py-compact text-small leading-none text-content-tertiary">
+              No link
+            </span>
+          )}
+        </div>
       </div>
     </article>
   );

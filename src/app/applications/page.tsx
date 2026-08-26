@@ -77,7 +77,7 @@ export default async function ApplicationsPage({
 
       {live.length === 0 && closed.length === 0 ? (
         <p className="text-body text-content-secondary">
-          Nothing tracked yet. Press <strong>Track</strong> on a job in{" "}
+          Nothing saved yet. Press <strong>Save</strong> on a job in{" "}
           <Link href="/jobs" className="underline underline-offset-2">
             For You
           </Link>{" "}

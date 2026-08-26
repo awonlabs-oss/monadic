@@ -55,7 +55,7 @@ export const COLUMNS: Column[] = [
     label: "Saved",
     statuses: ["shortlisted"],
     staleAfterDays: 5,
-    emptyCopy: "Nothing tracked yet. Press Track on a job to start one here.",
+    emptyCopy: "Nothing saved yet. Press Save on a job to start one here.",
   },
   {
     key: "applied",
