@@ -209,7 +209,7 @@ export function FilterDisclosure({
 
         <div className="flex items-center justify-between gap-snug border-t border-border-subtle pt-default">
           <Link
-            href="/jobs?panel=1"
+            href="/jobs?reset=1&panel=1"
             className="rounded-subtle px-compact py-tight text-small text-content-secondary underline underline-offset-2 transition-colors hover:bg-surface-hover hover:text-content-primary"
           >
             Clear all

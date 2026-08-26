@@ -278,7 +278,7 @@ export function FilterPanel({
 
       {active > 0 && (
         <Link
-          href="/jobs"
+          href="/jobs?reset=1"
           className="rounded-subtle px-compact py-tight text-small text-content-secondary underline underline-offset-2 transition-colors hover:bg-surface-hover hover:text-content-primary"
         >
           Clear {active} filter{active === 1 ? "" : "s"}
