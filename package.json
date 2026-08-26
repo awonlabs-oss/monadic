@@ -4,15 +4,19 @@
   "private": true,
   "scripts": {
     "predev": "npm run tokens",
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS=--experimental-websocket next dev",
     "prebuild": "npm run tokens",
-    "build": "next build",
-    "start": "next start",
+    "build": "NODE_OPTIONS=--experimental-websocket next build",
+    "start": "NODE_OPTIONS=--experimental-websocket next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "tokens": "tsx scripts/build-tokens.ts"
+    "tokens": "tsx scripts/build-tokens.ts",
+    "types": "supabase gen types typescript --linked --schema public > src/lib/supabase/types.ts",
+    "seed:user": "NODE_OPTIONS=--experimental-websocket tsx scripts/seed-user.ts",
+    "check:rls": "NODE_OPTIONS=--experimental-websocket tsx scripts/check-rls.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.109.0",
     "next": "16.3.3",
     "react": "19.2.8",
     "react-dom": "19.2.8"
@@ -27,5 +31,8 @@
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20.10"
   }
 }
