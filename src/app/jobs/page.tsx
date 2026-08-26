@@ -152,7 +152,7 @@ export default async function JobsPage({
 
           <ul className="grid grid-cols-1 gap-loose min-[1100px]:grid-cols-2">
             {jobs.map((job) => (
-              <li key={job.id}>
+              <li key={job.id} className="h-full">
                 <JobCard job={job} />
               </li>
             ))}

@@ -58,8 +58,12 @@ export function JobCard({ job }: { job: JobListItem }) {
   const locationTag = [primaryLocation, remoteLabel].filter(Boolean).join(" · ");
 
   return (
-    <article className="flex flex-col gap-snug rounded-default border border-border-subtle bg-surface-base px-default pt-default pb-body">
-      <div className="flex items-start gap-body">
+    // h-full plus a growing body is what makes every card in a row the same
+    // height: the grid row already stretches each cell to the tallest card, but
+    // without this the article only grows to its content and the divider and
+    // footer float at different heights across the row.
+    <article className="flex h-full flex-col gap-snug rounded-default border border-border-subtle bg-surface-base px-default pt-default pb-body">
+      <div className="flex flex-1 items-start gap-body">
         <CompanyLogo name={job.company_name} src={job.company_logo_url} />
 
         <div className="flex min-w-0 flex-1 flex-col gap-row">

@@ -189,7 +189,7 @@ export function FilterPanel({
         <form
           method="get"
           action="/jobs"
-          className="absolute left-0 top-full z-10 mt-tight flex w-panel max-w-full flex-col gap-body rounded-default border border-border-subtle bg-surface-base p-default shadow-overlay"
+          className="filter-panel absolute left-0 top-full z-10 mt-tight flex flex-col gap-body rounded-default border border-border-subtle bg-surface-base p-default shadow-overlay"
         >
           <input type="hidden" name="panel" value="1" />
           {filters.q && <input type="hidden" name="q" value={filters.q} />}
