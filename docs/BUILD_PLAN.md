@@ -121,6 +121,15 @@ anywhere in the schema. There is no way to edit history through the API. That is
 stronger than a convention and it is why `applications.status` is explicitly
 documented as a cache of the latest `status_change` event.
 
+> **Caveat found while verifying this against the live database.** RLS does not
+> raise on a blocked UPDATE or DELETE — it filters the row set, so the statement
+> succeeds having affected zero rows. Confirmed against real rows: an `update
+> application_events` as the owning user returns `row_count = 0` rather than an
+> error. So `src/lib/data/` must never expose an event update or delete; if one
+> were written it would appear to work and silently do nothing, which is worse
+> than an error. Anything that looks like editing an event is a new compensating
+> event.
+
 **Multi-table invariants live in SQL functions, all `SECURITY INVOKER`.**
 `save_job`, `dismiss_job`, `create_application`, `set_application_status`,
 `log_outreach_sent`. Each one writes two tables that must move together. They are
