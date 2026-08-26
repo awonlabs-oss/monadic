@@ -1,6 +1,8 @@
+import Link from "next/link";
 import type { JobListItem } from "@/lib/data/jobs";
 import { formatComp, formatYears, postedLabel } from "@/lib/format";
 import { CompanyLogo } from "./company-logo";
+import { saveJobAction, trackJobAction } from "@/app/actions";
 
 /**
  * JobCard — the feed card. Figma component `JobCardWide`, node 12:140.
@@ -34,6 +36,8 @@ function Tag({ children, muted = false }: { children: React.ReactNode; muted?: b
 }
 
 export function JobCard({ job }: { job: JobListItem }) {
+  const saved = job.interaction_state === "saved";
+  const tracked = job.application_id !== null;
   const comp = formatComp(job);
   const years = formatYears(job);
   const posted = postedLabel(job.posted_at, job.first_seen_at);
@@ -73,13 +77,30 @@ export function JobCard({ job }: { job: JobListItem }) {
               </span>
             </p>
 
-            <button
-              type="button"
-              className="shrink-0 rounded-subtle border border-border-subtle bg-surface-base px-control py-tight text-caption font-medium leading-none text-content-secondary"
-              aria-label={`Save ${job.title} at ${job.company_name}`}
-            >
-              Save
-            </button>
+            {/*
+              Save is a bookmark; it does not put the job on the pipeline board.
+              Track does. Keeping them separate is what stops a browsing session
+              of forty saves from flooding the pipeline.
+            */}
+            <form action={saveJobAction} className="shrink-0">
+              <input type="hidden" name="jobId" value={job.id} />
+              <button
+                type="submit"
+                aria-label={
+                  saved
+                    ? `${job.title} at ${job.company_name} is saved`
+                    : `Save ${job.title} at ${job.company_name}`
+                }
+                aria-pressed={saved}
+                className={`rounded-subtle border px-control py-tight text-caption font-medium leading-none ${
+                  saved
+                    ? "border-border-default bg-surface-sunken text-content-primary"
+                    : "border-border-subtle bg-surface-base text-content-secondary"
+                }`}
+              >
+                {saved ? "Saved" : "Save"}
+              </button>
+            </form>
           </div>
 
           <h3 className="text-lead font-semibold leading-default tracking-snug text-content-primary">
@@ -135,13 +156,25 @@ export function JobCard({ job }: { job: JobListItem }) {
           )}
         </div>
 
-        <button
-          type="button"
-          className="shrink-0 rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse"
-          aria-label={`Track ${job.title} at ${job.company_name}`}
-        >
-          Track
-        </button>
+        {tracked ? (
+          <Link
+            href="/applications"
+            className="shrink-0 rounded-subtle border border-border-default bg-surface-sunken px-default py-compact text-small font-medium leading-none text-content-primary"
+          >
+            Tracked
+          </Link>
+        ) : (
+          <form action={trackJobAction} className="shrink-0">
+            <input type="hidden" name="jobId" value={job.id} />
+            <button
+              type="submit"
+              className="rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse"
+              aria-label={`Track ${job.title} at ${job.company_name}`}
+            >
+              Track
+            </button>
+          </form>
+        )}
       </div>
     </article>
   );

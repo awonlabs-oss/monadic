@@ -66,9 +66,11 @@ function NavRow({
 export function Sidebar({
   health,
   counts,
+  savedActive = false,
 }: {
   health: IngestionHealth;
-  counts: { newJobs: number; tracked: number };
+  counts: { newJobs: number; tracked: number; saved: number };
+  savedActive?: boolean;
 }) {
   const pathname = usePathname();
 
@@ -101,10 +103,34 @@ export function Sidebar({
       </nav>
 
       {/*
-        DESIGN.md section 4 places Saved Views here. They are not built: there is
-        no saved_views table and saved views are not in Phase 1 scope. The slot
-        is left empty rather than filled with something unreviewed.
+        DESIGN.md §4 places Saved Views here. There is no saved_views table and
+        user-defined views are not in Phase 1, but "jobs I bookmarked" is a real
+        view backed by real data, and it is where feed bookmarks live now that
+        Save no longer puts anything on the pipeline board.
       */}
+      {/*
+        Labelled <nav>, not a heading. An <h2> here sits before the page's <h1>
+        in document order, so a screen reader user tabbing through headings meets
+        "Saved views" before they meet the name of the page they are on. The
+        landmark label carries the same information without disturbing the
+        document outline.
+      */}
+      <nav aria-label="Saved views" className="flex flex-col gap-micro">
+        <p
+          aria-hidden="true"
+          className="px-compact pb-tight text-caption font-medium uppercase text-content-tertiary"
+        >
+          Saved views
+        </p>
+        <ul className="flex flex-col gap-micro">
+          <NavRow
+            href="/jobs?saved=1"
+            label="Saved jobs"
+            count={counts.saved}
+            active={pathname === "/jobs" && savedActive}
+          />
+        </ul>
+      </nav>
 
       <div className="flex-1" />
 

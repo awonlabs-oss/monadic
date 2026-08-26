@@ -40,18 +40,26 @@ export async function ingestionHealth(): Promise<IngestionHealth> {
   };
 }
 
-export async function navCounts(): Promise<{ newJobs: number; tracked: number }> {
+export async function navCounts(): Promise<{ newJobs: number; tracked: number; saved: number }> {
   const db = await getServerClient();
   const weekAgo = new Date(Date.now() - 7 * 86_400_000).toISOString();
 
-  const [newJobs, tracked] = await Promise.all([
+  const [newJobs, tracked, saved] = await Promise.all([
     db
       .from("jobs")
       .select("id", { count: "exact", head: true })
       .is("closed_at", null)
       .gte("first_seen_at", weekAgo),
     db.from("applications").select("id", { count: "exact", head: true }),
+    db
+      .from("job_interactions")
+      .select("id", { count: "exact", head: true })
+      .eq("state", "saved"),
   ]);
 
-  return { newJobs: newJobs.count ?? 0, tracked: tracked.count ?? 0 };
+  return {
+    newJobs: newJobs.count ?? 0,
+    tracked: tracked.count ?? 0,
+    saved: saved.count ?? 0,
+  };
 }

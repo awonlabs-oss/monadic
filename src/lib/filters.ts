@@ -29,6 +29,7 @@ export interface JobFilters {
   includeCompUnknown: boolean;
   searchDescriptions: boolean;
   panelOpen: boolean;
+  savedOnly: boolean;
 }
 
 export const YEARS_BUCKETS = [
@@ -90,6 +91,7 @@ export function parseFilters(params: RawParams): JobFilters {
     // into 1,907, which is 80% of the corpus and not a filter.
     searchDescriptions: one(params.desc) === "1",
     panelOpen: one(params.panel) === "1",
+    savedOnly: one(params.saved) === "1",
   };
 }
 
@@ -110,7 +112,7 @@ export function toRpcArgs(filters: JobFilters, limit: number, offset = 0) {
     p_include_comp_unknown: filters.includeCompUnknown,
     p_remote: filters.remote.length > 0 ? filters.remote : undefined,
     p_company: filters.company ?? undefined,
-    p_saved_only: false,
+    p_saved_only: filters.savedOnly,
     p_search_descriptions: filters.searchDescriptions,
     p_sort: filters.sort,
     p_limit: limit,
@@ -156,6 +158,7 @@ export function hrefFor(
   if (f.searchDescriptions) params.set("desc", "1");
   if (f.sort !== "posted") params.set("sort", f.sort);
   if (f.panelOpen) params.set("panel", "1");
+  if (f.savedOnly) params.set("saved", "1");
   if (overrides.page && overrides.page > 1) params.set("page", String(overrides.page));
   const query = params.toString();
   return query ? `/jobs?${query}` : "/jobs";
@@ -216,6 +219,7 @@ export function activeCount(filters: JobFilters): number {
     (filters.company ? 1 : 0) +
     filters.remote.length +
     (filters.includeYearsUnknown ? 0 : 1) +
-    (filters.includeCompUnknown ? 0 : 1)
+    (filters.includeCompUnknown ? 0 : 1) +
+    (filters.savedOnly ? 1 : 0)
   );
 }

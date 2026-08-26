@@ -1217,9 +1217,14 @@ export type Database = {
           comp_currency: string | null
           comp_max: number | null
           comp_min: number | null
+          comp_source: string | null
           company_id: string | null
+          company_logo_url: string | null
           company_name: string | null
+          company_slug: string | null
           created_at: string | null
+          days_in_stage: number | null
+          event_count: number | null
           id: string | null
           is_stale: boolean | null
           job_closed_at: string | null
@@ -1227,9 +1232,11 @@ export type Database = {
           job_title: string | null
           job_url: string | null
           last_event_at: string | null
+          location_raw: string | null
           next_action: string | null
           next_action_at: string | null
           next_action_overdue: boolean | null
+          remote_policy: string | null
           source: string | null
           status: string | null
           status_changed_at: string | null
