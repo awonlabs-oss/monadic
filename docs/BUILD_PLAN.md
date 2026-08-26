@@ -22,19 +22,25 @@ open through the review.
 
 **There is no `README.md`** either. It is on the build order below.
 
-### Blocker: no container runtime
+### Resolved: no container runtime, so the schema runs hosted
 
-`supabase start` needs Docker, and this machine has no Docker, OrbStack, colima, or
-podman, and no local Postgres either. **I have not executed these migrations.** They
-are written carefully but they are unverified — nothing below should be read as
-"tested." First thing after sign-off is installing a runtime and running
-`supabase db reset`, which will shake out anything I got wrong.
+`supabase start` needs Docker, and this machine has none — no Docker, OrbStack,
+colima, podman, or local Postgres. Rather than block, the schema targets a hosted
+project (`monadic-ai`, ref `lnijtigtowywsguengvk`), linked via `supabase link` and
+deployed with `supabase db push`.
+
+**All twelve migrations are applied and verified against the live database**, not
+merely written. See §8 for what was checked and the one bug it caught.
+
+Consequence to remember: `supabase db reset --linked` drops and rebuilds the
+remote. Free today; not free once real postings are in there. Schema mistakes get
+fixed with follow-up migrations instead.
 
 ---
 
 ## 1. The schema
 
-Nine migrations in `supabase/migrations/`, one concern each.
+Twelve migrations in `supabase/migrations/`, one concern each. All applied.
 
 | File | Contents |
 |---|---|
@@ -48,6 +54,8 @@ Nine migrations in `supabase/migrations/`, one concern each.
 | `…120700_outreach.sql` | `outreach_templates`, `outreach_messages` |
 | `…120800_functions_and_views.sql` | invariant functions, `job_feed`, `application_overview` |
 | `…120900_rls.sql` | every policy, every grant |
+| `…121000_tighten_function_grants.sql` | per-function EXECUTE instead of schema-wide |
+| `…121100_account_profiles.sql` | `account_profiles` |
 
 `supabase/seed.sql` holds the dismissal-reason vocabulary. No sample jobs, companies,
 or applications anywhere.
@@ -69,15 +77,19 @@ never happen.
 
 Three clients, and the split matters:
 
-- **`lib/supabase/server.ts`** — anon key plus a real session for the seeded user.
-  Every app route uses this, so **RLS is actually exercised on every request**. A
-  broken policy fails loudly during development instead of on the day you add auth.
-- **`lib/supabase/client.ts`** — browser, anon key, same session.
-- **`lib/supabase/service.ts`** — service role. Imported *only* by `scripts/`, never
-  by anything under `src/app`. It writes the global tables, which have no write
-  policy at all. I will add a lint rule forbidding the import path from app code.
+- **`lib/supabase/server.ts`** — publishable key plus a real session for the seeded
+  user. Every app route uses this, so **RLS is actually exercised on every request**.
+  A broken policy fails loudly during development instead of on the day you add auth.
+- **`lib/supabase/client.ts`** — browser, publishable key, same session.
+- **`lib/supabase/service.ts`** — secret key. Imported *only* by `scripts/`, never by
+  anything under `src/app`. It writes the global tables, which have no write policy
+  at all. I will add a lint rule forbidding the import path from app code.
 
-The alternative — running the whole app on the service role — is less work and would
+Supabase replaced the JWT key pair in 2025: `sb_publishable_…` is the direct
+replacement for the anon key (RLS applies), `sb_secret_…` for service_role (bypasses
+RLS). The legacy JWTs stay disabled.
+
+The alternative — running the whole app on the secret key — is less work and would
 mean the RLS policies are never executed once. They would be decorative, and would
 be wrong by the time you needed them.
 
@@ -165,6 +177,8 @@ All answered. Recorded here so the reasoning survives the conversation.
 | 4 | Clean 200 with zero jobs | **Never closes on one empty pull** |
 | 5 | `/` route | **Redirect to `/jobs`** until frontpage mockups land |
 | 6 | Tailwind | **v4**, CSS-first `@theme` |
+| 7 | Auth | **Schema stays ready, no auth UI.** Email+password and Google land later |
+| 8 | Account name | **`account_profiles`**, separate from the parsed-resume `profiles` |
 
 ### 1. Resume parsing — LLM, server-side
 
@@ -213,6 +227,35 @@ mockups arrive.
 No second JS theme object to drift out of sync. A token with no corresponding utility
 becomes impossible by construction, which is what makes the no-raw-values rule
 enforceable by grep rather than by discipline.
+
+### 7. Auth — ready, not built
+
+Email+password first and Google OAuth eventually, but neither is built now. The
+brief's "do not build auth UI" stands for Phase 1.
+
+Nothing about that decision costs anything later. `auth.users` and
+`auth.identities` already handle multiple providers per user, so adding Google is
+a dashboard toggle and a button — no migration. Every user-scoped table already
+carries `user_id` with a real policy, and the app already runs on the publishable
+key with a genuine session, so RLS is exercised on every request today. Adding
+login is a route and a form; the data layer does not change.
+
+### 8. Account identity is not the parsed resume
+
+`public.profiles` is the resume: it is re-derived from a document every time a new
+one is uploaded. First and last name are account identity and must survive that,
+so they live in `public.account_profiles` — `user_id`, `first_name`, `last_name`,
+`avatar_url`. Google OAuth copies `given_name` / `family_name` / `picture` into
+those columns on first sign-in.
+
+Rows are created explicitly, by `seed:user` today and by the post-sign-in path
+later. There is deliberately no on-signup trigger: that pattern needs a
+`SECURITY DEFINER` function reachable from the `auth` schema, and this schema has
+none — which is what keeps the advisors clean.
+
+The rejected alternative was `auth.users.raw_user_meta_data`. It needs no
+migration and OAuth populates it for free, but users can write their own metadata
+through the client SDK, so nothing you need to trust belongs there.
 
 ### Dependencies
 
@@ -420,3 +463,57 @@ will be plain semantic HTML and will stay that way until frames land. One thing 
 will need before step 9: DESIGN.md §4 Layout is OPEN, and a navigation shell of some
 kind is required to reach any route. I intend a plain `<nav>` with a list of links,
 no styling beyond tokens, and will ask before doing anything more than that.
+
+---
+
+## 8. Verification record
+
+Run against the live hosted database after `supabase db push`, not asserted from
+reading the SQL.
+
+| Check | Result |
+|---|---|
+| Migrations applied | 12 / 12, no failures |
+| Tables with RLS enabled | 19 / 19 |
+| Tables with at least one policy | 19 / 19 |
+| `anon` table grants in `public` | none |
+| Views with `security_invoker` | both `true` |
+| Schema-owned functions | all `SECURITY INVOKER`, `search_path` pinned |
+| Generated columns present | `jobs.is_open`, `jobs.search_tsv` |
+| Seeded dismissal reasons | 14 |
+| `supabase db lint` | no errors |
+| `supabase db advisors --level warn` | no issues |
+
+### The bug this caught
+
+`20260825120900_rls.sql` ended with `grant execute on all functions in schema
+public to authenticated, service_role`. That is not "all functions I wrote" — it is
+every function in the schema, and Supabase installs `public.rls_auto_enable()`, a
+`SECURITY DEFINER` event-trigger function. The grant published it at
+`/rest/v1/rpc/rls_auto_enable` for any signed-in user.
+
+Not exploitable in this instance: Postgres refuses to invoke an event-trigger
+function directly. The defect is the pattern — the next platform function to appear
+in `public` would have been granted out the same way, silently. Fixed in
+`20260825121000` with an explicit per-function list.
+
+### Functional probe
+
+A transaction that created a user, company and job, then as that user ran
+`create_application()` and `set_application_status()`, and finally attempted to
+rewrite history with rows actually present. Rolled back via a raised exception, so
+nothing persisted — post-probe row counts are zero everywhere except the 14 seeded
+dismissal reasons.
+
+| Assertion | Result |
+|---|---|
+| `create_application()` → `set_application_status()` as the user | status reached `applied` |
+| Timeline events written and visible to owner | 2 |
+| `update application_events` with rows present | 0 rows affected |
+| `delete application_events` with rows present | 0 rows affected |
+| Insert into `companies` / `jobs` as `authenticated` | refused |
+| Insert `search_criteria` owned by another user | refused |
+
+The first attempt at the append-only assertions produced three false passes,
+because it ran against empty tables and an UPDATE matching zero rows succeeds
+trivially. That is the origin of the caveat in §1.
