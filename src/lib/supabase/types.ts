@@ -1361,6 +1361,24 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      job_facets: {
+        Args: {
+          p_comp_min?: number
+          p_company?: string
+          p_include_comp_unknown?: boolean
+          p_include_years_unknown?: boolean
+          p_query?: string
+          p_remote?: string[]
+          p_search_descriptions?: boolean
+          p_years_max?: number
+          p_years_min?: number
+        }
+        Returns: {
+          dimension: string
+          key: string
+          n: number
+        }[]
+      }
       job_signal_snapshot: { Args: { p_job_id: string }; Returns: Json }
       log_outreach_sent: {
         Args: {
@@ -1430,6 +1448,7 @@ export type Database = {
           p_remote?: string[]
           p_saved_only?: boolean
           p_search_descriptions?: boolean
+          p_sort?: string
           p_years_max?: number
           p_years_min?: number
         }

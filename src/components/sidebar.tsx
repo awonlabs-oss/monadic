@@ -28,7 +28,7 @@ const NAV = [
 
 function Badge({ count }: { count: number }) {
   return (
-    <span className="bg-surface-sunken text-content-secondary text-caption font-medium rounded-full px-tight py-[0.1875rem] leading-none">
+    <span className="bg-surface-sunken text-content-secondary text-caption font-medium rounded-full px-tight py-hair leading-none">
       {count}
     </span>
   );
@@ -77,7 +77,7 @@ export function Sidebar({
       <Link href="/jobs" className="flex items-center gap-compact px-compact">
         <span
           aria-hidden="true"
-          className="size-[0.5625rem] rounded-full bg-content-primary"
+          className="size-dot rounded-full bg-content-primary"
         />
         <span className="text-lead font-semibold tracking-tight text-content-primary">
           monadic
@@ -85,7 +85,7 @@ export function Sidebar({
       </Link>
 
       <nav aria-label="Main">
-        <ul className="flex flex-col gap-[0.125rem]">
+        <ul className="flex flex-col gap-micro">
           {NAV.map((item) => (
             <NavRow
               key={item.href}
@@ -115,7 +115,7 @@ export function Sidebar({
         <p className="flex items-center gap-compact text-caption text-content-secondary">
           <span
             aria-hidden="true"
-            className={`size-[0.375rem] rounded-full ${
+            className={`size-tight rounded-full ${
               health.failed > 0 ? "bg-status-stale" : "bg-signal-default"
             }`}
           />

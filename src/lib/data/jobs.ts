@@ -1,5 +1,5 @@
 import { getServerClient } from "@/lib/supabase/server";
-import { toRpcArgs, type JobFilters } from "@/lib/filters";
+import { toRpcArgs, toFacetArgs, type JobFilters } from "@/lib/filters";
 
 /**
  * The only place the app queries jobs.
@@ -48,6 +48,27 @@ export async function searchJobs(
 
   const jobs = (data ?? []) as unknown as JobListItem[];
   return { jobs, total: jobs[0]?.total_count ?? 0 };
+}
+
+/**
+ * Counts per filter option, with the other dimensions applied.
+ *
+ * These exist so the panel can show what a choice would actually yield.
+ * A filter that silently leads to zero results is the standard way filter UI
+ * wastes people's time, and a count is what shows the dead end beforehand.
+ */
+export type Facets = Record<string, Record<string, number>>;
+
+export async function jobFacets(filters: JobFilters): Promise<Facets> {
+  const db = await getServerClient();
+  const { data, error } = await db.rpc("job_facets", toFacetArgs(filters));
+  if (error) throw new Error(`jobFacets: ${error.message}`);
+
+  const out: Facets = {};
+  for (const row of (data ?? []) as Array<{ dimension: string; key: string; n: number }>) {
+    (out[row.dimension] ??= {})[row.key] = Number(row.n);
+  }
+  return out;
 }
 
 export interface FeedStats {

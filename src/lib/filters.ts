@@ -11,8 +11,16 @@
  * and would read as broken ingestion rather than as a filter doing its job.
  */
 
+export const SORTS = [
+  { key: "posted", label: "Newest posted" },
+  { key: "seen", label: "Newest to me" },
+  { key: "pay", label: "Highest pay" },
+] as const;
+
 export interface JobFilters {
   q: string | null;
+  sort: string;
+  page: number;
   years: string | null;
   comp: string | null;
   remote: string[];
@@ -20,6 +28,7 @@ export interface JobFilters {
   includeYearsUnknown: boolean;
   includeCompUnknown: boolean;
   searchDescriptions: boolean;
+  panelOpen: boolean;
 }
 
 export const YEARS_BUCKETS = [
@@ -47,22 +56,40 @@ type RawParams = Record<string, string | string[] | undefined>;
 const one = (v: string | string[] | undefined): string | null =>
   (Array.isArray(v) ? v[0] : v)?.trim() || null;
 
+/**
+ * Last occurrence, not first.
+ *
+ * An unchecked HTML checkbox submits nothing at all, so there is no way to tell
+ * "unchecked" from "never rendered". The fix is a hidden field carrying the off
+ * value immediately before the checkbox: unchecked submits just the hidden one,
+ * checked submits both, and the later value wins. That only works if the reader
+ * takes the last, which is why this exists alongside one().
+ */
+const last = (v: string | string[] | undefined): string | null =>
+  (Array.isArray(v) ? v[v.length - 1] : v)?.trim() || null;
+
 export function parseFilters(params: RawParams): JobFilters {
   const remote = one(params.remote);
+  const page = Number(one(params.page) ?? "1");
   return {
     q: one(params.q),
+    sort: SORTS.some((s) => s.key === one(params.sort)) ? one(params.sort)! : "posted",
+    page: Number.isFinite(page) && page > 0 ? Math.floor(page) : 1,
     years: YEARS_BUCKETS.some((b) => b.key === one(params.years)) ? one(params.years) : null,
     comp: COMP_BUCKETS.some((b) => b.key === one(params.comp)) ? one(params.comp) : null,
-    remote: (remote?.split(",") ?? []).filter((r) =>
-      REMOTE_OPTIONS.some((o) => o.key === r),
-    ),
+    // Comma-joined from a link, repeated from the panel's checkboxes.
+    remote: (Array.isArray(params.remote)
+      ? params.remote
+      : (remote?.split(",") ?? [])
+    ).filter((r) => REMOTE_OPTIONS.some((o) => o.key === r)),
     company: one(params.company),
     // Absent means included. Only an explicit "0" excludes.
-    includeYearsUnknown: one(params.yrsunk) !== "0",
-    includeCompUnknown: one(params.compunk) !== "0",
+    includeYearsUnknown: last(params.yrsunk) !== "0",
+    includeCompUnknown: last(params.compunk) !== "0",
     // Off by default: including descriptions turns "engineer" from 770 matches
     // into 1,907, which is 80% of the corpus and not a filter.
     searchDescriptions: one(params.desc) === "1",
+    panelOpen: one(params.panel) === "1",
   };
 }
 
@@ -85,9 +112,53 @@ export function toRpcArgs(filters: JobFilters, limit: number, offset = 0) {
     p_company: filters.company ?? undefined,
     p_saved_only: false,
     p_search_descriptions: filters.searchDescriptions,
+    p_sort: filters.sort,
     p_limit: limit,
     p_offset: offset,
   };
+}
+
+/** Arguments for the job_facets RPC — the same predicate, without paging. */
+export function toFacetArgs(filters: JobFilters) {
+  const years = YEARS_BUCKETS.find((b) => b.key === filters.years);
+  const comp = COMP_BUCKETS.find((b) => b.key === filters.comp);
+  return {
+    p_query: filters.q ?? undefined,
+    p_years_min: years?.min ?? undefined,
+    p_years_max: years?.max ?? undefined,
+    p_include_years_unknown: filters.includeYearsUnknown,
+    p_comp_min: comp?.min ?? undefined,
+    p_include_comp_unknown: filters.includeCompUnknown,
+    p_remote: filters.remote.length > 0 ? filters.remote : undefined,
+    p_company: filters.company ?? undefined,
+    p_search_descriptions: filters.searchDescriptions,
+  };
+}
+
+/**
+ * Serialises filters back to a querystring. Paging is dropped on any filter
+ * change, because staying on page 7 of a result set that just became 30 items
+ * long lands you on an empty page.
+ */
+export function hrefFor(
+  filters: JobFilters,
+  overrides: Partial<JobFilters> = {},
+): string {
+  const f = { ...filters, ...overrides };
+  const params = new URLSearchParams();
+  if (f.q) params.set("q", f.q);
+  if (f.years) params.set("years", f.years);
+  if (f.comp) params.set("comp", f.comp);
+  if (f.company) params.set("company", f.company);
+  if (f.remote.length > 0) params.set("remote", f.remote.join(","));
+  if (!f.includeYearsUnknown) params.set("yrsunk", "0");
+  if (!f.includeCompUnknown) params.set("compunk", "0");
+  if (f.searchDescriptions) params.set("desc", "1");
+  if (f.sort !== "posted") params.set("sort", f.sort);
+  if (f.panelOpen) params.set("panel", "1");
+  if (overrides.page && overrides.page > 1) params.set("page", String(overrides.page));
+  const query = params.toString();
+  return query ? `/jobs?${query}` : "/jobs";
 }
 
 /**
