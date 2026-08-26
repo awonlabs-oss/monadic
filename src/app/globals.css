@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@import "../styles/tokens.generated.css";
+
+/*
+ * Base element styling only. Every value here comes from the token layer —
+ * there are no literals in this file, and there must not be. Tailwind's default
+ * color palette is dropped in tokens.generated.css, so an accidental
+ * `bg-zinc-100` fails to compile rather than shipping an off-palette color.
+ *
+ * Focus rings are deliberately left at the browser default. DESIGN.md marks
+ * accessibility DECIDED and requires a visible focus indicator, but there is no
+ * token for ring width or offset — that is a design gap, and inventing one here
+ * is exactly what the brief forbids. The native ring is visible and accessible
+ * in the meantime.
+ */
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    line-height: var(--leading-default);
+  }
+
+  body {
+    background-color: var(--color-surface-base);
+    color: var(--color-content-primary);
+  }
+}
+
+/*
+ * DESIGN.md §9, DECIDED. No motion exists yet; this is a standing guard so that
+ * the first animation added cannot regress it. The durations are a disable
+ * mechanism rather than design values.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

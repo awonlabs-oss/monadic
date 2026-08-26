@@ -1,13 +1,19 @@
 # dependencies
 node_modules/
 .pnp
-.pnp.js
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
 # next.js
 .next/
 out/
 build/
 next-env.d.ts
+.vercel
 
 # env — .env.example is the only env file that may be tracked.
 # Broad glob on purpose: a Finder duplicate like ".env copy.example" is not
@@ -41,3 +47,7 @@ yarn-error.log*
 # misc
 *.tsbuildinfo
 coverage/
+
+# generated from design/tokens.json — tokens.json is the only tracked source
+# of design values, which is what makes the no-raw-values rule greppable
+src/styles/tokens.generated.css
