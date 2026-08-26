@@ -13,7 +13,9 @@
     "tokens": "tsx scripts/build-tokens.ts",
     "types": "supabase gen types typescript --linked --schema public > src/lib/supabase/types.ts",
     "seed:user": "NODE_OPTIONS=--experimental-websocket tsx scripts/seed-user.ts",
-    "check:rls": "NODE_OPTIONS=--experimental-websocket tsx scripts/check-rls.ts"
+    "check:rls": "NODE_OPTIONS=--experimental-websocket tsx scripts/check-rls.ts",
+    "resolve": "NODE_OPTIONS=--experimental-websocket tsx scripts/resolve.ts",
+    "ingest": "NODE_OPTIONS=--experimental-websocket tsx scripts/ingest.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.109.0",
