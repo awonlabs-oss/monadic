@@ -24,6 +24,11 @@ import type { Facets } from "@/lib/data/jobs";
  *
  * Every option carries a count computed with the other dimensions applied, so a
  * choice that would return nothing reads as zero before it is clicked.
+ *
+ * There is no company filter. Ninety-four companies made a checkbox list that
+ * was longer than everything else combined and still needed scrolling; typing
+ * the name into search reaches the same place, now that search matches company
+ * names as well as titles.
  */
 
 function Count({ n }: { n: number | undefined }) {
@@ -108,13 +113,11 @@ export function FilterPanel({
   facets,
   total,
   cities,
-  companies,
 }: {
   filters: JobFilters;
   facets: Facets;
   total: number;
   cities: Array<{ name: string; n: number }>;
-  companies: Array<{ slug: string; name: string; n: number }>;
 }) {
   const active = activeCount(filters);
 
@@ -154,11 +157,15 @@ export function FilterPanel({
         )}
       </div>
 
-      <details
-        open={filters.panelOpen}
-        className="min-w-0 rounded-default border border-border-subtle bg-surface-base"
-      >
-        <summary className="flex list-none items-center gap-tight rounded-default px-default py-compact text-small font-medium text-content-primary transition-colors hover:bg-surface-hover">
+      {/*
+        `relative w-fit` so the closed state is exactly the width of its button.
+        The open panel is absolutely positioned, so it overlays rather than
+        stretching the summary to match — a <details> whose content is in flow
+        forces the whole element to the width of the widest child, which is what
+        made the collapsed button span the page.
+      */}
+      <details open={filters.panelOpen} className="relative w-fit">
+        <summary className="flex w-fit list-none items-center gap-tight rounded-subtle border border-border-subtle bg-surface-base px-default py-compact text-small font-medium text-content-primary transition-colors hover:bg-surface-hover">
           <svg
             aria-hidden="true"
             viewBox="0 0 14 14"
@@ -182,7 +189,7 @@ export function FilterPanel({
         <form
           method="get"
           action="/jobs"
-          className="flex flex-col gap-body border-t border-border-subtle p-default"
+          className="absolute left-0 top-full z-10 mt-tight flex w-panel max-w-full flex-col gap-body rounded-default border border-border-subtle bg-surface-base p-default shadow-overlay"
         >
           <input type="hidden" name="panel" value="1" />
           {filters.q && <input type="hidden" name="q" value={filters.q} />}
@@ -191,7 +198,7 @@ export function FilterPanel({
             <input type="hidden" name="recency" value={filters.recency} />
           )}
 
-          <div className="grid grid-cols-1 gap-body sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-body sm:grid-cols-2 sm:grid-cols-2">
             <Section title="Experience">
               <Choice type="radio" name="years" value="" checked={!filters.years} label="Any" count={facets.total?.all} />
               {YEARS_BUCKETS.map((b) => (
@@ -222,20 +229,6 @@ export function FilterPanel({
               */}
               <input type="hidden" name="intl" value="0" />
               <Choice type="checkbox" name="intl" value="1" checked={!filters.usOnly} label="Include non-US roles" />
-            </Section>
-
-            {/*
-              Company is a filter because strict newest-first ordering is
-              dominated by whoever posts most — Anthropic holds 433 of the 1,790
-              US roles and takes 31 of the first 72 results. The ordering is
-              honest; this is how you see the other seventeen.
-            */}
-            <Section title="Company">
-              <div className="flex max-h-52 flex-col gap-hair overflow-y-auto">
-                {companies.map((c) => (
-                  <Choice key={c.slug} type="checkbox" name="company" value={c.slug} checked={filters.companies.includes(c.slug)} label={c.name} count={c.n} />
-                ))}
-              </div>
             </Section>
 
             <Section title="City">

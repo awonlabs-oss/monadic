@@ -41,15 +41,6 @@ export default async function JobsPage({
   // Cities, most-common first. Capped because the long tail is one-offs like
   // "Foster City" that nobody scrolls a filter list to find, and any currently
   // selected city is kept regardless so a filter can always be switched off.
-  // The facet encodes slug and display name together, since the filter value is
-  // the slug but the label has to be the name.
-  const companies = Object.entries(facets.companyName ?? {})
-    .map(([composite, n]) => {
-      const [slug, name] = composite.split("\t");
-      return { slug, name: name ?? slug, n };
-    })
-    .sort((a, b) => b.n - a.n || a.name.localeCompare(b.name));
-
   const cities = Object.entries(facets.city ?? {})
     .map(([name, n]) => ({ name, n }))
     .filter((c) => c.n >= 3 || filters.cities.includes(c.name))
@@ -107,9 +98,6 @@ export default async function JobsPage({
           {filters.cities.map((c) => (
             <input key={c} type="hidden" name="city" value={c} />
           ))}
-          {filters.companies.map((c) => (
-            <input key={c} type="hidden" name="company" value={c} />
-          ))}
           {!filters.usOnly && <input type="hidden" name="intl" value="1" />}
           {!filters.diversify && <input type="hidden" name="mix" value="0" />}
           <button
@@ -136,7 +124,7 @@ export default async function JobsPage({
           )}
         </form>
 
-        <FilterPanel filters={filters} facets={facets} total={total} cities={cities} companies={companies} />
+        <FilterPanel filters={filters} facets={facets} total={total} cities={cities} />
       </search>
 
       {jobs.length === 0 ? (
