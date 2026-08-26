@@ -29,13 +29,14 @@ async function main() {
   let yearsLost = 0;
   let yearsChanged = 0;
   let compGained = 0;
+  let descriptionFixed = 0;
   let usEligible = 0;
   let updated = 0;
 
   for (let offset = 0; ; offset += CHUNK) {
     const { data: rows, error } = await db
       .from("jobs")
-      .select("id, source, source_job_id, raw, years_min, years_max, years_source, comp_min, comp_source, location_raw, us_eligible, location_cities")
+      .select("id, source, source_job_id, raw, years_min, years_max, years_source, comp_min, comp_source, location_raw, us_eligible, location_cities, description_text")
       .order("id")
       .range(offset, offset + CHUNK - 1);
     if (error) throw new Error(error.message);
@@ -53,6 +54,8 @@ async function main() {
       comp_period: string | null;
       comp_source: string;
       comp_note: string | null;
+      description_html: string | null;
+      description_text: string | null;
       location_cities: string[];
       location_countries: string[];
       us_eligible: boolean;
@@ -79,6 +82,7 @@ async function main() {
       else if (hadYears && hasYears && row.years_min !== parsed.yearsMin) yearsChanged += 1;
 
       if (row.comp_source === "none" && parsed.compSource !== "none") compGained += 1;
+      if (row.description_text?.match(/&[a-zA-Z]{2,10};|&#x?[0-9a-fA-F]+;/)) descriptionFixed += 1;
 
       const loc = parseLocation(row.location_raw);
       if (loc.usEligible) usEligible += 1;
@@ -89,7 +93,15 @@ async function main() {
       const citiesChanged =
         JSON.stringify(row.location_cities ?? []) !== JSON.stringify(loc.cities);
 
+      // The stored description is re-derived too, not just the fields pulled
+      // out of it. The entity decoder is what changed, so the text a job
+      // detail view renders was carrying a literal "&mdash;" wherever the
+      // salary band sat — fixing only the extracted number would leave the
+      // prose it came from still wrong.
+      const descriptionChanged = (row.description_text ?? null) !== (parsed.descriptionText ?? null);
+
       const changed =
+        descriptionChanged ||
         citiesChanged ||
         row.us_eligible !== loc.usEligible ||
         row.years_source !== parsed.yearsSource ||
@@ -111,6 +123,9 @@ async function main() {
         comp_period: parsed.compPeriod,
         comp_source: parsed.compSource,
         comp_note: parsed.compNote,
+        // Postgres rejects \u0000 in text; ATS descriptions occasionally carry it.
+        description_html: parsed.descriptionHtml?.replace(/\u0000/g, "") ?? null,
+        description_text: parsed.descriptionText?.replace(/\u0000/g, "") ?? null,
         location_cities: loc.cities,
         location_countries: loc.countries,
         us_eligible: loc.usEligible,
@@ -139,6 +154,7 @@ async function main() {
   console.log(`  years changed   ${yearsChanged}`);
   console.log(`  years lost      ${yearsLost}`);
   console.log(`  comp gained     ${compGained}`);
+  console.log(`  entities fixed  ${descriptionFixed}`);
   console.log(`  US-eligible     ${usEligible}`);
   console.log(`  rows ${dryRun ? "that would change" : "written"}   ${updated}`);
 }
