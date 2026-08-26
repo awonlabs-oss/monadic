@@ -58,12 +58,13 @@ export function JobCard({ job }: { job: JobListItem }) {
   const locationTag = [primaryLocation, remoteLabel].filter(Boolean).join(" · ");
 
   return (
-    // h-full plus a growing body is what makes every card in a row the same
-    // height: the grid row already stretches each cell to the tallest card, but
-    // without this the article only grows to its content and the divider and
-    // footer float at different heights across the row.
-    <article className="flex h-full flex-col gap-snug rounded-default border border-border-subtle bg-surface-base px-default pt-default pb-body">
-      <div className="flex flex-1 items-start gap-body">
+    // No h-full and no growing body. Both existed to equalise card heights
+    // across a two-column grid; the feed is one column now (frame 22:471), so
+    // all they did was stretch every card to the tallest one on the page and
+    // push the divider away from the content it separates. That stretch was
+    // the dead space.
+    <article className="flex flex-col gap-snug rounded-default border border-border-subtle bg-surface-base px-default pt-default pb-body">
+      <div className="flex items-start gap-body">
         <CompanyLogo name={job.company_name} src={job.company_logo_url} />
 
         <div className="flex min-w-0 flex-1 flex-col gap-row">

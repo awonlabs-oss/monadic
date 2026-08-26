@@ -97,11 +97,20 @@
  * arbitrary value sneaking past the token rule.
  *
  * `max-w-full` is what it replaces, and why it exists: the popover is
- * absolutely positioned inside a `w-fit` <details>, so a percentage max-width
- * resolves against the button rather than the page and clamped a 640px panel
- * down to the width of the word "Filters".
+ * absolutely positioned, so a percentage max-width resolves against its
+ * containing block rather than the page and clamped a 640px panel down to the
+ * width of the filter row's left edge.
+ *
+ * The clamp subtracts the sidebar and the profile dock, not just the page
+ * padding: the popover opens inside the feed column, and a panel measured
+ * against the whole viewport spills across the dock's border on a narrow
+ * window. `max()` keeps it usable rather than letting the subtraction go
+ * negative on a small screen, where overlapping is the lesser problem.
  */
 @utility filter-panel {
   width: var(--container-panel);
-  max-width: calc(100vw - var(--spacing-page) * 2);
+  max-width: max(
+    20rem,
+    calc(100vw - var(--spacing-sidebar) - var(--spacing-dock) - var(--spacing-page) * 2)
+  );
 }

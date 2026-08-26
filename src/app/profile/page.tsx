@@ -63,7 +63,7 @@ export default async function ProfilePage() {
   const technical = skills.filter((s) => s.category !== "domain");
 
   return (
-    <div className="flex flex-col gap-loose">
+    <div className="flex flex-col gap-loose px-page pt-section pb-page">
       <header className="flex flex-col gap-tight">
         <h1 className="text-title font-semibold tracking-tight text-content-primary">
           Profile

@@ -73,6 +73,72 @@ export interface FullProfile {
   education: EducationRow[];
 }
 
+export interface CriteriaRow {
+  target_role_types: string[];
+  seniority_ceiling: string | null;
+  company_stages: string[];
+  locations: string[];
+  remote_preference: string | null;
+  comp_floor: number | null;
+  comp_currency: string;
+  comp_period: string;
+}
+
+/**
+ * What I am looking for, as opposed to who I am.
+ *
+ * Separate from getProfile because it is a separate concern on a separate
+ * schedule — the profile is derived from a document, criteria are authored —
+ * and because the dock renders the criteria section even when no resume has
+ * been parsed at all.
+ */
+export async function getCriteria(): Promise<CriteriaRow | null> {
+  const db = await getServerClient();
+  const { data, error } = await db
+    .from("search_criteria")
+    .select(
+      "target_role_types,seniority_ceiling,company_stages,locations,remote_preference,comp_floor,comp_currency,comp_period",
+    )
+    .maybeSingle();
+  if (error) throw new Error(`getCriteria: ${error.message}`);
+  return (data as unknown as CriteriaRow | null) ?? null;
+}
+
+/**
+ * The criteria as the dock's chips: one short phrase per stated preference,
+ * in the order the frame lists them. A criterion that is unset produces no
+ * chip rather than an empty one.
+ */
+export function criteriaChips(c: CriteriaRow | null): string[] {
+  if (!c) return [];
+
+  const chips = [...c.target_role_types];
+  if (c.seniority_ceiling) chips.push(c.seniority_ceiling);
+
+  const remote: Record<string, string> = {
+    remote_only: "Remote only",
+    remote_preferred: "Remote preferred",
+    hybrid_ok: "Hybrid",
+    onsite_ok: "On-site ok",
+    any: "Anywhere",
+  };
+  const place = c.locations.join(" / ");
+  const policy = c.remote_preference ? remote[c.remote_preference] : null;
+  if (place || policy) chips.push([place, policy].filter(Boolean).join(" / "));
+
+  chips.push(...c.company_stages);
+
+  if (c.comp_floor !== null) {
+    const unit = c.comp_currency === "USD" ? "$" : `${c.comp_currency} `;
+    const per = c.comp_period === "year" ? "" : `/${c.comp_period}`;
+    const floor =
+      c.comp_floor >= 1000 ? `${Math.round(c.comp_floor / 1000)}k` : String(c.comp_floor);
+    chips.push(`${unit}${floor}+${per}`);
+  }
+
+  return chips;
+}
+
 export async function getProfile(): Promise<FullProfile> {
   const db = await getServerClient();
 

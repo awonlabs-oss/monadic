@@ -13,10 +13,13 @@ import Link from "next/link";
  * by it returned whichever company was pulled last rather than anything
  * resembling recency.
  *
- * The main column fills the viewport rather than sitting inside a max-width.
- * The cap was mine, not the design's — DESIGN.md §4 specifies the sidebar width
- * and the main column's padding and says nothing about capping it — and on a
- * wide screen it left most of the display empty.
+ * One column of full-width cards, with the profile dock supplied by the route's
+ * layout to the right (frame `Screen / Home (feed + profile dock)`, 22:471).
+ * The column fills what is left rather than sitting inside a max-width.
+ *
+ * "For You" rather than "New jobs": the ordering is recency, but what makes the
+ * list worth reading is that it is filtered to what you are looking for, and
+ * the dock beside it is what states that.
  */
 
 export const dynamic = "force-dynamic";
@@ -52,28 +55,40 @@ export default async function JobsPage({
   const pastEnd = jobs.length === 0 && total > 0 && filters.page > lastPage;
 
   return (
-    <div className="flex flex-col gap-loose">
-      <header className="flex flex-col gap-tight">
-        <h1 className="text-title font-semibold tracking-tight text-content-primary">
-          New jobs
-        </h1>
-        <p className="text-body text-content-secondary">
-          {filtered ? (
-            <>
-              {total.toLocaleString()} matching {total === 1 ? "role" : "roles"} of{" "}
-              {stats.openJobs.toLocaleString()}
-            </>
-          ) : (
-            <>
-              {stats.openJobs.toLocaleString()} open {filters.usOnly ? "US " : ""}
-              roles from {stats.companies} companies
-            </>
-          )}
-        </p>
-      </header>
+    <div className="flex flex-col gap-snug">
+      {/*
+        Title left, search right, on one line — frame 22:471. The search box was
+        on its own row under the heading; it is the same size as the filter
+        controls and there is nothing else at the top of the page competing for
+        that space.
+      */}
+      <header className="flex flex-wrap items-start justify-between gap-snug pb-tight">
+        <div className="flex flex-col gap-tight">
+          <h1 className="text-title font-semibold tracking-tight text-content-primary">
+            For You
+          </h1>
+          <p className="text-body text-content-secondary">
+            {filtered ? (
+              <>
+                {total.toLocaleString()} matching {total === 1 ? "role" : "roles"} of{" "}
+                {stats.openJobs.toLocaleString()}
+              </>
+            ) : (
+              <>
+                {stats.openJobs.toLocaleString()} open {filters.usOnly ? "US " : ""}
+                roles from {stats.companies} companies
+              </>
+            )}
+          </p>
+        </div>
 
-      <search className="flex flex-col gap-snug">
-        <form method="get" action="/jobs" className="flex flex-wrap items-center gap-tight">
+        <div className="flex min-w-0 flex-col items-end gap-tight">
+        <form
+          method="get"
+          action="/jobs"
+          role="search"
+          className="flex flex-wrap items-center justify-end gap-tight"
+        >
           <label htmlFor="job-search" className="sr-only">
             Search job titles
           </label>
@@ -83,7 +98,7 @@ export default async function JobsPage({
             name="q"
             defaultValue={filters.q ?? ""}
             placeholder="Search roles and companies"
-            className="w-72 max-w-full rounded-subtle border border-border-subtle bg-surface-base px-default py-compact text-small text-content-primary placeholder:text-content-tertiary"
+            className="w-64 max-w-full rounded-subtle border border-border-subtle bg-surface-base px-default py-compact text-small text-content-primary placeholder:text-content-tertiary"
           />
           {/* Filters survive a search submit. */}
           {filters.years && <input type="hidden" name="years" value={filters.years} />}
@@ -106,26 +121,32 @@ export default async function JobsPage({
           >
             Search
           </button>
-          {filters.q && (
-            <Link
-              href={hrefFor(filters, {
-                searchDescriptions: !filters.searchDescriptions,
-                page: 1,
-              })}
-              aria-pressed={filters.searchDescriptions}
-              className={`rounded-subtle px-compact py-tight text-small font-medium transition-colors ${
-                filters.searchDescriptions
-                  ? "bg-accent-default text-content-inverse hover:bg-accent-hover"
-                  : "border border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
-              }`}
-            >
-              {filters.searchDescriptions ? "Searching descriptions" : "Search descriptions too"}
-            </Link>
-          )}
         </form>
 
-        <FilterPanel filters={filters} facets={facets} total={total} cities={cities} />
-      </search>
+        {/*
+          Outside the form: it is a link that re-runs the search with the
+          descriptions included, not a control the form submits.
+        */}
+        {filters.q && (
+          <Link
+            href={hrefFor(filters, {
+              searchDescriptions: !filters.searchDescriptions,
+              page: 1,
+            })}
+            aria-pressed={filters.searchDescriptions}
+            className={`rounded-subtle px-compact py-tight text-small font-medium transition-colors ${
+              filters.searchDescriptions
+                ? "bg-accent-default text-content-inverse hover:bg-accent-hover"
+                : "border border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
+            }`}
+          >
+            {filters.searchDescriptions ? "Searching descriptions" : "Search descriptions too"}
+          </Link>
+        )}
+        </div>
+      </header>
+
+      <FilterPanel filters={filters} facets={facets} total={total} cities={cities} />
 
       {jobs.length === 0 ? (
         <p className="text-body text-content-secondary">
@@ -145,14 +166,20 @@ export default async function JobsPage({
           )}
         </p>
       ) : (
-        <section aria-labelledby="feed-heading" className="flex flex-col gap-loose">
+        <section aria-labelledby="feed-heading" className="flex flex-col gap-snug">
           <h2 id="feed-heading" className="sr-only">
             {filtered ? "Matching job postings" : "Job postings"}
           </h2>
 
-          <ul className="grid grid-cols-1 gap-loose min-[1100px]:grid-cols-2">
+          {/*
+            One column, 14px apart (frame 22:471). The two-column grid fit more
+            cards on screen and made every one of them worse: each card had to
+            stretch to the height of its neighbour, and the title — the thing
+            you actually scan — had half the width to sit on.
+          */}
+          <ul className="flex flex-col gap-snug">
             {jobs.map((job) => (
-              <li key={job.id} className="h-full">
+              <li key={job.id}>
                 <JobCard job={job} />
               </li>
             ))}

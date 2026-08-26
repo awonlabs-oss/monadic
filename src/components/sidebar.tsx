@@ -19,7 +19,7 @@ import { relativeShort } from "@/lib/format";
  */
 
 const NAV = [
-  { href: "/jobs", label: "New jobs", badge: "newJobs" as const },
+  { href: "/jobs", label: "For You", badge: "newJobs" as const },
   { href: "/applications", label: "Tracked", badge: "tracked" as const },
   { href: "/contacts", label: "Contacts", badge: null },
   { href: "/templates", label: "Templates", badge: null },

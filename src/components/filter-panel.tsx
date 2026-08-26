@@ -11,12 +11,13 @@ import {
 import type { Facets } from "@/lib/data/jobs";
 
 /**
- * Filter controls: a recency row, then a disclosure holding the rest.
+ * Filter controls: one row of recency windows and a disclosure holding the rest.
  *
  * Recency sits outside the panel because it is reached for most often and
  * should cost one click. The three windows select a subset rather than reorder
  * one, so they are filters — the feed always orders newest posted first
- * underneath.
+ * underneath. They share a line with the Filters button because they are the
+ * same kind of control; on separate lines they read as two toolbars.
  *
  * The pay sort is gone. Ordering by pay put every posting that states a salary
  * above every posting that does not, which is 59% of the feed pushed below the
@@ -122,49 +123,43 @@ export function FilterPanel({
   const active = activeCount(filters);
 
   return (
-    <div className="flex flex-col gap-snug">
-      <div className="flex flex-wrap items-center gap-tight">
-        {RECENCY.map((r) => {
-          const on = filters.recency === r.key;
-          return (
-            <Link
-              key={r.key}
-              href={hrefFor(filters, { recency: on ? null : r.key, page: 1 })}
-              aria-pressed={on}
-              className={`inline-flex items-center gap-tight rounded-subtle px-default py-compact text-small font-medium transition-colors ${
-                on
-                  ? "bg-accent-default text-content-inverse hover:bg-accent-hover"
-                  : "border border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
-              }`}
-            >
-              {r.label}
-              <span className="tabular-nums opacity-70">
-                {facets.recency?.[r.key] ?? 0}
-              </span>
-            </Link>
-          );
-        })}
-
-        <span className="flex-1" />
-
-        {active > 0 && (
+    // One row, not two. The recency windows and the Filters disclosure are the
+    // same kind of control and belong on the same line (frame 22:471); stacking
+    // them read as two unrelated toolbars.
+    //
+    // `relative` here rather than on the <details>: the popover is anchored to
+    // the row, so it opens at the left edge of the feed column instead of
+    // wherever the Filters button happens to have landed after three pills.
+    <div className="relative flex flex-wrap items-center gap-tight">
+      {RECENCY.map((r) => {
+        const on = filters.recency === r.key;
+        return (
           <Link
-            href="/jobs"
-            className="rounded-subtle px-compact py-tight text-small text-content-secondary underline underline-offset-2 transition-colors hover:bg-surface-hover hover:text-content-primary"
+            key={r.key}
+            href={hrefFor(filters, { recency: on ? null : r.key, page: 1 })}
+            aria-pressed={on}
+            className={`inline-flex items-center gap-tight rounded-subtle px-default py-compact text-small font-medium transition-colors ${
+              on
+                ? "bg-accent-default text-content-inverse hover:bg-accent-hover"
+                : "border border-border-subtle bg-surface-base text-content-secondary hover:bg-surface-hover hover:text-content-primary"
+            }`}
           >
-            Clear {active} filter{active === 1 ? "" : "s"}
+            {r.label}
+            <span className="tabular-nums opacity-70">{facets.recency?.[r.key] ?? 0}</span>
           </Link>
-        )}
-      </div>
+        );
+      })}
 
       {/*
-        `relative w-fit` so the closed state is exactly the width of its button.
-        The open panel is absolutely positioned, so it overlays rather than
-        stretching the summary to match — a <details> whose content is in flow
-        forces the whole element to the width of the widest child, which is what
-        made the collapsed button span the page.
+        `w-fit` so the closed state is exactly the width of its button. The open
+        panel is absolutely positioned, so it overlays rather than stretching
+        the summary to match — a <details> whose content is in flow forces the
+        whole element to the width of the widest child, which is what made the
+        collapsed button span the page.
+
+        Deliberately not `relative`: the panel below anchors to the row instead.
       */}
-      <details open={filters.panelOpen} className="relative w-fit">
+      <details open={filters.panelOpen} className="w-fit">
         <summary className="flex w-fit list-none items-center gap-tight rounded-subtle border border-border-subtle bg-surface-base px-default py-compact text-small font-medium text-content-primary transition-colors hover:bg-surface-hover">
           <svg
             aria-hidden="true"
@@ -262,6 +257,23 @@ export function FilterPanel({
           </div>
         </form>
       </details>
+
+      {/*
+        The frame puts a sort control at the right end of this row. There is one
+        ordering — newest posted first — so there is nothing to choose between,
+        and the slot carries the only thing that belongs at that end: the escape
+        hatch out of whatever is currently applied.
+      */}
+      <span className="flex-1" />
+
+      {active > 0 && (
+        <Link
+          href="/jobs"
+          className="rounded-subtle px-compact py-tight text-small text-content-secondary underline underline-offset-2 transition-colors hover:bg-surface-hover hover:text-content-primary"
+        >
+          Clear {active} filter{active === 1 ? "" : "s"}
+        </Link>
+      )}
     </div>
   );
 }

@@ -45,7 +45,7 @@ export default async function RunsPage() {
   const unresolved = companies.filter((c) => c.ats_resolution_status !== "resolved");
 
   return (
-    <div className="flex flex-col gap-loose">
+    <div className="flex flex-col gap-loose px-page pt-section pb-page">
       <header className="flex flex-col gap-compact">
         <h1 className="text-title font-semibold">Ingestion</h1>
         <p className="text-content-secondary text-small">

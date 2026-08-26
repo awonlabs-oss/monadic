@@ -8,8 +8,9 @@ import "./globals.css";
  * Application shell. DESIGN.md section 4, DECIDED for application routes.
  *
  * Fixed 248px sidebar on the warm canvas with a 1px right border; main column
- * fills the rest with 40px horizontal and 36px top padding. Both values are
- * tokens (space/page, space/section), not literals.
+ * fills the rest. The page padding — 40px horizontal, 36px top, both tokens
+ * (space/page, space/section) — is applied per route rather than here, because
+ * /jobs docks a panel that has to reach the right edge of the viewport.
  *
  * Inter is self-hosted by next/font — no runtime request to Google, and no
  * layout shift. The token font/family/sans points at the variable this exposes.
@@ -48,7 +49,13 @@ export default async function RootLayout({
             </div>
           </aside>
 
-          <main id="main" className="min-w-0 flex-1 px-page pt-section pb-page">
+          {/*
+            No padding here. /jobs docks a profile panel flush to the right edge
+            of the viewport (frame 22:471), and padding on main would inset the
+            dock's border along with the feed. Each route applies its own page
+            padding to the column that should have it.
+          */}
+          <main id="main" className="min-w-0 flex-1">
             {children}
           </main>
         </div>

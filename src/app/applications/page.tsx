@@ -41,7 +41,7 @@ export default async function ApplicationsPage({
   const needing = live.filter((a) => needsAction(a).needed).length;
 
   return (
-    <div className="flex flex-col gap-loose">
+    <div className="flex flex-col gap-loose px-page pt-section pb-page">
       <header className="flex flex-wrap items-start justify-between gap-snug">
         <div className="flex flex-col gap-tight">
           <h1 className="text-title font-semibold tracking-tight text-content-primary">
@@ -79,7 +79,7 @@ export default async function ApplicationsPage({
         <p className="text-body text-content-secondary">
           Nothing tracked yet. Press <strong>Track</strong> on a job in{" "}
           <Link href="/jobs" className="underline underline-offset-2">
-            New jobs
+            For You
           </Link>{" "}
           to start one here.
         </p>
