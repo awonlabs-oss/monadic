@@ -111,6 +111,7 @@ export default async function JobsPage({
             <input key={c} type="hidden" name="company" value={c} />
           ))}
           {!filters.usOnly && <input type="hidden" name="intl" value="1" />}
+          {!filters.diversify && <input type="hidden" name="mix" value="0" />}
           <button
             type="submit"
             className="rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover"
@@ -168,6 +169,33 @@ export default async function JobsPage({
               </li>
             ))}
           </ul>
+
+          {/*
+            Said out loud because it is a real deviation from "newest first" and
+            an unexplained reordering is indistinguishable from a bug.
+          */}
+          {filters.diversify && !filters.q && (
+            <p className="text-caption text-content-tertiary">
+              Showing at most 2 roles per company so more companies fit on a page.{" "}
+              <Link
+                href={hrefFor(filters, { diversify: false, page: 1 })}
+                className="underline underline-offset-2 hover:text-content-primary"
+              >
+                Order strictly by date
+              </Link>
+            </p>
+          )}
+          {!filters.diversify && (
+            <p className="text-caption text-content-tertiary">
+              Ordered strictly by date, so one company can fill the page.{" "}
+              <Link
+                href={hrefFor(filters, { diversify: true, page: 1 })}
+                className="underline underline-offset-2 hover:text-content-primary"
+              >
+                Mix companies
+              </Link>
+            </p>
+          )}
 
           <Pagination filters={filters} total={total} pageSize={PAGE_SIZE} />
         </section>

@@ -1460,10 +1460,12 @@ export type Database = {
           p_cities?: string[]
           p_comp_min?: number
           p_companies?: string[]
+          p_diversify?: boolean
           p_include_comp_unknown?: boolean
           p_include_years_unknown?: boolean
           p_limit?: number
           p_offset?: number
+          p_per_company?: number
           p_posted_within?: number
           p_query?: string
           p_remote?: string[]
@@ -1526,6 +1528,17 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      upsert_jobs: {
+        Args: {
+          p_company_id: string
+          p_jobs: Json
+          p_source: Database["public"]["Enums"]["ats_source"]
+        }
+        Returns: {
+          created: number
+          updated: number
+        }[]
       }
     }
     Enums: {

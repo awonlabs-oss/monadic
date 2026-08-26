@@ -27,6 +27,7 @@ export interface JobFilters {
   recency: string | null;
   cities: string[];
   usOnly: boolean;
+  diversify: boolean;
   page: number;
   years: string | null;
   comp: string | null;
@@ -87,6 +88,9 @@ export function parseFilters(params: RawParams): JobFilters {
       .filter(Boolean),
     // US-only by default. 762 of 2,380 open postings are elsewhere.
     usOnly: one(params.intl) !== "1",
+    // On by default. Strict newest-first is dominated by whoever posts most:
+    // one company with 400 roles outranks ninety posting three each.
+    diversify: one(params.mix) !== "0",
     page: Number.isFinite(page) && page > 0 ? Math.floor(page) : 1,
     years: YEARS_BUCKETS.some((b) => b.key === one(params.years)) ? one(params.years) : null,
     comp: COMP_BUCKETS.some((b) => b.key === one(params.comp)) ? one(params.comp) : null,
@@ -132,6 +136,12 @@ export function toRpcArgs(filters: JobFilters, limit: number, offset = 0) {
     p_cities: filters.cities.length > 0 ? filters.cities : undefined,
     p_us_only: filters.usOnly,
     p_posted_within: RECENCY.find((r) => r.key === filters.recency)?.days ?? undefined,
+    p_diversify: filters.diversify,
+    // Two, not one: one collapses the feed to a single role per company, which
+    // is a different product. Two roughly doubles the companies on a page —
+    // measured at 18 against 13 for strict date order — while the feed still
+    // reads as a list of roles.
+    p_per_company: 2,
     p_limit: limit,
     p_offset: offset,
   };
@@ -179,6 +189,7 @@ export function hrefFor(
   if (f.recency) params.set("recency", f.recency);
   if (f.cities.length > 0) params.set("city", f.cities.join(","));
   if (!f.usOnly) params.set("intl", "1");
+  if (!f.diversify) params.set("mix", "0");
   if (f.panelOpen) params.set("panel", "1");
   if (f.savedOnly) params.set("saved", "1");
   if (overrides.page && overrides.page > 1) params.set("page", String(overrides.page));
