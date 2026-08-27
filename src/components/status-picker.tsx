@@ -43,6 +43,25 @@ export function StatusPicker({
 
   const [status, setStatus] = useState(serverStatus);
   const [open, setOpen] = useState(false);
+
+  /*
+   * useState only reads its argument on the first render, so a picker that
+   * stayed mounted while the server sent down a new status would keep showing
+   * the old one — the board refreshing around it, and this control quietly
+   * disagreeing with the row it belongs to. Tracking the last server value and
+   * comparing during render is React's own answer to that, and it resynchronises
+   * before paint rather than in an effect afterwards.
+   *
+   * The optimistic write is unaffected: it changes `status` while `serverStatus`
+   * is unchanged, so nothing here fires until the server actually reports
+   * something different.
+   */
+  const [lastServerStatus, setLastServerStatus] = useState(serverStatus);
+  if (serverStatus !== lastServerStatus) {
+    setLastServerStatus(serverStatus);
+    setStatus(serverStatus);
+  }
+
   const [active, setActive] = useState(() =>
     Math.max(0, ALL_STATUSES.indexOf(serverStatus as Status)),
   );

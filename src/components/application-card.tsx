@@ -2,6 +2,7 @@ import type { ApplicationRow } from "@/lib/data/applications";
 import { needsAction, stageLine, statusTone } from "@/lib/applications/pipeline";
 import { StatusBadge } from "./status-badge";
 import { StatusPicker } from "./status-picker";
+import { DeleteApplication } from "./delete-application";
 import { setNextActionAction } from "@/app/actions";
 
 /**
@@ -110,6 +111,16 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
             <span className="text-caption text-content-tertiary">Move to</span>
             <StatusPicker applicationId={app.id} status={app.status} />
           </div>
+
+          {/*
+            Removing sits under the same disclosure as the status controls, not
+            on the face of the card. It is the one irreversible thing here.
+          */}
+          <DeleteApplication
+            applicationId={app.id}
+            title={app.job_title}
+            companyName={app.company_name}
+          />
 
           <form
             action={setNextActionAction}

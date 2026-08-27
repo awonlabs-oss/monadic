@@ -170,3 +170,51 @@ export async function markJobApplied(jobId: string): Promise<void> {
 
   await setApplicationStatus(data.id, "applied");
 }
+
+/**
+ * Remove a tracked application entirely.
+ *
+ * The bookmark goes with it. Save writes both an interaction and an
+ * application, and the feed reads the interaction to decide whether a card says
+ * Save or Saved — so deleting only the application would leave a job still
+ * reading "Saved" that had nothing behind it, and pressing Save again would
+ * silently rebuild the row you just removed.
+ *
+ * The timeline goes too, by cascade. application_events is append-only and has
+ * no DELETE policy, which is what stops history being edited; a cascade is a
+ * referential action rather than a statement against that table, so removing
+ * the whole application takes its events without contradicting the rule. The
+ * distinction is the point — you cannot rewrite what happened, you can only
+ * discard the whole record of it.
+ *
+ * The job itself is untouched. It is a global row that ingestion owns and other
+ * things may reference, and deleting a tracked item is a statement about your
+ * pipeline, not about whether the posting exists.
+ */
+export async function deleteApplication(applicationId: string): Promise<boolean> {
+  const db = await getServerClient();
+
+  const { data: app, error: readError } = await db
+    .from("applications")
+    .select("id, job_id")
+    .eq("id", applicationId)
+    .maybeSingle();
+  if (readError) throw new Error(`Could not find that application: ${readError.message}`);
+  // Absent is not an error — it is the outcome the caller asked for, and a row
+  // already gone (a second press, a stale tab) should read as 404, not as a
+  // failure. The route distinguishes the two.
+  if (!app) return false;
+
+  const { error } = await db.from("applications").delete().eq("id", applicationId);
+  if (error) throw new Error(`Could not delete: ${error.message}`);
+
+  // After the application, so a failure here leaves a bookmark without a board
+  // entry — the state Save already repairs — rather than the reverse.
+  const { error: bookmarkError } = await db
+    .from("job_interactions")
+    .delete()
+    .eq("job_id", app.job_id);
+  if (bookmarkError) throw new Error(`Could not clear the bookmark: ${bookmarkError.message}`);
+
+  return true;
+}

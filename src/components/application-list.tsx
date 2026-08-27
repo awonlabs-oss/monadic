@@ -5,6 +5,7 @@ import { relativeShort } from "@/lib/format";
 import { CompanyLogo } from "./company-logo";
 import { StatusBadge } from "./status-badge";
 import { StatusPicker } from "./status-picker";
+import { DeleteApplication } from "./delete-application";
 
 /**
  * Tracked, as a list. Figma frame `Screen / Tracked list`, node 14:207.
@@ -158,6 +159,12 @@ export function ApplicationList({
               </Cell>
 
               <Cell className="text-right">
+                <span className="inline-flex items-center gap-compact">
+                  <DeleteApplication
+                    applicationId={app.id}
+                    title={app.job_title}
+                    companyName={app.company_name}
+                  />
                 <Link
                   href={`/jobs/${app.job_id}`}
                   aria-label={`Open ${app.job_title} at ${app.company_name}`}
@@ -176,6 +183,7 @@ export function ApplicationList({
                     <path d="M4.5 2.5 8 6l-3.5 3.5" />
                   </svg>
                 </Link>
+                </span>
               </Cell>
             </tr>
           ))}

@@ -33,7 +33,21 @@ export default async function ApplicationsPage({
   const params = await searchParams;
   const one = (v: string | string[] | undefined) =>
     Array.isArray(v) ? v[0] : v;
-  const showClosed = one(params.closed) === "1";
+  /*
+   * Closed applications are shown by default now.
+   *
+   * They were hidden, and the "Show N closed" link at the foot of the page was
+   * the only route to them. That reads as data loss rather than as a filter:
+   * setting a status to Rejected made the row vanish from the board, and it was
+   * still gone on the next visit — indistinguishable from the change never
+   * having saved. It always had saved; it had simply moved somewhere with no
+   * signpost from where it left.
+   *
+   * A rejection is part of what happened, and a tracker that quietly stops
+   * showing outcomes it considers finished is not a record. Hiding stays
+   * available, one link away, for when the closed list gets long.
+   */
+  const showClosed = one(params.closed) !== "0";
   // List is the default. The board answers "where does everything stand"; the
   // list answers "what is happening", which is the question you have more often
   // once there is more than a handful in flight.
@@ -74,7 +88,7 @@ export default async function ApplicationsPage({
           {(["board", "list"] as const).map((key) => {
             const on = view === key;
             const href = `/applications${key === "board" ? "?view=board" : ""}${
-              showClosed ? (key === "board" ? "&closed=1" : "?closed=1") : ""
+              showClosed ? "" : key === "board" ? "&closed=0" : "?closed=0"
             }`;
             return on ? (
               <span
@@ -169,7 +183,7 @@ export default async function ApplicationsPage({
           {showClosed ? (
             <>
               <Link
-                href="/applications"
+                href="/applications?closed=0"
                 className="w-fit text-small text-content-secondary underline underline-offset-2"
               >
                 Hide closed
@@ -184,7 +198,7 @@ export default async function ApplicationsPage({
             </>
           ) : (
             <Link
-              href="/applications?closed=1"
+              href="/applications"
               className="w-fit text-small text-content-secondary underline underline-offset-2"
             >
               Show {closedCount} closed{" "}
