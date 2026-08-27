@@ -1,7 +1,25 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { hrefFor, parseFilters } from "@/lib/filters";
+import { SESSION_COOKIE, appPassword, isValidSession } from "@/lib/auth";
 
 /**
+ * Two jobs, in this order: let the request in at all, then remember the feed's
+ * filters.
+ *
+ * The gate is first and it is total. monadic has no accounts — the app signs
+ * in to Supabase as one fixed user from the environment — so an unprotected
+ * public URL hands whoever finds it a parsed resume and a delete button. This
+ * is the only place that can refuse a request before any route runs, which is
+ * also why it has to cover /api/* and not just pages: the routes that save,
+ * apply, change status and delete are all reachable directly.
+ *
+ * It fails closed. With no MONADIC_APP_PASSWORD set the answer is 503 and an
+ * explanation, not open access, because a deploy that forgot the variable
+ * should be broken rather than exposed. Development is exempt so a laptop does
+ * not need a password to run `npm run dev`.
+ *
+ * ---
+ *
  * Remembers the feed's filters across a visit elsewhere.
  *
  * The URL stays the only place filter state lives — a filtered feed is still
@@ -59,8 +77,46 @@ function toRawParams(params: URLSearchParams): Record<string, string | string[]>
   return out;
 }
 
-export function middleware(request: NextRequest) {
+/** Paths that must answer before anyone is signed in. */
+function isPublic(pathname: string): boolean {
+  return pathname === "/login" || pathname === "/api/auth/login";
+}
+
+export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
+
+  // ---------------------------------------------------------------- the gate
+  if (!isPublic(url.pathname) && process.env.NODE_ENV !== "development") {
+    const password = appPassword();
+
+    if (!password) {
+      return new NextResponse(
+        "MONADIC_APP_PASSWORD is not set. This deployment is refusing every request rather than serving personal data without a password.",
+        { status: 503, headers: { "content-type": "text/plain" } },
+      );
+    }
+
+    const session = request.cookies.get(SESSION_COOKIE)?.value;
+    if (!(await isValidSession(session, password))) {
+      // An API caller gets a status it can act on; a browser gets the form.
+      // Answering /api/* with a redirect to an HTML page would surface as a
+      // JSON parse error at the fetch site rather than as "you are signed out".
+      if (url.pathname.startsWith("/api/")) {
+        return NextResponse.json({ error: "Not authenticated." }, { status: 401 });
+      }
+      const login = url.clone();
+      login.pathname = "/login";
+      login.search = "";
+      // Where to return to, so a bookmarked filtered feed survives signing in.
+      if (url.pathname !== "/") {
+        login.searchParams.set("next", url.pathname + url.search);
+      }
+      return NextResponse.redirect(login);
+    }
+  }
+
+  // ------------------------------------------------------- the feed's filters
+  if (url.pathname !== "/jobs") return NextResponse.next();
 
   if (url.searchParams.has("reset")) {
     const target = url.clone();
@@ -115,4 +171,15 @@ export function middleware(request: NextRequest) {
   return NextResponse.redirect(target);
 }
 
-export const config = { matcher: "/jobs" };
+/*
+ * Everything except Next's own static output and the favicon.
+ *
+ * The matcher was "/jobs" when this file only remembered filters. It cannot
+ * stay that way now that it is also the gate: a matcher that misses a route
+ * does not fail loudly, it silently serves that route to anyone. Excluding
+ * only static assets means a page added later is protected by default rather
+ * than by remembering to come back here.
+ */
+export const config = {
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+};

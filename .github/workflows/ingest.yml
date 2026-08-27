@@ -1,0 +1,78 @@
+name: Ingest job boards
+
+# Ingestion is a batch job, not a web request, and it is deliberately not on
+# Vercel. A full sweep of 254 boards takes about fifteen minutes; a Vercel
+# function on Hobby is capped at 300 seconds and on Pro at 800, so the only way
+# to run it there is to slice it across invocations and carry a cursor between
+# them — turning a simple loop into distributed state. A GitHub runner has six
+# hours and no such problem.
+
+on:
+  schedule:
+    # 06:00 UTC daily — roughly 2am New York, so a morning feed is already
+    # fresh. Cron here is UTC and does not follow daylight saving; the hour
+    # drifts by one against local time twice a year, which does not matter for
+    # a job whose output is read hours later.
+    - cron: "0 6 * * *"
+  # So a run can be triggered by hand after changing the company list, without
+  # waiting for tomorrow.
+  workflow_dispatch:
+
+# One sweep at a time. Two overlapping runs would both read the open set,
+# both diff it, and race on the closure pass — the second finishing last would
+# reopen or close rows based on a snapshot the first had already invalidated.
+concurrency:
+  group: ingest
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Resolve any newly seeded companies
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          INGEST_USER_AGENT: ${{ secrets.INGEST_USER_AGENT }}
+          INGEST_CONCURRENCY: "2"
+        # A company already resolved is cached and skipped, so this is a no-op
+        # on a list that has not changed. It is here so that adding a line to
+        # companies.config.ts is the only step needed to start ingesting one.
+        run: npm run resolve
+
+      - name: Pull every board
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          INGEST_USER_AGENT: ${{ secrets.INGEST_USER_AGENT }}
+          INGEST_CONCURRENCY: "2"
+        run: npm run ingest
+
+      # The run summary is where a failure gets noticed. A per-company failure
+      # does not fail the job — that was made deliberate so one bad board could
+      # not discard the whole sweep — so without this the only signal would be
+      # a green tick over a run that quietly stopped collecting something.
+      - name: Summarise
+        if: always()
+        run: |
+          {
+            echo "### Ingest finished"
+            echo ""
+            echo "Company-level failures do not fail this job. Check the"
+            echo "\`Pull every board\` step above for lines starting with"
+            echo "FAILED or SUSPECT, and /settings/runs in the app for the"
+            echo "full history."
+          } >> "$GITHUB_STEP_SUMMARY"
