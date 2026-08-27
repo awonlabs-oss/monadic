@@ -2,8 +2,8 @@ import Link from "next/link";
 import type { JobListItem } from "@/lib/data/jobs";
 import { formatComp, formatYears, postedLabel } from "@/lib/format";
 import { CompanyLogo } from "./company-logo";
-import { saveJobAction } from "@/app/actions";
-import { BookmarkIcon, SendIcon } from "./icons";
+import { SaveButton } from "./save-button";
+import { SendIcon } from "./icons";
 
 /**
  * JobCard — the feed card. Figma component `JobCardWide`, node 12:140.
@@ -223,27 +223,12 @@ export function JobCard({
           z-10 keeps both above the title's stretched overlay.
         */}
         <div className="relative z-10 flex shrink-0 items-center gap-compact">
-          {saved ? (
-            <Link
-              href="/applications"
-              className="inline-flex items-center gap-tight rounded-subtle border border-border-default bg-surface-sunken px-default py-compact text-small font-medium leading-none text-content-primary transition-colors hover:bg-surface-hover"
-            >
-              <BookmarkIcon className="size-icon-sm shrink-0" />
-              Saved
-            </Link>
-          ) : (
-            <form action={saveJobAction}>
-              <input type="hidden" name="jobId" value={job.id} />
-              <button
-                type="submit"
-                aria-label={`Save ${job.title} at ${job.company_name}`}
-                className="inline-flex items-center gap-tight rounded-subtle border border-border-subtle bg-surface-base px-default py-compact text-small font-medium leading-none text-content-secondary transition-colors hover:bg-surface-hover hover:text-content-primary"
-              >
-                <BookmarkIcon className="size-icon-sm shrink-0" />
-                Save
-              </button>
-            </form>
-          )}
+          <SaveButton
+            jobId={job.id}
+            jobTitle={job.title}
+            companyName={job.company_name}
+            saved={saved}
+          />
 
           {/*
             Applying leaves the app, so the link says where it goes rather than

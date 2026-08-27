@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { getServerClient } from "@/lib/supabase/server";
 import { ALL_STATUSES, type Status } from "@/lib/applications/pipeline";
 import { saveCriteria } from "@/lib/data/criteria";
+import { saveJob } from "@/lib/data/applications";
 
 /**
  * Every write the UI performs.
@@ -43,21 +44,7 @@ export async function saveJobAction(formData: FormData) {
   const jobId = String(formData.get("jobId") ?? "");
   if (!jobId) return;
 
-  const db = await getServerClient();
-
-  const { error } = await db.rpc("save_job", { p_job_id: jobId });
-  if (error) throw new Error(`Could not save job: ${error.message}`);
-
-  const { error: applicationError } = await db.rpc("create_application", {
-    p_job_id: jobId,
-    p_source: "job_feed",
-  });
-
-  // A second Save on the same job hits the unique (user_id, job_id) index.
-  // That is the constraint doing its job, not a failure worth showing.
-  if (applicationError && !/duplicate key|unique/i.test(applicationError.message)) {
-    throw new Error(`Could not track job: ${applicationError.message}`);
-  }
+  await saveJob(jobId);
 
   revalidatePath("/jobs");
   revalidatePath("/applications");

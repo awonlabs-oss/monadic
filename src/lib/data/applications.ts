@@ -80,3 +80,38 @@ export async function applicationTimeline(applicationId: string): Promise<Timeli
   if (error) throw new Error(`applicationTimeline: ${error.message}`);
   return (data ?? []) as TimelineEvent[];
 }
+
+/**
+ * Save: bookmark a job and put it on the board, in one write.
+ *
+ * Lives here rather than in the server action because two callers need it —
+ * the action, which still backs the no-JS form path, and the route handler the
+ * Save button posts to. Keeping one implementation is what stops the two from
+ * disagreeing about what "saved" means.
+ *
+ * Both writes still happen. The interaction is what the feed reads to render
+ * the button and what the sidebar's "Saved jobs" view filters on; the
+ * application is the board row. Dropping either would break a surface that
+ * currently works.
+ *
+ * Not atomic across the two, and it does not need to be: each RPC is atomic
+ * with the row it owns, and the failure mode is a bookmark without a board
+ * entry, which the next press repairs.
+ */
+export async function saveJob(jobId: string): Promise<void> {
+  const db = await getServerClient();
+
+  const { error } = await db.rpc("save_job", { p_job_id: jobId });
+  if (error) throw new Error(`Could not save job: ${error.message}`);
+
+  const { error: applicationError } = await db.rpc("create_application", {
+    p_job_id: jobId,
+    p_source: "job_feed",
+  });
+
+  // A second Save on the same job hits the unique (user_id, job_id) index.
+  // That is the constraint doing its job, not a failure worth showing.
+  if (applicationError && !/duplicate key|unique/i.test(applicationError.message)) {
+    throw new Error(`Could not track job: ${applicationError.message}`);
+  }
+}

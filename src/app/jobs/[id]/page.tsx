@@ -10,8 +10,8 @@ import {
   relativeShort,
 } from "@/lib/format";
 import { CompanyLogo } from "@/components/company-logo";
-import { saveJobAction } from "@/app/actions";
-import { BookmarkIcon, SendIcon } from "@/components/icons";
+import { SaveButton } from "@/components/save-button";
+import { SendIcon } from "@/components/icons";
 
 /*
  * /jobs/[id] — one posting. Figma frame `Screen / Job detail`, node 50:348.
@@ -212,26 +212,13 @@ export default async function JobDetailPage({
           </ul>
 
           <div className="flex flex-wrap items-center gap-compact">
-            {saved ? (
-              <Link
-                href="/applications"
-                className="inline-flex items-center gap-tight rounded-subtle border border-border-default bg-surface-sunken px-body py-compact text-small font-medium leading-none text-content-primary transition-colors hover:bg-surface-hover"
-              >
-                <BookmarkIcon className="size-icon-sm shrink-0" />
-                Saved
-              </Link>
-            ) : (
-              <form action={saveJobAction}>
-                <input type="hidden" name="jobId" value={job.id} />
-                <button
-                  type="submit"
-                  className="inline-flex items-center gap-tight rounded-subtle border border-border-subtle bg-surface-base px-body py-compact text-small font-medium leading-none text-content-secondary transition-colors hover:bg-surface-hover hover:text-content-primary"
-                >
-                  <BookmarkIcon className="size-icon-sm shrink-0" />
-                  Save
-                </button>
-              </form>
-            )}
+            <SaveButton
+              jobId={job.id}
+              jobTitle={job.title}
+              companyName={job.company.name}
+              saved={saved}
+              size="page"
+            />
 
             {/*
               Applying is the action that moves this forward and the only one
