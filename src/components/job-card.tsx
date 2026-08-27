@@ -29,7 +29,7 @@ import { ApplyButton } from "./apply-button";
  */
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <li className="rounded-tag bg-accent-muted px-chip py-xtight text-caption font-medium leading-none text-content-secondary">
+    <li className="rounded-tag border border-border-subtle bg-surface-canvas px-chip py-xtight text-caption font-medium leading-none text-content-secondary">
       {children}
     </li>
   );
@@ -93,12 +93,12 @@ export function JobCard({
     // `relative` plus the stretched link on the title below: the whole card is
     // one click target without nesting anything inside an anchor, which would be
     // invalid markup and would swallow the Save and Apply buttons.
-    <article className="relative flex items-start gap-body rounded-default border border-border-subtle bg-surface-base px-default py-body transition-colors hover:border-border-default">
+    <article className="relative flex items-start gap-body rounded-default border border-border-subtle bg-surface-base px-default py-body shadow-raised transition-[border-color,box-shadow] hover:border-border-default hover:shadow-overlay">
       <CompanyLogo name={job.company_name} src={job.company_logo_url} size="card" />
 
       <div className="flex min-w-0 flex-1 flex-col gap-row">
         <p className="flex min-w-0 items-center gap-row text-small leading-none">
-          <span className="truncate font-medium text-content-secondary">
+          <span className="truncate font-semibold text-content-primary">
             {job.company_name}
           </span>
           <span
@@ -127,7 +127,7 @@ export function JobCard({
           anchor's own box stays around the text, so the accessible name is the
           title rather than the whole card read aloud.
         */}
-        <h3 className="text-lead font-semibold leading-default tracking-snug text-content-primary">
+        <h3 className="text-lead font-medium leading-default tracking-snug text-content-primary">
           <Link
             href={`/jobs/${job.id}`}
             className="after:absolute after:inset-0 after:rounded-default hover:underline hover:underline-offset-2"
@@ -149,7 +149,7 @@ export function JobCard({
         */}
         <ul className="flex flex-wrap items-center gap-tight">
           {comp.known && (
-            <li className="text-body font-semibold tabular-nums leading-none text-content-primary">
+            <li className="font-numeric text-body font-semibold tabular-nums leading-none text-content-primary">
               {comp.value}
             </li>
           )}

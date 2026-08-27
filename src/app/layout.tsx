@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Figtree, EB_Garamond } from "next/font/google";
 import { Sidebar } from "@/components/sidebar";
 import { ingestionHealth, navCounts } from "@/lib/data/health";
 import "./globals.css";
@@ -12,13 +12,33 @@ import "./globals.css";
  * (space/page, space/section) — is applied per route rather than here, because
  * /jobs docks a panel that has to reach the right edge of the viewport.
  *
- * Inter is self-hosted by next/font — no runtime request to Google, and no
- * layout shift. The token font/family/sans points at the variable this exposes.
+ * Two faces, self-hosted by next/font — no runtime request to Google and no
+ * layout shift. The font/family tokens point at the variables these expose.
+ *
+ * Figtree carries the interface. It replaced Inter, which was doing nothing
+ * wrong and nothing memorable either; Figtree's rounder terminals and taller
+ * x-height read warmer at the 13px this app spends most of its time at, which
+ * is the difference between a warm palette and a warm product.
+ *
+ * EB Garamond is italic-only and appears in perhaps six places: page titles,
+ * empty states, the wordmark. It is the whole reason the reference sites read
+ * as considered rather than generic, and it is also the fastest way to make a
+ * dense tool look like a brochure — so it is confined to moments where a human
+ * is being addressed directly, and never touches a row, a tag or a figure.
  */
 
-const inter = Inter({
+const figtree = Figtree({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600"],
+  variable: "--font-figtree",
+  display: "swap",
+});
+
+const garamond = EB_Garamond({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["italic"],
+  variable: "--font-garamond",
   display: "swap",
 });
 
@@ -33,7 +53,7 @@ export default async function RootLayout({
   const [health, counts] = await Promise.all([ingestionHealth(), navCounts()]);
 
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${figtree.variable} ${garamond.variable}`}>
       <body className="min-h-screen bg-surface-canvas text-content-primary antialiased">
         <a
           href="#main"

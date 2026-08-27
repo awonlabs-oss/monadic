@@ -59,7 +59,7 @@ export function JobListSkeleton({ rows = 6 }: { rows?: number }) {
 export function PageHeadingSkeleton() {
   return (
     <div aria-hidden="true" className="flex flex-col gap-tight">
-      <Line className="h-6 w-40" />
+      <Line className="h-7 w-44" />
       <Line className="h-4 w-64" />
     </div>
   );

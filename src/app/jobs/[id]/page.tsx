@@ -11,7 +11,7 @@ import {
 } from "@/lib/format";
 import { CompanyLogo } from "@/components/company-logo";
 import { SaveButton } from "@/components/save-button";
-import { SendIcon } from "@/components/icons";
+import { ApplyButton } from "@/components/apply-button";
 
 /*
  * /jobs/[id] — one posting. Figma frame `Screen / Job detail`, node 50:348.
@@ -229,20 +229,20 @@ export default async function JobDetailPage({
               in-app apply to fall back to, so a posting whose URL never came
               through says so rather than rendering a dead button.
             */}
+            {/*
+              The same component the card uses. It was a plain anchor here long
+              after the card's had stopped being one, so applying from the
+              detail page opened the board and recorded nothing — the exact bug
+              that was fixed on the card, still live one click away.
+            */}
             {job.url ? (
-              <a
-                href={job.url}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex items-center gap-tight rounded-subtle bg-accent-default px-body py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover"
-              >
-                <SendIcon className="size-icon-sm shrink-0" />
-                Apply
-                <span className="sr-only">
-                  {" "}
-                  on {job.company.name}&rsquo;s site, opens in a new tab
-                </span>
-              </a>
+              <ApplyButton
+                jobId={job.id}
+                jobTitle={job.title}
+                companyName={job.company.name}
+                url={job.url}
+                size="page"
+              />
             ) : (
               <span className="rounded-subtle border border-border-subtle bg-surface-sunken px-body py-compact text-small text-content-tertiary">
                 No application link

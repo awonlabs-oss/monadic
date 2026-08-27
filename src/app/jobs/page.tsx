@@ -65,7 +65,13 @@ export default async function JobsPage({
       */}
         <header className="flex flex-wrap items-start justify-between gap-snug pb-tight">
           <div className="flex flex-col gap-tight">
-            <h1 className="text-title font-semibold tracking-tight text-content-primary">
+            {/*
+              The serif, used once. A page title is the one place on a feed
+              where a person is addressed rather than a row scanned, so it is
+              also the only place the display face earns its keep — everything
+              below this line is Figtree, because everything below it is data.
+            */}
+            <h1 className="font-display text-title italic leading-tight tracking-tight text-content-primary">
               All jobs
             </h1>
             <p className="text-body text-content-secondary">

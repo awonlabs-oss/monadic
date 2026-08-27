@@ -51,7 +51,13 @@ export function ApplyButton({
           // the status is correctable from the board.
         });
       }}
-      className={`inline-flex items-center gap-tight rounded-subtle bg-accent-default ${px} py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover`}
+      /*
+        The one coral thing on a card. Apply is the only control here that
+        leaves the app, and the accent marks that rather than decorating the
+        row: ink for everything that keeps you inside, coral for the one that
+        does not. Ink text on the coral, not white — see DESIGN.md section 1.
+      */
+      className={`inline-flex items-center gap-tight rounded-subtle bg-coral-default ${px} py-compact text-small font-semibold leading-none text-content-primary transition-colors hover:bg-coral-hover`}
     >
       <SendIcon className="size-icon-sm shrink-0" />
       Apply

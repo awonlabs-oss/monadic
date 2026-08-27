@@ -30,14 +30,42 @@ tracked pipeline are DECIDED. The frontpage remains blocked. Everything else is 
 **Status: DECIDED**
 
 **Name:** monadic. Lowercase in code, URLs, and identifiers. Capitalized as "Monadic"
-in prose and headings. The wordmark is lowercase, set in Inter Semi Bold at -3%
+in prose and headings. The wordmark is lowercase, set in Figtree Semi Bold at -3%
 tracking, preceded by a small filled circle.
 
-1. **Warm neutral, never cold.** The canvas is `#F4F3F1`, not white and not blue-grey.
-   Cards are pure white and sit _on_ the canvas. Nothing is pure white on white.
-2. **Ink is the accent.** Primary actions are near-black pills. There is exactly one
-   non-neutral color in the system, a muted green used only for positive or live
-   signals. If a screen needs a second accent, the screen is wrong.
+**Typefaces.** Figtree carries the interface at every size. EB Garamond, italic
+only, carries display moments — page titles, empty states, the wordmark's
+companion line. The serif is the most recognisable thing about the reference
+sites and also the fastest way to make a dense tool look like a brochure, so it
+is confined to places where a person is being addressed directly and never
+touches a row, a tag, or a figure.
+
+1. **Warm neutral, never cold.** The canvas is `#F2EFE6` — an actual cream, not a
+   grey with a warm name. The previous `#F4F3F1` described itself as warm and
+   rendered as neutral; measured against the references this direction is drawn
+   from, both ground on a real cream (Anthropic `#F0EEE6`, Wispr Flow `#FFFFEB`)
+   and that single value is most of why they read warm. Cards are `#FBFAF6`, not
+   pure white: `#FFFFFF` on cream reads as a hole punched in the page.
+
+2. **Ink leads; coral is the one warm accent.** _Amended — see the note below._
+   Primary controls are still near-black. Coral `#CF6A4A` marks the action that
+   leaves the app, and appears at most once in any row. The muted green is
+   retained but narrowed to positive and live signals only. A third accent means
+   the screen is wrong.
+
+   Text on coral is **ink, not white**. White measures 3.5:1 against it, ink
+   measures 4.8:1, and darkening the coral far enough for white to pass turns it
+   brown. Dark text on a warm fill is what the reference uses at the same hue.
+
+   > **Amendment, on the record.** This section previously read "Ink is the
+   > accent… there is exactly one non-neutral color in the system… if a screen
+   > needs a second accent, the screen is wrong," and was marked DECIDED. It was
+   > overturned deliberately, by the author, when the visual direction moved
+   > toward Wispr Flow and Anthropic — both of which carry a warm accent, and
+   > neither of which is legible as the same product without it. The rule was
+   > not wrong; the target changed. It is recorded rather than quietly edited
+   > because a DECIDED section that changes without explanation is worth less
+   > than one that never claimed to be decided.
 3. **Dense enough to scan fifty postings.** This is a triage tool, not a reading
    surface. Generous radius, tight vertical rhythm.
 4. **Absence is information.** Missing compensation is the common case, not an error.
