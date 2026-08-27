@@ -25,6 +25,18 @@ import type { Database } from "./types";
 
 let cached: Promise<SupabaseClient<Database>> | null = null;
 
+/**
+ * When the cached session stops being usable, as a unix timestamp in seconds.
+ * Zero means "nothing cached yet".
+ */
+let expiresAt = 0;
+
+/**
+ * Re-authenticate this long before the token actually expires, so a request
+ * that arrives mid-flight cannot be the one that discovers it is too late.
+ */
+const REFRESH_MARGIN_SECONDS = 120;
+
 async function signIn(): Promise<SupabaseClient<Database>> {
   const { url, publishableKey } = supabaseEnv();
   const user = localUserEnv();
@@ -57,15 +69,42 @@ async function signIn(): Promise<SupabaseClient<Database>> {
     );
   }
 
+  // Recorded so getServerClient can tell a live session from an expired one
+  // without a round trip. Supabase issues these for one hour.
+  expiresAt = data.session?.expires_at ?? 0;
+
   return client;
 }
 
+/**
+ * The client every route uses, re-authenticating when the session ages out.
+ *
+ * The expiry check is not defensive programming — the cache without it had a
+ * guaranteed failure at the one-hour mark. An access token lasts 3,600 seconds
+ * and this module caches for the life of the process, so any dev server left
+ * running longer than that served every request with a dead token. PostgREST
+ * does not treat an expired JWT as an error; it discards it and falls back to
+ * `anon`, and rls.sql revokes anon from every table in the schema. The result
+ * was "permission denied for table profiles" — a message that points at grants
+ * and RLS, neither of which was wrong, on whichever table the page happened to
+ * read first.
+ *
+ * autoRefreshToken is set on the client and does not cover this. It refreshes
+ * on a timer owned by the client, and a Next.js server process gives no
+ * guarantee that timer keeps firing across idle periods and dev-server reloads.
+ * Checking expiry at the point of use does not depend on any of that.
+ */
 export function getServerClient(): Promise<SupabaseClient<Database>> {
-  if (!cached) {
+  const now = Math.floor(Date.now() / 1000);
+
+  if (!cached || now >= expiresAt - REFRESH_MARGIN_SECONDS) {
     cached = signIn().catch((err) => {
-      cached = null; // never cache a failed sign-in — the next request retries
+      // Never cache a failed sign-in — the next request retries.
+      cached = null;
+      expiresAt = 0;
       throw err;
     });
   }
+
   return cached;
 }
