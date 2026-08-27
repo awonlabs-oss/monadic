@@ -1,5 +1,6 @@
 import { REMOTE_PREFERENCES, type CriteriaInput } from "@/lib/data/criteria";
 import { saveCriteriaAction } from "@/app/actions";
+import { Select } from "./select";
 
 /**
  * The form behind /for-you.
@@ -125,18 +126,23 @@ export function CriteriaEditor({
         </Field>
 
         <Field label="Workplace">
-          <select
+          <Select
             name="remote"
             defaultValue={criteria.remotePreference ?? ""}
-            className={INPUT}
-          >
-            <option value="">Not stated</option>
-            {REMOTE_PREFERENCES.map((p) => (
-              <option key={p.key} value={p.key}>
-                {p.label}
-              </option>
-            ))}
-          </select>
+            placeholder="Not stated"
+            ariaLabel="Workplace preference"
+            options={[
+              {
+                value: "",
+                label: "Not stated",
+                hint: "The criterion is not applied",
+              },
+              ...REMOTE_PREFERENCES.map((p) => ({
+                value: p.key,
+                label: p.label,
+              })),
+            ]}
+          />
         </Field>
       </div>
 

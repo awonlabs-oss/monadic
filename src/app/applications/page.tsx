@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { listApplications } from "@/lib/data/applications";
 import { COLUMNS, needsAction, isClosed } from "@/lib/applications/pipeline";
+import { ApplicationList, QuietBanner } from "@/components/application-list";
 import { ApplicationCard } from "@/components/application-card";
 
 /*
@@ -29,8 +30,13 @@ export default async function ApplicationsPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const params = await searchParams;
-  const showClosed =
-    (Array.isArray(params.closed) ? params.closed[0] : params.closed) === "1";
+  const one = (v: string | string[] | undefined) =>
+    Array.isArray(v) ? v[0] : v;
+  const showClosed = one(params.closed) === "1";
+  // List is the default. The board answers "where does everything stand"; the
+  // list answers "what is happening", which is the question you have more often
+  // once there is more than a handful in flight.
+  const view = one(params.view) === "board" ? "board" : "list";
 
   const { applications, closedCount } = await listApplications({
     includeClosed: showClosed,
@@ -61,17 +67,29 @@ export default async function ApplicationsPage({
           aria-label="View"
           className="flex items-center gap-hair rounded-subtle bg-surface-sunken p-hair"
         >
-          <span className="rounded-subtle bg-surface-base px-compact py-tight text-small font-medium text-content-primary">
-            Board
-          </span>
-          {/* No List frame exists in Figma; disabled rather than invented. */}
-          <span
-            aria-disabled="true"
-            title="List view is not designed yet"
-            className="px-compact py-tight text-small font-medium text-content-tertiary"
-          >
-            List
-          </span>
+          {(["board", "list"] as const).map((key) => {
+            const on = view === key;
+            const href = `/applications${key === "board" ? "?view=board" : ""}${
+              showClosed ? (key === "board" ? "&closed=1" : "?closed=1") : ""
+            }`;
+            return on ? (
+              <span
+                key={key}
+                aria-current="true"
+                className="rounded-subtle bg-surface-base px-compact py-tight text-small font-medium capitalize text-content-primary shadow-raised"
+              >
+                {key}
+              </span>
+            ) : (
+              <Link
+                key={key}
+                href={href}
+                className="rounded-subtle px-compact py-tight text-small font-medium capitalize text-content-secondary transition-colors hover:text-content-primary"
+              >
+                {key}
+              </Link>
+            );
+          })}
         </div>
       </header>
 
@@ -83,6 +101,11 @@ export default async function ApplicationsPage({
           </Link>{" "}
           to start one here.
         </p>
+      ) : view === "list" ? (
+        <>
+          <QuietBanner applications={live} />
+          <ApplicationList applications={showClosed ? applications : live} />
+        </>
       ) : (
         <div className="grid grid-cols-1 gap-default md:grid-cols-2 min-[1100px]:grid-cols-4">
           {COLUMNS.map((column) => {

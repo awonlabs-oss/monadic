@@ -94,7 +94,7 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
       )}
 
       {attention.needed && attention.reason && (
-        <StatusBadge label={attention.reason} />
+        <StatusBadge status="needs_action" label={attention.reason} />
       )}
 
       <details className="group">

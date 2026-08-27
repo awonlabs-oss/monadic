@@ -131,7 +131,7 @@ async function main() {
     } else {
       console.log(
         `  ok       ${label} ${String(outcome.jobs.length).padStart(4)} jobs` +
-          `  +${result.created} new  ~${result.updated} seen  -${result.closed} closed`,
+          `  +${result.created} new  ~${result.updated} changed  =${result.unchanged} same  -${result.closed} closed`,
       );
     }
   }

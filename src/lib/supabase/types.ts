@@ -1595,6 +1595,7 @@ export type Database = {
         }
         Returns: {
           created: number
+          unchanged: number
           updated: number
         }[]
       }

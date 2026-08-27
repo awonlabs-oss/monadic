@@ -78,7 +78,10 @@ export function Sidebar({
 
   return (
     <div className="flex h-full flex-col gap-comfortable px-comfortable py-loose">
-      <Link href="/for-you" className="flex items-center gap-compact px-compact">
+      <Link
+        href="/for-you"
+        className="flex items-center gap-compact px-compact"
+      >
         <span
           aria-hidden="true"
           className="size-dot rounded-full bg-content-primary"
