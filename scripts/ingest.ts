@@ -107,13 +107,31 @@ async function main() {
       };
     }
 
-    const result = await persistPull(db, {
-      companyId: company.id,
-      source: company.ats_source,
-      batchId,
-      startedAt,
-      outcome,
-    });
+    // Persisting one company must not be able to end the run.
+    //
+    // A 254-company batch died at company 51 on a statement timeout inside
+    // upsert_jobs, throwing away fifty companies' worth of completed work and
+    // every company after it. Nothing about that failure said the next board
+    // would fail too — and it did not, on the retry.
+    //
+    // So a persist error is recorded against the company that caused it and the
+    // loop moves on, which is exactly how a failed *fetch* is already handled a
+    // few lines above. The run summary counts it, and /settings/runs shows it.
+    let result: Awaited<ReturnType<typeof persistPull>>;
+    try {
+      result = await persistPull(db, {
+        companyId: company.id,
+        source: company.ats_source,
+        batchId,
+        startedAt,
+        outcome,
+      });
+    } catch (err) {
+      failures += 1;
+      const message = err instanceof Error ? err.message : String(err);
+      console.log(`  FAILED   ${company.name.padEnd(14)} persist: ${message}`);
+      continue;
+    }
 
     totalCreated += result.created;
     totalUpdated += result.updated;
