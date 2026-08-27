@@ -20,6 +20,18 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
  *
  * The value rides in a hidden input, so this drops into a plain form — server
  * action or GET — with no client state plumbing around it.
+ *
+ * There is deliberately no submit-on-change hook. There used to be an onCommit
+ * callback, and its only caller used it to requestSubmit() the enclosing form.
+ * That could not work: commit() sets React state and onCommit fired in the same
+ * handler, before React had flushed the re-render, so the hidden input still
+ * held the previous value and the form posted the status the row already had.
+ * Every status change silently did nothing.
+ *
+ * A control whose value lives in React state cannot correctly submit itself
+ * synchronously, so the hook is gone rather than patched. Something that needs
+ * to act on a choice should own the value directly — see StatusPicker, which
+ * passes the chosen status straight to its request and never reads the DOM.
  */
 
 export interface SelectOption {
@@ -38,7 +50,6 @@ export function Select({
   placeholder = "Select…",
   ariaLabel,
   className = "",
-  onCommit,
 }: {
   name: string;
   options: SelectOption[];
@@ -46,8 +57,6 @@ export function Select({
   placeholder?: string;
   ariaLabel?: string;
   className?: string;
-  /** Called after a choice is committed — used to submit the enclosing form. */
-  onCommit?: (value: string) => void;
 }) {
   const id = useId();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -77,9 +86,8 @@ export function Select({
       if (!option) return;
       setValue(option.value);
       close();
-      onCommit?.(option.value);
     },
-    [options, close, onCommit],
+    [options, close],
   );
 
   // The highlighted option is scrolled into view rather than left offscreen,

@@ -1,14 +1,8 @@
 import type { ApplicationRow } from "@/lib/data/applications";
-import {
-  ALL_STATUSES,
-  STATUS_LABELS,
-  needsAction,
-  stageLine,
-  statusTone,
-  type Status,
-} from "@/lib/applications/pipeline";
+import { needsAction, stageLine, statusTone } from "@/lib/applications/pipeline";
 import { StatusBadge } from "./status-badge";
-import { setStatusAction, setNextActionAction } from "@/app/actions";
+import { StatusPicker } from "./status-picker";
+import { setNextActionAction } from "@/app/actions";
 
 /**
  * ApplicationCard — a card on the pipeline board. Figma node 4:293.
@@ -103,25 +97,19 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
         </summary>
 
         <div className="flex flex-col gap-compact pt-compact">
-          <form action={setStatusAction} className="flex flex-col gap-tight">
-            <input type="hidden" name="applicationId" value={app.id} />
-            <fieldset className="flex flex-wrap gap-tight">
-              <legend className="pb-tight text-caption text-content-tertiary">
-                Move to
-              </legend>
-              {ALL_STATUSES.filter((s) => s !== app.status).map((status) => (
-                <button
-                  key={status}
-                  type="submit"
-                  name="status"
-                  value={status}
-                  className="rounded-tag border border-border-subtle bg-surface-base px-tight py-hair text-caption text-content-secondary transition-colors hover:bg-surface-hover hover:text-content-primary"
-                >
-                  {STATUS_LABELS[status as Status]}
-                </button>
-              ))}
-            </fieldset>
-          </form>
+          {/*
+            The picker, not a row of text buttons.
+
+            Moving a card used to mean reading seven status names rendered as
+            small outlined chips and pressing one — a different control from the
+            badge the card wears two lines above, describing the same eight
+            states in different visual language. It is one control now, and what
+            you point at is what the card becomes.
+          */}
+          <div className="flex flex-col gap-tight">
+            <span className="text-caption text-content-tertiary">Move to</span>
+            <StatusPicker applicationId={app.id} status={app.status} />
+          </div>
 
           <form
             action={setNextActionAction}

@@ -3,7 +3,7 @@ import type { JobListItem } from "@/lib/data/jobs";
 import { formatComp, formatYears, postedLabel } from "@/lib/format";
 import { CompanyLogo } from "./company-logo";
 import { SaveButton } from "./save-button";
-import { SendIcon } from "./icons";
+import { ApplyButton } from "./apply-button";
 
 /**
  * JobCard — the feed card. Figma component `JobCardWide`, node 12:140.
@@ -205,20 +205,12 @@ export function JobCard({
           "No link" chip sitting where a button should be.
         */}
         {job.url && (
-          <a
-            href={job.url}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center gap-tight rounded-subtle bg-accent-default px-default py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover"
-          >
-            <SendIcon className="size-icon-sm shrink-0" />
-            Apply
-            <span className="sr-only">
-              {" "}
-              to {job.title} at {job.company_name} on their site, opens in a new
-              tab
-            </span>
-          </a>
+          <ApplyButton
+            jobId={job.id}
+            jobTitle={job.title}
+            companyName={job.company_name}
+            url={job.url}
+          />
         )}
       </div>
     </article>

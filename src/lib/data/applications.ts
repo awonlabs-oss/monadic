@@ -1,5 +1,5 @@
 import { getServerClient } from "@/lib/supabase/server";
-import { CLOSED_STATUSES } from "@/lib/applications/pipeline";
+import { CLOSED_STATUSES, type Status } from "@/lib/applications/pipeline";
 
 /**
  * The only place the app queries applications.
@@ -114,4 +114,59 @@ export async function saveJob(jobId: string): Promise<void> {
   if (applicationError && !/duplicate key|unique/i.test(applicationError.message)) {
     throw new Error(`Could not track job: ${applicationError.message}`);
   }
+}
+
+/**
+ * Move an application to a status.
+ *
+ * Thin, and here rather than only in the server action for the same reason
+ * saveJob is: the status picker posts to a route handler, and two copies of
+ * this call would eventually disagree about which RPC writes the timeline.
+ */
+export async function setApplicationStatus(
+  applicationId: string,
+  status: Status,
+): Promise<void> {
+  const db = await getServerClient();
+  const { error } = await db.rpc("set_application_status", {
+    p_application_id: applicationId,
+    p_status: status,
+  });
+  if (error) throw new Error(`Could not change status: ${error.message}`);
+}
+
+/**
+ * Applying from a card: make sure the job is tracked, then mark it applied.
+ *
+ * Pressing Apply used to do nothing but open the company's board, so a job you
+ * had actually applied to still sat in Saved until you remembered to move it.
+ * The press is the strongest signal the app ever gets about intent, and it was
+ * being thrown away.
+ *
+ * saveJob first because Apply is reachable on a job that was never saved, and
+ * a status cannot be set on an application that does not exist yet. Both RPCs
+ * are idempotent, so pressing Apply twice is not a second row.
+ *
+ * It is a claim about intent, not proof of submission — you might close the tab
+ * without finishing. That is the right trade: the status picker is one click
+ * away and reversible, whereas a job silently left in Saved is a job you think
+ * you have not applied to.
+ */
+export async function markJobApplied(jobId: string): Promise<void> {
+  await saveJob(jobId);
+
+  const db = await getServerClient();
+  const { data, error } = await db
+    .from("applications")
+    .select("id, status")
+    .eq("job_id", jobId)
+    .maybeSingle();
+  if (error) throw new Error(`Could not find the application: ${error.message}`);
+  if (!data) throw new Error("No application exists for that job");
+
+  // Never walk a live process backwards. Someone at Onsite pressing Apply
+  // again — to re-read the posting — must not be dropped back to Applied.
+  if (data.status !== "shortlisted") return;
+
+  await setApplicationStatus(data.id, "applied");
 }

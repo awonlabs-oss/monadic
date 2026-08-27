@@ -4,7 +4,7 @@ import { needsAction, type Status } from "@/lib/applications/pipeline";
 import { relativeShort } from "@/lib/format";
 import { CompanyLogo } from "./company-logo";
 import { StatusBadge } from "./status-badge";
-import { StatusSelect } from "./status-select";
+import { StatusPicker } from "./status-picker";
 
 /**
  * Tracked, as a list. Figma frame `Screen / Tracked list`, node 14:207.
@@ -122,7 +122,7 @@ export function ApplicationList({
                 ceremony around it.
               */}
               <Cell className="w-48">
-                <StatusSelect applicationId={app.id} status={app.status} />
+                <StatusPicker applicationId={app.id} status={app.status} />
               </Cell>
 
               <Cell className="max-w-reading">
