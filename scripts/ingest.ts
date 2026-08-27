@@ -12,6 +12,7 @@ import { createServiceClient } from "@/lib/supabase/service";
 import { SOURCES } from "@/ingest/sources";
 import { fetchJson } from "@/ingest/http";
 import { persistPull, type PullOutcome } from "@/ingest/persist";
+import { syncCompanyLogo } from "@/ingest/logo";
 import { ingestEnv } from "@/lib/env";
 
 const onlySlug = process.argv[2] && !process.argv[2].startsWith("--") ? process.argv[2] : null;
@@ -19,11 +20,11 @@ const onlySlug = process.argv[2] && !process.argv[2].startsWith("--") ? process.
 async function main() {
   const db = createServiceClient();
   const batchId = randomUUID();
-  const { concurrency } = ingestEnv();
+  const { concurrency, userAgent } = ingestEnv();
 
   let query = db
     .from("companies")
-    .select("id, name, slug, ats_source, ats_slug, ats_etag, ats_last_modified")
+    .select("id, name, slug, ats_source, ats_slug, ats_etag, ats_last_modified, website_url, logo_url")
     .eq("ats_resolution_status", "resolved")
     .order("name");
   if (onlySlug) query = query.eq("slug", onlySlug);
@@ -44,6 +45,7 @@ async function main() {
   let totalUpdated = 0;
   let totalClosed = 0;
   let failures = 0;
+  let logosFound = 0;
 
   for (const company of companies) {
     if (!company.ats_source || !company.ats_slug) continue;
@@ -137,6 +139,35 @@ async function main() {
     totalUpdated += result.updated;
     totalClosed += result.closed;
 
+    // A company with no logo yet gets one now, before its cards are ever seen.
+    //
+    // This used to be a separate `npm run logos`, which meant every company
+    // added to the seed list showed a monogram until someone remembered to run
+    // it. Seeding 158 companies at once made that gap obvious: 166 of 257 had
+    // no logo. Ingestion is the run that already knows a company is live, so it
+    // is the right place to close it.
+    //
+    // Only when logo_url is null, so the steady state costs nothing. A company
+    // whose site publishes no usable icon stays null and is retried next run —
+    // one request against a board pull that already takes seconds, and the
+    // monogram it falls back to is a designed state rather than a hole.
+    //
+    // Never allowed to fail the company. A logo is decoration; the roles are
+    // the point, and they are already written by here.
+    if (!company.logo_url && company.website_url) {
+      try {
+        const logo = await syncCompanyLogo(
+          db,
+          { id: company.id, slug: company.slug, website_url: company.website_url },
+          userAgent,
+        );
+        if (logo.outcome === "found") logosFound += 1;
+      } catch {
+        // Recorded nowhere on purpose: a logo that cannot be resolved is not a
+        // failed ingest, and flagging it would train the eye to ignore FAILED.
+      }
+    }
+
     const label = company.name.padEnd(14);
     if (outcome.status === "failure") {
       failures += 1;
@@ -156,6 +187,7 @@ async function main() {
 
   console.log(
     `\n${totalCreated} created, ${totalUpdated} updated, ${totalClosed} closed` +
+      (logosFound > 0 ? `, ${logosFound} logos resolved` : "") +
       (failures > 0 ? `, ${failures} needing attention` : ""),
   );
   console.log(`Run history: /settings/runs`);
