@@ -1346,6 +1346,14 @@ export type Database = {
       }
     }
     Functions: {
+      add_manual_job: {
+        Args: {
+          p_company_name: string
+          p_job: Json
+          p_source: Database["public"]["Enums"]["ats_source"]
+        }
+        Returns: string
+      }
       create_application: {
         Args: { p_job_id: string; p_source?: string }
         Returns: {
@@ -1601,7 +1609,7 @@ export type Database = {
       }
     }
     Enums: {
-      ats_source: "greenhouse" | "ashby" | "lever"
+      ats_source: "greenhouse" | "ashby" | "lever" | "manual"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1729,7 +1737,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      ats_source: ["greenhouse", "ashby", "lever"],
+      ats_source: ["greenhouse", "ashby", "lever", "manual"],
     },
   },
 } as const

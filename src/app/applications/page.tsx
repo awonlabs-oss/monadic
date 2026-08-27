@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AddLink } from "@/components/add-link";
 import { listApplications } from "@/lib/data/applications";
 import { COLUMNS, needsAction, isClosed } from "@/lib/applications/pipeline";
 import { ApplicationList, QuietBanner } from "@/components/application-list";
@@ -62,6 +63,9 @@ export default async function ApplicationsPage({
           </p>
         </div>
 
+        <div className="flex flex-wrap items-center gap-compact">
+          <AddLink />
+
         <div
           role="group"
           aria-label="View"
@@ -90,6 +94,7 @@ export default async function ApplicationsPage({
               </Link>
             );
           })}
+        </div>
         </div>
       </header>
 

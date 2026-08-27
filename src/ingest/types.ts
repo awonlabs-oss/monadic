@@ -2,6 +2,17 @@ import type { Database } from "@/lib/supabase/types";
 
 export type AtsSource = Database["public"]["Enums"]["ats_source"];
 
+/**
+ * The sources that have a board behind them.
+ *
+ * 'manual' is a real ats_source — a posting added by hand is an ordinary job
+ * and needs a value in that column — but there is nothing to fetch and nothing
+ * to resolve, so it must not appear in the puller registry or the probe order.
+ * Excluding it here means the compiler rejects `SOURCES[manual]` rather than
+ * the registry carrying a stub implementation that throws.
+ */
+export type BoardSource = Exclude<AtsSource, "manual">;
+
 export type RemotePolicy = "remote" | "hybrid" | "onsite";
 export type CompPeriod = "year" | "month" | "week" | "day" | "hour";
 /** How we know a value. The schema refuses a figure that does not say. */
@@ -56,7 +67,7 @@ export interface NormalizedJob {
  * lives entirely on the persist side of the line.
  */
 export interface JobSource {
-  readonly source: AtsSource;
+  readonly source: BoardSource;
 
   /** The JSON endpoint for a board. */
   boardUrl(slug: string): string;

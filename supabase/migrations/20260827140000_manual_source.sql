@@ -1,0 +1,31 @@
+-- monadic — a source for postings added by hand
+--
+-- The tracker needs to hold a job that no board here publishes: a link a friend
+-- sent, a posting on a company's own site, an ATS with no puller. Those rows
+-- still have to be real jobs — the card, the detail page, the pipeline and the
+-- timeline all read public.jobs, and a parallel "manual application" table
+-- would mean every one of those surfaces growing a second code path.
+--
+-- So a manual posting is an ordinary job with its own source. That buys two
+-- things beyond storage:
+--
+--   1. Ingestion cannot touch it. persist.ts scopes both its upsert and its
+--      closure to (company_id, source), so a board pull for a company that also
+--      has hand-added rows will never close them — the source does not match.
+--      Without a distinct value, adding a Greenhouse link by hand to a company
+--      monadic already ingests would put a row in front of the closure diff
+--      that the next pull would immediately close.
+--
+--   2. The UI can say where a row came from without guessing.
+--
+-- companies already anticipated this: ats_resolution_status and
+-- ats_resolution_method both accept 'manual', and companies_resolved_needs_
+-- identity requires an ats_source alongside it. That constraint is why this
+-- value has to exist on the enum rather than being left null — a company
+-- created from a pasted link is 'manual' and therefore needs a source.
+--
+-- ALTER TYPE ... ADD VALUE is transactional on PG12+, but the new value cannot
+-- be USED in the transaction that adds it. Nothing here uses it; the first
+-- writes happen at runtime, long after this commits.
+
+alter type public.ats_source add value if not exists 'manual';

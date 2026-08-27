@@ -12,7 +12,7 @@
 
 import { createServiceClient } from "@/lib/supabase/service";
 import { SOURCES } from "@/ingest/sources";
-import type { AtsSource } from "@/ingest/types";
+import type { BoardSource } from "@/ingest/types";
 import { parseLocation } from "@/ingest/location";
 
 const dryRun = process.argv.includes("--dry");
@@ -43,7 +43,7 @@ async function main() {
     if (!rows || rows.length === 0) break;
 
     type Derived = {
-      source: AtsSource;
+      source: BoardSource;
       sourceJobId: string;
       years_min: number | null;
       years_max: number | null;
@@ -64,7 +64,12 @@ async function main() {
 
     for (const row of rows) {
       scanned += 1;
-      const source = SOURCES[row.source as AtsSource];
+
+      // Hand-added rows have no board parser to re-run. Their fields were
+      // derived once, at the moment the link was pasted, and there is no stored
+      // board payload to re-derive them from.
+      if (row.source === "manual") continue;
+      const source = SOURCES[row.source as BoardSource];
 
       // Re-run the source's own parser over the stored payload. Each parse()
       // expects a board-shaped envelope, so the single row is wrapped back into
@@ -112,7 +117,7 @@ async function main() {
       if (!changed) continue;
 
       updates.push({
-        source: row.source as AtsSource,
+        source: row.source as BoardSource,
         sourceJobId: row.source_job_id,
         years_min: parsed.yearsMin,
         years_max: parsed.yearsMax,

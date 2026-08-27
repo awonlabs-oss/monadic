@@ -48,7 +48,10 @@ async function main() {
   let logosFound = 0;
 
   for (const company of companies) {
-    if (!company.ats_source || !company.ats_slug) continue;
+    // A manual company has no board. Its jobs were added by hand and there is
+    // nothing to fetch, so it is skipped rather than looked up in a registry
+    // that deliberately has no entry for it.
+    if (!company.ats_source || !company.ats_slug || company.ats_source === "manual") continue;
 
     const source = SOURCES[company.ats_source];
     const startedAt = new Date();

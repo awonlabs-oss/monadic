@@ -1,4 +1,4 @@
-import type { AtsSource } from "./types";
+import type { BoardSource } from "./types";
 
 /**
  * The seed list. Adding a company is one line here plus `npm run resolve`.
@@ -34,7 +34,7 @@ export interface CompanySeed {
   websiteUrl?: string;
   careersUrl?: string;
   /** Skip probing when the board is already known. Still verified before use. */
-  atsSource?: AtsSource;
+  atsSource?: BoardSource;
   atsSlug?: string;
 }
 

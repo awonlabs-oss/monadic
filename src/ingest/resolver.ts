@@ -1,7 +1,7 @@
 import { fetchJson } from "./http";
 import { SOURCES } from "./sources";
 import { slugCandidates, type CompanySeed } from "./companies.config";
-import type { AtsSource } from "./types";
+import type { BoardSource } from "./types";
 
 /**
  * Maps a company to its ATS and board slug.
@@ -19,7 +19,7 @@ import type { AtsSource } from "./types";
 
 export interface ResolutionSuccess {
   outcome: "resolved";
-  source: AtsSource;
+  source: BoardSource;
   slug: string;
   boardUrl: string;
   method: "probe" | "fingerprint";
@@ -35,7 +35,7 @@ export interface ResolutionFailure {
 export type Resolution = ResolutionSuccess | ResolutionFailure;
 
 /** Ordered: cheapest and most-used board first. */
-const PROBE_ORDER: AtsSource[] = ["greenhouse", "ashby", "lever"];
+const PROBE_ORDER: BoardSource[] = ["greenhouse", "ashby", "lever"];
 
 async function probe(seed: CompanySeed): Promise<Resolution> {
   const attempts: string[] = [];
@@ -95,7 +95,7 @@ async function probe(seed: CompanySeed): Promise<Resolution> {
  * headless browser, by design. A careers page that needs one to read is out of
  * scope rather than a problem to solve.
  */
-const FINGERPRINTS: Array<{ source: AtsSource; re: RegExp }> = [
+const FINGERPRINTS: Array<{ source: BoardSource; re: RegExp }> = [
   { source: "greenhouse", re: /(?:boards|job-boards)\.greenhouse\.io\/(?:embed\/job_board\?for=)?([a-z0-9_-]+)/i },
   { source: "ashby", re: /jobs\.ashbyhq\.com\/([a-z0-9_.-]+)/i },
   { source: "lever", re: /jobs\.(?:eu\.)?lever\.co\/([a-z0-9_-]+)/i },
