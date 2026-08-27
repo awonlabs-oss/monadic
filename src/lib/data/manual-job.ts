@@ -4,7 +4,12 @@ import {
   postingIdCandidates,
   fetchAtsPosting,
   parsePostingPage,
+  identifyCompany,
+  normaliseWebsite,
+  guessCompanyWebsite,
 } from "@/ingest/manual";
+import { resolveLogo, FLOOR_PX } from "@/ingest/logo";
+import { ingestEnv } from "@/lib/env";
 import { contentHash } from "@/ingest/normalize";
 import { parseLocation } from "@/ingest/location";
 import type { NormalizedJob } from "@/ingest/types";
@@ -53,6 +58,7 @@ async function writeJob(
   companyName: string,
   source: "greenhouse" | "ashby" | "lever" | "manual",
   job: NormalizedJob,
+  identity: { website: string | null; logo: string | null } = { website: null, logo: null },
 ): Promise<string> {
   const db = await getServerClient();
   const location = parseLocation(job.locationRaw);
@@ -60,6 +66,11 @@ async function writeJob(
   const { data, error } = await db.rpc("add_manual_job", {
     p_company_name: companyName,
     p_source: source,
+    // Omitted rather than null: PostgREST types a defaulted argument as
+    // `T | undefined`, and an absent one takes the function's own default,
+    // which is the same null this would otherwise spell out.
+    p_company_website: identity.website ?? undefined,
+    p_company_logo: identity.logo ?? undefined,
     p_job: {
       source_job_id: job.sourceJobId,
       url: job.url,
@@ -90,6 +101,32 @@ async function writeJob(
   });
   if (error) throw new Error(`Could not save the job: ${error.message}`);
   return data as unknown as string;
+}
+
+/**
+ * The company's logo, from the company's own site.
+ *
+ * Runs before the row is written rather than after, because the write is a
+ * single security definer call and a second privileged round trip to attach a
+ * logo would be a second surface to reason about. It is also the only chance:
+ * scripts/logos.ts and the ingest logo step both select on
+ * `website_url is not null`, and until this ran there was nothing for either to
+ * find, so a hand-added company would have shown a monogram forever.
+ *
+ * Never fatal. A posting that could not be given a logo is still a posting, and
+ * the monogram it falls back to is a designed state.
+ */
+async function logoFor(website: string | null): Promise<string | null> {
+  if (!website) return null;
+  try {
+    const { userAgent } = ingestEnv();
+    const logo = await resolveLogo(website, userAgent);
+    // Same floor the bulk resolver uses: below it, the monogram is crisper than
+    // a 16px favicon stretched across the tile.
+    return logo && logo.width >= FLOOR_PX ? logo.href : null;
+  } catch {
+    return null;
+  }
 }
 
 export async function resolveManualJob(rawUrl: string): Promise<ManualResolution> {
@@ -169,11 +206,29 @@ export async function resolveManualJob(rawUrl: string): Promise<ManualResolution
         };
       }
 
-      // Known board, unknown company. The posting is still exactly what the
-      // board published — same fetch, same parser — so only the source label
-      // differs, and that difference is honest: nothing here resolved a board.
-      const name = fetched.companyName ?? identified.boardSlug;
-      const jobId = await writeJob(name, "manual", fetched.job);
+      // Known board, unknown company. The posting is exactly what the board
+      // published — same fetch, same parser — so only the source label differs,
+      // and that difference is honest: nothing here resolved a board.
+      //
+      // The name is the part the board cannot be trusted for. Greenhouse
+      // returns company_name and that is authoritative; Ashby and Lever return
+      // nothing, and the slug is not a name — it would put "ramp" on a card
+      // that should read "Ramp", and "weights-and-biases" on one that should
+      // read "Weights & Biases". So the description is read for the real one.
+      const identity = fetched.companyName
+        ? { name: fetched.companyName, website: null as string | null }
+        : await identifyCompany(fetched.job.descriptionText, identified.boardSlug);
+
+      const name = identity.name ?? identified.boardSlug;
+      // Boards name a company but never link to it, so a probe is usually the
+      // only route to a logo for one monadic has not seen before.
+      const website =
+        normaliseWebsite(identity.website) ??
+        (identity.name ? await guessCompanyWebsite(identity.name, ingestEnv().userAgent) : null);
+      const jobId = await writeJob(name, "manual", fetched.job, {
+        website,
+        logo: await logoFor(website),
+      });
       return { outcome: "created", jobId, title: fetched.job.title, companyName: name, via: "board" };
     }
   }
@@ -186,7 +241,16 @@ export async function resolveManualJob(rawUrl: string): Promise<ManualResolution
     );
   }
 
-  const name = page.companyName ?? parsed.hostname.replace(/^www\./, "");
-  const jobId = await writeJob(name, "manual", page.job);
+  // The hostname is the last resort and only when it is not a job board's —
+  // deriving a company from boards.greenhouse.io would name it "greenhouse"
+  // and point the logo resolver at Greenhouse's own mark.
+  const fallbackHost = normaliseWebsite(parsed.hostname);
+  const name =
+    page.companyName ?? (fallbackHost ? parsed.hostname.replace(/^www\./, "") : "Unknown company");
+  const website = page.companyWebsite ?? fallbackHost;
+  const jobId = await writeJob(name, "manual", page.job, {
+    website,
+    logo: await logoFor(website),
+  });
   return { outcome: "created", jobId, title: page.job.title, companyName: name, via: "page" };
 }

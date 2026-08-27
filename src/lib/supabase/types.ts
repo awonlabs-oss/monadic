@@ -1348,7 +1348,9 @@ export type Database = {
     Functions: {
       add_manual_job: {
         Args: {
+          p_company_logo?: string
           p_company_name: string
+          p_company_website?: string
           p_job: Json
           p_source: Database["public"]["Enums"]["ats_source"]
         }

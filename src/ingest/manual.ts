@@ -144,17 +144,186 @@ export async function fetchAtsPosting(
   return { job, companyName };
 }
 
+/**
+ * Hosts that are never the hiring company.
+ *
+ * This list is the difference between Discord's logo and Greenhouse's. A board
+ * URL's hostname belongs to the ATS, and deriving a website from it would send
+ * the logo resolver to greenhouse.io and put the job board's mark on the card.
+ */
+const ATS_HOSTS =
+  /(^|\.)(greenhouse\.io|ashbyhq\.com|lever\.co|workable\.com|myworkdayjobs\.com|smartrecruiters\.com|breezy\.hr|recruitee\.com|rippling\.com|applytojob\.com|jobvite\.com|icims\.com|teamtailor\.com|bamboohr\.com|linkedin\.com|indeed\.com|glassdoor\.com|wellfound\.com|ycombinator\.com)$/i;
+
+/** An https origin, or null when the value is empty, unparseable, or an ATS. */
+export function normaliseWebsite(value: string | null | undefined): string | null {
+  const raw = value?.trim();
+  if (!raw) return null;
+  try {
+    const url = new URL(/^https?:\/\//i.test(raw) ? raw : `https://${raw}`);
+    if (ATS_HOSTS.test(url.hostname)) return null;
+    return `https://${url.hostname.replace(/^www\./, "")}`;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * The company's site, found by trying the obvious domains and checking.
+ *
+ * A last resort, and only reached when neither the board nor the description
+ * gave one. Guessing a domain unverified is how a card ends up wearing a
+ * squatter's favicon, so nothing is accepted on the strength of resolving:
+ * measured on one real case, starbridge.com does not answer at all and
+ * starbridge.io sits behind a challenge page, while the actual company is at
+ * starbridge.ai. Only a page that says the company's name back is taken.
+ *
+ * The check is deliberately blunt — the name, stripped to letters and digits,
+ * appearing in the page's own title or opening markup. A company's landing page
+ * says its name; a parked domain or an unrelated business does not.
+ */
+export async function guessCompanyWebsite(
+  name: string,
+  userAgent: string,
+): Promise<string | null> {
+  const collapsed = name.toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (collapsed.length < 3) return null;
+
+  const needle = collapsed;
+  const candidates = [
+    `${collapsed}.com`,
+    `${collapsed}.ai`,
+    `${collapsed}.io`,
+    `${collapsed}.co`,
+    `${collapsed}.dev`,
+    `get${collapsed}.com`,
+    `try${collapsed}.com`,
+  ];
+
+  for (const host of candidates) {
+    try {
+      const response = await fetch(`https://${host}`, {
+        headers: { "User-Agent": userAgent },
+        signal: AbortSignal.timeout(8_000),
+        redirect: "follow",
+      });
+      if (!response.ok) continue;
+
+      const head = (await response.text()).slice(0, 6_000).toLowerCase();
+      const title = /<title[^>]*>([^<]{0,200})/.exec(head)?.[1] ?? "";
+      const flat = (s: string) => s.replace(/[^a-z0-9]/g, "");
+
+      // A challenge page resolves and says nothing; it must not count.
+      if (/just a moment|checking your browser|enable javascript to continue/.test(title)) continue;
+      if (flat(title).includes(needle) || flat(head.slice(0, 3_000)).includes(needle)) {
+        return `https://${host}`;
+      }
+    } catch {
+      // Unreachable, TLS failure, timeout. Try the next one.
+    }
+  }
+  return null;
+}
+
+const IDENTITY_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  required: ["companyName", "companyWebsite"],
+  properties: {
+    companyName: {
+      type: "string",
+      description:
+        "The hiring company as it brands itself, character for character: 'Weights & Biases' not 'Weights and Biases', 'dbt Labs' not 'DBT Labs', '1Password' not 'OnePassword'. Never a slug, never lowercased. Empty string if the text does not say.",
+    },
+    companyWebsite: {
+      type: "string",
+      description:
+        "The company's own website as an https:// origin with no path. Empty string unless it is stated in the text or unambiguous from the company's name.",
+    },
+  },
+} as const;
+
+const IDENTITY_SYSTEM = `You are given a job description and the board slug it was published under.
+
+Name the hiring company exactly as it writes its own name — capitalisation,
+punctuation and spacing included. The slug is a lowercased, hyphenated
+identifier and is never the answer on its own: "weights-and-biases" is the slug,
+"Weights & Biases" is the name.
+
+Return "" rather than guessing. A wrong name is worse than no name, because it
+is what the card will say.`;
+
+/**
+ * Who is hiring, for a board that does not say.
+ *
+ * Greenhouse returns company_name on a single posting; Ashby and Lever return
+ * the postings and nothing else. Falling back to the board slug would put
+ * "ramp" on a card that should read "Ramp", and "weights-and-biases" on one
+ * that should read "Weights & Biases" — so the description, which almost always
+ * introduces the company by name, is read instead.
+ *
+ * Only ever called for a company monadic does not already have. A company that
+ * exists keeps the name it was seeded with.
+ */
+export async function identifyCompany(
+  descriptionText: string | null,
+  boardSlug: string,
+): Promise<{ name: string | null; website: string | null }> {
+  if (!descriptionText || descriptionText.length < 80) {
+    return { name: null, website: null };
+  }
+
+  const client = new Anthropic({ apiKey: anthropicApiKey() });
+  const response = await client.messages.create({
+    model: MODEL,
+    max_tokens: 300,
+    system: IDENTITY_SYSTEM,
+    output_config: { format: { type: "json_schema", schema: IDENTITY_SCHEMA } },
+    messages: [
+      {
+        role: "user",
+        content: `Board slug: ${boardSlug}\n\nDescription:\n${descriptionText.slice(0, 12_000)}`,
+      },
+    ],
+  });
+
+  if (response.stop_reason === "refusal") return { name: null, website: null };
+  const block = response.content.find((b) => b.type === "text");
+  if (!block || block.type !== "text") return { name: null, website: null };
+
+  const parsed = JSON.parse(block.text) as { companyName: string; companyWebsite: string };
+  return {
+    name: parsed.companyName.trim() || null,
+    website: normaliseWebsite(parsed.companyWebsite),
+  };
+}
+
 const EXTRACT_SCHEMA = {
   type: "object",
   additionalProperties: false,
-  required: ["title", "companyName", "locationRaw", "employmentType", "department", "isJobPosting"],
+  required: [
+    "title", "companyName", "companyWebsite", "locationRaw",
+    "employmentType", "department", "isJobPosting",
+  ],
   properties: {
     isJobPosting: {
       type: "boolean",
       description: "False if this page is not a single job posting — a listing index, a 404, a login wall, an article.",
     },
-    title: { type: "string", description: "The role title alone. Empty string if the page is not a posting." },
-    companyName: { type: "string", description: "The hiring company. Empty string if not stated." },
+    title: {
+      type: "string",
+      description:
+        "The role title, character for character as the page writes it. Keep capitalisation, punctuation, ampersands, slashes, commas, parentheses and any level or region suffix. Do not title-case it, expand abbreviations, or drop a trailing qualifier. Empty string if the page is not a posting.",
+    },
+    companyName: {
+      type: "string",
+      description:
+        "The hiring company as it brands itself, character for character: 'Weights & Biases' not 'Weights and Biases', 'dbt Labs' not 'DBT Labs', '1Password' not 'OnePassword'. Never a slug, never lowercased, never the job board's name. Empty string if not stated.",
+    },
+    companyWebsite: {
+      type: "string",
+      description:
+        "The hiring company's own website as an https:// origin with no path, e.g. https://discord.com. Only when the page shows it. Never the job board's domain (greenhouse.io, ashbyhq.com, lever.co, workable.com, myworkdayjobs.com). Empty string if unsure.",
+    },
     locationRaw: { type: "string", description: "Location exactly as written on the page. Empty string if not stated." },
     employmentType: { type: "string", description: "Full-time, Contract, Internship, etc. Empty string if not stated." },
     department: { type: "string", description: "Team or function. Empty string if not stated." },
@@ -170,6 +339,11 @@ role is a posting.
 Every text field is a plain string. Use "" for anything the page does not state
 — never invent, never infer from the company's other roles, and never normalise
 a location into a form the page did not use.
+
+Reproduce the title and the company name exactly as written: same capitalisation,
+same punctuation, same spacing. These are shown back verbatim and sit alongside
+the same fields read straight from an ATS API, so a tidied-up version is a wrong
+answer rather than a nicer one.
 
 Do not extract compensation or years of experience. Those are derived from the
 description text afterwards by the same code that reads them off every other
@@ -189,7 +363,11 @@ came from.`;
  */
 export async function parsePostingPage(
   url: string,
-): Promise<{ job: NormalizedJob; companyName: string | null } | null> {
+): Promise<{
+  job: NormalizedJob;
+  companyName: string | null;
+  companyWebsite: string | null;
+} | null> {
   const { userAgent } = ingestEnv();
 
   let html: string;
@@ -227,6 +405,7 @@ export async function parsePostingPage(
     isJobPosting: boolean;
     title: string;
     companyName: string;
+    companyWebsite: string;
     locationRaw: string;
     employmentType: string;
     department: string;
@@ -237,6 +416,7 @@ export async function parsePostingPage(
 
   return {
     companyName: clean(parsed.companyName),
+    companyWebsite: normaliseWebsite(parsed.companyWebsite),
     job: {
       // The URL is the identity. Two pastes of the same link must be the same
       // row, and nothing else on an arbitrary page is stable enough to key on.
