@@ -40,19 +40,24 @@ export function CompanyLogo({
 }: {
   name: string;
   src: string | null;
-  /** `small` is the 34px tile a rail panel uses; `default` is the 68px feed tile. */
-  size?: "default" | "small";
+  /**
+   * `small` is the 34px tile a rail panel uses, `card` the 44px feed tile, and
+   * `default` the 68px one the detail page header keeps.
+   */
+  size?: "default" | "card" | "small";
 }) {
   const [failed, setFailed] = useState(false);
   const initial = name.trim().charAt(0).toUpperCase();
   const hasImage = Boolean(src) && !failed;
   const small = size === "small";
+  const tile =
+    size === "small" ? "size-logo-sm" : size === "card" ? "size-logo-card" : "size-logo";
 
   return (
     <span
       aria-hidden="true"
       className={`flex shrink-0 items-center justify-center overflow-hidden rounded-preview ${
-        small ? "size-logo-sm" : "size-logo"
+        tile
       } ${hasImage ? "" : "border border-border-subtle bg-surface-sunken"}`}
     >
       {hasImage ? (
@@ -68,7 +73,7 @@ export function CompanyLogo({
       ) : (
         <span
           className={`font-semibold leading-none tracking-mid text-content-primary ${
-            small ? "text-body" : "text-monogram"
+            small || size === "card" ? "text-body" : "text-monogram"
           }`}
         >
           {initial}
