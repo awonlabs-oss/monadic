@@ -23,7 +23,19 @@ import { BookmarkIcon } from "./icons";
  * failed bookmark is more apparatus than the failure deserves.
  *
  * `saved` is the server's answer and is the initial state, so a job saved on a
- * previous visit renders as Saved on first paint with no request at all.
+ * previous visit renders as saved on first paint with no request at all.
+ *
+ * The saved state is the icon alone. "Save" needs its label — it is a call to
+ * action and a bare bookmark on a card full of controls is a guess — but once
+ * the answer is yes, the word is repeating what the filled bookmark already
+ * says, twice per row, on the majority of a feed you have been through. The
+ * icon keeps its accessible name and a tooltip, so nothing is lost to anyone
+ * reading it with a screen reader or hovering it.
+ *
+ * The control does get narrower on press, which moves Apply left. That is real
+ * and it is the right trade: the alternative is padding the saved state out to
+ * the width of a word that is no longer there, which reads as a button with
+ * something missing from it.
  */
 export function SaveButton({
   jobId,
@@ -41,15 +53,24 @@ export function SaveButton({
 }) {
   const [saved, setSaved] = useState(initiallySaved);
   const px = size === "page" ? "px-body" : "px-default";
+  /*
+   * A square whose height matches the labelled controls beside it, so the
+   * saved state sits on the same baseline as Apply rather than becoming a
+   * shorter chip. py-compact plus the icon is what sets that height, and the
+   * matching horizontal padding makes it square rather than a narrow slot.
+   */
+  const square = "px-compact py-compact";
 
   if (saved) {
+    const label = `Saved — ${jobTitle} at ${companyName}. Open in Tracked`;
     return (
       <Link
         href="/applications"
-        className={`inline-flex items-center gap-tight rounded-subtle border border-border-default bg-surface-sunken ${px} py-compact text-small font-medium leading-none text-content-primary transition-colors hover:bg-surface-hover`}
+        aria-label={label}
+        title="Saved"
+        className={`inline-flex items-center justify-center rounded-subtle border border-border-default bg-surface-sunken ${square} text-content-primary transition-colors hover:bg-surface-hover`}
       >
         <BookmarkIcon className="size-icon-sm shrink-0" />
-        Saved
       </Link>
     );
   }
