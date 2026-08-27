@@ -1,0 +1,31 @@
+-- monadic — remove the title indexes added an hour ago; they did nothing
+--
+-- The theory was sound and the measurement disagreed, so they go.
+--
+-- recommend_jobs evaluates a trigram similarity and builds a tsvector per row
+-- for the role test, and neither had an index. Adding both changed nothing:
+--
+--   before   1184ms
+--   after    1261 / 1344 / 2486ms   (median 1344)
+--
+-- The reason is in the shape of the query rather than the expressions. The
+-- roles arrive as an array and are unnested inside a correlated EXISTS, so each
+-- comparison is against a set produced per row rather than against a constant
+-- the planner can probe an index with. A GIN index cannot be driven from that
+-- position, and neither one was ever consulted.
+--
+-- Keeping them would not be free. Both are GIN indexes over 17,190 rows, and
+-- every ingest that writes a title pays to maintain them — a real cost on the
+-- run that already takes fifteen minutes, bought for no read that got faster.
+--
+-- The latency this was chasing is addressed where it actually was: dynamic
+-- routes had no client cache and no loading boundary, so every tab switch
+-- re-ran the whole query with nothing on screen. See next.config.ts and the
+-- loading.tsx files.
+--
+-- Making recommend_jobs itself faster is still open, and would mean changing
+-- the query rather than indexing it — matching roles against a precomputed
+-- column, or narrowing the candidate set before scoring rather than after.
+
+drop index if exists public.jobs_title_trgm_idx;
+drop index if exists public.jobs_title_tsv_idx;

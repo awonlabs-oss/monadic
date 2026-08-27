@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { StatusBadge } from "./status-badge";
 import { ALL_STATUSES, STATUS_LABELS, type Status } from "@/lib/applications/pipeline";
 
@@ -28,6 +29,19 @@ import { ALL_STATUSES, STATUS_LABELS, type Status } from "@/lib/applications/pip
  * regression: arrows, Home/End, Enter and Space to commit, Escape to abandon,
  * focus returned to the trigger, aria-activedescendant on the highlighted row,
  * and an outside press to dismiss.
+ *
+ * The list is rendered into document.body rather than beside the trigger. An
+ * absolutely-positioned menu is still a child of whatever it sits inside, and
+ * the list view wraps its table in overflow-x-auto — so the menu was being
+ * clipped at the table's edge, and on the board it was painting underneath the
+ * card below. Both are the same bug: a popup cannot escape an ancestor's
+ * overflow or stacking context from the inside. A portal takes it out of both,
+ * and fixed positioning from the trigger's own rect keeps it attached.
+ *
+ * It also flips above the trigger when there is not room below, which is what
+ * was happening to rows near the bottom of the screen: the menu opened past the
+ * viewport and its last options — Rejected and Withdrawn, the two you reach for
+ * at the end — were the ones off-screen.
  */
 export function StatusPicker({
   applicationId,
@@ -61,6 +75,44 @@ export function StatusPicker({
     setLastServerStatus(serverStatus);
     setStatus(serverStatus);
   }
+
+  /** Where the list is drawn, in viewport coordinates. */
+  const [box, setBox] = useState<{ top: number; left: number; width: number } | null>(null);
+
+  /*
+   * Measured after layout and before paint, so the list never appears in the
+   * wrong place for a frame. The estimate is the list's own height: eight rows
+   * of a badge plus padding, which is enough to decide which side of the
+   * trigger has room without rendering it twice to find out.
+   */
+  useLayoutEffect(() => {
+    if (!open) return;
+
+    function place() {
+      const trigger = triggerRef.current;
+      if (!trigger) return;
+      const rect = trigger.getBoundingClientRect();
+      const estimated = ALL_STATUSES.length * 34 + 8;
+      const below = window.innerHeight - rect.bottom;
+      const flip = below < estimated && rect.top > below;
+      setBox({
+        top: flip ? Math.max(8, rect.top - estimated - 6) : rect.bottom + 6,
+        left: Math.min(rect.left, window.innerWidth - 240),
+        width: Math.max(rect.width, 200),
+      });
+    }
+
+    place();
+    // Scrolling or resizing while it is open must move it with the trigger, or
+    // it detaches and floats over unrelated rows. Capture, so scrolls inside
+    // the overflow container are heard too.
+    window.addEventListener("scroll", place, true);
+    window.addEventListener("resize", place);
+    return () => {
+      window.removeEventListener("scroll", place, true);
+      window.removeEventListener("resize", place);
+    };
+  }, [open]);
 
   const [active, setActive] = useState(() =>
     Math.max(0, ALL_STATUSES.indexOf(serverStatus as Status)),
@@ -111,9 +163,13 @@ export function StatusPicker({
     if (!open) return;
     function onPointerDown(event: PointerEvent) {
       const root = rootRef.current;
-      if (root && event.target instanceof Node && !root.contains(event.target)) {
-        setOpen(false);
-      }
+      if (!(event.target instanceof Node)) return;
+      // The list lives in document.body now, so "inside" is the trigger or the
+      // list — a containment check against the trigger's wrapper alone would
+      // close the menu on the very press that chose an option.
+      if (root?.contains(event.target)) return;
+      if (listRef.current?.contains(event.target)) return;
+      setOpen(false);
     }
     document.addEventListener("pointerdown", onPointerDown);
     return () => document.removeEventListener("pointerdown", onPointerDown);
@@ -198,14 +254,23 @@ export function StatusPicker({
         </svg>
       </button>
 
-      {open && (
+      {/*
+        No mounted flag guarding the portal. `open` only becomes true from a
+        click or a keypress, both of which happen after hydration, so document
+        is always there by the time this renders.
+      */}
+      {open &&
+        box &&
+        createPortal(
         <ul
           ref={listRef}
           id={`${id}-list`}
           role="listbox"
           aria-label="Application status"
           tabIndex={-1}
-          className="absolute left-0 top-full z-20 mt-tight w-max overflow-y-auto rounded-default border border-border-subtle bg-surface-base p-hair shadow-overlay"
+          data-status-picker-list=""
+          style={{ top: box.top, left: box.left, minWidth: box.width }}
+          className="fixed z-50 max-h-[70vh] w-max overflow-y-auto rounded-default border border-border-subtle bg-surface-base p-hair shadow-overlay"
         >
           {ALL_STATUSES.map((option, index) => (
             <li
@@ -237,8 +302,9 @@ export function StatusPicker({
               )}
             </li>
           ))}
-        </ul>
-      )}
+        </ul>,
+          document.body,
+        )}
     </div>
   );
 }
