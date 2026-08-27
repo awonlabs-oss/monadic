@@ -65,7 +65,7 @@ export default async function ProfilePage() {
   return (
     <div className="flex flex-col gap-loose px-page pt-section pb-page">
       <header className="flex flex-col gap-tight">
-        <h1 className="font-display text-title italic leading-tight tracking-tight text-content-primary">
+        <h1 className="font-display text-display font-semibold italic leading-tight tracking-tight text-content-primary">
           Profile
         </h1>
         <p className="text-body text-content-secondary">

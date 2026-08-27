@@ -67,7 +67,7 @@ export default async function ForYouPage({
       <div className="flex min-w-0 flex-1 flex-col gap-snug px-page pt-section pb-page">
         <header className="flex flex-wrap items-start justify-between gap-snug pb-tight">
           <div className="flex flex-col gap-tight">
-            <h1 className="font-display text-title italic leading-tight tracking-tight text-content-primary">
+            <h1 className="font-display text-display font-semibold italic leading-tight tracking-tight text-content-primary">
               For You
             </h1>
             <p className="text-body text-content-secondary">

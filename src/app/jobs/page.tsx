@@ -71,7 +71,7 @@ export default async function JobsPage({
               also the only place the display face earns its keep — everything
               below this line is Figtree, because everything below it is data.
             */}
-            <h1 className="font-display text-title italic leading-tight tracking-tight text-content-primary">
+            <h1 className="font-display text-display font-semibold italic leading-tight tracking-tight text-content-primary">
               All jobs
             </h1>
             <p className="text-body text-content-secondary">

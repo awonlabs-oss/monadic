@@ -36,7 +36,11 @@ const figtree = Figtree({
 
 const garamond = EB_Garamond({
   subsets: ["latin"],
-  weight: ["400"],
+  // 600 as well as 400. A page title set in semibold with only the regular
+  // weight loaded gets a browser-synthesised bold — the outlines smeared
+  // sideways — and on a serif that reads as a rendering fault rather than as
+  // emphasis. The weight has to be a real cut.
+  weight: ["400", "600"],
   style: ["italic"],
   variable: "--font-garamond",
   display: "swap",

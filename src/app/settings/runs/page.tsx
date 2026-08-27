@@ -52,7 +52,9 @@ export default async function RunsPage() {
   return (
     <div className="flex flex-col gap-loose px-page pt-section pb-page">
       <header className="flex flex-col gap-compact">
-        <h1 className="text-title font-semibold">Ingestion</h1>
+        <h1 className="font-display text-display font-semibold italic leading-tight tracking-tight text-content-primary">
+          Ingestion
+        </h1>
         <p className="text-content-secondary text-small">
           {runs.length === 0
             ? "No runs recorded yet."
