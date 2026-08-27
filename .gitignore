@@ -18,13 +18,43 @@ next-env.d.ts
 # env — .env.example is the only env file that may be tracked.
 # Broad glob on purpose: a Finder duplicate like ".env copy.example" is not
 # matched by ".env.local" or ".env.*.local" and would otherwise be committable.
+# No leading slash, so this also covers nested files like supabase/.env.
 .env*
 !.env.example
+
+# keys and credentials — same reasoning as the env glob: match the shape of the
+# thing, not the one filename we happened to think of. Nothing in this project
+# legitimately carries these extensions, so a hit is always a mistake.
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.asc
+*.gpg
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+*.ppk
+# tool auth files that carry bearer tokens
+.npmrc
+.netrc
+.netrc.*
+# service-account and CLI credential dumps, which arrive as ordinary .json and
+# would otherwise sail past every rule above
+*credentials*.json
+*service-account*.json
+*client_secret*.json
+gha-creds-*.json
 
 # supabase local state
 supabase/.branches
 supabase/.temp
-supabase/.env
 
 # personal data — resumes used in testing must never be committed
 *.pdf
@@ -32,11 +62,12 @@ supabase/.env
 *.doc
 /private/
 
-# os / editor
+# os / editor / agent — settings.local.json holds per-machine tool permissions.
+# A global ignore covers it on this machine; naming it here covers a fresh clone.
 .DS_Store
-*.pem
 .vscode/
 .idea/
+.claude/settings.local.json
 
 # logs
 npm-debug.log*
