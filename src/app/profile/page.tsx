@@ -1,4 +1,5 @@
 import { getProfile } from "@/lib/data/profile";
+import { GmailConnection } from "@/components/gmail-connection";
 import { ResumeUpload } from "@/components/resume-upload";
 
 /*
@@ -56,7 +57,13 @@ function dateRange(row: {
   return `${start} – ${end}`;
 }
 
-export default async function ProfilePage() {
+export default async function ProfilePage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const params = await searchParams;
+  const gmailStatus = Array.isArray(params.gmail) ? params.gmail[0] : params.gmail;
   const { profile, experiences, skills, education } = await getProfile();
 
   const domains = skills.filter((s) => s.category === "domain");
@@ -222,6 +229,12 @@ export default async function ProfilePage() {
           </Section>
         </>
       )}
+
+      {/*
+        Below the profile, because connecting a mailbox is a thing you do once
+        and the resume is what you come here for.
+      */}
+      <GmailConnection status={gmailStatus} />
     </div>
   );
 }

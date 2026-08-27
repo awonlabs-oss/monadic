@@ -48,6 +48,8 @@ the database, so the build itself signs in.
 | `MONADIC_APP_PASSWORD` | **The gate.** Anything long. Not the Supabase password |
 | `ANTHROPIC_API_KEY` | Reading a pasted job link that is not on a known board |
 | `INGEST_USER_AGENT` | Sent when fetching a pasted page or a company logo |
+| `GOOGLE_CLIENT_ID` | Optional. Gmail drafts — see below |
+| `GOOGLE_CLIENT_SECRET` | Optional. Gmail drafts — see below |
 
 ### GitHub — Settings → Secrets and variables → Actions
 
@@ -70,6 +72,42 @@ Ingestion needs it and runs somewhere else. Keep it there.
 
 Ingestion also does **not** need `MONADIC_USER_*`. It never signs in as the
 user; `npm run ingest` and `npm run resolve` both use the service client.
+
+---
+
+## Gmail drafts (optional)
+
+Leave `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` unset and everything else
+still works — the compose panel falls back to opening your mail client. The
+profile page says so rather than showing a button that cannot work.
+
+Setting it up needs a Google Cloud project, which only you can create:
+
+1. [console.cloud.google.com](https://console.cloud.google.com) → new project.
+2. **APIs & Services → Library** → enable **Gmail API**.
+3. **OAuth consent screen** → External → add yourself as a Test user. It never
+   needs verification or publishing while you are the only user.
+4. **Credentials → Create credentials → OAuth client ID → Web application**.
+   Add both redirect URIs:
+   - `http://localhost:3000/api/google/callback`
+   - `https://YOUR-DOMAIN/api/google/callback`
+5. Put the client ID and secret in Vercel, and in `.env.local` for local use.
+6. Profile → **Connect Gmail**.
+
+### What it can and cannot do
+
+The scope requested is `gmail.compose` and deliberately not `gmail.send`.
+monadic can place a message in your drafts folder; it has no permission to send
+one, so a wrong recipient is something you catch in Gmail rather than something
+you undo. Opening the draft is also how you see the real headers and sender,
+which was the point of connecting it at all.
+
+Disconnecting removes monadic's copy of the grant. It does not revoke it at
+Google — do that from your Google account's security settings.
+
+If a reconnect ever fails with "Google returned no refresh token", revoke
+monadic's access in your Google account first. Google issues the durable token
+on a fresh grant only.
 
 ---
 

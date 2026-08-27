@@ -6,6 +6,7 @@ import { getServerClient } from "@/lib/supabase/server";
 import { CompanyLogo } from "@/components/company-logo";
 import { ComposePanel } from "@/components/compose-panel";
 import { MessageHistory } from "@/components/message-history";
+import { connectedAccount } from "@/outreach/gmail";
 
 /*
  * One contact: who they are, what has been written to them, and the panel that
@@ -29,7 +30,7 @@ export default async function ContactPage({
   if (!contact) notFound();
 
   const db = await getServerClient();
-  const [messages, applications] = await Promise.all([
+  const [messages, applications, gmail] = await Promise.all([
     listMessagesForContact(id),
     contact.company_id
       ? db
@@ -37,6 +38,7 @@ export default async function ContactPage({
           .select("id, jobs(title, companies(name))")
           .order("created_at", { ascending: false })
       : Promise.resolve({ data: [] }),
+    connectedAccount(),
   ]);
 
   // Narrowed to this contact's company where there is one, so the dropdown is
@@ -117,6 +119,7 @@ export default async function ContactPage({
             subject: m.subject,
             created_at: m.created_at,
           }))}
+          gmailConnected={gmail !== null}
         />
       ) : (
         <p className="rounded-default border border-dashed border-border-default px-default py-loose text-center text-body text-content-secondary">

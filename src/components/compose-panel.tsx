@@ -27,12 +27,15 @@ export function ComposePanel({
   contactEmail,
   applications,
   previousMessages,
+  gmailConnected,
 }: {
   contactId: string;
   contactName: string;
   contactEmail: string;
   applications: Array<{ id: string; label: string }>;
   previousMessages: Array<{ id: string; subject: string | null; created_at: string }>;
+  /** Shows the Gmail button. Connected on /profile. */
+  gmailConnected: boolean;
 }) {
   const router = useRouter();
   const [instructions, setInstructions] = useState("");
@@ -43,6 +46,7 @@ export function ComposePanel({
   const [context, setContext] = useState("");
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [inGmail, setInGmail] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const field =
@@ -105,6 +109,39 @@ export function ComposePanel({
       }
       setSaved(true);
       router.refresh();
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function toGmail() {
+    setBusy(true);
+    setError(null);
+    try {
+      const response = await fetch("/api/outreach/gmail-draft", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contactId,
+          applicationId: applicationId || null,
+          to: contactEmail,
+          subject,
+          body,
+          context,
+        }),
+      });
+      if (!response.ok) {
+        const data = (await response.json()) as { error?: string };
+        setError(data.error ?? "Could not create the draft.");
+        return;
+      }
+      // Kept here too, by the same request. Marking both means the buttons
+      // stop inviting a second copy of the same message.
+      setInGmail(true);
+      setSaved(true);
+      router.refresh();
+    } catch {
+      setError("Could not reach the server.");
     } finally {
       setBusy(false);
     }
@@ -207,6 +244,7 @@ export function ComposePanel({
               onChange={(e) => {
                 setSubject(e.target.value);
                 setSaved(false);
+                setInGmail(false);
               }}
               className={field}
             />
@@ -220,6 +258,7 @@ export function ComposePanel({
               onChange={(e) => {
                 setBody(e.target.value);
                 setSaved(false);
+                setInGmail(false);
               }}
               className={`${field} resize-y leading-relaxed`}
             />
@@ -236,17 +275,32 @@ export function ComposePanel({
             </button>
 
             {/*
-              Until Gmail is connected this is how a draft leaves: the mail
-              client opens with it filled in. It is a stopgap and it is honest
-              about being one — long bodies are at the mercy of the browser's
-              URL limit, which is exactly the problem the Gmail draft solves.
+              Gmail when it is connected, the mail client when it is not.
+              Both are shown as one slot rather than two, because they are the
+              same intention and offering both at once would only ask you to
+              pick between a good route and a worse one.
+
+              The Gmail path creates a DRAFT. monadic holds the compose scope
+              and not the send scope, so it could not send this if it tried —
+              you open Gmail, see the real headers, and send it yourself.
             */}
-            <a
-              href={mailto}
-              className="rounded-subtle bg-coral-default px-body py-compact text-small font-semibold leading-none text-content-primary transition-colors hover:bg-coral-hover"
-            >
-              Open in mail
-            </a>
+            {gmailConnected ? (
+              <button
+                type="button"
+                onClick={toGmail}
+                disabled={busy || inGmail}
+                className="rounded-subtle bg-coral-default px-body py-compact text-small font-semibold leading-none text-content-primary transition-colors hover:bg-coral-hover disabled:opacity-50"
+              >
+                {inGmail ? "In your Gmail drafts ✓" : busy ? "Creating…" : "Create Gmail draft"}
+              </button>
+            ) : (
+              <a
+                href={mailto}
+                className="rounded-subtle bg-coral-default px-body py-compact text-small font-semibold leading-none text-content-primary transition-colors hover:bg-coral-hover"
+              >
+                Open in mail
+              </a>
+            )}
 
             <button
               type="button"
