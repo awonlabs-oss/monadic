@@ -78,7 +78,7 @@ export default async function ApplicationsPage({
       {live.length === 0 && closed.length === 0 ? (
         <p className="text-body text-content-secondary">
           Nothing saved yet. Press <strong>Save</strong> on a job in{" "}
-          <Link href="/jobs" className="underline underline-offset-2">
+          <Link href="/for-you" className="underline underline-offset-2">
             For You
           </Link>{" "}
           to start one here.
@@ -129,7 +129,10 @@ export default async function ApplicationsPage({
           aria-labelledby="closed-heading"
           className="flex flex-col gap-compact border-t border-border-subtle pt-default"
         >
-          <h2 id="closed-heading" className="text-small font-medium text-content-primary">
+          <h2
+            id="closed-heading"
+            className="text-small font-medium text-content-primary"
+          >
             Closed
             <span className="pl-tight tabular-nums text-content-tertiary">
               {closedCount}

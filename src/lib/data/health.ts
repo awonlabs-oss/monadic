@@ -40,16 +40,25 @@ export async function ingestionHealth(): Promise<IngestionHealth> {
   };
 }
 
-export async function navCounts(): Promise<{ newJobs: number; tracked: number; saved: number }> {
+/**
+ * The counts beside the nav items.
+ *
+ * openJobs is every open posting, not the ones first seen in the last week.
+ * The week-long window was measuring ingestion rather than the world — every
+ * posting here was first seen inside a single run, so "new this week" and "all
+ * of them" were the same 6,675 and the badge said nothing. It also sat on For
+ * You, which is a bounded ranked feed of about 25; a five-figure badge on it was
+ * describing a different page. It belongs on All jobs, where a total is what
+ * you would expect it to mean.
+ */
+export async function navCounts(): Promise<{ openJobs: number; tracked: number; saved: number }> {
   const db = await getServerClient();
-  const weekAgo = new Date(Date.now() - 7 * 86_400_000).toISOString();
 
-  const [newJobs, tracked, saved] = await Promise.all([
+  const [openJobs, tracked, saved] = await Promise.all([
     db
       .from("jobs")
       .select("id", { count: "exact", head: true })
-      .is("closed_at", null)
-      .gte("first_seen_at", weekAgo),
+      .is("closed_at", null),
     db.from("applications").select("id", { count: "exact", head: true }),
     db
       .from("job_interactions")
@@ -58,7 +67,7 @@ export async function navCounts(): Promise<{ newJobs: number; tracked: number; s
   ]);
 
   return {
-    newJobs: newJobs.count ?? 0,
+    openJobs: openJobs.count ?? 0,
     tracked: tracked.count ?? 0,
     saved: saved.count ?? 0,
   };

@@ -61,7 +61,12 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
 
       <h3 className="text-body font-semibold leading-default tracking-snug text-content-primary">
         {app.job_url ? (
-          <a href={app.job_url} target="_blank" rel="noreferrer noopener" className="hover:underline hover:underline-offset-2">
+          <a
+            href={app.job_url}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="hover:underline hover:underline-offset-2"
+          >
             {app.job_title}
           </a>
         ) : (
@@ -83,10 +88,14 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
         designed rather than left silent.
       */}
       {app.job_closed_at && (
-        <p className="text-caption text-content-tertiary">Posting has since closed</p>
+        <p className="text-caption text-content-tertiary">
+          Posting has since closed
+        </p>
       )}
 
-      {attention.needed && attention.reason && <StatusBadge label={attention.reason} />}
+      {attention.needed && attention.reason && (
+        <StatusBadge label={attention.reason} />
+      )}
 
       <details className="group">
         <summary className="list-none text-caption text-content-tertiary underline underline-offset-2 transition-colors hover:text-content-primary">
@@ -114,7 +123,10 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
             </fieldset>
           </form>
 
-          <form action={setNextActionAction} className="flex flex-col gap-tight">
+          <form
+            action={setNextActionAction}
+            className="flex flex-col gap-tight"
+          >
             <input type="hidden" name="applicationId" value={app.id} />
             <label
               htmlFor={`next-${app.id}`}

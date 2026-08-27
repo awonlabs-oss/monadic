@@ -42,7 +42,23 @@ function Tag({
   );
 }
 
-export function JobCard({ job }: { job: JobListItem }) {
+/** Human labels for the criteria keys recommend_jobs returns. */
+const CRITERION_LABELS: Record<string, string> = {
+  role: "role",
+  years: "experience",
+  comp: "pay",
+  city: "location",
+  remote: "workplace",
+};
+
+export function JobCard({
+  job,
+  match,
+}: {
+  job: JobListItem;
+  /** Present only in the recommendation feed. */
+  match?: { matched: number; applicable: number; keys: string[] } | null;
+}) {
   // Either write means it is saved. Save performs both, but a job tracked
   // before they were merged has only the application row.
   const saved =
@@ -147,6 +163,29 @@ export function JobCard({ job }: { job: JobListItem }) {
               <Tag muted>Location not stated</Tag>
             )}
           </ul>
+
+          {/*
+            Why this job is here, in the feed that put it here. A score would be
+            unarguable; naming the criteria means you can see when the ranking is
+            wrong and go fix the criteria rather than distrust the feed.
+
+            `applicable` rather than the number of criteria you set: a posting
+            that states no pay makes pay uncheckable, and counting it in the
+            denominator would read as a failure to match rather than a silence.
+          */}
+          {match && match.applicable > 0 && (
+            <p className="text-caption leading-none text-content-tertiary">
+              <span className="font-medium text-signal-default">
+                Matches {match.matched} of {match.applicable}
+              </span>
+              {match.keys.length > 0 && (
+                <>
+                  {" · "}
+                  {match.keys.map((k) => CRITERION_LABELS[k] ?? k).join(", ")}
+                </>
+              )}
+            </p>
+          )}
         </div>
       </div>
 

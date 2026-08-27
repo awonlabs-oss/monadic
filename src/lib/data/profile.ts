@@ -82,7 +82,17 @@ export interface CriteriaRow {
   comp_floor: number | null;
   comp_currency: string;
   comp_period: string;
+  years_min: number | null;
+  years_max: number | null;
+  include_missing_years: boolean;
+  include_missing_comp: boolean;
+  recency_days: number;
 }
+
+const CRITERIA_COLUMNS =
+  "target_role_types,seniority_ceiling,company_stages,locations,remote_preference," +
+  "comp_floor,comp_currency,comp_period,years_min,years_max,include_missing_years," +
+  "include_missing_comp,recency_days";
 
 /**
  * What I am looking for, as opposed to who I am.
@@ -96,9 +106,7 @@ export async function getCriteria(): Promise<CriteriaRow | null> {
   const db = await getServerClient();
   const { data, error } = await db
     .from("search_criteria")
-    .select(
-      "target_role_types,seniority_ceiling,company_stages,locations,remote_preference,comp_floor,comp_currency,comp_period",
-    )
+    .select(CRITERIA_COLUMNS)
     .maybeSingle();
   if (error) throw new Error(`getCriteria: ${error.message}`);
   return (data as unknown as CriteriaRow | null) ?? null;

@@ -3,7 +3,6 @@ import { parseFilters, activeCount, hrefFor } from "@/lib/filters";
 import { JobCard } from "@/components/job-card";
 import { FilterPanel } from "@/components/filter-panel";
 import { Pagination } from "@/components/pagination";
-import { ProfileDock } from "@/components/profile-dock";
 import Link from "next/link";
 
 /*
@@ -56,12 +55,6 @@ export default async function JobsPage({
   const pastEnd = jobs.length === 0 && total > 0 && filters.page > lastPage;
 
   return (
-    /*
-      The dock lives here rather than in a layout. A layout at this segment also
-      wraps /jobs/[id], and the job detail frame (50:348) has no dock — it is
-      sidebar and content. The cost is that the dock's two single-row queries
-      re-run on a filter change instead of being held across it.
-    */
     <div className="flex min-h-screen">
       <div className="flex min-w-0 flex-1 flex-col gap-snug px-page pt-section pb-page">
         {/*
@@ -73,7 +66,7 @@ export default async function JobsPage({
         <header className="flex flex-wrap items-start justify-between gap-snug pb-tight">
           <div className="flex flex-col gap-tight">
             <h1 className="text-title font-semibold tracking-tight text-content-primary">
-              For You
+              All jobs
             </h1>
             <p className="text-body text-content-secondary">
               {filtered ? (
@@ -254,8 +247,6 @@ export default async function JobsPage({
           </section>
         )}
       </div>
-
-      <ProfileDock />
     </div>
   );
 }

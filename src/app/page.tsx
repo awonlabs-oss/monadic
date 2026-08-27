@@ -1,10 +1,9 @@
 import { redirect } from "next/navigation";
 
 /*
- * The frontpage is design-led and blocked (DESIGN.md §6). This route exists
- * only so that `/` goes somewhere useful; it renders nothing and makes no design
- * decisions. Delete it and build the real page when frames land.
+ * `/` is the recommendation feed. This route exists only to send it there and
+ * makes no design decisions of its own.
  */
 export default function RootPage() {
-  redirect("/jobs");
+  redirect("/for-you");
 }

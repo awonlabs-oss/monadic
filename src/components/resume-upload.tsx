@@ -23,7 +23,10 @@ export function ResumeUpload({ hasProfile }: { hasProfile: boolean }) {
       aria-labelledby="upload-heading"
       className="flex flex-col gap-compact rounded-default border border-border-subtle bg-surface-base p-default"
     >
-      <h2 id="upload-heading" className="text-small font-medium text-content-primary">
+      <h2
+        id="upload-heading"
+        className="text-small font-medium text-content-primary"
+      >
         {hasProfile ? "Replace resume" : "Upload resume"}
       </h2>
       <p className="text-caption text-content-tertiary">

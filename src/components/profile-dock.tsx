@@ -2,7 +2,12 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { getProfile, getCriteria, criteriaChips } from "@/lib/data/profile";
 import type { EducationRow, ExperienceRow } from "@/lib/data/profile";
-import { flagEducation, flagExperience, profileGaps, reviewCount } from "@/profile/review";
+import {
+  flagEducation,
+  flagExperience,
+  profileGaps,
+  reviewCount,
+} from "@/profile/review";
 import { DockShell } from "./dock-shell";
 
 /**
@@ -76,14 +81,20 @@ function Entry({
         flag ? "border-dashed border-badge-amber-fg" : "border-border-subtle"
       }`}
     >
-      <p className="text-small font-medium leading-tight text-content-primary">{title}</p>
+      <p className="text-small font-medium leading-tight text-content-primary">
+        {title}
+      </p>
       {subtitle && (
-        <p className="text-caption leading-tight text-content-secondary">{subtitle}</p>
+        <p className="text-caption leading-tight text-content-secondary">
+          {subtitle}
+        </p>
       )}
       {(meta || flag) && (
         <p className="flex flex-wrap items-center gap-row text-meta leading-none">
           {meta && <span className="text-content-tertiary">{meta}</span>}
-          {flag && <span className="font-medium text-badge-amber-fg">{flag}</span>}
+          {flag && (
+            <span className="font-medium text-badge-amber-fg">{flag}</span>
+          )}
         </p>
       )}
     </li>
@@ -91,7 +102,8 @@ function Entry({
 }
 
 function experienceMeta(row: ExperienceRow): string | null {
-  const start = row.start_text ?? (row.start_date ? row.start_date.slice(0, 7) : null);
+  const start =
+    row.start_text ?? (row.start_date ? row.start_date.slice(0, 7) : null);
   const end = row.is_current ? "Present" : (row.end_text ?? null);
   if (!start && !end) return null;
   return [start ?? "?", end ?? "?"].join(" – ");
@@ -111,10 +123,8 @@ export async function ProfileDock() {
   // it. Skipping the fetch would be cheaper, but expanding is a client-side
   // toggle with no round trip — there would be nothing to reveal, so the panel
   // would open empty and stay that way until the next navigation.
-  const [{ profile, experiences, skills, education }, criteria] = await Promise.all([
-    getProfile(),
-    getCriteria(),
-  ]);
+  const [{ profile, experiences, skills, education }, criteria] =
+    await Promise.all([getProfile(), getCriteria()]);
 
   const parsed = Boolean(profile?.parsed_at);
   const chips = criteriaChips(criteria);
@@ -123,7 +133,10 @@ export async function ProfileDock() {
   const shownSkills = skills.slice(0, SKILL_LIMIT);
 
   const parsedOn = profile?.parsed_at
-    ? new Date(profile.parsed_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })
+    ? new Date(profile.parsed_at).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      })
     : null;
 
   return (
@@ -149,7 +162,9 @@ export async function ProfileDock() {
               {profile?.source_file_name ?? "No resume yet"}
             </p>
             <p className="text-caption leading-none text-content-tertiary">
-              {parsedOn ? `Parsed ${parsedOn}` : "Upload one to build your profile"}
+              {parsedOn
+                ? `Parsed ${parsedOn}`
+                : "Upload one to build your profile"}
             </p>
           </div>
         </div>
@@ -190,17 +205,19 @@ export async function ProfileDock() {
             <path d="M7 1.5 13 12.5H1z" />
             <path d="M7 5.5v3M7 10.5v.01" />
           </svg>
-          {needsReview} parsed {needsReview === 1 ? "field needs" : "fields need"} review
+          {needsReview} parsed{" "}
+          {needsReview === 1 ? "field needs" : "fields need"} review
         </Link>
       )}
 
       {/* Match criteria */}
       <section className="flex flex-col gap-control">
-        <SectionHead label="Match criteria" href="/profile" />
+        {/* The one section head that does not go to /profile: criteria are
+            authored where they take effect. */}
+        <SectionHead label="Match criteria" href="/for-you?edit=1" />
         {chips.length === 0 ? (
           <p className="text-caption leading-relaxed text-content-tertiary">
-            None set. Until they are, the feed is everything that has been
-            ingested, ordered by date.
+            None set, so For You has nothing to rank against.
           </p>
         ) : (
           <>
@@ -221,14 +238,18 @@ export async function ProfileDock() {
           <section className="flex flex-col gap-compact">
             <SectionHead label="Experience" href="/profile" />
             {experiences.length === 0 ? (
-              <p className="text-caption text-content-tertiary">Nothing found in the resume.</p>
+              <p className="text-caption text-content-tertiary">
+                Nothing found in the resume.
+              </p>
             ) : (
               <ul className="flex flex-col gap-compact">
                 {experiences.map((row) => (
                   <Entry
                     key={row.id}
                     title={row.title ?? "Title not stated"}
-                    subtitle={[row.company_name, row.location].filter(Boolean).join(" · ")}
+                    subtitle={[row.company_name, row.location]
+                      .filter(Boolean)
+                      .join(" · ")}
                     meta={experienceMeta(row)}
                     flag={flagExperience(row)?.note ?? null}
                   />
@@ -240,14 +261,18 @@ export async function ProfileDock() {
           <section className="flex flex-col gap-compact">
             <SectionHead label="Education" href="/profile" />
             {education.length === 0 ? (
-              <p className="text-caption text-content-tertiary">Nothing found in the resume.</p>
+              <p className="text-caption text-content-tertiary">
+                Nothing found in the resume.
+              </p>
             ) : (
               <ul className="flex flex-col gap-compact">
                 {education.map((row) => (
                   <Entry
                     key={row.id}
                     title={row.institution}
-                    subtitle={[row.degree, row.field].filter(Boolean).join(", ") || null}
+                    subtitle={
+                      [row.degree, row.field].filter(Boolean).join(", ") || null
+                    }
                     meta={educationMeta(row)}
                     flag={flagEducation(row)?.note ?? null}
                   />
@@ -259,7 +284,9 @@ export async function ProfileDock() {
           <section className="flex flex-col gap-control">
             <SectionHead label="Skills" href="/profile" />
             {skills.length === 0 ? (
-              <p className="text-caption text-content-tertiary">Nothing found in the resume.</p>
+              <p className="text-caption text-content-tertiary">
+                Nothing found in the resume.
+              </p>
             ) : (
               <ul className="flex flex-wrap gap-tight">
                 {shownSkills.map((s) => (

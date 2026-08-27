@@ -59,13 +59,18 @@ export function Pagination({
       className="flex flex-wrap items-center justify-between gap-snug border-t border-border-subtle pt-default"
     >
       <p className="text-caption text-content-tertiary tabular-nums">
-        {from.toLocaleString()}–{to.toLocaleString()} of {total.toLocaleString()}
+        {from.toLocaleString()}–{to.toLocaleString()} of{" "}
+        {total.toLocaleString()}
       </p>
 
       <ul className="flex flex-wrap items-center gap-tight">
         <li>
           {current > 1 ? (
-            <Link href={hrefFor(filters, { page: current - 1 })} className={linkClass} rel="prev">
+            <Link
+              href={hrefFor(filters, { page: current - 1 })}
+              className={linkClass}
+              rel="prev"
+            >
               Previous
             </Link>
           ) : (
@@ -77,7 +82,11 @@ export function Pagination({
 
         {pageWindow(current, lastPage).map((entry, i) =>
           entry === "gap" ? (
-            <li key={`gap-${i}`} aria-hidden="true" className="px-tight text-caption text-content-tertiary">
+            <li
+              key={`gap-${i}`}
+              aria-hidden="true"
+              className="px-tight text-caption text-content-tertiary"
+            >
               …
             </li>
           ) : (
@@ -100,7 +109,11 @@ export function Pagination({
 
         <li>
           {current < lastPage ? (
-            <Link href={hrefFor(filters, { page: current + 1 })} className={linkClass} rel="next">
+            <Link
+              href={hrefFor(filters, { page: current + 1 })}
+              className={linkClass}
+              rel="next"
+            >
               Next
             </Link>
           ) : (

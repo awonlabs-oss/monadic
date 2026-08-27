@@ -1,4 +1,5 @@
 import { getServerClient } from "@/lib/supabase/server";
+import { policiesFor, type CriteriaInput } from "@/lib/data/criteria";
 import { toRpcArgs, toFacetArgs, type JobFilters } from "@/lib/filters";
 
 /**
@@ -43,20 +44,16 @@ export async function searchJobs(
 ): Promise<{ jobs: JobListItem[]; total: number }> {
   const db = await getServerClient();
 
-  const { data, error } = await db.rpc("search_jobs", toRpcArgs(filters, limit, offset));
+  const { data, error } = await db.rpc(
+    "search_jobs",
+    toRpcArgs(filters, limit, offset),
+  );
   if (error) throw new Error(`searchJobs: ${error.message}`);
 
   const jobs = (data ?? []) as unknown as JobListItem[];
   return { jobs, total: jobs[0]?.total_count ?? 0 };
 }
 
-/**
- * Counts per filter option, with the other dimensions applied.
- *
- * These exist so the panel can show what a choice would actually yield.
- * A filter that silently leads to zero results is the standard way filter UI
- * wastes people's time, and a count is what shows the dead end beforehand.
- */
 export interface JobDetail {
   id: string;
   title: string;
@@ -146,21 +143,87 @@ export async function getJob(id: string): Promise<JobDetail | null> {
       "company" | "interaction_state" | "application_id" | "other_open_roles"
     >),
     company,
-    interaction_state: (interaction.data?.state as string | undefined) ?? "none",
+    interaction_state:
+      (interaction.data?.state as string | undefined) ?? "none",
     application_id: (application.data?.id as string | undefined) ?? null,
     other_open_roles: siblings.count ?? 0,
   };
 }
 
+/** A feed row plus why it was recommended. */
+export interface RecommendedJob extends JobListItem {
+  matched: number;
+  applicable: number;
+  matched_keys: string[];
+}
+
+/**
+ * The recommendation feed.
+ *
+ * Criteria are passed to the RPC rather than read inside it, matching
+ * search_jobs — the function stays stateless, so a ranking can be checked
+ * against a hand-built criteria set without writing a row first.
+ *
+ * `matched_keys` comes back with every row and is the whole point: the feed can
+ * say which criteria a job met rather than showing a number nobody can argue
+ * with. See the migration for why matches are counted before ratios, and why a
+ * job that states nothing about pay is not scored as failing on pay.
+ */
+export async function recommendJobs(
+  criteria: CriteriaInput,
+  limit = 25,
+  offset = 0,
+): Promise<{ jobs: RecommendedJob[]; total: number }> {
+  const db = await getServerClient();
+
+  const { data, error } = await db.rpc("recommend_jobs", {
+    p_roles:
+      criteria.targetRoleTypes.length > 0
+        ? criteria.targetRoleTypes
+        : undefined,
+    p_years_min: criteria.yearsMin ?? undefined,
+    p_years_max: criteria.yearsMax ?? undefined,
+    p_comp_floor: criteria.compFloor ?? undefined,
+    p_cities: criteria.locations.length > 0 ? criteria.locations : undefined,
+    p_remote:
+      policiesFor(criteria.remotePreference).length > 0
+        ? policiesFor(criteria.remotePreference)
+        : undefined,
+    p_recency_days: criteria.recencyDays,
+    // With no roles stated every job scores zero, and a floor of one would
+    // return an empty feed rather than an unranked one.
+    p_min_matched: criteria.targetRoleTypes.length > 0 ? 1 : 0,
+    p_limit: limit,
+    p_offset: offset,
+  });
+  if (error) throw new Error(`recommendJobs: ${error.message}`);
+
+  const jobs = (data ?? []) as unknown as Array<
+    RecommendedJob & { total_count: number }
+  >;
+  return { jobs, total: jobs[0]?.total_count ?? 0 };
+}
+
 export type Facets = Record<string, Record<string, number>>;
 
+/**
+ * Counts per filter option, with the other dimensions applied.
+ *
+ * These exist so the panel can show what a choice would actually yield.
+ * A filter that silently leads to zero results is the standard way filter UI
+ * wastes people's time, and a count is what shows the dead end beforehand.
+ */
 export async function jobFacets(filters: JobFilters): Promise<Facets> {
   const db = await getServerClient();
   const { data, error } = await db.rpc("job_facets", toFacetArgs(filters));
   if (error) throw new Error(`jobFacets: ${error.message}`);
 
   const out: Facets = {};
-  for (const row of (data ?? []) as Array<{ dimension: string; key: string; n: number }>) {
+  for (const row of (data ?? []) as Array<{
+    dimension: string;
+    key: string;
+    n: number;
+  }>) {
     (out[row.dimension] ??= {})[row.key] = Number(row.n);
   }
   return out;
@@ -193,7 +256,10 @@ export async function feedStats(usOnly: boolean): Promise<FeedStats> {
 
   const [open, all, companies] = await Promise.all([
     scoped,
-    db.from("jobs").select("id", { count: "exact", head: true }).is("closed_at", null),
+    db
+      .from("jobs")
+      .select("id", { count: "exact", head: true })
+      .is("closed_at", null),
     db
       .from("companies")
       .select("id", { count: "exact", head: true })

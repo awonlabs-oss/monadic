@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getServerClient } from "@/lib/supabase/server";
 import { ALL_STATUSES, type Status } from "@/lib/applications/pipeline";
+import { saveCriteria } from "@/lib/data/criteria";
 
 /**
  * Every write the UI performs.
@@ -113,4 +114,57 @@ export async function setNextActionAction(formData: FormData) {
   }
 
   revalidatePath("/applications");
+}
+
+/**
+ * Saves the match criteria that drive /for-you.
+ *
+ * Roles arrive as one comma-separated field rather than a repeatable row, and
+ * are split here. It is the shape of the thing being described — "forward
+ * deployed engineer, solutions engineer" is how you would say it out loud — and
+ * a chip editor with an add button is more machinery than three values need.
+ *
+ * Blank means unset, and unset means the criterion is not applied at all rather
+ * than applied as zero. A pay floor of null is "I did not say"; a pay floor of 0
+ * would be a criterion every job trivially meets and would inflate every score.
+ */
+export async function saveCriteriaAction(formData: FormData) {
+  const list = (value: FormDataEntryValue | null) =>
+    String(value ?? "")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+  const number = (value: FormDataEntryValue | null) => {
+    const raw = String(value ?? "").trim();
+    if (raw === "") return null;
+    const n = Number(raw.replace(/[$,\s]/g, ""));
+    return Number.isFinite(n) ? n : null;
+  };
+
+  const compFloor = number(formData.get("compFloor"));
+  let yearsMin = number(formData.get("yearsMin"));
+  let yearsMax = number(formData.get("yearsMax"));
+  if (yearsMin !== null && yearsMax !== null && yearsMin > yearsMax) {
+    [yearsMin, yearsMax] = [yearsMax, yearsMin];
+  }
+
+  await saveCriteria({
+    targetRoleTypes: list(formData.get("roles")),
+    locations: list(formData.get("locations")),
+    remotePreference: String(formData.get("remote") ?? "") || null,
+    yearsMin: yearsMin === null ? null : Math.max(0, Math.round(yearsMin)),
+    // A band the wrong way round is a typo, not an intent. Swapping is kinder
+    // than the check constraint rejecting the whole save.
+    yearsMax: yearsMax === null ? null : Math.max(0, Math.round(yearsMax)),
+    // Entered as thousands when it is obviously thousands: "130" means $130k,
+    // and nobody is filtering for jobs paying at least one hundred and thirty
+    // dollars a year.
+    compFloor: compFloor === null ? null : compFloor < 1000 ? compFloor * 1000 : compFloor,
+    recencyDays: Math.min(365, Math.max(1, number(formData.get("recencyDays")) ?? 60)),
+  });
+
+  revalidatePath("/for-you");
+  revalidatePath("/jobs");
+  revalidatePath("/profile");
 }

@@ -96,7 +96,9 @@ export default async function ProfilePage() {
                 ["Level", profile.seniority_signal],
               ].map(([label, value]) => (
                 <div key={label as string} className="flex flex-col gap-hair">
-                  <dt className="text-caption text-content-tertiary">{label}</dt>
+                  <dt className="text-caption text-content-tertiary">
+                    {label}
+                  </dt>
                   <dd className="text-body text-content-primary">
                     {value ?? <Empty>Not on resume</Empty>}
                   </dd>
@@ -116,8 +118,8 @@ export default async function ProfilePage() {
           <Section title="Experience" count={experiences.length}>
             {experiences.length === 0 ? (
               <p className="text-body text-content-secondary">
-                No roles were found. If the resume has them, the parse missed them —
-                worth re-uploading or checking the file.
+                No roles were found. If the resume has them, the parse missed
+                them — worth re-uploading or checking the file.
               </p>
             ) : (
               <ul className="flex flex-col gap-compact">
@@ -137,7 +139,10 @@ export default async function ProfilePage() {
                     <p className="text-small text-content-secondary">
                       {role.company_name}
                       {role.location && (
-                        <span className="text-content-tertiary"> · {role.location}</span>
+                        <span className="text-content-tertiary">
+                          {" "}
+                          · {role.location}
+                        </span>
                       )}
                     </p>
                     {role.description && (
@@ -166,9 +171,9 @@ export default async function ProfilePage() {
                         {school.institution}
                       </h3>
                       <p className="text-small text-content-secondary">
-                        {[school.degree, school.field].filter(Boolean).join(", ") || (
-                          <Empty>Degree not stated</Empty>
-                        )}
+                        {[school.degree, school.field]
+                          .filter(Boolean)
+                          .join(", ") || <Empty>Degree not stated</Empty>}
                       </p>
                     </div>
                     <span className="text-caption tabular-nums text-content-tertiary">

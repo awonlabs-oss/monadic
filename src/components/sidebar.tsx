@@ -19,7 +19,9 @@ import { relativeShort } from "@/lib/format";
  */
 
 const NAV = [
-  { href: "/jobs", label: "For You", badge: "newJobs" as const },
+  // No badge on For You: the page is a bounded ranked set and says its own size.
+  { href: "/for-you", label: "For You" },
+  { href: "/jobs", label: "All jobs", badge: "openJobs" as const },
   { href: "/applications", label: "Tracked", badge: "tracked" as const },
   { href: "/contacts", label: "Contacts", badge: null },
   { href: "/templates", label: "Templates", badge: null },
@@ -69,14 +71,14 @@ export function Sidebar({
   savedActive = false,
 }: {
   health: IngestionHealth;
-  counts: { newJobs: number; tracked: number; saved: number };
+  counts: { openJobs: number; tracked: number; saved: number };
   savedActive?: boolean;
 }) {
   const pathname = usePathname();
 
   return (
     <div className="flex h-full flex-col gap-comfortable px-comfortable py-loose">
-      <Link href="/jobs" className="flex items-center gap-compact px-compact">
+      <Link href="/for-you" className="flex items-center gap-compact px-compact">
         <span
           aria-hidden="true"
           className="size-dot rounded-full bg-content-primary"

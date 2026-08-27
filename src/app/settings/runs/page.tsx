@@ -37,12 +37,17 @@ const STATUS_TONE: Record<string, string> = {
 };
 
 export default async function RunsPage() {
-  const [runs, companies] = await Promise.all([recentRuns(40), companyHealth()]);
+  const [runs, companies] = await Promise.all([
+    recentRuns(40),
+    companyHealth(),
+  ]);
 
   const needsAttention = runs.filter(
     (r) => r.status === "failure" || r.status === "empty_suspect",
   );
-  const unresolved = companies.filter((c) => c.ats_resolution_status !== "resolved");
+  const unresolved = companies.filter(
+    (c) => c.ats_resolution_status !== "resolved",
+  );
 
   return (
     <div className="flex flex-col gap-loose px-page pt-section pb-page">
@@ -57,7 +62,10 @@ export default async function RunsPage() {
       </header>
 
       {unresolved.length > 0 && (
-        <section aria-labelledby="unresolved-heading" className="flex flex-col gap-compact">
+        <section
+          aria-labelledby="unresolved-heading"
+          className="flex flex-col gap-compact"
+        >
           <h2 id="unresolved-heading" className="text-lead font-medium">
             Companies without a board ({unresolved.length})
           </h2>
@@ -74,7 +82,8 @@ export default async function RunsPage() {
                 <span className="font-medium">{company.name}</span>
                 <span className="text-content-tertiary">{company.slug}</span>
                 <span className="text-status-stale">
-                  {company.ats_resolution_error ?? company.ats_resolution_status}
+                  {company.ats_resolution_error ??
+                    company.ats_resolution_status}
                 </span>
               </li>
             ))}
@@ -82,36 +91,62 @@ export default async function RunsPage() {
         </section>
       )}
 
-      <section aria-labelledby="companies-heading" className="flex flex-col gap-compact">
+      <section
+        aria-labelledby="companies-heading"
+        className="flex flex-col gap-compact"
+      >
         <h2 id="companies-heading" className="text-lead font-medium">
-          Boards ({companies.filter((c) => c.ats_resolution_status === "resolved").length})
+          Boards (
+          {
+            companies.filter((c) => c.ats_resolution_status === "resolved")
+              .length
+          }
+          )
         </h2>
         <div className="overflow-x-auto">
           <table className="w-full text-small">
             <caption className="sr-only">
-              Resolved companies, their applicant tracking system, and open posting counts
+              Resolved companies, their applicant tracking system, and open
+              posting counts
             </caption>
             <thead>
               <tr className="text-left text-content-secondary">
-                <th scope="col" className="p-tight">Company</th>
-                <th scope="col" className="p-tight">ATS</th>
-                <th scope="col" className="p-tight">Board slug</th>
-                <th scope="col" className="p-tight">Resolved via</th>
-                <th scope="col" className="p-tight">Open jobs</th>
+                <th scope="col" className="p-tight">
+                  Company
+                </th>
+                <th scope="col" className="p-tight">
+                  ATS
+                </th>
+                <th scope="col" className="p-tight">
+                  Board slug
+                </th>
+                <th scope="col" className="p-tight">
+                  Resolved via
+                </th>
+                <th scope="col" className="p-tight">
+                  Open jobs
+                </th>
               </tr>
             </thead>
             <tbody>
               {companies
                 .filter((c) => c.ats_resolution_status === "resolved")
                 .map((company) => (
-                  <tr key={company.id} className="border-t border-border-subtle">
+                  <tr
+                    key={company.id}
+                    className="border-t border-border-subtle"
+                  >
                     <td className="p-tight">{company.name}</td>
                     <td className="p-tight">{company.ats_source}</td>
-                    <td className="p-tight text-content-secondary">{company.ats_slug}</td>
+                    <td className="p-tight text-content-secondary">
+                      {company.ats_slug}
+                    </td>
                     <td className="p-tight text-content-secondary">
                       {company.ats_resolution_method}
                     </td>
-                    <td className="p-tight">{company.open_jobs.toLocaleString()}</td>
+                    <td className="p-tight">
+                      {company.open_jobs.toLocaleString()}
+                    </td>
                   </tr>
                 ))}
             </tbody>
@@ -119,7 +154,10 @@ export default async function RunsPage() {
         </div>
       </section>
 
-      <section aria-labelledby="runs-heading" className="flex flex-col gap-compact">
+      <section
+        aria-labelledby="runs-heading"
+        className="flex flex-col gap-compact"
+      >
         <h2 id="runs-heading" className="text-lead font-medium">
           Recent runs
         </h2>
@@ -131,31 +169,56 @@ export default async function RunsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-small">
               <caption className="sr-only">
-                Every board fetch, with status, counts, and whether closure detection ran
+                Every board fetch, with status, counts, and whether closure
+                detection ran
               </caption>
               <thead>
                 <tr className="text-left text-content-secondary">
-                  <th scope="col" className="p-tight">Company</th>
-                  <th scope="col" className="p-tight">Source</th>
-                  <th scope="col" className="p-tight">Status</th>
-                  <th scope="col" className="p-tight">HTTP</th>
-                  <th scope="col" className="p-tight">Returned</th>
-                  <th scope="col" className="p-tight">New</th>
-                  <th scope="col" className="p-tight">Closed</th>
-                  <th scope="col" className="p-tight">Closure ran</th>
-                  <th scope="col" className="p-tight">Took</th>
-                  <th scope="col" className="p-tight">When</th>
+                  <th scope="col" className="p-tight">
+                    Company
+                  </th>
+                  <th scope="col" className="p-tight">
+                    Source
+                  </th>
+                  <th scope="col" className="p-tight">
+                    Status
+                  </th>
+                  <th scope="col" className="p-tight">
+                    HTTP
+                  </th>
+                  <th scope="col" className="p-tight">
+                    Returned
+                  </th>
+                  <th scope="col" className="p-tight">
+                    New
+                  </th>
+                  <th scope="col" className="p-tight">
+                    Closed
+                  </th>
+                  <th scope="col" className="p-tight">
+                    Closure ran
+                  </th>
+                  <th scope="col" className="p-tight">
+                    Took
+                  </th>
+                  <th scope="col" className="p-tight">
+                    When
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {runs.map((run) => (
                   <tr key={run.id} className="border-t border-border-subtle">
                     <td className="p-tight">{run.company_name ?? "—"}</td>
-                    <td className="p-tight text-content-secondary">{run.source ?? "—"}</td>
+                    <td className="p-tight text-content-secondary">
+                      {run.source ?? "—"}
+                    </td>
                     <td className={`p-tight ${STATUS_TONE[run.status] ?? ""}`}>
                       {STATUS_LABEL[run.status] ?? run.status}
                     </td>
-                    <td className="p-tight text-content-secondary">{run.http_status ?? "—"}</td>
+                    <td className="p-tight text-content-secondary">
+                      {run.http_status ?? "—"}
+                    </td>
                     <td className="p-tight">{run.jobs_returned ?? "—"}</td>
                     <td className="p-tight">{run.jobs_created ?? "—"}</td>
                     <td className="p-tight">{run.jobs_closed ?? "—"}</td>

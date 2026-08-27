@@ -101,7 +101,9 @@ export function FilterDisclosure({
     setCounting(true);
 
     fetch(`/api/job-count?${params.toString()}`, { signal: controller.signal })
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((r) =>
+        r.ok ? r.json() : Promise.reject(new Error(String(r.status))),
+      )
       .then((d: { total: number }) => {
         setTotal(d.total);
         setCounting(false);
@@ -202,7 +204,12 @@ export function FilterDisclosure({
           was asking for.
         */}
         {hidden.map((f) => (
-          <input key={`${f.name}:${f.value}`} type="hidden" name={f.name} value={f.value} />
+          <input
+            key={`${f.name}:${f.value}`}
+            type="hidden"
+            name={f.name}
+            value={f.value}
+          />
         ))}
 
         {children}

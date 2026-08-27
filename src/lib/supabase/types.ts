@@ -1128,13 +1128,17 @@ export type Database = {
           created_at: string
           id: string
           include_missing_comp: boolean
+          include_missing_years: boolean
           locations: string[]
           notes: string | null
+          recency_days: number
           remote_preference: string | null
           seniority_ceiling: string | null
           target_role_types: string[]
           updated_at: string
           user_id: string
+          years_max: number | null
+          years_min: number | null
         }
         Insert: {
           comp_currency?: string
@@ -1144,13 +1148,17 @@ export type Database = {
           created_at?: string
           id?: string
           include_missing_comp?: boolean
+          include_missing_years?: boolean
           locations?: string[]
           notes?: string | null
+          recency_days?: number
           remote_preference?: string | null
           seniority_ceiling?: string | null
           target_role_types?: string[]
           updated_at?: string
           user_id: string
+          years_max?: number | null
+          years_min?: number | null
         }
         Update: {
           comp_currency?: string
@@ -1160,13 +1168,17 @@ export type Database = {
           created_at?: string
           id?: string
           include_missing_comp?: boolean
+          include_missing_years?: boolean
           locations?: string[]
           notes?: string | null
+          recency_days?: number
           remote_preference?: string | null
           seniority_ceiling?: string | null
           target_role_types?: string[]
           updated_at?: string
           user_id?: string
+          years_max?: number | null
+          years_min?: number | null
         }
         Relationships: []
       }
@@ -1433,6 +1445,52 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      recommend_jobs: {
+        Args: {
+          p_cities?: string[]
+          p_comp_floor?: number
+          p_exclude_engaged?: boolean
+          p_limit?: number
+          p_min_matched?: number
+          p_offset?: number
+          p_recency_days?: number
+          p_remote?: string[]
+          p_require_role?: boolean
+          p_roles?: string[]
+          p_us_only?: boolean
+          p_years_max?: number
+          p_years_min?: number
+        }
+        Returns: {
+          applicable: number
+          application_id: string
+          comp_currency: string
+          comp_max: number
+          comp_min: number
+          comp_period: string
+          comp_source: string
+          company_logo_url: string
+          company_name: string
+          company_slug: string
+          department: string
+          employment_type: string
+          first_seen_at: string
+          id: string
+          interaction_state: string
+          location_cities: string[]
+          location_raw: string
+          matched: number
+          matched_keys: string[]
+          posted_at: string
+          remote_policy: string
+          title: string
+          total_count: number
+          url: string
+          years_max: number
+          years_min: number
+          years_source: string
+        }[]
       }
       save_job: {
         Args: { p_job_id: string }

@@ -58,7 +58,9 @@ export function DockShell({
             type="button"
             onClick={toggle}
             aria-expanded={open}
-            aria-label={open ? "Collapse the profile panel" : "Expand the profile panel"}
+            aria-label={
+              open ? "Collapse the profile panel" : "Expand the profile panel"
+            }
             className="shrink-0 rounded-subtle border border-border-subtle bg-surface-base p-row text-content-secondary transition-colors hover:bg-surface-hover hover:text-content-primary"
           >
             <svg
