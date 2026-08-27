@@ -24,7 +24,10 @@ const NAV = [
   { href: "/jobs", label: "All jobs", badge: "openJobs" as const },
   { href: "/applications", label: "Tracked", badge: "tracked" as const },
   { href: "/contacts", label: "Contacts", badge: null },
-  { href: "/templates", label: "Templates", badge: null },
+  // /templates is in DESIGN.md section 6 and the outreach_templates table
+  // exists, but nothing renders it — the link was 404ing. It comes back when
+  // there is a page behind it. A contact's own history already covers reusing
+  // an earlier email, which was the part that mattered.
   { href: "/profile", label: "Profile", badge: null },
 ];
 
