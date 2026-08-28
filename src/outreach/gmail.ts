@@ -1,13 +1,21 @@
 import { getServerClient } from "@/lib/supabase/server";
 
 /**
- * Gmail, for creating drafts and nothing else.
+ * Gmail: drafts, and sending behind a review step.
  *
- * The scope requested is gmail.compose. That is deliberate and it is the whole
- * safety story: monadic can put a message into your drafts folder and cannot
- * send one. You open Gmail, see the real headers and the real sender, edit if
- * you want, and press send yourself. An app that sends on your behalf gets a
- * wrong recipient exactly once and there is no undo.
+ * A correction is recorded here because it was wrong in the code for a while.
+ * This file previously claimed that gmail.compose "cannot send" and that
+ * sending was therefore impossible. That is not what the scope does —
+ * gmail.compose is documented as "Manage drafts and send emails", and it has
+ * permitted sending the entire time. The code only created drafts, which is a
+ * different statement from the one the comments made.
+ *
+ * The scope is unchanged, so no reconnect is needed. What changed is that
+ * sending is now implemented, and the guarantee moved from the OAuth grant to
+ * the interface: nothing is sent without an explicit review of the exact
+ * message, addressed to a named recipient, followed by a deliberate second
+ * action. A wrong recipient has no undo, so the review is not a formality and
+ * is not skippable.
  *
  * Tokens live in public.google_accounts under RLS, one row per user. The access
  * token is refreshed lazily at the point of use rather than on a schedule,
@@ -18,9 +26,13 @@ import { getServerClient } from "@/lib/supabase/server";
 const TOKEN_URL = "https://oauth2.googleapis.com/token";
 const AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
 const DRAFT_URL = "https://gmail.googleapis.com/gmail/v1/users/me/drafts";
+const SEND_URL = "https://gmail.googleapis.com/gmail/v1/users/me/messages/send";
 const USERINFO_URL = "https://www.googleapis.com/oauth2/v2/userinfo";
 
-/** Compose only. Never gmail.send. */
+/**
+ * gmail.compose covers both drafting and sending, so gmail.send is not
+ * requested on top of it — it would widen nothing and ask for more.
+ */
 export const GMAIL_SCOPE = [
   "https://www.googleapis.com/auth/gmail.compose",
   "https://www.googleapis.com/auth/userinfo.email",
@@ -228,4 +240,32 @@ export async function createDraft(args: {
   }
   const created = (await response.json()) as { id: string; message?: { id: string } };
   return { draftId: created.id, messageId: created.message?.id ?? "" };
+}
+
+
+/**
+ * Send a message.
+ *
+ * Reached only from the review step. This function deliberately takes the
+ * final text rather than a draft id: what is reviewed and what is sent are then
+ * the same bytes, with no window in between where an edit could land after the
+ * confirmation and before the send.
+ */
+export async function sendMessage(args: {
+  to: string;
+  subject: string;
+  body: string;
+}): Promise<{ messageId: string; threadId: string }> {
+  const token = await accessToken();
+
+  const response = await fetch(SEND_URL, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ raw: toRawMessage(args.to, args.subject, args.body) }),
+  });
+  if (!response.ok) {
+    throw new Error(`Gmail refused to send: ${await response.text()}`);
+  }
+  const sent = (await response.json()) as { id: string; threadId: string };
+  return { messageId: sent.id, threadId: sent.threadId };
 }

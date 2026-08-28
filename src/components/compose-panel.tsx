@@ -28,14 +28,17 @@ export function ComposePanel({
   applications,
   previousMessages,
   gmailConnected,
+  gmailAddress,
 }: {
   contactId: string;
   contactName: string;
   contactEmail: string;
   applications: Array<{ id: string; label: string }>;
   previousMessages: Array<{ id: string; subject: string | null; created_at: string }>;
-  /** Shows the Gmail button. Connected on /profile. */
+  /** Shows the Gmail actions. Connected on /profile. */
   gmailConnected: boolean;
+  /** The mailbox a send would go out from. Named on the review screen. */
+  gmailAddress: string | null;
 }) {
   const router = useRouter();
   const [instructions, setInstructions] = useState("");
@@ -48,6 +51,8 @@ export function ComposePanel({
   const [streaming, setStreaming] = useState(false);
   const [saved, setSaved] = useState(false);
   const [inGmail, setInGmail] = useState(false);
+  const [reviewing, setReviewing] = useState(false);
+  const [sent, setSent] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const field =
@@ -185,6 +190,42 @@ export function ComposePanel({
     }
   }
 
+  async function send() {
+    setBusy(true);
+    setError(null);
+    try {
+      const response = await fetch("/api/outreach/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          // Set here and nowhere else. The route rejects anything without it,
+          // so a caller that has not been through this screen cannot send.
+          confirmed: true,
+          contactId,
+          applicationId: applicationId || null,
+          to: contactEmail,
+          subject,
+          body,
+          context,
+        }),
+      });
+      const data = (await response.json()) as { error?: string; from?: string };
+      if (!response.ok) {
+        setError(data.error ?? "Could not send.");
+        setReviewing(false);
+        return;
+      }
+      setSent(data.from ?? contactEmail);
+      setReviewing(false);
+      router.refresh();
+    } catch {
+      setError("Could not reach the server.");
+      setReviewing(false);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   const mailto = `mailto:${encodeURIComponent(contactEmail)}?subject=${encodeURIComponent(
     subject,
   )}&body=${encodeURIComponent(body)}`;
@@ -240,6 +281,7 @@ export function ComposePanel({
         )}
       </div>
 
+      {!reviewing && !sent && (
       <label className="flex flex-col gap-tight text-caption text-content-tertiary">
         Anything to steer it
         <textarea
@@ -250,7 +292,9 @@ export function ComposePanel({
           className={`${field} resize-y`}
         />
       </label>
+      )}
 
+      {!reviewing && !sent && (
       <div className="flex flex-wrap items-center gap-compact">
         <button
           type="button"
@@ -266,6 +310,7 @@ export function ComposePanel({
           </span>
         )}
       </div>
+      )}
 
       {error && (
         <p role="alert" className="text-caption text-badge-clay-fg">
@@ -273,7 +318,7 @@ export function ComposePanel({
         </p>
       )}
 
-      {(body || subject || streaming) && (
+      {(body || subject || streaming) && !reviewing && !sent && (
         <div className="flex flex-col gap-compact border-t border-border-subtle pt-compact">
           <label className="flex flex-col gap-tight text-caption text-content-tertiary">
             Subject
@@ -346,19 +391,33 @@ export function ComposePanel({
               same intention and offering both at once would only ask you to
               pick between a good route and a worse one.
 
-              The Gmail path creates a DRAFT. monadic holds the compose scope
-              and not the send scope, so it could not send this if it tried —
-              you open Gmail, see the real headers, and send it yourself.
+              Sending is behind Review and send; the Gmail draft is kept
+              alongside it for the times you want to finish in Gmail — add an
+              attachment, cc someone, sit on it overnight. Neither is the
+              default-on path: nothing leaves without the review screen.
             */}
             {gmailConnected ? (
-              <button
-                type="button"
-                onClick={toGmail}
-                disabled={busy || inGmail}
-                className="rounded-subtle bg-coral-default px-body py-compact text-small font-semibold leading-none text-content-primary transition-colors hover:bg-coral-hover disabled:opacity-50"
-              >
-                {inGmail ? "In your Gmail drafts ✓" : busy ? "Creating…" : "Create Gmail draft"}
-              </button>
+              <>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setError(null);
+                    setReviewing(true);
+                  }}
+                  disabled={busy || !body.trim() || !contactEmail}
+                  className="rounded-subtle bg-coral-default px-body py-compact text-small font-semibold leading-none text-content-primary transition-colors hover:bg-coral-hover disabled:opacity-50"
+                >
+                  Review and send
+                </button>
+                <button
+                  type="button"
+                  onClick={toGmail}
+                  disabled={busy || inGmail}
+                  className="rounded-subtle border border-border-default bg-surface-sunken px-body py-compact text-small font-medium leading-none text-content-primary transition-colors hover:bg-surface-hover disabled:opacity-50"
+                >
+                  {inGmail ? "In your Gmail drafts ✓" : busy ? "Creating…" : "Save to Gmail drafts"}
+                </button>
+              </>
             ) : (
               <a
                 href={mailto}
@@ -377,6 +436,104 @@ export function ComposePanel({
             </button>
           </div>
           )}
+        </div>
+      )}
+
+      {/*
+        The review.
+        
+        It is a separate screen rather than a confirm dialog over the editor,
+        and everything that is about to be true is on it: the address it leaves
+        from, the person it arrives at with their address spelled out, the
+        subject, and the entire body — not a preview of the body, all of it, no
+        scroll box hiding the last paragraph. The thing you skim is the thing
+        that goes.
+
+        Nothing here is editable. An editable review is not a review; it is the
+        editor with a Send button, and the pause it is supposed to create
+        disappears. Back to editing is one press away and loses nothing.
+      */}
+      {reviewing && (
+        <div className="flex flex-col gap-body border-t border-border-subtle pt-body">
+          <div className="flex flex-col gap-tight">
+            <h3 className="text-small font-semibold text-content-primary">
+              Send this?
+            </h3>
+            <p className="text-caption text-content-tertiary">
+              This goes out from your Gmail as soon as you press send. There is
+              no recall.
+            </p>
+          </div>
+
+          <dl className="flex flex-col gap-tight rounded-default border border-border-subtle bg-surface-sunken px-default py-compact text-caption">
+            <div className="flex gap-compact">
+              <dt className="w-12 shrink-0 text-content-tertiary">From</dt>
+              <dd className="min-w-0 truncate text-content-secondary">
+                {gmailAddress ?? "your connected Gmail"}
+              </dd>
+            </div>
+            <div className="flex gap-compact">
+              <dt className="w-12 shrink-0 text-content-tertiary">To</dt>
+              <dd className="min-w-0 truncate text-content-primary">
+                {contactName} &lt;{contactEmail}&gt;
+              </dd>
+            </div>
+            <div className="flex gap-compact">
+              <dt className="w-12 shrink-0 text-content-tertiary">Subject</dt>
+              <dd className="min-w-0 text-content-primary">
+                {subject.trim() || (
+                  <span className="text-badge-amber-fg">(no subject)</span>
+                )}
+              </dd>
+            </div>
+          </dl>
+
+          <div className="whitespace-pre-wrap rounded-default border border-border-subtle bg-surface-base px-default py-compact text-body leading-relaxed text-content-primary">
+            {body}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-compact">
+            <button
+              type="button"
+              onClick={() => void send()}
+              disabled={busy}
+              className="rounded-subtle bg-coral-default px-body py-compact text-small font-semibold leading-none text-content-primary transition-colors hover:bg-coral-hover disabled:opacity-50"
+            >
+              {busy ? "Sending…" : `Send to ${contactName.split(" ")[0]}`}
+            </button>
+            <button
+              type="button"
+              onClick={() => setReviewing(false)}
+              disabled={busy}
+              className="rounded-subtle border border-border-default bg-surface-sunken px-body py-compact text-small font-medium leading-none text-content-primary transition-colors hover:bg-surface-hover disabled:opacity-50"
+            >
+              Back to editing
+            </button>
+          </div>
+        </div>
+      )}
+
+      {sent && (
+        <div className="flex flex-col gap-compact border-t border-border-subtle pt-body">
+          <p className="text-body text-content-primary">
+            Sent to {contactName} from {sent}.
+          </p>
+          <p className="text-caption text-content-tertiary">
+            It is in your Gmail sent folder, and kept here under this contact.
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              setSent(null);
+              setSubject("");
+              setBody("");
+              setSaved(false);
+              setInGmail(false);
+            }}
+            className="self-start text-caption text-content-tertiary underline underline-offset-2 transition-colors hover:text-content-primary"
+          >
+            Write another
+          </button>
         </div>
       )}
     </section>

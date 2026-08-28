@@ -82,7 +82,34 @@ The email must be something a busy recruiter reads to the end:
 - Never invent a project, a metric, an employer, a duration or a shared
   connection. Everything specific must come from the context you are given.
 - If a fact is missing, write around it. An email that says less and is true is
-  the one that works.`;
+  the one that works.
+
+Write to the person you are actually writing to. Their relationship to the role
+changes what is true of them, and getting it wrong is the tell that an email was
+generated:
+
+- A recruiter does not own the team and is not building the product. "Your
+  team", "the product you're building", "your roadmap" are all wrong for them.
+  They are the way in — refer to the company, not to their work.
+- A hiring manager does own the team. "Your team" is correct and specific, and
+  the reason for writing is the work itself.
+- A referral is someone inside the company who can point you at the right
+  person. Ask them who to speak to, not for the role.
+- An interviewer has already met you. Do not introduce yourself as a stranger.
+- When the relationship is not stated, write as though to a recruiter. It is the
+  safe assumption: nothing in that register is wrong for anyone else.
+
+The company is given to you below as "Company". Use that name — do not infer one
+from the role, the contact's email domain, or the description.
+
+The subject line is almost always exactly:
+
+  Interest in <the role title> role at <the company>
+
+Both values are given below. Do not paraphrase the title, do not shorten the
+company, and do not write a cleverer subject — an initial email is opened
+because the subject says plainly what it is about. Depart from this only when
+the person asked for something specific, or when there is no role to name.`;
 
 /**
  * The fallback voice, used only when the sender has shown us nothing.
@@ -99,6 +126,15 @@ avoid the phrases that make an email look automated: no "I hope this email finds
 you well", no "I came across your profile", no "passionate about", no "I'd love
 to", no em dashes as connectors. Open with why this person and this company.
 Sign off with the sender's first name alone.`;
+
+/** The relationship, as a sentence rather than as a database enum value. */
+const RELATIONSHIP_LABELS: Record<string, string> = {
+  recruiter: "recruiter — the way in, does not own the team or build the product",
+  hiring_manager: "hiring manager — owns the team and the role",
+  referral: "referral — inside the company, can point me at the right person",
+  interviewer: "interviewer — has already met me",
+  other: "not stated — treat as a recruiter",
+};
 
 function block(label: string, value: string | null | undefined): string {
   return value?.trim() ? `${label}: ${value.trim()}` : "";
@@ -145,12 +181,26 @@ export function renderContext(ctx: DraftContext): string {
     [
       block("Name", ctx.contact.fullName),
       block("Title", ctx.contact.title),
-      block("Relationship", ctx.contact.role),
-      block("Company", ctx.company?.name ?? null),
+      // Spelled out rather than passed as the raw enum value. "hiring_manager"
+      // is a database value; what the model needs is the sentence that says
+      // what such a person can and cannot be told about "your team".
+      block("Relationship", RELATIONSHIP_LABELS[ctx.contact.role ?? ""] ?? "not stated — treat as a recruiter"),
     ]
       .filter(Boolean)
       .join("\n"),
   );
+
+  /*
+   * One company name, resolved here rather than left to the model.
+   *
+   * Two candidates exist — the company on the job and the company on the
+   * contact — and asking the model to pick between them is how a subject line
+   * ends up naming the wrong one. The job wins when there is a job, because
+   * that is what the email is about; the contact's company is the fallback for
+   * outreach with no specific role attached.
+   */
+  const company = ctx.job?.companyName?.trim() || ctx.company?.name?.trim() || null;
+  parts.push(company ? `Company: ${company}` : "Company: not known — do not name one");
 
   if (ctx.job) {
     parts.push("\n## The role");

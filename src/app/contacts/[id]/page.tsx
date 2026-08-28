@@ -127,6 +127,7 @@ export default async function ContactPage({
             created_at: m.created_at,
           }))}
           gmailConnected={gmail !== null}
+          gmailAddress={gmail?.email ?? null}
         />
       ) : (
         <p className="rounded-default border border-dashed border-border-default px-default py-loose text-center text-body text-content-secondary">

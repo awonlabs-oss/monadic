@@ -94,13 +94,22 @@ Setting it up needs a Google Cloud project, which only you can create:
 5. Put the client ID and secret in Vercel, and in `.env.local` for local use.
 6. Profile → **Connect Gmail**.
 
-### What it can and cannot do
+### What it can do
 
-The scope requested is `gmail.compose` and deliberately not `gmail.send`.
-monadic can place a message in your drafts folder; it has no permission to send
-one, so a wrong recipient is something you catch in Gmail rather than something
-you undo. Opening the draft is also how you see the real headers and sender,
-which was the point of connecting it at all.
+The scope requested is `gmail.compose`, which Google documents as "manage drafts
+and send emails" — it covers both. `gmail.send` is not requested on top of it
+because it would add nothing.
+
+So monadic can send as you, and the thing that stops an unread email going out
+is the interface, not the grant: every send passes a review screen that names
+the from address, the recipient and their address, the subject, and the whole
+body, and sends only on a second, deliberate press. Saving to Gmail drafts is
+still there for when you would rather finish in Gmail.
+
+An earlier version of this file claimed the app "has no permission to send".
+That was wrong about the scope, though true of the code at the time, which only
+ever created drafts. It is recorded here because a security claim that quietly
+changes is worse than one that was never made.
 
 Disconnecting removes monadic's copy of the grant. It does not revoke it at
 Google — do that from your Google account's security settings.

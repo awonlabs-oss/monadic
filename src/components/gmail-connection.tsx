@@ -17,10 +17,10 @@ export async function GmailConnection({ status }: { status?: string }) {
       <div className="flex flex-col gap-tight">
         <h2 className="text-body font-semibold text-content-primary">Gmail</h2>
         <p className="max-w-reading text-caption leading-relaxed text-content-secondary">
-          Connecting lets monadic put a drafted email straight into your Gmail
-          drafts, where you can see the real sender and headers before sending it
-          yourself. It asks for permission to compose only — monadic cannot send
-          on your behalf.
+          Connecting lets you send a drafted email from your own address, or
+          save it to your Gmail drafts to finish there. Sending always goes
+          through a review screen showing the exact recipient, subject and body
+          — monadic never sends anything you have not read on that screen.
         </p>
       </div>
 
