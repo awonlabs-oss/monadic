@@ -34,9 +34,23 @@ const NAV = [
   // to and come back from. The dock links through for editing.
 ];
 
+/**
+ * The count beside a nav item, capped at a thousand.
+ *
+ * Above that the exact figure is noise wearing the clothes of information. The
+ * badge is furniture read at a glance on every page, and its job is "is there
+ * anything, and roughly how much" — 4,312 answers a question nobody asked, and
+ * it changes every night, which makes a fixed piece of chrome flicker. The feed
+ * still states its own exact total, where the number is a promise about the
+ * list underneath it rather than a decoration in the margin.
+ *
+ * The cap is general rather than special-cased to the jobs count. Tracked and
+ * Saved will not reach four figures for a real person, so nothing else is
+ * affected today — and if one ever did, the same reasoning would apply to it.
+ */
 function Badge({ count }: { count: number }) {
   return (
-    <span className="bg-surface-sunken text-content-secondary text-caption font-medium rounded-full px-tight py-hair leading-none">
+    <span className="bg-surface-sunken text-content-secondary text-caption font-medium rounded-full px-tight py-hair leading-none tabular-nums">
       {count}
     </span>
   );
@@ -149,19 +163,34 @@ export function Sidebar({
         aria-label="Ingestion health"
         className="rounded-default bg-surface-sunken px-default py-compact flex flex-col gap-tight"
       >
+        {/*
+          Three states, not two. "Unavailable" is its own, because the numbers
+          behind this footer are zero when nothing has been ingested and also
+          zero when the database could not be read — and rendering the second as
+          the first would put a green dot and "0 failed" over an app that cannot
+          see its own pipeline. Section 4 puts this footer on every screen
+          precisely so that silent failure is impossible; a footer that reports
+          health it did not measure would defeat that.
+        */}
         <p className="flex items-center gap-compact text-caption text-content-secondary">
           <span
             aria-hidden="true"
             className={`size-tight rounded-full ${
-              health.failed > 0 ? "bg-status-stale" : "bg-signal-default"
+              health.unavailable || health.failed > 0
+                ? "bg-status-stale"
+                : "bg-signal-default"
             }`}
           />
-          {health.lastSyncAt
-            ? `Last sync ${relativeShort(health.lastSyncAt)}`
-            : "Never synced"}
+          {health.unavailable
+            ? "Sync status unavailable"
+            : health.lastSyncAt
+              ? `Last sync ${relativeShort(health.lastSyncAt)}`
+              : "Never synced"}
         </p>
         <p className="text-caption text-content-tertiary">
-          {health.boards} boards · {health.failed} failed
+          {health.unavailable
+            ? "Could not reach the database"
+            : `${health.boards} boards · ${health.failed} failed`}
         </p>
       </section>
     </div>

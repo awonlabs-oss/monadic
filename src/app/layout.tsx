@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
 import { Figtree, EB_Garamond } from "next/font/google";
-import { Sidebar } from "@/components/sidebar";
-import { ProfileDock } from "@/components/profile-dock";
-import { ingestionHealth, navCounts } from "@/lib/data/health";
 import "./globals.css";
 
 /*
- * Application shell. DESIGN.md section 4, DECIDED for application routes.
+ * The document, and nothing else.
  *
- * Fixed 248px sidebar on the warm canvas with a 1px right border; main column
- * fills the rest. The page padding — 40px horizontal, 36px top, both tokens
- * (space/page, space/section) — is applied per route rather than here, because
- * /jobs docks a panel that has to reach the right edge of the viewport.
+ * The shell moved to (app)/layout.tsx. It used to live here, which meant every
+ * route got the sidebar and the profile dock — including /login, whose own
+ * docstring says it is "deliberately not the app shell". It was: the page
+ * rendered a bare card, and the layout wrapped it in the nav, the counts and
+ * the dock anyway. So the sign-in screen showed the tabs, the job counts, the
+ * sync status and the profile before anyone had typed the password, and none of
+ * that was recoverable from inside the page.
+ *
+ * A route group fixes it at the level the problem lives at. `(app)` adds no
+ * path segment, so every URL is unchanged; it just gives the authenticated
+ * routes a layout that /login does not share. This file keeps what genuinely
+ * belongs to every document: the html and body elements, the fonts, and the
+ * stylesheet.
  *
  * Two faces, self-hosted by next/font — no runtime request to Google and no
  * layout shift. The font/family tokens point at the variables these expose.
@@ -47,55 +53,30 @@ const garamond = EB_Garamond({
   display: "swap",
 });
 
+/*
+ * Nothing in this app is prerenderable.
+ *
+ * Every page already declares force-dynamic, but the layout did not, and `/`
+ * did not either — so Next prerendered `/` at build time, which ran this
+ * layout, which signs in to Supabase. A build that cannot compile without a
+ * reachable, seeded database is a build that fails on a fresh Vercel project
+ * with "Error occurred prerendering page /". Declared here as well as on the
+ * pages because the layout is what actually touches the database.
+ */
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Monadic",
   description: "Personal job search platform for early-stage startup roles.",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const [health, counts] = await Promise.all([ingestionHealth(), navCounts()]);
-
   return (
     <html lang="en" className={`${figtree.variable} ${garamond.variable}`}>
       <body className="min-h-screen bg-surface-canvas text-content-primary antialiased">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-10 focus:m-compact focus:rounded-default focus:bg-surface-base focus:px-comfortable focus:py-compact focus:text-body"
-        >
-          Skip to main content
-        </a>
-
-        <div className="flex min-h-screen">
-          <aside className="w-sidebar shrink-0 border-r border-border-subtle">
-            <div className="sticky top-0 h-screen">
-              <Sidebar health={health} counts={counts} />
-            </div>
-          </aside>
-
-          {/*
-            No padding here. /jobs docks a profile panel flush to the right edge
-            of the viewport (frame 22:471), and padding on main would inset the
-            dock's border along with the feed. Each route applies its own page
-            padding to the column that should have it.
-          */}
-          <main id="main" className="min-w-0 flex-1">
-            {children}
-          </main>
-
-          {/*
-            The profile docks here, on every route, rather than being rendered
-            by one page and reachable from a nav item on the others.
-
-            It is reference material — the thing you read a posting against —
-            so it belongs beside whatever you are reading, not behind a
-            navigation that costs you your place in the feed. Rendered in the
-            layout, it also survives navigation instead of unmounting and
-            refetching on each route change.
-          */}
-          <ProfileDock />
-        </div>
+        {children}
       </body>
     </html>
   );
