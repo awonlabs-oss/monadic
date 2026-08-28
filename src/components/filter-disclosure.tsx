@@ -28,6 +28,15 @@ export interface HiddenField {
 
 const DEBOUNCE_MS = 200;
 
+/**
+ * What counts as "the user pressed a thing" rather than "the user clicked away".
+ *
+ * `summary` is in the list because the Filters button itself sits outside the
+ * form: pressing it to close the panel must not race a submit against the
+ * <details> element's own toggle.
+ */
+const INTERACTIVE = 'a[href], button, summary, input, select, textarea, [role="button"], [role="link"]';
+
 function Chevron({ open }: { open: boolean }) {
   return (
     <svg
@@ -137,6 +146,31 @@ export function FilterDisclosure({
       if (!details?.open) return;
       const target = event.target;
       if (target instanceof Node && details.contains(target)) return;
+
+      /*
+       * Clicking a control outside the panel closes it without applying, and
+       * lets that control do what it was pressed to do.
+       *
+       * This is the "Clear filters needs two clicks" bug. Applying submits the
+       * form, which is a native GET navigation, and it starts on *pointerdown*
+       * — before the click that would have followed. So the first press on
+       * "Clear 3 filters" applied the pending selections and threw the click
+       * away; the second press, with the panel now closed, actually cleared.
+       * Every other control beside the panel had the same problem, which is why
+       * it read as intermittent: it only happens while the panel is open.
+       *
+       * "Clicking away applies" is kept for clicking away — empty canvas, the
+       * page behind the panel, anywhere with nothing to press. A deliberate
+       * press on a link or a button is not looking elsewhere, it is asking for
+       * that thing, and honouring it beats preserving selections the user was
+       * in the middle of abandoning.
+       */
+      if (target instanceof Element && target.closest(INTERACTIVE)) {
+        details.open = false;
+        setOpen(false);
+        return;
+      }
+
       applyOrClose();
     }
     function onKeyDown(event: KeyboardEvent) {
