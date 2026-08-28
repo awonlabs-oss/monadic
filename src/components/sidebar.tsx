@@ -22,7 +22,7 @@ const NAV = [
   // No badge on For You: the page is a bounded ranked set and says its own size.
   { href: "/for-you", label: "For You" },
   { href: "/jobs", label: "All jobs", badge: "openJobs" as const },
-  { href: "/applications", label: "Tracked", badge: "tracked" as const },
+  { href: "/applications", label: "Tracking", badge: "tracked" as const },
   { href: "/contacts", label: "Contacts", badge: null },
   { href: "/voice", label: "Voice", badge: null },
   // /templates is in DESIGN.md section 6 and the outreach_templates table
