@@ -1,0 +1,8576 @@
+[
+  {
+    "name": "10x",
+    "slug": "10x",
+    "websiteUrl": "https://www.10xdental.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "10x Science",
+    "slug": "10x-science",
+    "websiteUrl": "https://10xscience.com",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "1stCollab",
+    "slug": "1stcollab",
+    "websiteUrl": "https://1stcollab.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "83 Sciences",
+    "slug": "83-sciences",
+    "websiteUrl": "https://83sciences.ai",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "9 Mothers",
+    "slug": "9-mothers-corporation",
+    "websiteUrl": "https://9mothers.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "99minutos",
+    "slug": "99minutos",
+    "websiteUrl": "https://99minutos.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "a0.dev",
+    "slug": "a0-dev",
+    "websiteUrl": "https://a0.dev",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Abacum",
+    "slug": "abacum",
+    "websiteUrl": "https://www.abacum.ai/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Abundant",
+    "slug": "abundant",
+    "websiteUrl": "https://www.abundant.ai/",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Accend",
+    "slug": "accend",
+    "websiteUrl": "https://www.withaccend.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Accord",
+    "slug": "accord",
+    "websiteUrl": "https://inaccord.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Acely",
+    "slug": "acely",
+    "websiteUrl": "https://acely.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Activeloop",
+    "slug": "activeloop",
+    "websiteUrl": "https://activeloop.ai/",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Adam",
+    "slug": "adam",
+    "websiteUrl": "https://adam.new/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Adaptional",
+    "slug": "adaptional",
+    "websiteUrl": "https://www.adaptional.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Adaptyv",
+    "slug": "adaptyv",
+    "websiteUrl": "https://www.adaptyvbio.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Adentris",
+    "slug": "adentris",
+    "websiteUrl": "https://www.adentris.com",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Adialante",
+    "slug": "adialante",
+    "websiteUrl": "http://www.adialante.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "adyn",
+    "slug": "adyn",
+    "websiteUrl": "https://adyn.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Aemon",
+    "slug": "aemon",
+    "websiteUrl": "https://aemon.ai/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Afriex",
+    "slug": "afriex",
+    "websiteUrl": "https://www.afriexapp.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "AfterQuery",
+    "slug": "afterquery",
+    "websiteUrl": "https://afterquery.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Agapé",
+    "slug": "agape",
+    "websiteUrl": "https://www.getdailyagape.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Agave",
+    "slug": "agave",
+    "websiteUrl": "https://www.useagave.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Agency",
+    "slug": "agency",
+    "websiteUrl": "https://GetAgency.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "AgentMail",
+    "slug": "agentmail",
+    "websiteUrl": "https://agentmail.to",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "AgentPhone",
+    "slug": "agentphone",
+    "websiteUrl": "https://agentphone.ai/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "AgileMD",
+    "slug": "agilemd",
+    "websiteUrl": "https://agilemd.com",
+    "batch": "Summer 2011"
+  },
+  {
+    "name": "Aglide",
+    "slug": "aglide",
+    "websiteUrl": "https://aglide.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "COACH",
+    "slug": "ai-coach",
+    "websiteUrl": "https://www.getcoach.com/",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "AIOS",
+    "slug": "aios",
+    "websiteUrl": "https://www.aiosmedical.com/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "AiPrise",
+    "slug": "aiprise",
+    "websiteUrl": "https://aiprise.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "AirCaps",
+    "slug": "aircaps",
+    "websiteUrl": "https://aircaps.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Airgoods",
+    "slug": "airgoods",
+    "websiteUrl": "https://airgoods.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Airhart Aeronautics",
+    "slug": "airhart-aeronautics",
+    "websiteUrl": "https://www.airhartaero.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "AirMyne",
+    "slug": "airmyne",
+    "websiteUrl": "http://www.airmyne.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Airweave",
+    "slug": "airweave",
+    "websiteUrl": "https://airweave.ai",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "AIVideo.com",
+    "slug": "aivideo-com",
+    "websiteUrl": "https://aivideo.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Aktoria Robotics",
+    "slug": "aktoria-robotics",
+    "websiteUrl": "https://aktoria.com/",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "Akute Health",
+    "slug": "akute-health",
+    "websiteUrl": "https://www.akutehealth.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Alaan",
+    "slug": "alaan",
+    "websiteUrl": "https://www.alaan.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Albedo",
+    "slug": "albedo",
+    "websiteUrl": "https://albedo.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "AlemHealth",
+    "slug": "alemhealth",
+    "websiteUrl": "https://www.alemhealth.com",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Aleph",
+    "slug": "aleph",
+    "websiteUrl": "https://getaleph.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Alex",
+    "slug": "alex-com",
+    "websiteUrl": "https://alex.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Algolia",
+    "slug": "algolia",
+    "websiteUrl": "http://www.algolia.com",
+    "batch": "Winter 2014"
+  },
+  {
+    "name": "AlgoTest",
+    "slug": "algotest",
+    "websiteUrl": "https://algotest.in",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "AlgoUniversity",
+    "slug": "algouniversity",
+    "websiteUrl": "http://algouniversity.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Alguna",
+    "slug": "alguna",
+    "websiteUrl": "https://alguna.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Alinea",
+    "slug": "alinea",
+    "websiteUrl": "https://alinea-invest.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Alkali",
+    "slug": "alkali",
+    "websiteUrl": "https://alkali.engineering",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Allus AI",
+    "slug": "allus-ai",
+    "websiteUrl": "https://allus.ai",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Almond",
+    "slug": "almond-2",
+    "websiteUrl": "https://almond.bot/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Alpaca",
+    "slug": "alpaca",
+    "websiteUrl": "https://alpaca.markets/",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Alpha Vantage",
+    "slug": "alpha-vantage",
+    "websiteUrl": "https://www.alphavantage.co/",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Ambient.ai",
+    "slug": "ambient-ai",
+    "websiteUrl": "https://ambient.ai",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Ambral",
+    "slug": "ambral",
+    "websiteUrl": "https://www.ambral.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "amiloz",
+    "slug": "amiloz",
+    "websiteUrl": "https://www.beloz.com.mx/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Anara",
+    "slug": "anara",
+    "websiteUrl": "https://anara.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Andco",
+    "slug": "andco",
+    "websiteUrl": "http://www.useandco.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Andromeda Surgical",
+    "slug": "andromeda-surgical",
+    "websiteUrl": "http://www.andromedasurgical.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Andy AI",
+    "slug": "andy-ai",
+    "websiteUrl": "https://with-andy.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Anglera",
+    "slug": "anglera",
+    "websiteUrl": "https://www.anglera.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Anima",
+    "slug": "anima",
+    "websiteUrl": "http://www.animahealth.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Ankr Health",
+    "slug": "ankr-health",
+    "websiteUrl": "https://ankr.us",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "ANORIA",
+    "slug": "anoria",
+    "websiteUrl": "https://www.anoria.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "AnswerThis",
+    "slug": "answerthis",
+    "websiteUrl": "https://answerthis.io/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Anthrogen",
+    "slug": "anthrogen",
+    "websiteUrl": "https://anthrogen.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Antigen",
+    "slug": "antigen",
+    "websiteUrl": "https://antigen.sh/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "AON3D",
+    "slug": "aon3d",
+    "websiteUrl": "https://www.aon3d.com",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Apero Health",
+    "slug": "apero-health",
+    "websiteUrl": "https://www.aperohealth.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Apolink",
+    "slug": "apolink",
+    "websiteUrl": "https://apolink.space",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Apollo",
+    "slug": "apollo",
+    "websiteUrl": "http://apollographql.com/",
+    "batch": "Summer 2011"
+  },
+  {
+    "name": "Apollo.io",
+    "slug": "apollo-io",
+    "websiteUrl": "https://www.apollo.io/",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Apprentice Health",
+    "slug": "apprentice-health",
+    "websiteUrl": "https://www.apprenticehealth.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "AptDeco",
+    "slug": "aptdeco",
+    "websiteUrl": "https://www.aptdeco.com/",
+    "batch": "Winter 2014"
+  },
+  {
+    "name": "Apten",
+    "slug": "apten",
+    "websiteUrl": "https://www.apten.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Aqua",
+    "slug": "aqua",
+    "websiteUrl": "https://www.investwithaqua.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "AquaShield",
+    "slug": "aquashield",
+    "websiteUrl": "https://aquashieldai.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Ara",
+    "slug": "ara",
+    "websiteUrl": "https://ara.so",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Aragorn AI",
+    "slug": "aragorn-ai",
+    "websiteUrl": "https://www.aragorn.ai",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Aravolta",
+    "slug": "aravolta",
+    "websiteUrl": "https://www.aravolta.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "ArchForm",
+    "slug": "archform",
+    "websiteUrl": "http://archform.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "ArchiLabs",
+    "slug": "archilabs",
+    "websiteUrl": "https://archilabs.ai",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Archon",
+    "slug": "archon",
+    "websiteUrl": "https://archon.inc",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Ardent",
+    "slug": "ardent",
+    "websiteUrl": "https://tryardent.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Arini",
+    "slug": "arini",
+    "websiteUrl": "https://www.arini.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Arketa",
+    "slug": "arketa",
+    "websiteUrl": "https://arketa.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Arlo Industries",
+    "slug": "arlo-industries",
+    "websiteUrl": "https://arlo1.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "arnata",
+    "slug": "arnata",
+    "websiteUrl": "https://arnata.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Arpari",
+    "slug": "arpari",
+    "websiteUrl": "https://www.arpari.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "ARQ",
+    "slug": "arq",
+    "websiteUrl": "https://www.arqfinance.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Artie",
+    "slug": "artie",
+    "websiteUrl": "https://www.artie.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Artifact",
+    "slug": "artifact-2",
+    "websiteUrl": "https://www.artifact.engineer/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Artificial Societies",
+    "slug": "artificial-societies",
+    "websiteUrl": "https://societies.io",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Artisan",
+    "slug": "artisan",
+    "websiteUrl": "https://artisan.co/?utm_source=ycombinator",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Artos",
+    "slug": "artos",
+    "websiteUrl": "https://www.artosai.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Arva AI",
+    "slug": "arva-ai",
+    "websiteUrl": "https://www.arva.ai",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Arzana",
+    "slug": "arzana",
+    "websiteUrl": "https://www.arzana.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Asendia AI",
+    "slug": "asendia-ai",
+    "websiteUrl": "https://asendia.ai/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Aseon Labs",
+    "slug": "aseon-labs",
+    "websiteUrl": "https://www.aseonlabs.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Asha Health",
+    "slug": "asha-health",
+    "websiteUrl": "https://asha.health",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Aside",
+    "slug": "aside",
+    "websiteUrl": "https://aside.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "aSim",
+    "slug": "asim",
+    "websiteUrl": "https://asim.sh/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Asimov",
+    "slug": "asimov",
+    "websiteUrl": "https://tryasimov.ai/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Aspect",
+    "slug": "aspect-inc",
+    "websiteUrl": "https://aspect.inc",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Aspire",
+    "slug": "aspire",
+    "websiteUrl": "https://aspireapp.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Assembly",
+    "slug": "assembly-com",
+    "websiteUrl": "https://www.assembly.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Assembly HOA",
+    "slug": "assembly-hoa",
+    "websiteUrl": "https://assemblyhoa.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "AssemblyAI",
+    "slug": "assemblyai",
+    "websiteUrl": "https://www.assemblyai.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Astraea",
+    "slug": "astraea",
+    "websiteUrl": "https://tryastraea.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Astro Mechanica",
+    "slug": "astro-mechanica",
+    "websiteUrl": "https://astromecha.co/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "AstroForge",
+    "slug": "astroforge",
+    "websiteUrl": "https://www.astroforge.io/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Athelas",
+    "slug": "athelas",
+    "websiteUrl": "http://athelas.com",
+    "batch": "Summer 2016"
+  },
+  {
+    "name": "AthenaHQ",
+    "slug": "athenahq",
+    "websiteUrl": "https://www.athenahq.ai",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Atlas",
+    "slug": "atlas-3",
+    "websiteUrl": "https://atlascard.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "AtlasGrid",
+    "slug": "atlasgrid",
+    "websiteUrl": "https://atlasgrid.ai",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Atlog",
+    "slug": "atlog",
+    "websiteUrl": "https://atlog.ai",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "AtoB",
+    "slug": "atob",
+    "websiteUrl": "https://atob.com/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Atomic",
+    "slug": "atomic",
+    "websiteUrl": "https://www.atomicvest.com/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Atomic Industries",
+    "slug": "atomic-industries",
+    "websiteUrl": "http://atomic.industries",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "atopile",
+    "slug": "atopile",
+    "websiteUrl": "http://atopile.io",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Attack Capital",
+    "slug": "attack-capital",
+    "websiteUrl": "https://attack.capital/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Attain",
+    "slug": "attain",
+    "websiteUrl": "https://joinattain.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Attune",
+    "slug": "attune",
+    "websiteUrl": "https://attunehq.com",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Auctor",
+    "slug": "auctor",
+    "websiteUrl": "https://getauctor.com",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Aurelian",
+    "slug": "aurelian",
+    "websiteUrl": "https://www.aurelian.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Auricle",
+    "slug": "auricle",
+    "websiteUrl": "https://auricle.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Aurorin CAD",
+    "slug": "aurorin-cad",
+    "websiteUrl": "https://aurorincad.com",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Authologic",
+    "slug": "authologic",
+    "websiteUrl": "https://authologic.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "authzed",
+    "slug": "authzed",
+    "websiteUrl": "https://authzed.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Automat",
+    "slug": "automat",
+    "websiteUrl": "https://www.runautomat.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Autonomous Technologies Group",
+    "slug": "autonomous-technologies-group",
+    "websiteUrl": "https://becomeautonomous.com/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "AutoSitu",
+    "slug": "autositu",
+    "websiteUrl": "https://autositu.com/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Autostep",
+    "slug": "autostep",
+    "websiteUrl": "https://autostep.ai/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Autumn",
+    "slug": "autumn",
+    "websiteUrl": "https://useautumn.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Avallon AI",
+    "slug": "avallon-ai",
+    "websiteUrl": "https://www.avallon.ai/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Avent",
+    "slug": "avent",
+    "websiteUrl": "https://www.aventindustrial.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "AveryIQ",
+    "slug": "averyiq",
+    "websiteUrl": "https://averyiq.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Aviator",
+    "slug": "aviator",
+    "websiteUrl": "https://aviator.co",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Avoca",
+    "slug": "avoca",
+    "websiteUrl": "https://www.avoca.ai/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Avora",
+    "slug": "avora",
+    "websiteUrl": "https://www.getavora.ai",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Axel Travel",
+    "slug": "axel-travel",
+    "websiteUrl": "https://helloaxel.com/",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Axiom",
+    "slug": "axiom",
+    "websiteUrl": "https://axiom.trade",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Axle",
+    "slug": "axle",
+    "websiteUrl": "https://axle.insure",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Axle Health",
+    "slug": "axle-health",
+    "websiteUrl": "https://www.axlehealth.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Axross Pte Ltd",
+    "slug": "axross-pte-ltd",
+    "websiteUrl": "https://www.axross.co/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Azalea Robotics Corporation",
+    "slug": "azalea-robotics-corporation",
+    "websiteUrl": "https://azalearobotics.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "b12 Labs",
+    "slug": "b12-labs",
+    "websiteUrl": "https://b12-labs.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Banner",
+    "slug": "banner",
+    "websiteUrl": "https://withbanner.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Baraka",
+    "slug": "baraka",
+    "websiteUrl": "https://www.getbaraka.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "BeGo",
+    "slug": "be-go",
+    "websiteUrl": "http://www.bego.ai",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Beacons",
+    "slug": "beacons",
+    "websiteUrl": "https://beacons.ai/",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Beam",
+    "slug": "beam",
+    "websiteUrl": "https://beam.cloud",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Beglaubigt.de",
+    "slug": "beglaubigtde",
+    "websiteUrl": "https://beglaubigt.de/en-us",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Belvo",
+    "slug": "belvo",
+    "websiteUrl": "https://belvo.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Bemlo",
+    "slug": "bemlo",
+    "websiteUrl": "https://www.bemlo.com/en",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Benepass",
+    "slug": "benepass",
+    "websiteUrl": "http://www.getbenepass.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Berry",
+    "slug": "berry",
+    "websiteUrl": "https://berryai.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Besimple AI",
+    "slug": "besimple-ai",
+    "websiteUrl": "https://besimple.ai",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "BetterBasket",
+    "slug": "betterbasket",
+    "websiteUrl": "http://www.betterbasket.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Betterhalf",
+    "slug": "betterhalf",
+    "websiteUrl": "https://betterhalf.ai",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "BIK",
+    "slug": "bik",
+    "websiteUrl": "https://bik.ai/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Bild AI",
+    "slug": "bild-ai",
+    "websiteUrl": "https://www.bild.ai",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Binks",
+    "slug": "binks",
+    "websiteUrl": "https://getbinks.com/",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Biodock",
+    "slug": "biodock",
+    "websiteUrl": "https://www.biodock.ai",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "BioRender",
+    "slug": "biorender",
+    "websiteUrl": "https://www.biorender.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "BioStack Platforms",
+    "slug": "biostack-platforms",
+    "websiteUrl": "https://www.getbiostack.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Bitmovin",
+    "slug": "bitmovin",
+    "websiteUrl": "http://bitmovin.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "Blacksmith",
+    "slug": "blacksmith",
+    "websiteUrl": "https://blacksmith.sh/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Bland AI",
+    "slug": "bland-ai",
+    "websiteUrl": "https://bland.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Blank Bio",
+    "slug": "blank-bio",
+    "websiteUrl": "http://blank.bio/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Blaxel",
+    "slug": "blaxel",
+    "websiteUrl": "https://blaxel.ai",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Blaze",
+    "slug": "blaze-2",
+    "websiteUrl": "https://blaze.money",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Blee",
+    "slug": "blee",
+    "websiteUrl": "https://www.blee.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Blink",
+    "slug": "blink-new",
+    "websiteUrl": "https://blink.new",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Blissway",
+    "slug": "blissway",
+    "websiteUrl": "https://www.blissway.com/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Bloom",
+    "slug": "bloom-4",
+    "websiteUrl": "https://bloom.diy/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Bloom Institute of Technology",
+    "slug": "bloom-institute-of-technology",
+    "websiteUrl": "https://www.bloomtech.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Bloomy",
+    "slug": "bloomy",
+    "websiteUrl": "https://bloomylearning.com/",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "Blue Onion",
+    "slug": "blue-onion",
+    "websiteUrl": "https://www.blueonion.ai/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "BlueCargo",
+    "slug": "bluecargo",
+    "websiteUrl": "http://www.bluecargo.io/",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Bluejay",
+    "slug": "bluejay",
+    "websiteUrl": "https://getbluejay.ai/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Bluelight",
+    "slug": "bluelight",
+    "websiteUrl": "https://usebluelight.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "BoldVoice",
+    "slug": "boldvoice",
+    "websiteUrl": "https://boldvoice.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Bolna AI",
+    "slug": "bolna-ai",
+    "websiteUrl": "https://bolna.ai",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Bolster",
+    "slug": "bolster",
+    "websiteUrl": "https://bolsterbuilt.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Bond",
+    "slug": "bond",
+    "websiteUrl": "https://www.bondapp.io/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Booko",
+    "slug": "booko",
+    "websiteUrl": "https://bookoapp.com",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "BootLoop",
+    "slug": "bootloop",
+    "websiteUrl": "https://bootloop.ai/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "borong",
+    "slug": "borong",
+    "websiteUrl": "https://www.borong.com/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Bot MD",
+    "slug": "bot-md",
+    "websiteUrl": "https://www.botmd.io",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "BotBuilt",
+    "slug": "botbuilt",
+    "websiteUrl": "https://www.botbuilt.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Boundary",
+    "slug": "boundary",
+    "websiteUrl": "https://www.boundaryml.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Bountiful",
+    "slug": "bountiful",
+    "websiteUrl": "https://bountiful.ag/",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Brainbase Labs",
+    "slug": "brainbase-labs",
+    "websiteUrl": "https://brainbaselabs.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Branch8",
+    "slug": "branch8",
+    "websiteUrl": "https://www.branch8.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "Bree",
+    "slug": "bree",
+    "websiteUrl": "https://www.trybree.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Bretton AI",
+    "slug": "bretton-ai",
+    "websiteUrl": "https://www.bretton.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Brickanta",
+    "slug": "brickanta",
+    "websiteUrl": "https://www.brickanta.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Brickwise",
+    "slug": "brickwise",
+    "websiteUrl": "https://www.brickwiseai.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Brighterway",
+    "slug": "brighterway",
+    "websiteUrl": "https://www.brighterway.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Broccoli AI",
+    "slug": "broccoli-ai",
+    "websiteUrl": "https://www.broccoli.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Browser Use",
+    "slug": "browser-use",
+    "websiteUrl": "https://browser-use.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Bucket Robotics",
+    "slug": "bucket-robotics",
+    "websiteUrl": "https://bucket.bot",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "BuildBuddy",
+    "slug": "buildbuddy",
+    "websiteUrl": "https://buildbuddy.io",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Bunkerhill Health",
+    "slug": "bunkerhill-health",
+    "websiteUrl": "http://bunkerhillhealth.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Bunting Labs",
+    "slug": "bunting-labs",
+    "websiteUrl": "https://buntinglabs.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Buoyant Aero",
+    "slug": "buoyant-aero",
+    "websiteUrl": "https://www.buoyant.aero",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "burnt",
+    "slug": "burnt",
+    "websiteUrl": "https://getburnt.ai/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "BusinessOnBot",
+    "slug": "businessonbot",
+    "websiteUrl": "https://www.businessonbot.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Cair Health",
+    "slug": "cair-health",
+    "websiteUrl": "https://www.cairhealth.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Callab AI",
+    "slug": "callab-ai",
+    "websiteUrl": "https://callab.ai",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Calltree",
+    "slug": "calltree",
+    "websiteUrl": "https://calltree.ai",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Camber",
+    "slug": "camber-2",
+    "websiteUrl": "https://www.camber.health/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Cambio",
+    "slug": "cambio-2",
+    "websiteUrl": "https://www.cambio.ai/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Cambly",
+    "slug": "cambly",
+    "websiteUrl": "http://www.cambly.com",
+    "batch": "Winter 2014"
+  },
+  {
+    "name": "Campfire",
+    "slug": "campfire-2",
+    "websiteUrl": "https://campfire.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Canary Technologies",
+    "slug": "canary-technologies",
+    "websiteUrl": "https://www.canarytechnologies.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Candid Health",
+    "slug": "candid-health",
+    "websiteUrl": "https://www.joincandidhealth.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Candle",
+    "slug": "candle",
+    "websiteUrl": "https://www.trycandle.app/",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Candor",
+    "slug": "candor-security",
+    "websiteUrl": "https://candor.security/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Canix",
+    "slug": "canix",
+    "websiteUrl": "https://www.canix.com/",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Capi Money",
+    "slug": "capi-money",
+    "websiteUrl": "https://www.capimoney.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Capitol AI",
+    "slug": "capitol-ai",
+    "websiteUrl": "https://www.capitol.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Capix",
+    "slug": "capix",
+    "websiteUrl": "http://capix.ai/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "CaptivateIQ",
+    "slug": "captivateiq",
+    "websiteUrl": "https://www.captivateiq.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Capy",
+    "slug": "capy",
+    "websiteUrl": "https://capy.ai",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "CarbonChain",
+    "slug": "carbonchain",
+    "websiteUrl": "https://carbonchain.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Cardboard",
+    "slug": "cardboard",
+    "websiteUrl": "https://cardboard.ai",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Cardinal Gray",
+    "slug": "cardinal-gray",
+    "websiteUrl": "https://www.cardinalgray.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Careforce",
+    "slug": "careforce",
+    "websiteUrl": "https://careforce.ai/",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "CareSwift",
+    "slug": "careswift",
+    "websiteUrl": "https://www.careswift.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Cargo",
+    "slug": "cargo",
+    "websiteUrl": "https://getcargo.io",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Caribou",
+    "slug": "caribou",
+    "websiteUrl": "https://usecaribou.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Carma",
+    "slug": "carma",
+    "websiteUrl": "https://www.joincarma.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Cartage",
+    "slug": "cartage",
+    "websiteUrl": "https://cartage.ai",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Casca",
+    "slug": "casca",
+    "websiteUrl": "https://www.cascading.ai/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Cascade Space",
+    "slug": "cascade-space",
+    "websiteUrl": "https://cascadespace.com",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Casco",
+    "slug": "casco",
+    "websiteUrl": "https://casco.com",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Cashfree Payments",
+    "slug": "cashfree-payments",
+    "websiteUrl": "https://www.cashfree.com/",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Castle",
+    "slug": "castle-2",
+    "websiteUrl": "https://castle.io",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "CatchBack Cards",
+    "slug": "catchback-cards",
+    "websiteUrl": "https://catchbackcards.com",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Cedana",
+    "slug": "cedana",
+    "websiteUrl": "https://cedana.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Cekura",
+    "slug": "cekura-ai",
+    "websiteUrl": "https://www.cekura.ai/",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "CellType",
+    "slug": "celltype",
+    "websiteUrl": "https://www.celltype.com",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Centralize",
+    "slug": "centralize",
+    "websiteUrl": "https://www.usecentralize.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Cerrion",
+    "slug": "cerrion",
+    "websiteUrl": "https://www.cerrion.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Cerulion",
+    "slug": "cerulion",
+    "websiteUrl": "https://www.cerulion.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Channel3",
+    "slug": "channel3",
+    "websiteUrl": "https://trychannel3.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "CharacterQuilt",
+    "slug": "characterquilt",
+    "websiteUrl": "https://characterquilt.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Charge Robotics",
+    "slug": "charge-robotics",
+    "websiteUrl": "https://chargerobotics.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Chariot",
+    "slug": "chariot-2",
+    "websiteUrl": "https://givechariot.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Chasi",
+    "slug": "chasi",
+    "websiteUrl": "https://chasi.ai/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Checkr",
+    "slug": "checkr",
+    "websiteUrl": "http://www.checkr.com",
+    "batch": "Summer 2014"
+  },
+  {
+    "name": "Chestnut",
+    "slug": "chestnut",
+    "websiteUrl": "https://chestnutmortgage.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Chima",
+    "slug": "chima",
+    "websiteUrl": "https://www.withchima.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Cifrato",
+    "slug": "cifrato",
+    "websiteUrl": "https://cifrato.ai",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Cinder",
+    "slug": "cinder-2",
+    "websiteUrl": "https://cinder.ai",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Circle Medical",
+    "slug": "circle-medical",
+    "websiteUrl": "https://circlemedical.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "Circleback",
+    "slug": "circleback",
+    "websiteUrl": "https://circleback.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "CircuitHub",
+    "slug": "circuithub",
+    "websiteUrl": "https://circuithub.com",
+    "batch": "Winter 2012"
+  },
+  {
+    "name": "Ciro",
+    "slug": "ciro",
+    "websiteUrl": "https://www.ciro.io/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Cityfurnish",
+    "slug": "cityfurnish",
+    "websiteUrl": "https://cityfurnish.com/",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Clad",
+    "slug": "clad",
+    "websiteUrl": "https://withclad.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Claim Health",
+    "slug": "claim-health",
+    "websiteUrl": "https://www.claimhealth.com",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "ClaimSorted",
+    "slug": "claimsorted",
+    "websiteUrl": "https://claimsorted.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Clara",
+    "slug": "clara-2",
+    "websiteUrl": "http://askclara.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Clarion",
+    "slug": "clarion",
+    "websiteUrl": "https://clarionhealth.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "ClassDojo",
+    "slug": "classdojo",
+    "websiteUrl": "http://www.classdojo.com",
+    "batch": "Summer 2012"
+  },
+  {
+    "name": "Clearest Health",
+    "slug": "clearest-health",
+    "websiteUrl": "https://clearesthealth.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Clearly AI",
+    "slug": "clearly-ai",
+    "websiteUrl": "https://clearly-ai.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "ClickPe",
+    "slug": "clickpe",
+    "websiteUrl": "https://clickpe.ai/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Clicks Health",
+    "slug": "clicks-health",
+    "websiteUrl": "https://www.goclicks.ai/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Clinikally",
+    "slug": "clinikally",
+    "websiteUrl": "https://www.clinikally.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Clipboard",
+    "slug": "clipboard",
+    "websiteUrl": "https://www.clipboardworks.com/careers",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Closure",
+    "slug": "closure",
+    "websiteUrl": "https://closure-intel.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Cloudglue",
+    "slug": "cloudglue",
+    "websiteUrl": "https://cloudglue.dev",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Coast",
+    "slug": "coast",
+    "websiteUrl": "https://trycoast.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Coba",
+    "slug": "coba",
+    "websiteUrl": "https://www.coba.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Code Four",
+    "slug": "code-four",
+    "websiteUrl": "https://codefour.us/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "CodeAnt AI",
+    "slug": "codeant-ai",
+    "websiteUrl": "https://codeant.ai/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Codes Health",
+    "slug": "codes-health",
+    "websiteUrl": "https://www.codeshealth.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Codingal",
+    "slug": "codingal",
+    "websiteUrl": "https://www.codingal.com/?utm_source=yc",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Cofactr",
+    "slug": "cofactr",
+    "websiteUrl": "https://www.cofactr.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Cogram",
+    "slug": "cogram",
+    "websiteUrl": "https://cogram.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Coinrule",
+    "slug": "coinrule",
+    "websiteUrl": "https://coinrule.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "CoinTracker",
+    "slug": "cointracker",
+    "websiteUrl": "https://cointracker.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Collectly",
+    "slug": "collectly",
+    "websiteUrl": "http://collectly.co/",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "CollectWise",
+    "slug": "collectwise",
+    "websiteUrl": "https://collectwise.com/",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "CoLoop",
+    "slug": "coloop",
+    "websiteUrl": "https://coloop.ai/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Comena",
+    "slug": "comena",
+    "websiteUrl": "https://comena.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "CommodityAI",
+    "slug": "commodityai",
+    "websiteUrl": "https://commodityai.io/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Community Phone Company",
+    "slug": "community-phone-company",
+    "websiteUrl": "https://www.communityphone.org/",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Complete",
+    "slug": "complete",
+    "websiteUrl": "https://complete.so",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Complir",
+    "slug": "complir",
+    "websiteUrl": "https://complir.io/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Compose.ai",
+    "slug": "compose-ai",
+    "websiteUrl": "https://compose.ai",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Concourse",
+    "slug": "concourse",
+    "websiteUrl": "https://concourse.co/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Conductor",
+    "slug": "conductor",
+    "websiteUrl": "https://conductor.build",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Conductor Quantum",
+    "slug": "conductor-quantum",
+    "websiteUrl": "https://www.conductorquantum.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Conduit",
+    "slug": "conduit",
+    "websiteUrl": "http://helloconduit.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Confident AI",
+    "slug": "confident-ai",
+    "websiteUrl": "https://confident-ai.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Confido",
+    "slug": "confido",
+    "websiteUrl": "https://www.confidotech.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Constant",
+    "slug": "constant",
+    "websiteUrl": "https://useconstant.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Conta Simples",
+    "slug": "conta-simples",
+    "websiteUrl": "https://contasimples.com/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Contrario",
+    "slug": "contrario",
+    "websiteUrl": "https://contrario.ai",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Conveo",
+    "slug": "conveo",
+    "websiteUrl": "https://conveo.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Converge",
+    "slug": "converge",
+    "websiteUrl": "http://www.runconverge.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Convexia",
+    "slug": "convexia",
+    "websiteUrl": "https://convexia.bio",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Conviction",
+    "slug": "conviction",
+    "websiteUrl": "https://convictiontrade.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Coperniq",
+    "slug": "coperniq",
+    "websiteUrl": "https://coperniq.io",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Corgea",
+    "slug": "corgea",
+    "websiteUrl": "https://www.corgea.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Corgi Insurance",
+    "slug": "corgi-insurance",
+    "websiteUrl": "https://corgi.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Coris",
+    "slug": "coris",
+    "websiteUrl": "https://coris.ai/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Cosine",
+    "slug": "cosine",
+    "websiteUrl": "http://www.cosine.sh",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Cotera",
+    "slug": "cotera",
+    "websiteUrl": "https://cotera.co",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Coulomb AI",
+    "slug": "coulomb-ai",
+    "websiteUrl": "https://coulomb.ai/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Coval",
+    "slug": "coval",
+    "websiteUrl": "https://coval.dev",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Covera",
+    "slug": "covera",
+    "websiteUrl": "https://www.covera-agents.com/",
+    "batch": "Fall 2026"
+  },
+  {
+    "name": "Coverage Cat",
+    "slug": "coverage-cat",
+    "websiteUrl": "https://www.coveragecat.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Cozmo AI",
+    "slug": "cozmo-ai",
+    "websiteUrl": "https://www.hellocozmo.ai/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Craniometrix",
+    "slug": "craniometrix",
+    "websiteUrl": "https://craniometrix.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Cranston AI",
+    "slug": "cranston-ai",
+    "websiteUrl": "https://www.cranston.ai",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "CreativeMode",
+    "slug": "creativemode",
+    "websiteUrl": "https://creativemode.net",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Credal.ai",
+    "slug": "credal-ai",
+    "websiteUrl": "https://credal.ai",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Crew",
+    "slug": "crew",
+    "websiteUrl": "https://crew.work/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Crouton",
+    "slug": "crouton",
+    "websiteUrl": "https://usecrouton.com",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "CrowdVolt",
+    "slug": "crowdvolt",
+    "websiteUrl": "https://crowdvolt.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Crustdata",
+    "slug": "crustdata",
+    "websiteUrl": "https://crustdata.com",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "CTGT",
+    "slug": "ctgt",
+    "websiteUrl": "https://www.ctgt.ai/",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Cua",
+    "slug": "cua",
+    "websiteUrl": "https://cua.ai",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "cubic",
+    "slug": "cubic",
+    "websiteUrl": "https://cubic.dev/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Culdesac",
+    "slug": "culdesac",
+    "websiteUrl": "http://culdesac.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Cumulus Labs",
+    "slug": "cumulus-labs",
+    "websiteUrl": "https://cumuluslabs.io",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Curacel",
+    "slug": "curacel",
+    "websiteUrl": "https://curacel.co",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Curo",
+    "slug": "curo",
+    "websiteUrl": "https://www.curocharging.com/",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Curri",
+    "slug": "curri",
+    "websiteUrl": "http://www.curri.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Cyble",
+    "slug": "cyble",
+    "websiteUrl": "https://cyble.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Mytos",
+    "slug": "cytera-cellworks",
+    "websiteUrl": "https://www.mytos.bio",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "D-ID",
+    "slug": "d-id",
+    "websiteUrl": "http://www.d-id.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Dalus",
+    "slug": "dalus",
+    "websiteUrl": "https://dalus.io",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Dart",
+    "slug": "dart",
+    "websiteUrl": "https://www.dartai.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Data Driven Bioscience",
+    "slug": "data-driven-bioscience",
+    "websiteUrl": "http://datadrivenbioscience.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Dataland",
+    "slug": "dataland",
+    "websiteUrl": "https://dataland.io",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Dataleap",
+    "slug": "dataleap",
+    "websiteUrl": "https://dataleap.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Datrics",
+    "slug": "datrics",
+    "websiteUrl": "https://datrics.ai",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "David AI",
+    "slug": "david-ai",
+    "websiteUrl": "https://www.withdavid.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Dayjob",
+    "slug": "dayjob",
+    "websiteUrl": "https://www.getdayjob.ai",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Decoda Health",
+    "slug": "decoda-health",
+    "websiteUrl": "https://decodahealth.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Dedalus Labs",
+    "slug": "dedalus-labs",
+    "websiteUrl": "https://www.dedaluslabs.ai/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Deel",
+    "slug": "deel",
+    "websiteUrl": "https://www.deel.com/",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Deep24",
+    "slug": "deep24",
+    "websiteUrl": "https://deep24.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "DeepAware AI (Robotics Center of Silicon Valley)",
+    "slug": "deepaware-ai-robotics-center-of-silicon-valley",
+    "websiteUrl": "https://roboticscenter.ai/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Deepgram",
+    "slug": "deepgram",
+    "websiteUrl": "https://www.deepgram.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "DeepGrove",
+    "slug": "deepgrove",
+    "websiteUrl": "https://deepgrove.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Deepnote",
+    "slug": "deepnote",
+    "websiteUrl": "https://www.deepnote.com/",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "DeepSource",
+    "slug": "deepsource",
+    "websiteUrl": "https://deepsource.com/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Deeptrace",
+    "slug": "deeptrace",
+    "websiteUrl": "https://deeptrace.com/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Delfino AI",
+    "slug": "delfino-ai",
+    "websiteUrl": "https://www.delfino.ai/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Dench.com",
+    "slug": "dench-com",
+    "websiteUrl": "https://dench.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Designbase",
+    "slug": "designbase",
+    "websiteUrl": "https://www.designbase.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Dex",
+    "slug": "dex",
+    "websiteUrl": "https://getdex.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Diffuse Bio",
+    "slug": "diffuse-bio",
+    "websiteUrl": "http://diffuse.bio",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "digi",
+    "slug": "digi",
+    "websiteUrl": "https://www.digitech.la/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "DigiBuild",
+    "slug": "digibuild",
+    "websiteUrl": "https://digibuild.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Digipals",
+    "slug": "digipals",
+    "websiteUrl": "https://www.digipals.app/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "dili",
+    "slug": "dili",
+    "websiteUrl": "https://www.dili.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "DiligenceSquared",
+    "slug": "diligencesquared-inc",
+    "websiteUrl": "https://diligencesquared.com/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Diligent",
+    "slug": "diligent",
+    "websiteUrl": "https://godiligent.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Dill",
+    "slug": "dill",
+    "websiteUrl": "https://usedill.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Dime",
+    "slug": "dime-2",
+    "websiteUrl": "https://www.dimehealth.ai/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Dimely",
+    "slug": "dimely",
+    "websiteUrl": "https://dimely.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Diode Computers, Inc.",
+    "slug": "diode-computers-inc",
+    "websiteUrl": "https://diode.computer",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "DirectShifts",
+    "slug": "directshifts",
+    "websiteUrl": "https://directshifts.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Discovered Materials",
+    "slug": "discovered-materials",
+    "websiteUrl": "https://discoveredmaterials.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Dispatch",
+    "slug": "dispatch",
+    "websiteUrl": "https://dispatch.space/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Ditto",
+    "slug": "ditto",
+    "websiteUrl": "http://dittowords.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Dodo",
+    "slug": "dodo",
+    "websiteUrl": "https://www.dodo.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Domu Technology Inc.",
+    "slug": "domu-technology-inc",
+    "websiteUrl": "https://www.domu.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "doola",
+    "slug": "doola",
+    "websiteUrl": "https://www.doola.com/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Dots 💸",
+    "slug": "dots-2",
+    "websiteUrl": "https://usedots.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Double",
+    "slug": "doublehq",
+    "websiteUrl": "https://www.doublehq.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Dover",
+    "slug": "dover",
+    "websiteUrl": "https://dover.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Draft The Record",
+    "slug": "draft-the-record",
+    "websiteUrl": "https://www.drafttherecord.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Draftaid",
+    "slug": "draftaid",
+    "websiteUrl": "https://draftaid.io/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Draftwise",
+    "slug": "draftwise",
+    "websiteUrl": "https://www.draftwise.com/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Dream3D",
+    "slug": "dream3d",
+    "websiteUrl": "https://dream3d.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "DreamCraft Entertainment, Inc.",
+    "slug": "dreamcraft-entertainment-inc",
+    "websiteUrl": "https://www.dreamcraft.com/",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Drillbit",
+    "slug": "drillbit",
+    "websiteUrl": "https://www.drillbit.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Drip Capital",
+    "slug": "drip-capital",
+    "websiteUrl": "http://dripcapital.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "DryMerge",
+    "slug": "drymerge",
+    "websiteUrl": "https://www.drymerge.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Duckie",
+    "slug": "duckie",
+    "websiteUrl": "https://duckie.ai/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Duffel",
+    "slug": "duffel",
+    "websiteUrl": "https://duffel.com/",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Dynamo AI",
+    "slug": "dynamo-ai",
+    "websiteUrl": "https://dynamo.ai",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Dyneti Technologies",
+    "slug": "dyneti-technologies",
+    "websiteUrl": "http://www.dyneti.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Eden",
+    "slug": "eden-2",
+    "websiteUrl": "https://edenmed.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Eden Robotics",
+    "slug": "eden-robotics",
+    "websiteUrl": "https://www.edenrobotics.ai",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Edexia",
+    "slug": "edexia",
+    "websiteUrl": "https://www.edexia.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Educato",
+    "slug": "educato",
+    "websiteUrl": "https://www.educato.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "EffiGov",
+    "slug": "effigov",
+    "websiteUrl": "https://effigov.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "ego",
+    "slug": "ego",
+    "websiteUrl": "https://egoai.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Eight Sleep",
+    "slug": "eight-sleep",
+    "websiteUrl": "http://eightsleep.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "Ekho",
+    "slug": "ekho",
+    "websiteUrl": "https://www.ekho.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Elayne",
+    "slug": "elayne",
+    "websiteUrl": "https://www.elayne.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Electric Air",
+    "slug": "electric-air-2",
+    "websiteUrl": "https://www.electricair.io/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Elevate (formerly Bloom)",
+    "slug": "elevate",
+    "websiteUrl": "https://www.elevatepay.co",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Elevate",
+    "slug": "elevate-2",
+    "websiteUrl": "https://www.useelevate.dev/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Ellipsis",
+    "slug": "ellipsis",
+    "websiteUrl": "https://ellipsis.dev",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Ello",
+    "slug": "ello",
+    "websiteUrl": "https://www.ello.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Eloquent AI",
+    "slug": "eloquent-ai",
+    "websiteUrl": "https://www.eloquentai.co/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Elyos AI",
+    "slug": "elyos-ai",
+    "websiteUrl": "https://www.elyos.ai/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Elyra",
+    "slug": "elyra",
+    "websiteUrl": "https://www.elyrasystems.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Embeddables",
+    "slug": "embeddables",
+    "websiteUrl": "https://embeddables.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Ember",
+    "slug": "ember",
+    "websiteUrl": "https://www.embercopilot.ai",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Embrace",
+    "slug": "embrace",
+    "websiteUrl": "https://embrace.io",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Emerge Career",
+    "slug": "emerge-career",
+    "websiteUrl": "https://www.emergecareer.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Emergent",
+    "slug": "emergent",
+    "websiteUrl": "https://emergent.sh",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Empirical Health",
+    "slug": "empirical-health",
+    "websiteUrl": "https://empirical.health",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Encord",
+    "slug": "encord",
+    "websiteUrl": "https://encord.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Enerjazz",
+    "slug": "enerjazz",
+    "websiteUrl": "https://www.enerjazz.tech/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Enhanced Radar",
+    "slug": "enhanced-radar",
+    "websiteUrl": "https://www.enhancedradar.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Enode",
+    "slug": "enode",
+    "websiteUrl": "http://www.enode.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Entangl",
+    "slug": "entangl",
+    "websiteUrl": "https://www.entangl.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Epinoma",
+    "slug": "epinoma",
+    "websiteUrl": "https://www.epinoma.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Epsilon3",
+    "slug": "epsilon3-inc",
+    "websiteUrl": "https://www.epsilon3.io/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Ergo",
+    "slug": "ergo",
+    "websiteUrl": "https://joinergo.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Escape",
+    "slug": "escape",
+    "websiteUrl": "https://escape.tech",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Etleap",
+    "slug": "etleap",
+    "websiteUrl": "https://etleap.com",
+    "batch": "Winter 2013"
+  },
+  {
+    "name": "Event Horizon Labs",
+    "slug": "event-horizon-labs",
+    "websiteUrl": "https://www.ehl.markets/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Eventual",
+    "slug": "eventual",
+    "websiteUrl": "https://www.daft.ai/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Every",
+    "slug": "every",
+    "websiteUrl": "https://every.io/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Exonic",
+    "slug": "exonic",
+    "websiteUrl": "https://exonic.ai",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Explorex",
+    "slug": "explorex",
+    "websiteUrl": "https://explorex.co",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Eze",
+    "slug": "eze",
+    "websiteUrl": "https://www.ezeit.ai/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "F2",
+    "slug": "f2",
+    "websiteUrl": "http://f2.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "FamPay",
+    "slug": "fampay",
+    "websiteUrl": "https://fampay.in",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Farcast",
+    "slug": "farcast",
+    "websiteUrl": "https://www.farcast.com/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Fathom",
+    "slug": "fathom",
+    "websiteUrl": "https://www.fathom.ai",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Feanix Biotechnologies",
+    "slug": "feanix-biotechnologies",
+    "websiteUrl": "https://www.feanixbio.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Feather",
+    "slug": "feather-2",
+    "websiteUrl": "https://featherhq.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Fenrock AI",
+    "slug": "fenrock-ai",
+    "websiteUrl": "https://fenrock.ai/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Fieldguide",
+    "slug": "fieldguide",
+    "websiteUrl": "http://fieldguide.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Fifth Door",
+    "slug": "fifth-door",
+    "websiteUrl": "https://fifthdoor.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Finch",
+    "slug": "finch",
+    "websiteUrl": "https://tryfinch.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Findly",
+    "slug": "findly",
+    "websiteUrl": "https://www.findly.ai/join",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Finku",
+    "slug": "finku",
+    "websiteUrl": "http://finku.id",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Finni Health",
+    "slug": "finni-health",
+    "websiteUrl": "https://www.finnihealth.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "FINNY AI",
+    "slug": "finny-ai",
+    "websiteUrl": "https://www.finny.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Finosu",
+    "slug": "finosu",
+    "websiteUrl": "https://www.finosu.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Finta",
+    "slug": "finta",
+    "websiteUrl": "https://www.finta.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Finto",
+    "slug": "finto-de",
+    "websiteUrl": "https://www.gofinto.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Finvest",
+    "slug": "finvest",
+    "websiteUrl": "https://www.getfinvest.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Firebender",
+    "slug": "firebender",
+    "websiteUrl": "https://firebender.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Firecrawl",
+    "slug": "firecrawl",
+    "websiteUrl": "https://www.firecrawl.dev",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Firstbase.io",
+    "slug": "firstbase-io",
+    "websiteUrl": "https://firstbase.io/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Flagright",
+    "slug": "flagright",
+    "websiteUrl": "https://flagright.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Flai",
+    "slug": "flai",
+    "websiteUrl": "https://www.useflai.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Flair Labs",
+    "slug": "flair-labs",
+    "websiteUrl": "https://www.flairlabs.ai/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Fleek",
+    "slug": "fleek",
+    "websiteUrl": "https://www.joinfleek.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Fleetline",
+    "slug": "fleetline",
+    "websiteUrl": "https://fleetline.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "FleetWorks",
+    "slug": "fleetworks",
+    "websiteUrl": "https://fleetworks.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Flex",
+    "slug": "flex",
+    "websiteUrl": "https://www.withflex.com/shop",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "FlexDesk",
+    "slug": "flexdesk",
+    "websiteUrl": "https://www.flexdesk.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Flick",
+    "slug": "flick",
+    "websiteUrl": "https://flick.art",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Flint",
+    "slug": "flint",
+    "websiteUrl": "https://withflint.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Flock Safety",
+    "slug": "flock-safety",
+    "websiteUrl": "http://www.flocksafety.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Flockjay",
+    "slug": "flockjay",
+    "websiteUrl": "https://flockjay.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Floot",
+    "slug": "floot",
+    "websiteUrl": "https://floot.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Flowtel",
+    "slug": "flowtel",
+    "websiteUrl": "https://flowtel.ai",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "FlutterFlow",
+    "slug": "flutterflow",
+    "websiteUrl": "https://flutterflow.io",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Fondo",
+    "slug": "fondo",
+    "websiteUrl": "https://fondo.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Forage",
+    "slug": "forage-2",
+    "websiteUrl": "http://www.joinforage.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Forge Automation",
+    "slug": "forge-automation",
+    "websiteUrl": "https://www.forgeautomation.ca",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Formance",
+    "slug": "formance",
+    "websiteUrl": "https://formance.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Fort",
+    "slug": "fort",
+    "websiteUrl": "https://fort.cx",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Fortuna Health",
+    "slug": "fortuna-health",
+    "websiteUrl": "https://fortunahealth.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Foundation Industries",
+    "slug": "foundation-industries",
+    "websiteUrl": "https://www.foundation-industries.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Fractional",
+    "slug": "fractional",
+    "websiteUrl": "https://fractional.app",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Fresco",
+    "slug": "fresco",
+    "websiteUrl": "https://fresco-ai.com/",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Freshpaint",
+    "slug": "freshpaint",
+    "websiteUrl": "https://freshpaint.io",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Freya",
+    "slug": "freya",
+    "websiteUrl": "https://freyavoice.ai/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "FrontPage",
+    "slug": "frontpage",
+    "websiteUrl": "https://front.page",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Function of Beauty",
+    "slug": "function-of-beauty",
+    "websiteUrl": "http://www.functionofbeauty.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "FurtherAI",
+    "slug": "furtherai",
+    "websiteUrl": "https://www.furtherai.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Fuse AI",
+    "slug": "fuse-ai",
+    "websiteUrl": "https://fuseai.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Galactic Resource Utilization Space, Inc. (GRU Space)",
+    "slug": "galactic-resource-utilization-space-inc-gru-space",
+    "websiteUrl": "https://gru.space",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Garage",
+    "slug": "garage-2",
+    "websiteUrl": "https://www.shopgarage.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Gather",
+    "slug": "gather-2",
+    "websiteUrl": "https://www.gather.town/",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Gauge",
+    "slug": "gauge",
+    "websiteUrl": "https://withgauge.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Gecko Robotics",
+    "slug": "gecko-robotics",
+    "websiteUrl": "https://www.geckorobotics.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Gem",
+    "slug": "gem",
+    "websiteUrl": "https://www.gem.com/",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Gemnote",
+    "slug": "gemnote",
+    "websiteUrl": "http://gemnote.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "General Proximity",
+    "slug": "general-proximity",
+    "websiteUrl": "https://www.generalproximity.bio/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "General Astronautics",
+    "slug": "generalastro",
+    "websiteUrl": "https://generalastro.com/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "GETASAP",
+    "slug": "getasap",
+    "websiteUrl": "https://www.getasap.us",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Balance",
+    "slug": "getbalance",
+    "websiteUrl": "https://getbalance.ai",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "GetCrux",
+    "slug": "getcrux",
+    "websiteUrl": "http://getcrux.ai/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "GhostEye",
+    "slug": "ghosteye",
+    "websiteUrl": "https://ghosteye.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Giga",
+    "slug": "giga",
+    "websiteUrl": "https://giga.ai/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Gigs",
+    "slug": "gigs",
+    "websiteUrl": "https://gigs.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "GIMO",
+    "slug": "gimo",
+    "websiteUrl": "https://gimo.vn/en",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "GiveCampus",
+    "slug": "givecampus",
+    "websiteUrl": "http://go.givecampus.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "Giveffect",
+    "slug": "giveffect",
+    "websiteUrl": "http://giveffect.com",
+    "batch": "Winter 2015"
+  },
+  {
+    "name": "Glass Health",
+    "slug": "glass-health",
+    "websiteUrl": "https://glass.health",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Glimpse",
+    "slug": "glimpse-2",
+    "websiteUrl": "https://tryglimpse.com/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "GloGlo",
+    "slug": "gloglo",
+    "websiteUrl": "https://gloglo.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Go1",
+    "slug": "go1",
+    "websiteUrl": "https://go1.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "GOAT Group",
+    "slug": "goat-group",
+    "websiteUrl": "https://www.goatgroup.com/",
+    "batch": "Winter 2011"
+  },
+  {
+    "name": "Godela",
+    "slug": "godela",
+    "websiteUrl": "http://godela.ai",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "GoGoGrandparent",
+    "slug": "gogograndparent",
+    "websiteUrl": "https://gogograndparent.com",
+    "batch": "Summer 2016"
+  },
+  {
+    "name": "Gojiberry AI",
+    "slug": "gojiberry-ai",
+    "websiteUrl": "https://www.gojiberry.ai",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Goldbelly",
+    "slug": "goldbelly",
+    "websiteUrl": "https://www.goldbelly.com/",
+    "batch": "Winter 2013"
+  },
+  {
+    "name": "GoLinks",
+    "slug": "golinks",
+    "websiteUrl": "https://www.golinks.io",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "goodfin",
+    "slug": "goodfin",
+    "websiteUrl": "http://www.goodfin.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Gooseworks",
+    "slug": "gooseworks",
+    "websiteUrl": "https://gooseworks.ai/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "GoSats",
+    "slug": "gosats",
+    "websiteUrl": "https://gosats.io",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "GovDash",
+    "slug": "govdash",
+    "websiteUrl": "https://govdash.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "GovEagle",
+    "slug": "goveagle",
+    "websiteUrl": "https://www.goveagle.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "GovernGPT",
+    "slug": "governgpt",
+    "websiteUrl": "https://www.governgpt.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Govly",
+    "slug": "govly",
+    "websiteUrl": "https://www.govly.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Great Question",
+    "slug": "great-question",
+    "websiteUrl": "https://greatquestion.co",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Greenboard",
+    "slug": "greenboard",
+    "websiteUrl": "https://www.greenboard.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Gridware",
+    "slug": "gridware",
+    "websiteUrl": "https://www.gridware.io",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "GroMo",
+    "slug": "gromo",
+    "websiteUrl": "https://www.gromo.in",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "GrowthBook",
+    "slug": "growthbook",
+    "websiteUrl": "https://www.growthbook.io",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Guac",
+    "slug": "guac",
+    "websiteUrl": "https://www.guac.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Guardian RF",
+    "slug": "guardian-rf",
+    "websiteUrl": "https://guardianrf.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Gutgutgoose",
+    "slug": "gutgutgoose",
+    "websiteUrl": "https://gutgutgoose.com/",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "Gym Class",
+    "slug": "gym-class",
+    "websiteUrl": "https://gymclass.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "HackerRank",
+    "slug": "hackerrank",
+    "websiteUrl": "http://hackerrank.com",
+    "batch": "Summer 2011"
+  },
+  {
+    "name": "Hadrius",
+    "slug": "hadrius",
+    "websiteUrl": "https://www.hadrius.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Haladir",
+    "slug": "haladir",
+    "websiteUrl": "https://www.haladir.com/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Halluminate",
+    "slug": "halluminate",
+    "websiteUrl": "https://halluminate.ai/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Hamming AI",
+    "slug": "hamming-ai",
+    "websiteUrl": "https://hamming.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Hammr",
+    "slug": "hammr",
+    "websiteUrl": "https://www.hammr.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Handle",
+    "slug": "handle",
+    "websiteUrl": "https://www.handle.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Handoff",
+    "slug": "handoff",
+    "websiteUrl": "https://www.handoff.ai/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Hapi",
+    "slug": "hapi",
+    "websiteUrl": "https://hapi.trade/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Haplotype Labs",
+    "slug": "haplotype-labs",
+    "websiteUrl": "https://www.haplotypelabs.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Happl",
+    "slug": "happl",
+    "websiteUrl": "https://happl.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "HappyRobot",
+    "slug": "happyrobot",
+    "websiteUrl": "https://happyrobot.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Harper",
+    "slug": "harper",
+    "websiteUrl": "https://www.harperinsure.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Haven",
+    "slug": "haven",
+    "websiteUrl": "http://www.havenservicing.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Haystack",
+    "slug": "haystack",
+    "websiteUrl": "https://usehaystack.io/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Healia",
+    "slug": "healia",
+    "websiteUrl": "https://www.healiahealth.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Health Harbor",
+    "slug": "health-harbor",
+    "websiteUrl": "https://healthharbor.co/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Healthtech 1",
+    "slug": "healthtech-1",
+    "websiteUrl": "https://www.healthtech1.uk/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Hedge",
+    "slug": "hedge",
+    "websiteUrl": "https://www.hedgespecialty.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Hedgehog",
+    "slug": "hedgehog-2",
+    "websiteUrl": "http://hedgehogfoods.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Helios",
+    "slug": "helios",
+    "websiteUrl": "https://www.usehelios.ai/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Helium",
+    "slug": "helium",
+    "websiteUrl": "https://tryhelium.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Hellometer",
+    "slug": "hellometer",
+    "websiteUrl": "https://hellometer.io/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Helloverify",
+    "slug": "helloverify",
+    "websiteUrl": "https://www.helloverify.ae",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Hemlock",
+    "slug": "hemlock",
+    "websiteUrl": "https://hemlock.info",
+    "batch": "Fall 2026"
+  },
+  {
+    "name": "Hemut",
+    "slug": "hemut",
+    "websiteUrl": "https://www.hemut.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Hera",
+    "slug": "hera-video",
+    "websiteUrl": "https://hera.video/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Heron Data",
+    "slug": "heron-data",
+    "websiteUrl": "https://www.herondata.io",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Hestus, Inc.",
+    "slug": "hestus-inc",
+    "websiteUrl": "https://www.hestus.co",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Hey Telo",
+    "slug": "hey-telo",
+    "websiteUrl": "https://www.heytelo.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "HeyCharge",
+    "slug": "heycharge",
+    "websiteUrl": "https://heycharge.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "hillclimb",
+    "slug": "hillclimb",
+    "websiteUrl": "https://hillclimb.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "HiOperator",
+    "slug": "hioperator",
+    "websiteUrl": "http://www.hioperator.com",
+    "batch": "Summer 2016"
+  },
+  {
+    "name": "HitPay",
+    "slug": "hitpay",
+    "websiteUrl": "https://www.hitpayapp.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Hive",
+    "slug": "hive",
+    "websiteUrl": "http://www.hive.co",
+    "batch": "Summer 2014"
+  },
+  {
+    "name": "HockeyStack",
+    "slug": "hockeystack",
+    "websiteUrl": "https://hockeystack.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "HOKALI",
+    "slug": "hokali",
+    "websiteUrl": "https://www.hokali.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Homebase",
+    "slug": "homebase",
+    "websiteUrl": "http://www.gethomebase.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "HOMLI",
+    "slug": "homli",
+    "websiteUrl": "https://thehomli.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "hotglue",
+    "slug": "hotglue",
+    "websiteUrl": "https://hotglue.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Hotplate",
+    "slug": "hotplate",
+    "websiteUrl": "http://www.hotplate.com/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Housewarming",
+    "slug": "housewarming",
+    "websiteUrl": "https://housewarming.me",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Hub",
+    "slug": "hub",
+    "websiteUrl": "https://hub.xyz",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Lightdash",
+    "slug": "hubble",
+    "websiteUrl": "http://lightdash.com/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "HUD",
+    "slug": "hud",
+    "websiteUrl": "https://www.hud.ai",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Humaans",
+    "slug": "humaans",
+    "websiteUrl": "https://humaans.io",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Human Archive",
+    "slug": "human-archive",
+    "websiteUrl": "https://www.humanarchive.ai/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Human Interest",
+    "slug": "human-interest",
+    "websiteUrl": "http://humaninterest.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "HumanLayer",
+    "slug": "humanlayer",
+    "websiteUrl": "https://humanlayer.com",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Humwork",
+    "slug": "humwork",
+    "websiteUrl": "https://humwork.ai",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Huscarl",
+    "slug": "huscarl",
+    "websiteUrl": "https://www.huscarl.io/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "HyLight",
+    "slug": "hylight",
+    "websiteUrl": "https://www.hylight.aero/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Hype",
+    "slug": "hype",
+    "websiteUrl": "https://www.hype.meme/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Hyperbound",
+    "slug": "hyperbound",
+    "websiteUrl": "https://hyperbound.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Hyperbrowser",
+    "slug": "hyperbrowser",
+    "websiteUrl": "https://hyperbrowser.ai",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Hypercubic",
+    "slug": "hypercubic",
+    "websiteUrl": "https://www.hypercubic.ai/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Hyperspell",
+    "slug": "hyperspell",
+    "websiteUrl": "https://hyperspell.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Hypotenuse AI",
+    "slug": "hypotenuse-ai",
+    "websiteUrl": "https://hypotenuse.ai/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Icarus",
+    "slug": "icarus",
+    "websiteUrl": "https://www.icarus.one/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "IcePanel",
+    "slug": "icepanel",
+    "websiteUrl": "https://icepanel.io",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "idler",
+    "slug": "idler",
+    "websiteUrl": "https://idler.ai/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Imagine AI",
+    "slug": "imagine-ai",
+    "websiteUrl": "https://imagineai.me",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Imprezia",
+    "slug": "imprezia",
+    "websiteUrl": "https://imprezia.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "IMT Care",
+    "slug": "imt-care",
+    "websiteUrl": "https://www.imt.care",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "inBuild",
+    "slug": "inbuild",
+    "websiteUrl": "https://www.inbuild.ai/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "InEvent",
+    "slug": "inevent",
+    "websiteUrl": "https://inevent.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Infer",
+    "slug": "infer",
+    "websiteUrl": "https://www.infer.so/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Infinia",
+    "slug": "infinia",
+    "websiteUrl": "https://www.infiniaweb.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Infinite",
+    "slug": "infinite",
+    "websiteUrl": "https://infinite.dev",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Infinity",
+    "slug": "infinity",
+    "websiteUrl": "https://www.infinityapp.in/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "InfluxData",
+    "slug": "influxdata",
+    "websiteUrl": "https://influxdata.com",
+    "batch": "Winter 2013"
+  },
+  {
+    "name": "Infracost",
+    "slug": "infracost",
+    "websiteUrl": "https://infracost.io",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Inito",
+    "slug": "inito",
+    "websiteUrl": "https://www.inito.com/",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Inkeep",
+    "slug": "inkeep",
+    "websiteUrl": "https://inkeep.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Inlet",
+    "slug": "inlet-2",
+    "websiteUrl": "https://inletai.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Innate",
+    "slug": "innate",
+    "websiteUrl": "https://innate.bot",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Inscribe",
+    "slug": "inscribe",
+    "websiteUrl": "https://www.inscribe.ai/",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Inspectify",
+    "slug": "inspectify",
+    "websiteUrl": "http://www.inspectify.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "InspectMind AI",
+    "slug": "inspectmind-ai",
+    "websiteUrl": "https://www.inspectmind.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Instawork",
+    "slug": "instawork",
+    "websiteUrl": "http://instawork.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "Instrumentl",
+    "slug": "instrumentl",
+    "websiteUrl": "https://www.instrumentl.com",
+    "batch": "Summer 2016"
+  },
+  {
+    "name": "Intelligence Factory",
+    "slug": "intelligence-factory",
+    "websiteUrl": "https://intelligence-factory.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Intelline",
+    "slug": "intelline",
+    "websiteUrl": "https://www.intelline.ca/",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Interfere",
+    "slug": "interfere",
+    "websiteUrl": "https://interfere.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Intryc",
+    "slug": "intryc",
+    "websiteUrl": "https://intryc.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Invert",
+    "slug": "invert",
+    "websiteUrl": "http://www.invertbio.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Invopop",
+    "slug": "invopop",
+    "websiteUrl": "https://www.invopop.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "IOMETE",
+    "slug": "iomete",
+    "websiteUrl": "https://www.iomete.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "IronLedger.ai",
+    "slug": "ironledger-ai",
+    "websiteUrl": "https://ironledger.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "iSono Health",
+    "slug": "isono-health",
+    "websiteUrl": "http://www.isonohealth.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "item",
+    "slug": "item",
+    "websiteUrl": "https://item.app",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "JABU",
+    "slug": "jabu",
+    "websiteUrl": "http://www.gojabu.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Jarmin",
+    "slug": "jarmin",
+    "websiteUrl": "https://jarmin.ai/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Jeevy Fabrication",
+    "slug": "jeevy-fabrication",
+    "websiteUrl": "https://www.jeevyfabrication.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Verse Medical",
+    "slug": "jetlenses",
+    "websiteUrl": "http://versemedical.com/",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Jiga",
+    "slug": "jiga",
+    "websiteUrl": "https://jiga.io",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Jinba",
+    "slug": "jinba",
+    "websiteUrl": "https://jinba.io",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "JITX",
+    "slug": "jitx",
+    "websiteUrl": "http://www.jitx.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Joy",
+    "slug": "joy",
+    "websiteUrl": "http://withjoy.com",
+    "batch": "Summer 2016"
+  },
+  {
+    "name": "Juicebox",
+    "slug": "juicebox",
+    "websiteUrl": "https://juicebox.ai/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Julius",
+    "slug": "julius",
+    "websiteUrl": "https://julius.ai",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Junction",
+    "slug": "junction",
+    "websiteUrl": "https://www.junction.com/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Juno",
+    "slug": "juno-chat",
+    "websiteUrl": "https://junocompanion.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Just Appraised",
+    "slug": "just-appraised",
+    "websiteUrl": "https://www.justappraised.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "JustAI",
+    "slug": "justai",
+    "websiteUrl": "https://getjust.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Juxta",
+    "slug": "juxta",
+    "websiteUrl": "https://juxta.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "JuziBot",
+    "slug": "juzibot",
+    "websiteUrl": "https://www.juzibot.com/",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Kabilah",
+    "slug": "kabilah",
+    "websiteUrl": "https://www.kabilah.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "KaiPod Learning",
+    "slug": "kaipod-learning",
+    "websiteUrl": "http://www.kaipodlearning.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Kalam Labs",
+    "slug": "kalam-labs",
+    "websiteUrl": "http://www.kalamlabs.in",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Kalinda",
+    "slug": "kalinda",
+    "websiteUrl": "https://www.kalinda.ai/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Kalpa Labs",
+    "slug": "kalpa-labs",
+    "websiteUrl": "https://kalpalabs.ai/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Kalshi",
+    "slug": "kalshi",
+    "websiteUrl": "https://www.kalshi.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "kapa.ai",
+    "slug": "kapa-ai",
+    "websiteUrl": "https://www.kapa.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Karat Financial",
+    "slug": "karat-financial",
+    "websiteUrl": "http://trykarat.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Karumi",
+    "slug": "karumi",
+    "websiteUrl": "https://www.karumi.ai/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Kaso",
+    "slug": "kaso",
+    "websiteUrl": "https://www.kaso.ai",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Kastle",
+    "slug": "kastle",
+    "websiteUrl": "https://kastle.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Keeper",
+    "slug": "keeper-2",
+    "websiteUrl": "https://keepertax.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "KelAI",
+    "slug": "kelai",
+    "websiteUrl": "https://kelaitech.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Keye",
+    "slug": "keye",
+    "websiteUrl": "https://www.keye.co",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Kilvin",
+    "slug": "kilvin",
+    "websiteUrl": "https://www.kilvin.ai",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Kingdom",
+    "slug": "kingdom",
+    "websiteUrl": "https://kingdomsuperculture.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Kino AI",
+    "slug": "kino-ai",
+    "websiteUrl": "https://kino.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Kinro",
+    "slug": "kinro",
+    "websiteUrl": "https://www.kinro.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Kinter",
+    "slug": "kinter",
+    "websiteUrl": "https://kinter.ai",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Kivo Health",
+    "slug": "kivo-health",
+    "websiteUrl": "https://kivohealth.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Klaimee",
+    "slug": "klaimee",
+    "websiteUrl": "https://www.klaimee.ai",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Klavis AI",
+    "slug": "klavis-ai",
+    "websiteUrl": "https://www.klavis.ai/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Knowtex",
+    "slug": "knowtex",
+    "websiteUrl": "http://www.knowtex.ai/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Kodex",
+    "slug": "kodex",
+    "websiteUrl": "https://www.kodexglobal.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Kodo",
+    "slug": "kodo",
+    "websiteUrl": "https://www.kodo.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Kombo",
+    "slug": "kombo",
+    "websiteUrl": "https://kombo.dev",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Kontigo",
+    "slug": "kontigo",
+    "websiteUrl": "https://kontigo.lat/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "KorrAI",
+    "slug": "korrai",
+    "websiteUrl": "https://www.korrai.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Koyal",
+    "slug": "koyal",
+    "websiteUrl": "https://koyal.ai",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "KugelAudio",
+    "slug": "kugelaudio",
+    "websiteUrl": "https://kugelaudio.com/en",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Kuli",
+    "slug": "kuli",
+    "websiteUrl": "https://kuli.one",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Kyber",
+    "slug": "kyber",
+    "websiteUrl": "https://askkyber.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Lab0",
+    "slug": "lab0",
+    "websiteUrl": "https://lab0.ai",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Lago",
+    "slug": "lago",
+    "websiteUrl": "https://www.getlago.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Lamar Health",
+    "slug": "lamar-health",
+    "websiteUrl": "http://www.lamarhealth.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Lambda Robotics",
+    "slug": "lambda-robotics",
+    "websiteUrl": "https://lambdarobotics.ai",
+    "batch": "Fall 2026"
+  },
+  {
+    "name": "Laminar",
+    "slug": "laminar-com",
+    "websiteUrl": "https://laminar.com",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Lance",
+    "slug": "lance",
+    "websiteUrl": "https://www.lance.live",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Landed",
+    "slug": "landed-2",
+    "websiteUrl": "https://www.gotlanded.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Landeed",
+    "slug": "landeed",
+    "websiteUrl": "https://www.landeed.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Lanesurf",
+    "slug": "lanesurf",
+    "websiteUrl": "https://www.lanesurf.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Langdock",
+    "slug": "langdock",
+    "websiteUrl": "https://langdock.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Latent",
+    "slug": "latent",
+    "websiteUrl": "https://latenthealth.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Layers",
+    "slug": "layers",
+    "websiteUrl": "https://www.layers.bio/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Layerup",
+    "slug": "layerup",
+    "websiteUrl": "https://www.uselayerup.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Laylo",
+    "slug": "laylo",
+    "websiteUrl": "https://laylo.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Leadbay",
+    "slug": "leadbay",
+    "websiteUrl": "https://leadbay.ai/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Leaping AI",
+    "slug": "leaping-ai",
+    "websiteUrl": "https://www.leapingai.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Ledger Investing",
+    "slug": "ledger-investing",
+    "websiteUrl": "https://ledgerinvesting.com/",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Leena AI",
+    "slug": "leena-ai",
+    "websiteUrl": "https://www.leena.ai",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Leeroo",
+    "slug": "leeroo",
+    "websiteUrl": "https://www.leeroo.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Legalist",
+    "slug": "legalist",
+    "websiteUrl": "https://www.legalist.com",
+    "batch": "Summer 2016"
+  },
+  {
+    "name": "Legion Health",
+    "slug": "legion-health",
+    "websiteUrl": "https://legionhealth.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Legionfarm",
+    "slug": "legionfarm",
+    "websiteUrl": "https://lfcarry.com/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Legora",
+    "slug": "legora",
+    "websiteUrl": "https://www.legora.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Letter AI",
+    "slug": "letter-ai",
+    "websiteUrl": "https://www.letter.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Letterdrop",
+    "slug": "letterdrop",
+    "websiteUrl": "https://letterdrop.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Lightberry",
+    "slug": "lightberry",
+    "websiteUrl": "https://lightberry.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Lighthouz AI",
+    "slug": "lighthouz-ai",
+    "websiteUrl": "https://lighthouz.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Lightly",
+    "slug": "lightly",
+    "websiteUrl": "https://lightly.ai/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Lightsprint",
+    "slug": "lightsprint",
+    "websiteUrl": "https://lightsprint.ai",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "LineLeap",
+    "slug": "lineleap",
+    "websiteUrl": "https://www.lineleap.com/",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Liquid Compute",
+    "slug": "liquid-compute",
+    "websiteUrl": "https://www.liquidcompute.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "LiteLLM",
+    "slug": "litellm",
+    "websiteUrl": "https://www.litellm.ai/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "LiveFlow",
+    "slug": "liveflow",
+    "websiteUrl": "https://www.liveflow.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Living Carbon",
+    "slug": "living-carbon",
+    "websiteUrl": "https://www.livingcarbon.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Lob",
+    "slug": "lob",
+    "websiteUrl": "http://lob.com",
+    "batch": "Summer 2013"
+  },
+  {
+    "name": "Locata",
+    "slug": "locata",
+    "websiteUrl": "https://www.locatahealth.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Locke",
+    "slug": "locke",
+    "websiteUrl": "https://locke.inc",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "Loombotic",
+    "slug": "loombotic",
+    "websiteUrl": "https://www.loombotic.com",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "loopfour",
+    "slug": "loopfour",
+    "websiteUrl": "https://www.loopfour.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Loops",
+    "slug": "loops",
+    "websiteUrl": "https://loops.so",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "LootRush",
+    "slug": "lootrush",
+    "websiteUrl": "https://www.lootrush.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Loula",
+    "slug": "loula",
+    "websiteUrl": "https://joinloula.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Lua Global Inc",
+    "slug": "lua-global-inc",
+    "websiteUrl": "https://heylua.ai/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Lucid",
+    "slug": "lucid",
+    "websiteUrl": "https://lucid.ai",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Lucis",
+    "slug": "lucis",
+    "websiteUrl": "https://www.lucis.life",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Lugg",
+    "slug": "lugg",
+    "websiteUrl": "http://lugg.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "Lumari",
+    "slug": "lumari",
+    "websiteUrl": "https://www.lumari.ai/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Luminai",
+    "slug": "luminai",
+    "websiteUrl": "https://www.luminai.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Luminal",
+    "slug": "luminal",
+    "websiteUrl": "https://luminal.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Lumius",
+    "slug": "lumius",
+    "websiteUrl": "https://www.lumius-imaging.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "LunaJoy Health",
+    "slug": "lunajoy-health",
+    "websiteUrl": "http://HelloLunaJoy.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Luthor",
+    "slug": "luthor",
+    "websiteUrl": "https://luthor.ai",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Macadamia",
+    "slug": "macadamia",
+    "websiteUrl": "https://macadamialabs.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Mach9",
+    "slug": "mach9",
+    "websiteUrl": "https://www.mach9.ai/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "MadeThis",
+    "slug": "madethis",
+    "websiteUrl": "https://madethis.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Mage Legal",
+    "slug": "mage-legal",
+    "websiteUrl": "https://magelegal.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Magic",
+    "slug": "magic",
+    "websiteUrl": "https://getmagic.com/",
+    "batch": "Winter 2015"
+  },
+  {
+    "name": "Magic Patterns",
+    "slug": "magic-patterns",
+    "websiteUrl": "https://www.magicpatterns.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Magnetic",
+    "slug": "magnetic",
+    "websiteUrl": "https://www.magnetictax.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "MailTime",
+    "slug": "mailtime",
+    "websiteUrl": "http://mailtime.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Maintouch",
+    "slug": "maintouch",
+    "websiteUrl": "https://maintouch.com/?utm_source=bookface&utm_medium=social&utm_campaign=profile",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Maitai",
+    "slug": "maitai",
+    "websiteUrl": "https://trymaitai.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Malama Health",
+    "slug": "malama-health",
+    "websiteUrl": "https://www.heymalama.co",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "MangoDesk",
+    "slug": "mangodesk",
+    "websiteUrl": "https://www.mangodesk.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Manicule",
+    "slug": "manicule",
+    "websiteUrl": "https://manicule.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Mantis",
+    "slug": "mantis",
+    "websiteUrl": "https://mantisbiotech.com/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Manufact",
+    "slug": "manufact",
+    "websiteUrl": "https://manufact.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Margin",
+    "slug": "margin",
+    "websiteUrl": "https://usemargin.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Maritime Fusion",
+    "slug": "maritime-fusion",
+    "websiteUrl": "https://maritimefusion.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Mashgin",
+    "slug": "mashgin",
+    "websiteUrl": "http://mashgin.com",
+    "batch": "Winter 2015"
+  },
+  {
+    "name": "Mason",
+    "slug": "mason",
+    "websiteUrl": "http://www.bymason.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Material Depot",
+    "slug": "material-depot",
+    "websiteUrl": "https://materialdepot.in/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Matter",
+    "slug": "matter",
+    "websiteUrl": "https://getmatter.app",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Maven Bio",
+    "slug": "maven-bio",
+    "websiteUrl": "https://mavenbio.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "May Mobility",
+    "slug": "may-mobility",
+    "websiteUrl": "http://maymobility.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Maywood",
+    "slug": "maywood",
+    "websiteUrl": "https://maywoodai.com/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Mbodi AI",
+    "slug": "mbodi-ai",
+    "websiteUrl": "https://www.mbodi.ai/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "MDalgorithms Inc.",
+    "slug": "mdalgorithms-inc",
+    "websiteUrl": "https://www.mdalgorithms.com",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "mdhub",
+    "slug": "mdhub",
+    "websiteUrl": "https://www.mdhub.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Measured",
+    "slug": "measured",
+    "websiteUrl": "https://trymeasured.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "MedMe Health",
+    "slug": "medme-health",
+    "websiteUrl": "https://www.medmehealth.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Mednet",
+    "slug": "mednet",
+    "websiteUrl": "https://www.themednet.org",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Medplum",
+    "slug": "medplum",
+    "websiteUrl": "https://www.medplum.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Mem0",
+    "slug": "mem0",
+    "websiteUrl": "https://mem0.ai",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Mentra",
+    "slug": "mentra",
+    "websiteUrl": "https://mentra.glass",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Menza",
+    "slug": "menza",
+    "websiteUrl": "https://menza.ai/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Mercoa",
+    "slug": "mercoa",
+    "websiteUrl": "http://mercoa.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Mercura",
+    "slug": "mercura",
+    "websiteUrl": "https://www.mercura.ai",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Meridian Industries",
+    "slug": "meridian-industries",
+    "websiteUrl": "https://mora.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Merlin AI",
+    "slug": "merlin-ai",
+    "websiteUrl": "https://www.merlinai.co",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Meru Health",
+    "slug": "meru-health",
+    "websiteUrl": "http://www.meruhealth.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Mesh",
+    "slug": "mesh-2",
+    "websiteUrl": "http://www.usemesh.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Metal",
+    "slug": "metal",
+    "websiteUrl": "https://metal.ai/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Metalware",
+    "slug": "metalware",
+    "websiteUrl": "https://www.metalware.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Meticulate",
+    "slug": "meticulate",
+    "websiteUrl": "https://meticulate.ai/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Meticulous",
+    "slug": "meticulous",
+    "websiteUrl": "https://www.meticulous.ai",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Metorial",
+    "slug": "metorial",
+    "websiteUrl": "https://metorial.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Metriport",
+    "slug": "metriport",
+    "websiteUrl": "https://metriport.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Middleware",
+    "slug": "middleware",
+    "websiteUrl": "https://www.middleware.io",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "MindFi",
+    "slug": "mindfi",
+    "websiteUrl": "https://www.mindfi.co",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "MindFort",
+    "slug": "mindfort",
+    "websiteUrl": "https://mindfort.ai/?utm_source=ycombinator&utm_medium=referral&utm_campaign=yc",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Mineflow",
+    "slug": "mineflow",
+    "websiteUrl": "http://mineflow.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Minerva",
+    "slug": "minerva",
+    "websiteUrl": "https://joinminerva.ai",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Minicor",
+    "slug": "minicor",
+    "websiteUrl": "https://minicor.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Minimum",
+    "slug": "minimum",
+    "websiteUrl": "https://minimum.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Mino Games",
+    "slug": "mino-games",
+    "websiteUrl": "http://minomonsters.com",
+    "batch": "Winter 2011"
+  },
+  {
+    "name": "Mintlify",
+    "slug": "mintlify",
+    "websiteUrl": "https://mintlify.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Miso",
+    "slug": "miso",
+    "websiteUrl": "http://miso.kr",
+    "batch": "Summer 2016"
+  },
+  {
+    "name": "Miso Labs",
+    "slug": "miso-labs",
+    "websiteUrl": "https://misolabs.ai",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Misprint",
+    "slug": "misprint",
+    "websiteUrl": "https://www.misprint.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "MixRank",
+    "slug": "mixrank",
+    "websiteUrl": "https://mixrank.com",
+    "batch": "Summer 2011"
+  },
+  {
+    "name": "MochaCare",
+    "slug": "mochacare",
+    "websiteUrl": "https://www.mochacare.com/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Model ML",
+    "slug": "model-ml",
+    "websiteUrl": "https://www.modelml.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Modern Health",
+    "slug": "modern-health",
+    "websiteUrl": "https://www.modernhealth.com/",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "ModernLoop",
+    "slug": "modernloop",
+    "websiteUrl": "http://modernloop.io",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Momentic",
+    "slug": "momentic",
+    "websiteUrl": "https://momentic.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Monumint",
+    "slug": "monumint",
+    "websiteUrl": "https://monumint.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Moonset Health",
+    "slug": "moonset-health",
+    "websiteUrl": "https://www.moonsethealth.com/",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Moonvalley",
+    "slug": "moonvalley",
+    "websiteUrl": "https://www.moonvalley.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Moritz",
+    "slug": "moritz",
+    "websiteUrl": "http://moritzlegal.com/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Morph",
+    "slug": "morph",
+    "websiteUrl": "https://morphllm.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Morphle Labs",
+    "slug": "morphle-labs",
+    "websiteUrl": "https://morphlelabs.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "MorphoAI",
+    "slug": "morphoai",
+    "websiteUrl": "https://morpho.ai/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Mosaic",
+    "slug": "mosaic-2",
+    "websiteUrl": "https://mosaic.so",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Moss",
+    "slug": "moss",
+    "websiteUrl": "https://moss.dev",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Motion",
+    "slug": "motion",
+    "websiteUrl": "https://www.usemotion.com/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "MSPilot",
+    "slug": "mspilot",
+    "websiteUrl": "https://mspilot.io",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Multifactor",
+    "slug": "multifactor",
+    "websiteUrl": "https://multifactor.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Multiply Labs",
+    "slug": "multiply-labs",
+    "websiteUrl": "http://multiplylabs.com/",
+    "batch": "Summer 2016"
+  },
+  {
+    "name": "Mutiny",
+    "slug": "mutiny",
+    "websiteUrl": "https://www.mutinyhq.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Mux",
+    "slug": "mux",
+    "websiteUrl": "http://mux.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Muzz",
+    "slug": "muzz",
+    "websiteUrl": "https://muzz.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Myria",
+    "slug": "myria",
+    "websiteUrl": "https://myria.us",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Nabis",
+    "slug": "nabis",
+    "websiteUrl": "https://www.nabis.com/",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Naïve",
+    "slug": "naive",
+    "websiteUrl": "https://usenaive.ai",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Nango",
+    "slug": "nango",
+    "websiteUrl": "https://nango.dev",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "NanoNets",
+    "slug": "nanonets",
+    "websiteUrl": "https://nanonets.com",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "nao Labs",
+    "slug": "nao-labs",
+    "websiteUrl": "https://getnao.io/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Narrative",
+    "slug": "narrative",
+    "websiteUrl": "https://www.trynarrative.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Nash",
+    "slug": "nash",
+    "websiteUrl": "https://www.usenash.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Nautilus",
+    "slug": "nautilus",
+    "websiteUrl": "https://nautilus.co",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Navier AI",
+    "slug": "navier-ai",
+    "websiteUrl": "http://navier.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Nectar",
+    "slug": "nectar",
+    "websiteUrl": "https://nectarclimate.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Neodocs",
+    "slug": "neodocs",
+    "websiteUrl": "https://www.neodocs.in",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Nessie",
+    "slug": "nessie",
+    "websiteUrl": "https://nessielabs.com/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Nest Genomics",
+    "slug": "nest-genomics",
+    "websiteUrl": "https://nestgenomics.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Nestor",
+    "slug": "nestor",
+    "websiteUrl": "https://nestorup.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Netomi",
+    "slug": "netomi",
+    "websiteUrl": "https://netomi.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "NewsCatcher",
+    "slug": "newscatcher",
+    "websiteUrl": "https://newscatcherapi.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Newton",
+    "slug": "newton",
+    "websiteUrl": "https://joinnewton.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Nimble",
+    "slug": "nimble",
+    "websiteUrl": "http://www.hirenimble.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Nine Fives",
+    "slug": "nine-fives",
+    "websiteUrl": "https://ninefives.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Nira Energy",
+    "slug": "nira-energy",
+    "websiteUrl": "https://www.niraenergy.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Nitrode",
+    "slug": "nitrode",
+    "websiteUrl": "https://www.nitrode.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Nixo",
+    "slug": "nixo",
+    "websiteUrl": "https://withnixo.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "No Logo",
+    "slug": "no-logo",
+    "websiteUrl": "https://nologo.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Nomic Bio",
+    "slug": "nomic-bio",
+    "websiteUrl": "http://www.nomic.bio",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "NOSO LABS",
+    "slug": "noso-labs",
+    "websiteUrl": "https://noso.so",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Notabene",
+    "slug": "notabene",
+    "websiteUrl": "https://notabene.id",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Nourish",
+    "slug": "nourish",
+    "websiteUrl": "https://nourish.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Novaflow",
+    "slug": "novaflow",
+    "websiteUrl": "https://www.novaflow.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Novig",
+    "slug": "novig",
+    "websiteUrl": "https://www.novig.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Novoflow",
+    "slug": "novoflow",
+    "websiteUrl": "https://www.novoflow.io/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Nowadays",
+    "slug": "nowadays",
+    "websiteUrl": "http://nowadays.ai/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Nox Metals",
+    "slug": "nox-metals",
+    "websiteUrl": "https://noxmetals.co/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Nozomio",
+    "slug": "nozomio",
+    "websiteUrl": "https://www.nozomio.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "nsave",
+    "slug": "nsave",
+    "websiteUrl": "https://www.nsave.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Numen",
+    "slug": "numen",
+    "websiteUrl": "https://www.numen.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Numeral",
+    "slug": "numeral",
+    "websiteUrl": "https://www.numeral.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Numero",
+    "slug": "numero",
+    "websiteUrl": "https://www.numero.ai",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Ocular AI",
+    "slug": "ocular-ai",
+    "websiteUrl": "https://useocular.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Odeko",
+    "slug": "odeko",
+    "websiteUrl": "http://www.odeko.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Odys Aviation",
+    "slug": "odys-aviation",
+    "websiteUrl": "https://www.odysaviation.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "OffDeal",
+    "slug": "offdeal",
+    "websiteUrl": "https://offdeal.io",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Offstream",
+    "slug": "offstream",
+    "websiteUrl": "https://www.useoffstream.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Ohm",
+    "slug": "ohm-2",
+    "websiteUrl": "https://www.ohm.ai",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Okteto",
+    "slug": "okteto",
+    "websiteUrl": "https://okteto.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Olympian Motors",
+    "slug": "olympian-motors",
+    "websiteUrl": "https://olympianmotors.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Omnistrate",
+    "slug": "omnistrate",
+    "websiteUrl": "http://www.omnistrate.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "OnDeck AI",
+    "slug": "ondeck-ai",
+    "websiteUrl": "https://www.ondeckai.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "One Robot",
+    "slug": "one-robot",
+    "websiteUrl": "https://www.onerobot.io/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "OneChronos",
+    "slug": "onechronos",
+    "websiteUrl": "https://www.onechronos.com/",
+    "batch": "Summer 2016"
+  },
+  {
+    "name": "OneFin",
+    "slug": "onefin",
+    "websiteUrl": "https://www.onefin.in",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Oneleet",
+    "slug": "oneleet",
+    "websiteUrl": "https://www.oneleet.com/?utm_source=yc&utm_medium=bookface",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "OneLocal",
+    "slug": "onelocal",
+    "websiteUrl": "https://onelocal.com/",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "OneSchema",
+    "slug": "oneschema",
+    "websiteUrl": "https://www.oneschema.co",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "OneSignal",
+    "slug": "onesignal",
+    "websiteUrl": "https://onesignal.com",
+    "batch": "Summer 2011"
+  },
+  {
+    "name": "Onlook",
+    "slug": "onlook",
+    "websiteUrl": "https://onlook.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Onyx",
+    "slug": "onyx",
+    "websiteUrl": "https://www.onyx.app/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Ooak Data",
+    "slug": "ooak-data",
+    "websiteUrl": "https://ooakdata.com/",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "Open",
+    "slug": "open",
+    "websiteUrl": "https://open.cx",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Openbenchmarks",
+    "slug": "openbenchmarks",
+    "websiteUrl": "https://openbenchmarks.com",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Opencall",
+    "slug": "opencall",
+    "websiteUrl": "https://opencall.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Openmart",
+    "slug": "openmart",
+    "websiteUrl": "https://www.openmart.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "OpenUnit",
+    "slug": "openunit",
+    "websiteUrl": "https://www.openunit.com/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "OpenWork",
+    "slug": "openwork",
+    "websiteUrl": "https://openworklabs.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Ophelia",
+    "slug": "ophelia",
+    "websiteUrl": "https://ophelia.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Optifye.ai",
+    "slug": "optifye-ai",
+    "websiteUrl": "https://www.optifye.ai",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Orange Slice",
+    "slug": "orange-slice",
+    "websiteUrl": "https://orangeslice.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Orangewood Labs",
+    "slug": "orangewood-labs",
+    "websiteUrl": "http://www.orangewood.co",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Orbio Earth",
+    "slug": "orbio-earth",
+    "websiteUrl": "https://www.orbio.earth/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Orbital Operations",
+    "slug": "orbital-operations",
+    "websiteUrl": "https://www.orbitalops.tech/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Orchid",
+    "slug": "orchid",
+    "websiteUrl": "https://orchid.health",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Origami",
+    "slug": "origami-2",
+    "websiteUrl": "https://origami.chat/",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "OS3",
+    "slug": "os3",
+    "websiteUrl": "https://os3robotics.com/",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "Osium AI",
+    "slug": "osium-ai",
+    "websiteUrl": "https://osium.ai/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Osmosis",
+    "slug": "osmosis",
+    "websiteUrl": "https://osmosis.ai/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Outerport",
+    "slug": "outerport",
+    "websiteUrl": "https://outerport.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Output Biosciences",
+    "slug": "output",
+    "websiteUrl": "https://www.outputbio.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Outset",
+    "slug": "outset",
+    "websiteUrl": "https://outset.ai/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Overlap",
+    "slug": "overlap",
+    "websiteUrl": "https://www.overlap.ai",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Overview",
+    "slug": "overview",
+    "websiteUrl": "https://overview.ai",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "OWNY",
+    "slug": "owny",
+    "websiteUrl": "https://www.owny.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Oxygen",
+    "slug": "oxygen",
+    "websiteUrl": "http://getoxygen.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Paasa",
+    "slug": "paasa",
+    "websiteUrl": "https://paasa.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Paces",
+    "slug": "paces",
+    "websiteUrl": "https://paces.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Padlet",
+    "slug": "padlet",
+    "websiteUrl": "https://padlet.com",
+    "batch": "Winter 2013"
+  },
+  {
+    "name": "Pair AI",
+    "slug": "pair-ai",
+    "websiteUrl": "https://www.pairai.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Pair Team",
+    "slug": "pair-team",
+    "websiteUrl": "https://pairteam.com/",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "PaletteHQ",
+    "slug": "palettehq",
+    "websiteUrl": "https://palettehq.com/en",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Panels",
+    "slug": "panels",
+    "websiteUrl": "https://www.usepanels.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Pangea.app",
+    "slug": "pangea-app",
+    "websiteUrl": "https://www.pangea.app",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Pangolin",
+    "slug": "pangolin",
+    "websiteUrl": "https://pangolin.net",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "ParadeDB",
+    "slug": "paradedb",
+    "websiteUrl": "https://paradedb.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Paradigm",
+    "slug": "paradigm",
+    "websiteUrl": "https://www.paradigmai.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Paragon",
+    "slug": "paragon",
+    "websiteUrl": "http://useparagon.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Paragon AI",
+    "slug": "paragon-ai",
+    "websiteUrl": "https://paragon.ai",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Parallel Bio",
+    "slug": "parallel-bio",
+    "websiteUrl": "http://parallel.bio",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Parameter",
+    "slug": "parameter",
+    "websiteUrl": "https://parameter.ai?utm_source=ycombinator&utm_medium=referral&utm_campaign=parameter-profile",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Parametric",
+    "slug": "parametric",
+    "websiteUrl": "https://parametric.company/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Parasma",
+    "slug": "parasma",
+    "websiteUrl": "https://parasma.com",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "Parrot",
+    "slug": "parrot",
+    "websiteUrl": "https://parrotapp.com/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Parsewise",
+    "slug": "parsewise",
+    "websiteUrl": "https://parsewise.ai",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Partcl",
+    "slug": "partcl",
+    "websiteUrl": "https://partcl.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Pasito",
+    "slug": "pasito",
+    "websiteUrl": "https://pasito.ai",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Pave Robotics",
+    "slug": "pave-robotics",
+    "websiteUrl": "https://pave-robotics.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Pax",
+    "slug": "pax",
+    "websiteUrl": "https://paxai.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "PAX Markets",
+    "slug": "pax-markets",
+    "websiteUrl": "https://pax.markets/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Payflow",
+    "slug": "payflow",
+    "websiteUrl": "https://www.payflow.es/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Payna",
+    "slug": "payna",
+    "websiteUrl": "https://payna.com/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Peakflo",
+    "slug": "peakflo",
+    "websiteUrl": "https://peakflo.co",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Pelago",
+    "slug": "pelago",
+    "websiteUrl": "https://www.pelagohealth.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Pelica",
+    "slug": "pelica",
+    "websiteUrl": "https://www.pelica.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "People.ai",
+    "slug": "people-ai",
+    "websiteUrl": "https://people.ai",
+    "batch": "Summer 2016"
+  },
+  {
+    "name": "Peoplebox.ai",
+    "slug": "peoplebox",
+    "websiteUrl": "https://www.peoplebox.ai",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Peppr AI",
+    "slug": "peppr-ai",
+    "websiteUrl": "https://www.usepeppr.ai/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Per Diem",
+    "slug": "per-diem",
+    "websiteUrl": "https://tryperdiem.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "PerfectBit, Inc.",
+    "slug": "perfectbit-inc",
+    "websiteUrl": "https://perfectbit.ai",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "PermitFlow",
+    "slug": "permitflow",
+    "websiteUrl": "http://www.permitflow.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "PermitPortal",
+    "slug": "permitportal",
+    "websiteUrl": "https://permitportalapp.com/",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Perseus Defense",
+    "slug": "perseus-defense",
+    "websiteUrl": "https://perseusdefense.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Perspectives Health",
+    "slug": "perspectives-health",
+    "websiteUrl": "https://perspectiveshealth.ai/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Pesto",
+    "slug": "pesto",
+    "websiteUrl": "https://www.getpesto.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "PgDog",
+    "slug": "pgdog",
+    "websiteUrl": "https://pgdog.dev",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Phoenix",
+    "slug": "phoenix",
+    "websiteUrl": "https://phoenix.ca",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Phonely",
+    "slug": "phonely",
+    "websiteUrl": "https://phonely.ai",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Photonium",
+    "slug": "photonium",
+    "websiteUrl": "https://www.photoniumoptics.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "PicnicAI",
+    "slug": "picnicai",
+    "websiteUrl": "https://picnic.ai",
+    "batch": "Summer 2014"
+  },
+  {
+    "name": "Pier",
+    "slug": "pier",
+    "websiteUrl": "http://www.pier-finance.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "PiinPoint",
+    "slug": "piinpoint",
+    "websiteUrl": "https://piinpoint.com",
+    "batch": "Winter 2014"
+  },
+  {
+    "name": "Pillar",
+    "slug": "pillar-2",
+    "websiteUrl": "https://www.pillar.io",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Pine Park Health",
+    "slug": "pine-park-health",
+    "websiteUrl": "http://pineparkhealth.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Piramidal",
+    "slug": "piramidal",
+    "websiteUrl": "https://piramidal.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Piris Labs",
+    "slug": "pirislabs",
+    "websiteUrl": "https://pirislabs.io/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Pirouette Pharma",
+    "slug": "pirouette-pharma",
+    "websiteUrl": "https://www.pirouettepharma.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Pirros",
+    "slug": "pirros",
+    "websiteUrl": "http://pirros.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Pivot Robotics",
+    "slug": "pivot-robotics",
+    "websiteUrl": "https://pivotrobotics.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Players' Lounge",
+    "slug": "players-lounge",
+    "websiteUrl": "https://playerslounge.co/",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Plexe",
+    "slug": "plexe",
+    "websiteUrl": "https://plexe.ai",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Ploy",
+    "slug": "ploy",
+    "websiteUrl": "https://ploy.ai",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Pocket",
+    "slug": "pocket",
+    "websiteUrl": "https://heypocket.com/now",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "PocketSuite",
+    "slug": "pocketsuite",
+    "websiteUrl": "https://pocketsuite.io",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Podium",
+    "slug": "podium",
+    "websiteUrl": "https://podium.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Pointhound",
+    "slug": "pointhound",
+    "websiteUrl": "http://www.pointhound.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "PointOne",
+    "slug": "pointone",
+    "websiteUrl": "https://pointone.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Poka Labs",
+    "slug": "poka-labs",
+    "websiteUrl": "https://www.pokalabs.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "PoloTab",
+    "slug": "polotab",
+    "websiteUrl": "https://polotab.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Poly",
+    "slug": "poly",
+    "websiteUrl": "https://poly.app",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Polymath",
+    "slug": "polymath",
+    "websiteUrl": "https://polymathlabs.ai/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Polymath Robotics",
+    "slug": "polymath-robotics",
+    "websiteUrl": "http://www.polymathrobotics.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Pop Meals",
+    "slug": "pop-meals",
+    "websiteUrl": "https://popmeals.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Popl",
+    "slug": "popl",
+    "websiteUrl": "https://popl.co/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Porter",
+    "slug": "porter",
+    "websiteUrl": "https://porter.run",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Postal",
+    "slug": "postal",
+    "websiteUrl": "https://usepostal.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "PostHog",
+    "slug": "posthog",
+    "websiteUrl": "https://www.posthog.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Postscript",
+    "slug": "postscript",
+    "websiteUrl": "https://postscript.io",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Zen",
+    "slug": "posturehealth-inc",
+    "websiteUrl": "https://lnkd.in/dgH2xxBJ",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Powder",
+    "slug": "powder",
+    "websiteUrl": "https://www.powderfi.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Prelim",
+    "slug": "prelim",
+    "websiteUrl": "https://prelim.com/",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Prembly (formerly Identitypass)",
+    "slug": "prembly",
+    "websiteUrl": "https://prembly.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Prequel",
+    "slug": "prequel",
+    "websiteUrl": "https://prequel.co",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Presti AI",
+    "slug": "presti-ai",
+    "websiteUrl": "https://www.presti.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "PrimeVault",
+    "slug": "primevault",
+    "websiteUrl": "https://www.primevault.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "primitive",
+    "slug": "primitive",
+    "websiteUrl": "https://primitive.dev",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Probably Genetic",
+    "slug": "probably-genetic",
+    "websiteUrl": "https://www.probablygenetic.com/",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Proception Inc",
+    "slug": "proception-inc",
+    "websiteUrl": "https://proception.ai/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "ProcIndex",
+    "slug": "procindex",
+    "websiteUrl": "https://procindex.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Prodigal",
+    "slug": "prodigal",
+    "websiteUrl": "https://prodigaltech.com/",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "ProhostAI",
+    "slug": "prohostai",
+    "websiteUrl": "https://www.prohost.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Proliferate",
+    "slug": "proliferate",
+    "websiteUrl": "https://proliferate.com?utm_source=yc&utm_medium=referral&utm_campaign=profile",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Prolific",
+    "slug": "prolific",
+    "websiteUrl": "https://www.prolific.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Promise",
+    "slug": "promise",
+    "websiteUrl": "http://promise-pay.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "PromptArmor",
+    "slug": "promptarmor",
+    "websiteUrl": "https://promptarmor.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Promptless",
+    "slug": "promptless",
+    "websiteUrl": "https://promptless.ai/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Proof of Human",
+    "slug": "proof-of-human",
+    "websiteUrl": "https://poh.org",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "PropelAuth",
+    "slug": "propelauth",
+    "websiteUrl": "https://www.propelauth.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "ProSights",
+    "slug": "prosights",
+    "websiteUrl": "https://prosights.co/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Prospa",
+    "slug": "prospa",
+    "websiteUrl": "https://getprospa.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Prosper",
+    "slug": "prosper",
+    "websiteUrl": "https://www.getprosper.ai?utm_source=yc&utm_medium=directory&utm_campaign=yc_directory",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Protex AI",
+    "slug": "protex-ai",
+    "websiteUrl": "https://www.protex.ai",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Proven Group",
+    "slug": "proven-group",
+    "websiteUrl": "https://www.provenskincare.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Provision",
+    "slug": "provision",
+    "websiteUrl": "https://provision.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Prox",
+    "slug": "prox",
+    "websiteUrl": "https://useprox.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Proximitty",
+    "slug": "proximitty",
+    "websiteUrl": "https://proximitty.ai",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Pulley",
+    "slug": "pulley",
+    "websiteUrl": "https://pulley.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Pulse",
+    "slug": "pulse-3",
+    "websiteUrl": "https://www.runpulse.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Pump.co",
+    "slug": "pump-co",
+    "websiteUrl": "https://www.pump.co/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Pure",
+    "slug": "pure",
+    "websiteUrl": "https://www.collectpure.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Pylon",
+    "slug": "pylon-2",
+    "websiteUrl": "https://usepylon.com/?utm_source=bookface&utm_medium=referral&utm_campaign=pylon-profile",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "QFEX",
+    "slug": "qfex",
+    "websiteUrl": "https://qfex.com",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Quadrant Health",
+    "slug": "quadrant-health",
+    "websiteUrl": "https://quadrant.health",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "QualGent",
+    "slug": "qualgent",
+    "websiteUrl": "https://www.qualgent.ai",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Quartzy",
+    "slug": "quartzy",
+    "websiteUrl": "https://www.quartzy.com",
+    "batch": "Summer 2011"
+  },
+  {
+    "name": "Quickchat AI",
+    "slug": "quickchat-ai",
+    "websiteUrl": "https://quickchat.ai/",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Quicknode",
+    "slug": "quicknode",
+    "websiteUrl": "https://www.quicknode.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Quill",
+    "slug": "quill",
+    "websiteUrl": "https://quill.co",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Quill Bills",
+    "slug": "quill-bills",
+    "websiteUrl": "https://quillbills.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Quindar",
+    "slug": "quindar",
+    "websiteUrl": "https://www.quindar.space",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Quinn",
+    "slug": "quinn",
+    "websiteUrl": "https://www.quinnbio.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Qventus",
+    "slug": "qventus",
+    "websiteUrl": "http://qventus.com",
+    "batch": "Winter 2015"
+  },
+  {
+    "name": "RADAR",
+    "slug": "radar",
+    "websiteUrl": "https://goradar.com",
+    "batch": "Winter 2013"
+  },
+  {
+    "name": "Raindrop",
+    "slug": "raindrop",
+    "websiteUrl": "https://www.raindrop.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Rally",
+    "slug": "rally",
+    "websiteUrl": "https://rally.video",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Ralo",
+    "slug": "ralo",
+    "websiteUrl": "https://www.ralo.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "RamAIn",
+    "slug": "ramain",
+    "websiteUrl": "https://ramain.ai",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Ramani",
+    "slug": "ramani",
+    "websiteUrl": "http://www.ramani.io",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Rappi",
+    "slug": "rappi",
+    "websiteUrl": "http://www.rappi.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Raven",
+    "slug": "raven",
+    "websiteUrl": "https://startraven.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Raycaster",
+    "slug": "raycaster",
+    "websiteUrl": "https://raycaster.ai",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Razorpay",
+    "slug": "razorpay",
+    "websiteUrl": "https://razorpay.com",
+    "batch": "Winter 2015"
+  },
+  {
+    "name": "Reach",
+    "slug": "reach",
+    "websiteUrl": "https://reachpower.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "Reacher",
+    "slug": "reacher",
+    "websiteUrl": "https://reacherapp.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Readily",
+    "slug": "readily",
+    "websiteUrl": "https://readily.co",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Ready",
+    "slug": "ready",
+    "websiteUrl": "https://ready.net",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Reality Defender",
+    "slug": "reality-defender",
+    "websiteUrl": "http://www.realitydefender.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Rebolt",
+    "slug": "rebolt",
+    "websiteUrl": "https://rebolt.ai",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Recall.ai",
+    "slug": "recall-ai",
+    "websiteUrl": "https://www.recall.ai",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Recurrency",
+    "slug": "recurrency",
+    "websiteUrl": "http://www.recurrency.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Redbird",
+    "slug": "redbird",
+    "websiteUrl": "https://www.redbird.io",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Reditus Space",
+    "slug": "reditus-space",
+    "websiteUrl": "https://www.reditus.space/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Reducto",
+    "slug": "reducto",
+    "websiteUrl": "https://reducto.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Refactor",
+    "slug": "refactor",
+    "websiteUrl": "https://refactor.co",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Reflex",
+    "slug": "reflex",
+    "websiteUrl": "https://reflex.dev",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Reforged Labs",
+    "slug": "reforged-labs",
+    "websiteUrl": "https://reforgedlabs.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Reform",
+    "slug": "reform",
+    "websiteUrl": "https://www.reformhq.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Reframe",
+    "slug": "reframe",
+    "websiteUrl": "https://www.joinreframeapp.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Regbase",
+    "slug": "regbase",
+    "websiteUrl": "https://regbase.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Relace",
+    "slug": "relace",
+    "websiteUrl": "https://relace.ai",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Relativity Space",
+    "slug": "relativity-space",
+    "websiteUrl": "http://relativityspace.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Relling",
+    "slug": "relling",
+    "websiteUrl": "https://relling.co",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Remi",
+    "slug": "remi",
+    "websiteUrl": "https://www.remihq.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "RentFlow",
+    "slug": "rentflow",
+    "websiteUrl": "https://www.therentflow.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "RentHop",
+    "slug": "renthop",
+    "websiteUrl": "http://renthop.com",
+    "batch": "Summer 2009"
+  },
+  {
+    "name": "Replicas",
+    "slug": "replicas",
+    "websiteUrl": "https://replicas.dev",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Replo",
+    "slug": "replo",
+    "websiteUrl": "https://replo.app/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Repool",
+    "slug": "repool",
+    "websiteUrl": "http://repool.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Reprompt",
+    "slug": "reprompt",
+    "websiteUrl": "https://repromptai.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Rescale",
+    "slug": "rescale",
+    "websiteUrl": "https://rescale.com",
+    "batch": "Winter 2012"
+  },
+  {
+    "name": "Rescript",
+    "slug": "rescript",
+    "websiteUrl": "https://rescript.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Zuma",
+    "slug": "resident-boost",
+    "websiteUrl": "https://www.getzuma.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Respan",
+    "slug": "respan",
+    "websiteUrl": "https://respan.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Resquared",
+    "slug": "resquared",
+    "websiteUrl": "http://re2.ai",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "RetailReady",
+    "slug": "retailready",
+    "websiteUrl": "https://www.retailreadyai.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Retell AI",
+    "slug": "retell-ai",
+    "websiteUrl": "https://retellai.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "RetroFix",
+    "slug": "retrofix",
+    "websiteUrl": "https://www.retrofix.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Rev Genomics",
+    "slug": "rev-genomics",
+    "websiteUrl": "https://www.revgenomics.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Revamp",
+    "slug": "revamp",
+    "websiteUrl": "https://www.getrevamp.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "RevenueCat",
+    "slug": "revenuecat",
+    "websiteUrl": "https://www.revenuecat.com/",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "REVER",
+    "slug": "rever",
+    "websiteUrl": "https://itsrever.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Revion",
+    "slug": "revion",
+    "websiteUrl": "https://revion.inc",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Revise Robotics",
+    "slug": "revise-robotics",
+    "websiteUrl": "https://www.reviserobotics.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Reviving Mind",
+    "slug": "reviving-mind",
+    "websiteUrl": "https://www.revivingmind.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Revnu",
+    "slug": "revnu",
+    "websiteUrl": "https://revnu.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Revyl",
+    "slug": "revyl",
+    "websiteUrl": "https://www.revyl.com",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Rhizome AI",
+    "slug": "rhizome-ai",
+    "websiteUrl": "https://rhizomeai.com/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Ridecell",
+    "slug": "ridecell",
+    "websiteUrl": "https://www.ridecell.com",
+    "batch": "Winter 2012"
+  },
+  {
+    "name": "Rimward",
+    "slug": "rimward",
+    "websiteUrl": "https://rimward.ai/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Rinse",
+    "slug": "rinse",
+    "websiteUrl": "http://www.rinse.dental",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Riot",
+    "slug": "riot",
+    "websiteUrl": "https://tryriot.com/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "River Markets",
+    "slug": "river-markets",
+    "websiteUrl": "https://www.rivermarkets.com",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Rivet",
+    "slug": "rivet",
+    "websiteUrl": "https://rivet.dev",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Rivia.AI",
+    "slug": "rivia-ai",
+    "websiteUrl": "https://rivia.ai",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Roame",
+    "slug": "roame",
+    "websiteUrl": "https://roame.travel/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Robby",
+    "slug": "robby",
+    "websiteUrl": "https://tryrobby.com",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "RoboDock",
+    "slug": "robodock",
+    "websiteUrl": "https://www.robodock.tech/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Roboflow",
+    "slug": "roboflow",
+    "websiteUrl": "https://roboflow.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "RocketSDR",
+    "slug": "rocketsdr",
+    "websiteUrl": "https://rocketsdr.ai",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "ROE",
+    "slug": "roe",
+    "websiteUrl": "https://getroe.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Roger",
+    "slug": "roger-2",
+    "websiteUrl": "https://hireroger.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Rollstack",
+    "slug": "rollstack-2",
+    "websiteUrl": "https://www.rollstack.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Rootly",
+    "slug": "rootly",
+    "websiteUrl": "https://rootly.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Rose Rocket",
+    "slug": "rose-rocket",
+    "websiteUrl": "http://roserocket.com",
+    "batch": "Summer 2016"
+  },
+  {
+    "name": "Routable",
+    "slug": "routable",
+    "websiteUrl": "https://routable.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Rove",
+    "slug": "rove",
+    "websiteUrl": "https://rove.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Rovi Health",
+    "slug": "rovi-health",
+    "websiteUrl": "https://www.rovi.health",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Rownd",
+    "slug": "rownd",
+    "websiteUrl": "https://rownd.ai",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Rubbrband",
+    "slug": "rubbrband",
+    "websiteUrl": "https://rubbrband.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Rudus",
+    "slug": "rudus",
+    "websiteUrl": "http://rudus.ai/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Rulebase",
+    "slug": "rulebase",
+    "websiteUrl": "https://rulebase.co",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Rulebricks",
+    "slug": "rulebricks",
+    "websiteUrl": "https://rulebricks.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Ruma Care",
+    "slug": "ruma-care",
+    "websiteUrl": "https://rumacare.com",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Runa",
+    "slug": "runa",
+    "websiteUrl": "http://runahr.com/",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "RunAnywhere",
+    "slug": "runanywhere",
+    "websiteUrl": "https://www.runanywhere.ai/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Runtime",
+    "slug": "runtime",
+    "websiteUrl": "https://www.runtm.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Rutter",
+    "slug": "rutter",
+    "websiteUrl": "https://rutter.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Ryvn",
+    "slug": "ryvn",
+    "websiteUrl": "https://ryvn.ai",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "SafeBeat",
+    "slug": "safebeat",
+    "websiteUrl": "https://safebeat.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "SafeButler",
+    "slug": "safebutler",
+    "websiteUrl": "https://www.safebutler.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Safepay",
+    "slug": "safepay",
+    "websiteUrl": "https://getsafepay.pk/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "SafetyKit",
+    "slug": "safetykit",
+    "websiteUrl": "https://www.safetykit.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "SafetyWing",
+    "slug": "safetywing",
+    "websiteUrl": "http://www.safetywing.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Sage Care",
+    "slug": "sagecare",
+    "websiteUrl": "https://sagecare.ai",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "SalaryBox",
+    "slug": "salarybox",
+    "websiteUrl": "https://salarybox.in/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "SalesPatriot",
+    "slug": "salespatriot",
+    "websiteUrl": "https://www.salespatriot.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Salient",
+    "slug": "salient",
+    "websiteUrl": "https://www.trysalient.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Salus",
+    "slug": "salus",
+    "websiteUrl": "https://www.usesalus.ai/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Sameday",
+    "slug": "sameday",
+    "websiteUrl": "https://www.gosameday.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "SAMMY Labs",
+    "slug": "sammy-labs",
+    "websiteUrl": "https://www.sammylabs.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Samora AI",
+    "slug": "samora-ai",
+    "websiteUrl": "https://samora.ai/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Santé",
+    "slug": "sante",
+    "websiteUrl": "https://santehq.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Saphira AI",
+    "slug": "saphira-ai",
+    "websiteUrl": "https://saphira.ai",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Sapling.ai",
+    "slug": "sapling-ai",
+    "websiteUrl": "https://sapling.ai",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Saturn",
+    "slug": "saturn",
+    "websiteUrl": "https://www.SaturnOS.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Sava",
+    "slug": "savahq",
+    "websiteUrl": "https://www.savahq.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Scalar Field",
+    "slug": "scalar-field",
+    "websiteUrl": "https://www.scalarfield.io/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Scispot",
+    "slug": "scispot-io",
+    "websiteUrl": "https://scispot.io",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Scott AI",
+    "slug": "scott-ai",
+    "websiteUrl": "https://tryscott.ai",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "screenpipe",
+    "slug": "screenpipe",
+    "websiteUrl": "https://screenpipe.com",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "Scritch",
+    "slug": "scritch",
+    "websiteUrl": "https://www.scritchai.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Seabound",
+    "slug": "seabound",
+    "websiteUrl": "http://seabound.co",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Seal",
+    "slug": "seal-2",
+    "websiteUrl": "https://seal.run",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Seam",
+    "slug": "seam",
+    "websiteUrl": "https://seam.co",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Seeing Systems",
+    "slug": "seeing-systems",
+    "websiteUrl": "https://www.seeing-systems.com",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Semble",
+    "slug": "semble",
+    "websiteUrl": "https://www.sembleai.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Sendbird",
+    "slug": "sendbird",
+    "websiteUrl": "https://sendbird.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Sendblue",
+    "slug": "sendblue",
+    "websiteUrl": "https://www.sendblue.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Senso",
+    "slug": "senso",
+    "websiteUrl": "http://www.senso.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Serif Health",
+    "slug": "serif-health",
+    "websiteUrl": "https://www.serifhealth.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Servo7",
+    "slug": "servo7",
+    "websiteUrl": "https://servo7.com",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "SF Tensor",
+    "slug": "sf-tensor",
+    "websiteUrl": "https://sf-tensor.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Shadeform",
+    "slug": "shadeform",
+    "websiteUrl": "https://www.shadeform.ai/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Shape (ShapeScale)",
+    "slug": "shape-shapescale",
+    "websiteUrl": "https://shapescale.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "Shef",
+    "slug": "shef",
+    "websiteUrl": "https://www.shef.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Shepherd",
+    "slug": "shepherd",
+    "websiteUrl": "https://shepherdinsurance.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Shiboleth",
+    "slug": "shiboleth",
+    "websiteUrl": "https://www.shiboleth.ai/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Shimmer",
+    "slug": "shimmer",
+    "websiteUrl": "https://shimmer.care",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "ShipBob",
+    "slug": "shipbob",
+    "websiteUrl": "http://shipbob.com",
+    "batch": "Summer 2014"
+  },
+  {
+    "name": "Short Story",
+    "slug": "short-story",
+    "websiteUrl": "https://shortstorybox.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "ShortLoop",
+    "slug": "shortloop",
+    "websiteUrl": "https://shortloop.dev/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Shuttle Central",
+    "slug": "shuttle-central",
+    "websiteUrl": "https://book.shuttlecentral.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "SID",
+    "slug": "sid",
+    "websiteUrl": "https://www.sid.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Sieve",
+    "slug": "sieve",
+    "websiteUrl": "https://sievedata.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Sift",
+    "slug": "sift",
+    "websiteUrl": "https://sift.com/",
+    "batch": "Summer 2011"
+  },
+  {
+    "name": "SigmaOS",
+    "slug": "sigmaos",
+    "websiteUrl": "https://www.sigmaos.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Signadot",
+    "slug": "signadot",
+    "websiteUrl": "https://www.signadot.com/",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "SigNoz",
+    "slug": "signoz",
+    "websiteUrl": "https://signoz.io",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Silimate",
+    "slug": "silimate",
+    "websiteUrl": "https://www.silimate.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "SilkChart",
+    "slug": "silkchart",
+    "websiteUrl": "https://www.silkchart.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Silurian",
+    "slug": "silurian",
+    "websiteUrl": "https://silurian.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Sim",
+    "slug": "sim",
+    "websiteUrl": "https://sim.ai",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Simantic",
+    "slug": "simantic",
+    "websiteUrl": "https://simantic.dev",
+    "batch": "Fall 2026"
+  },
+  {
+    "name": "Simbie AI",
+    "slug": "simbie-ai",
+    "websiteUrl": "http://www.simbie.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "SimCare",
+    "slug": "simcare",
+    "websiteUrl": "https://simcare.ai",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Simple AI",
+    "slug": "simple-ai",
+    "websiteUrl": "https://www.usesimple.ai",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "SimplyInsured",
+    "slug": "simplyinsured",
+    "websiteUrl": "http://simplyinsured.com",
+    "batch": "Winter 2013"
+  },
+  {
+    "name": "SiPhox Health",
+    "slug": "siphox-health",
+    "websiteUrl": "https://www.siphoxhealth.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Sira",
+    "slug": "sira",
+    "websiteUrl": "https://sira.team",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Sirdab",
+    "slug": "sirdab",
+    "websiteUrl": "https://sirdab.co/en",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Sitefire",
+    "slug": "sitefire",
+    "websiteUrl": "https://sitefire.ai",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Sixtyfour",
+    "slug": "sixtyfour",
+    "websiteUrl": "https://www.sixtyfour.ai/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Skypher",
+    "slug": "skypher",
+    "websiteUrl": "https://skypher.co",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Skyvern",
+    "slug": "skyvern",
+    "websiteUrl": "https://www.skyvern.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Skyways",
+    "slug": "skyways",
+    "websiteUrl": "http://skyways.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Slash",
+    "slug": "slash",
+    "websiteUrl": "https://www.slash.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Smartcuts",
+    "slug": "smartcuts",
+    "websiteUrl": "https://trysmartcuts.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Smooth",
+    "slug": "smooth",
+    "websiteUrl": "https://smooth.sh",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "SnapMagic",
+    "slug": "snapmagic",
+    "websiteUrl": "https://www.snapmagic.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "Snappr",
+    "slug": "snappr",
+    "websiteUrl": "https://www.snappr.com",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Socratix AI",
+    "slug": "socratix-ai",
+    "websiteUrl": "https://getsocratix.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Soff",
+    "slug": "soff",
+    "websiteUrl": "https://soff.ai",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Sola",
+    "slug": "sola",
+    "websiteUrl": "https://www.sola-solutions.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Solidroad",
+    "slug": "solidroad",
+    "websiteUrl": "https://solidroad.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Solo",
+    "slug": "solo",
+    "websiteUrl": "https://www.solosuit.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Solum Health",
+    "slug": "solum-health",
+    "websiteUrl": "https://www.getsolum.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Solva",
+    "slug": "solva",
+    "websiteUrl": "https://solvatechnology.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Solve Intelligence",
+    "slug": "solve-intelligence",
+    "websiteUrl": "https://www.solveintelligence.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Sonatoria",
+    "slug": "sonatoria",
+    "websiteUrl": "https://sonatoria.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Sonauto",
+    "slug": "sonauto",
+    "websiteUrl": "https://sonauto.ai/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Sonia",
+    "slug": "sonia",
+    "websiteUrl": "https://soniahealth.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Soraban",
+    "slug": "soraban",
+    "websiteUrl": "https://www.soraban.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Sorce",
+    "slug": "sorce",
+    "websiteUrl": "https://sorce.jobs",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Soren",
+    "slug": "soren",
+    "websiteUrl": "https://usesoren.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Soria",
+    "slug": "soria",
+    "websiteUrl": "https://www.soriaanalytics.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Sorting Robotics",
+    "slug": "sorting-robotics",
+    "websiteUrl": "https://www.sortingrobotics.com/",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "SOUNDBOKS",
+    "slug": "soundboks",
+    "websiteUrl": "http://soundboks.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Sourcebot",
+    "slug": "sourcebot",
+    "websiteUrl": "https://www.sourcebot.dev/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Sourcify",
+    "slug": "sourcify",
+    "websiteUrl": "https://www.sourcify.com/",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Spaceium Inc",
+    "slug": "spaceium-inc",
+    "websiteUrl": "https://spaceium.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Spark",
+    "slug": "spark",
+    "websiteUrl": "https://www.sparkhq.ai",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Sparkles",
+    "slug": "sparkles",
+    "websiteUrl": "https://sparkles.dev",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Speak",
+    "slug": "speak",
+    "websiteUrl": "http://speak.com",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Speedy Labs",
+    "slug": "speedy-labs",
+    "websiteUrl": "https://speedylabs.ai/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Spellbrush",
+    "slug": "spellbrush",
+    "websiteUrl": "https://spellbrush.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Spenmo",
+    "slug": "spenmo",
+    "websiteUrl": "https://summitglobal.com/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Sphere",
+    "slug": "sphere",
+    "websiteUrl": "https://www.getsphere.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Splash Inc.",
+    "slug": "splash-inc",
+    "websiteUrl": "https://splash9.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Spot Health",
+    "slug": "spot-health",
+    "websiteUrl": "https://spotdx.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Spott",
+    "slug": "spott",
+    "websiteUrl": "https://spott.io",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "SpruceID",
+    "slug": "spruceid",
+    "websiteUrl": "https://www.spruceid.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Spur",
+    "slug": "spur",
+    "websiteUrl": "https://www.spurtest.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Stable",
+    "slug": "stable",
+    "websiteUrl": "https://useStable.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Stacksync",
+    "slug": "stacksync",
+    "websiteUrl": "https://www.stacksync.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Stackup",
+    "slug": "stackup",
+    "websiteUrl": "https://www.stackup.fi",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Superwall",
+    "slug": "staffbar",
+    "websiteUrl": "https://superwall.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "stagewise",
+    "slug": "stagewise",
+    "websiteUrl": "https://stagewise.io",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Standard AI",
+    "slug": "standard-ai",
+    "websiteUrl": "https://standard.ai",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Standout",
+    "slug": "standout",
+    "websiteUrl": "https://standout.work",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Star",
+    "slug": "star",
+    "websiteUrl": "https://buildwithstar.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Stardex",
+    "slug": "stardex",
+    "websiteUrl": "https://www.stardex.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Stardrift",
+    "slug": "stardrift",
+    "websiteUrl": "https://stardrift.ai",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Starling",
+    "slug": "starling",
+    "websiteUrl": "https://starlingmedical.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Steinmetz",
+    "slug": "steinmetz",
+    "websiteUrl": "https://steinmetzmotors.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Stepful",
+    "slug": "stepful",
+    "websiteUrl": "https://www.stepful.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Stilta",
+    "slug": "stilta",
+    "websiteUrl": "https://stilta.com",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Stoke Space",
+    "slug": "stoke-space",
+    "websiteUrl": "https://www.stokespace.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Storyboarder",
+    "slug": "storyboarder",
+    "websiteUrl": "https://storyboarder.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Storylane",
+    "slug": "storylane",
+    "websiteUrl": "https://www.storylane.io/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Strac",
+    "slug": "strac",
+    "websiteUrl": "https://www.strac.io/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Strada",
+    "slug": "strada",
+    "websiteUrl": "https://www.getstrada.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Streak",
+    "slug": "streak",
+    "websiteUrl": "http://streak.com",
+    "batch": "Summer 2011"
+  },
+  {
+    "name": "Stream",
+    "slug": "stream",
+    "websiteUrl": "http://www.stream.claims",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Streamable",
+    "slug": "streamable",
+    "websiteUrl": "https://streamable.run",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Strive Math",
+    "slug": "strive-math",
+    "websiteUrl": "https://www.strivemath.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Strong Compute",
+    "slug": "strong-compute",
+    "websiteUrl": "https://strongcompute.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Structured AI",
+    "slug": "structured-ai",
+    "websiteUrl": "https://www.getstructured.ai/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "SubImage",
+    "slug": "subimage",
+    "websiteUrl": "https://subimage.io",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Subsets",
+    "slug": "subsets",
+    "websiteUrl": "https://www.subsets.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Substrate",
+    "slug": "substrate",
+    "websiteUrl": "https://www.substrate.cc/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Suger",
+    "slug": "suger",
+    "websiteUrl": "https://www.suger.io/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Sully.ai",
+    "slug": "sully-ai",
+    "websiteUrl": "https://www.sully.ai",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Sunflower",
+    "slug": "sunflower",
+    "websiteUrl": "https://sunflowerclinic.com/",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "SuperKalam",
+    "slug": "superkalam",
+    "websiteUrl": "https://superkalam.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Superset",
+    "slug": "superset",
+    "websiteUrl": "https://www.superset.sh/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "SuperTokens",
+    "slug": "supertokens",
+    "websiteUrl": "https://supertokens.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "SureBright",
+    "slug": "surebright",
+    "websiteUrl": "https://surebright.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Surface Labs",
+    "slug": "surface-labs",
+    "websiteUrl": "https://withsurface.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Svix",
+    "slug": "svix",
+    "websiteUrl": "https://www.svix.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Swadesh",
+    "slug": "swadesh",
+    "websiteUrl": "http://www.swadesh.co",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Swayable",
+    "slug": "swayable",
+    "websiteUrl": "http://swayable.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Sweep",
+    "slug": "sweep",
+    "websiteUrl": "https://sweep.dev/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Sweetspot",
+    "slug": "sweetspot",
+    "websiteUrl": "https://www.sweetspot.so/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Swif.ai",
+    "slug": "swif-ai",
+    "websiteUrl": "https://www.swif.ai",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "SwiftSku",
+    "slug": "swiftsku",
+    "websiteUrl": "https://swiftsku.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Sygaldry Technologies",
+    "slug": "sygaldry-technologies",
+    "websiteUrl": "https://www.sygaldry.com",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Synapse Semiconductor",
+    "slug": "synapse-semiconductor",
+    "websiteUrl": "https://synapsesemi.org",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "sync.",
+    "slug": "sync-2",
+    "websiteUrl": "https://sync.so/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Synthetic Society",
+    "slug": "synthetic-society",
+    "websiteUrl": "https://syntheticsociety.ai/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "SyntheticFi",
+    "slug": "syntheticfi",
+    "websiteUrl": "https://www.syntheticfi.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Synthio Labs",
+    "slug": "synthio-labs",
+    "websiteUrl": "https://synthiolabs.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Syntra",
+    "slug": "syntra",
+    "websiteUrl": "https://www.syntra.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Tab",
+    "slug": "tab",
+    "websiteUrl": "https://www.tab.travel",
+    "batch": "Winter 2015"
+  },
+  {
+    "name": "Tabula",
+    "slug": "tabula",
+    "websiteUrl": "https://www.tabula.de",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Tailor",
+    "slug": "tailor",
+    "websiteUrl": "https://www.tailor.tech/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Taiv",
+    "slug": "taiv",
+    "websiteUrl": "https://taiv.tv",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Taktile",
+    "slug": "taktile",
+    "websiteUrl": "http://www.taktile.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Tamarind Bio",
+    "slug": "tamarind-bio",
+    "websiteUrl": "https://www.tamarind.bio",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Tandem",
+    "slug": "tandem-2",
+    "websiteUrl": "https://tandemspace.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Tank Payments",
+    "slug": "tank-payments",
+    "websiteUrl": "https://www.tankpayments.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Tara AI",
+    "slug": "tara-ai",
+    "websiteUrl": "http://www.tara.ai",
+    "batch": "Winter 2015"
+  },
+  {
+    "name": "Taskade",
+    "slug": "taskade",
+    "websiteUrl": "https://www.taskade.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Tasklet",
+    "slug": "tasklet-2",
+    "websiteUrl": "https://tasklet.ai",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Tavus",
+    "slug": "tavus",
+    "websiteUrl": "https://www.tavus.io",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "TaxGPT",
+    "slug": "taxgpt",
+    "websiteUrl": "https://www.taxgpt.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "TeamOut",
+    "slug": "teamout",
+    "websiteUrl": "https://www.teamout.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Tekton Dynamics",
+    "slug": "tekton-dynamics",
+    "websiteUrl": "https://www.tekton-dynamics.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "telli",
+    "slug": "telli",
+    "websiteUrl": "https://telli.com",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Telmai",
+    "slug": "telmai",
+    "websiteUrl": "https://www.telm.ai/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Tempo",
+    "slug": "tempo",
+    "websiteUrl": "https://tempo.fit/",
+    "batch": "Winter 2015"
+  },
+  {
+    "name": "Tennr",
+    "slug": "tennr",
+    "websiteUrl": "https://www.tennr.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Terminal",
+    "slug": "terminal",
+    "websiteUrl": "https://www.withterminal.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Terra API",
+    "slug": "terra-api",
+    "websiteUrl": "http://tryterra.co",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Terrakotta",
+    "slug": "terrakotta",
+    "websiteUrl": "https://www.terrakotta.ai/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Terranox AI",
+    "slug": "terranox-ai",
+    "websiteUrl": "https://terranox.ai",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Tesora",
+    "slug": "tesora",
+    "websiteUrl": "https://tesora.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "testRigor",
+    "slug": "testrigor",
+    "websiteUrl": "https://testrigor.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Text.ai",
+    "slug": "text-ai",
+    "websiteUrl": "https://www.text.ai/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Text Blaze",
+    "slug": "text-blaze",
+    "websiteUrl": "https://blaze.today",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "The Company Company",
+    "slug": "the-company-company",
+    "websiteUrl": "https://www.thecompany.company",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "The Forecasting Company",
+    "slug": "the-forecasting-company",
+    "websiteUrl": "https://www.theforecastingcompany.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "The Hog",
+    "slug": "the-hog",
+    "websiteUrl": "https://thehog.ai/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "The Juggernaut",
+    "slug": "the-juggernaut",
+    "websiteUrl": "https://www.thejuggernaut.com/",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "The Prompting Company",
+    "slug": "the-prompting-company",
+    "websiteUrl": "https://www.promptingcompany.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Scout",
+    "slug": "thedailyscout",
+    "websiteUrl": "https://thedailyscout.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Interface",
+    "slug": "theinterface",
+    "websiteUrl": "https://www.theinterface.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Theorem",
+    "slug": "theorem-2",
+    "websiteUrl": "https://theorem.dev",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Thera",
+    "slug": "thera",
+    "websiteUrl": "https://www.getthera.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Theseus",
+    "slug": "theseus",
+    "websiteUrl": "https://theseus.us",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Thesis",
+    "slug": "thesis",
+    "websiteUrl": "https://thesislabs.ai",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Third Chair",
+    "slug": "third-chair",
+    "websiteUrl": "https://usethirdchair.com",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "throxy",
+    "slug": "throxy",
+    "websiteUrl": "https://throxy.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Thunder Compute",
+    "slug": "thunder-compute",
+    "websiteUrl": "https://www.thundercompute.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Thunkable",
+    "slug": "thunkable",
+    "websiteUrl": "http://thunkable.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Tilt (f.k.a. Delphia)",
+    "slug": "tilt-fka-delphia",
+    "websiteUrl": "http://tilt.io",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Tint",
+    "slug": "tint",
+    "websiteUrl": "http://www.tint.ai",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Titan",
+    "slug": "titan",
+    "websiteUrl": "http://www.titan.com",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Tivara",
+    "slug": "tivara",
+    "websiteUrl": "https://tivara.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Toothy AI",
+    "slug": "toothy-ai",
+    "websiteUrl": "https://www.toothy.ai/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Topkey",
+    "slug": "topkey",
+    "websiteUrl": "https://www.topkey.io/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Topline Pro",
+    "slug": "topline-pro",
+    "websiteUrl": "https://www.toplinepro.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Topship",
+    "slug": "topship",
+    "websiteUrl": "https://topship.africa/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Torus",
+    "slug": "torus",
+    "websiteUrl": "https://www.usetorus.com",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "Tovala",
+    "slug": "tovala",
+    "websiteUrl": "http://www.tovala.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "TraceRoot.AI",
+    "slug": "traceroot-ai",
+    "websiteUrl": "https://traceroot.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Tractian",
+    "slug": "tractian",
+    "websiteUrl": "https://tractian.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Mindbase",
+    "slug": "tradex",
+    "websiteUrl": "https://mymindbase.ai",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "TransAstra Corporation",
+    "slug": "transastra-corporation",
+    "websiteUrl": "https://www.transastra.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Trata",
+    "slug": "trata",
+    "websiteUrl": "https://www.trytrata.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Trayd",
+    "slug": "trayd",
+    "websiteUrl": "https://www.buildtrayd.com/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Trébol",
+    "slug": "trebol",
+    "websiteUrl": "https://gotrebol.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Trelium",
+    "slug": "trelium",
+    "websiteUrl": "https://www.trelium.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Trellis AI",
+    "slug": "trellis-ai",
+    "websiteUrl": "https://runtrellis.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Triomics",
+    "slug": "triomics",
+    "websiteUrl": "https://triomics.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "TRM Labs",
+    "slug": "trm-labs",
+    "websiteUrl": "https://trmlabs.com/",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "TrueBiz",
+    "slug": "truebiz",
+    "websiteUrl": "https://truebiz.io/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "TrueClaim",
+    "slug": "trueclaim",
+    "websiteUrl": "https://www.trytrueclaim.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "truemetrics",
+    "slug": "truemetrics",
+    "websiteUrl": "https://www.truemetrics.io/",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Trueplace",
+    "slug": "trueplace",
+    "websiteUrl": "https://www.trueplace.ca/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Truewind",
+    "slug": "truewind",
+    "websiteUrl": "https://truewind.ai",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Truss",
+    "slug": "truss",
+    "websiteUrl": "https://trusspayments.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "truthsystems",
+    "slug": "truthsystems",
+    "websiteUrl": "https://www.truthsystems.ai",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Cardinal",
+    "slug": "trycardinal-ai",
+    "websiteUrl": "https://trycardinal.com",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Tuesday Labs",
+    "slug": "tuesday-labs",
+    "websiteUrl": "https://www.tuesdaylabs.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Turing College",
+    "slug": "turing-college",
+    "websiteUrl": "https://www.turingcollege.com/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Turing Labs Inc.",
+    "slug": "turing-labs-inc",
+    "websiteUrl": "http://www.turingsaas.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Turion Space",
+    "slug": "turion-space",
+    "websiteUrl": "https://turionspace.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Twenty",
+    "slug": "twenty",
+    "websiteUrl": "https://twenty.com",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Two Dots",
+    "slug": "two-dots",
+    "websiteUrl": "https://www.twodots.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Type",
+    "slug": "type",
+    "websiteUrl": "https://type.ai",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Typewise",
+    "slug": "typewise",
+    "websiteUrl": "https://typewise.app",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Ubicloud",
+    "slug": "ubicloud",
+    "websiteUrl": "https://www.ubicloud.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Ultra",
+    "slug": "ultra",
+    "websiteUrl": "https://ultra.tech",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Unbound",
+    "slug": "unbound",
+    "websiteUrl": "https://getunbound.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "UNISON",
+    "slug": "unison",
+    "websiteUrl": "https://www.in-unison.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Uno Wallet",
+    "slug": "uno-wallet",
+    "websiteUrl": "https://myunowallet.com/",
+    "batch": "Spring 2026"
+  },
+  {
+    "name": "Unsiloed AI",
+    "slug": "unsiloed-ai",
+    "websiteUrl": "https://www.unsiloed.ai/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Unsloth AI",
+    "slug": "unsloth-ai",
+    "websiteUrl": "https://unsloth.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Untether Labs",
+    "slug": "untether-labs",
+    "websiteUrl": "https://untetherlabs.com",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Unusual",
+    "slug": "unusual",
+    "websiteUrl": "https://unusual.ai",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "UpCodes",
+    "slug": "upcodes",
+    "websiteUrl": "https://up.codes/",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "UpEquity",
+    "slug": "upequity",
+    "websiteUrl": "http://www.upequity.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Uplane",
+    "slug": "uplane",
+    "websiteUrl": "https://uplane.com",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Uplift AI",
+    "slug": "uplift-ai",
+    "websiteUrl": "https://upliftai.org/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Upsolve AI",
+    "slug": "upsolve-ai",
+    "websiteUrl": "https://upsolve.ai/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Lemma",
+    "slug": "uselemma",
+    "websiteUrl": "https://www.uselemma.ai/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Usul",
+    "slug": "usul",
+    "websiteUrl": "https://www.usul.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Vahan",
+    "slug": "vahan",
+    "websiteUrl": "https://vahan.ai",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Vapi",
+    "slug": "vapi",
+    "websiteUrl": "https://vapi.ai",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Variance",
+    "slug": "variance",
+    "websiteUrl": "https://www.variance.com/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Variant",
+    "slug": "variant",
+    "websiteUrl": "https://variant.com",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Varos",
+    "slug": "varos",
+    "websiteUrl": "http://varos.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Vector",
+    "slug": "vector",
+    "websiteUrl": "https://vector.co",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Vector Legal",
+    "slug": "vector-legal",
+    "websiteUrl": "https://vectorlegal.com",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "VectorShift",
+    "slug": "vectorshift",
+    "websiteUrl": "https://www.vectorshift.ai",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Vela",
+    "slug": "vela",
+    "websiteUrl": "https://tryvela.ai",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Velt",
+    "slug": "velt",
+    "websiteUrl": "https://velt.dev",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Velvet",
+    "slug": "velvet",
+    "websiteUrl": "https://velvetlab.ai",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Vena Vitals",
+    "slug": "vena-vitals",
+    "websiteUrl": "http://venavitals.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Vendah",
+    "slug": "vendah",
+    "websiteUrl": "https://vendah.com.br/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Vendora",
+    "slug": "vendora",
+    "websiteUrl": "https://www.vendora.io/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Vendra",
+    "slug": "vendra",
+    "websiteUrl": "https://vendra.io/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Ventura",
+    "slug": "ventura",
+    "websiteUrl": "https://www.ventura.ai",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Venu AI",
+    "slug": "venu-ai",
+    "websiteUrl": "https://www.venu3d.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Verge Genomics",
+    "slug": "verge-genomics",
+    "websiteUrl": "http://vergegenomics.com",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "VergeSense",
+    "slug": "vergesense",
+    "websiteUrl": "http://www.vergesense.com",
+    "batch": "Summer 2017"
+  },
+  {
+    "name": "Veritus",
+    "slug": "veritus",
+    "websiteUrl": "https://www.veritus.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Verne Robotics",
+    "slug": "verne-robotics",
+    "websiteUrl": "https://vernerobotics.com/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Versable",
+    "slug": "versable",
+    "websiteUrl": "https://www.versableai.com/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Verto",
+    "slug": "verto",
+    "websiteUrl": "http://www.vertofx.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Veryfi, Inc.",
+    "slug": "veryfi-inc",
+    "websiteUrl": "https://www.veryfi.com/",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Vetcove",
+    "slug": "vetcove",
+    "websiteUrl": "https://www.vetcove.com",
+    "batch": "Summer 2016"
+  },
+  {
+    "name": "VideoGen",
+    "slug": "videogen",
+    "websiteUrl": "https://videogen.io",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Vinci Games",
+    "slug": "vinci-games",
+    "websiteUrl": "https://ruffnauts.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Vitable Health",
+    "slug": "vitable-health",
+    "websiteUrl": "https://vitablehealth.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Vitalize",
+    "slug": "vitalize",
+    "websiteUrl": "https://vitalize.care",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Voiceops",
+    "slug": "voiceops",
+    "websiteUrl": "https://voiceops.com",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "VoiceOS",
+    "slug": "voiceos",
+    "websiteUrl": "https://voiceos.com",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Voicepanel",
+    "slug": "voicepanel",
+    "websiteUrl": "https://voicepanel.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "voize",
+    "slug": "voize",
+    "websiteUrl": "https://voize.de/",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Volantio",
+    "slug": "volantio",
+    "websiteUrl": "http://www.volantio.com",
+    "batch": "Winter 2009"
+  },
+  {
+    "name": "Volta Labs, Inc.",
+    "slug": "volta-labs-inc",
+    "websiteUrl": "http://voltalabs.com",
+    "batch": "Winter 2019"
+  },
+  {
+    "name": "Voltair",
+    "slug": "voltair",
+    "websiteUrl": "https://voltairlabs.com/",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Voltic",
+    "slug": "voltic",
+    "websiteUrl": "https://volticshipping.com/",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Vooma",
+    "slug": "vooma",
+    "websiteUrl": "https://www.vooma.ai",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Vori",
+    "slug": "vori",
+    "websiteUrl": "https://www.vori.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "Vorticity",
+    "slug": "vorticity",
+    "websiteUrl": "http://vorticity.xyz/",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Vouch",
+    "slug": "vouch",
+    "websiteUrl": "http://vouch.us",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "VOYGR",
+    "slug": "voygr",
+    "websiteUrl": "https://voygr.tech",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Vulcan Technologies",
+    "slug": "vulcan-technologies",
+    "websiteUrl": "https://vulcan.ai/",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Wardstone",
+    "slug": "wardstone",
+    "websiteUrl": "https://www.wardstone.us",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "WarpBuild",
+    "slug": "warpbuild",
+    "websiteUrl": "https://www.warpbuild.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Wasmer",
+    "slug": "wasmer",
+    "websiteUrl": "https://wasmer.io",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Wavelength",
+    "slug": "wavelength",
+    "websiteUrl": "https://wavelength.cx/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Waybill",
+    "slug": "waybill",
+    "websiteUrl": "https://www.waybill.to/",
+    "batch": "Summer 2026"
+  },
+  {
+    "name": "Wayco",
+    "slug": "wayco",
+    "websiteUrl": "https://wayco.ai",
+    "batch": "Winter 2026"
+  },
+  {
+    "name": "Waydev",
+    "slug": "waydev",
+    "websiteUrl": "https://waydev.co/",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Wayline",
+    "slug": "wayline",
+    "websiteUrl": "https://wayline.com",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Weave",
+    "slug": "weave-3",
+    "websiteUrl": "https://weaveos.com",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Weave Robotics",
+    "slug": "weave-robotics",
+    "websiteUrl": "https://www.weaverobots.com",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Webflow",
+    "slug": "webflow",
+    "websiteUrl": "https://webflow.com",
+    "batch": "Summer 2013"
+  },
+  {
+    "name": "Wedge",
+    "slug": "wedge",
+    "websiteUrl": "https://www.wedge.health",
+    "batch": "Summer 2025"
+  },
+  {
+    "name": "Weekday",
+    "slug": "weekday",
+    "websiteUrl": "https://weekday.works",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Weekend (fmr. Volley)",
+    "slug": "weekend-fmr-volley",
+    "websiteUrl": "https://weekend.com",
+    "batch": "Winter 2018"
+  },
+  {
+    "name": "Wefunder",
+    "slug": "wefunder",
+    "websiteUrl": "http://wefunder.com",
+    "batch": "Winter 2013"
+  },
+  {
+    "name": "Wifi Dabba, Inc.",
+    "slug": "wifi-dabba-inc",
+    "websiteUrl": "https://dabba.com",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Wildcard",
+    "slug": "wildcard",
+    "websiteUrl": "https://wild-card.ai",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Willow",
+    "slug": "willow",
+    "websiteUrl": "https://willowvoice.com/",
+    "batch": "Spring 2025"
+  },
+  {
+    "name": "Windmill",
+    "slug": "windmill",
+    "websiteUrl": "https://windmill.dev",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Within",
+    "slug": "within",
+    "websiteUrl": "http://within.ai",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Wolfia",
+    "slug": "wolfia",
+    "websiteUrl": "https://wolfia.com",
+    "batch": "Summer 2022"
+  },
+  {
+    "name": "Wordware",
+    "slug": "wordware",
+    "websiteUrl": "https://wordware.ai/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Woz",
+    "slug": "woz",
+    "websiteUrl": "https://www.wozcode.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Wright Electric",
+    "slug": "wright-electric",
+    "websiteUrl": "http://www.weflywright.com",
+    "batch": "Winter 2017"
+  },
+  {
+    "name": "Writesonic",
+    "slug": "writesonic",
+    "websiteUrl": "https://writesonic.com/",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "x1",
+    "slug": "x1",
+    "websiteUrl": "https://x1.new/",
+    "batch": "Fall 2024"
+  },
+  {
+    "name": "Xendit",
+    "slug": "xendit",
+    "websiteUrl": "https://www.xendit.co/",
+    "batch": "Summer 2015"
+  },
+  {
+    "name": "xPay",
+    "slug": "xpay",
+    "websiteUrl": "https://www.xpaycheckout.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Y Combinator",
+    "slug": "y-combinator",
+    "websiteUrl": "https://www.ycombinator.com",
+    "batch": "Unspecified"
+  },
+  {
+    "name": "Yarn",
+    "slug": "yarn-2",
+    "websiteUrl": "https://www.yarn.so",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Yassir",
+    "slug": "yassir",
+    "websiteUrl": "https://yassir.com",
+    "batch": "Winter 2020"
+  },
+  {
+    "name": "yhangry",
+    "slug": "yhangry",
+    "websiteUrl": "http://www.yhangry.com",
+    "batch": "Winter 2022"
+  },
+  {
+    "name": "Y/n",
+    "slug": "yn",
+    "websiteUrl": "https://yn.app",
+    "batch": "Summer 2023"
+  },
+  {
+    "name": "Yondu",
+    "slug": "yondu",
+    "websiteUrl": "https://yondu.ai/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "YouShift",
+    "slug": "youshift",
+    "websiteUrl": "https://www.you-shift.com/",
+    "batch": "Winter 2025"
+  },
+  {
+    "name": "Yummy Future",
+    "slug": "yummy-future",
+    "websiteUrl": "https://yummy-future.com",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Zalos",
+    "slug": "zalos",
+    "websiteUrl": "https://www.zalos.ai/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Zapier",
+    "slug": "zapier",
+    "websiteUrl": "http://zapier.com",
+    "batch": "Summer 2012"
+  },
+  {
+    "name": "Zarna",
+    "slug": "zarna",
+    "websiteUrl": "https://www.zarnaai.com/",
+    "batch": "Fall 2025"
+  },
+  {
+    "name": "Zaymo",
+    "slug": "zaymo",
+    "websiteUrl": "https://zaymo.com",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Zeit AI",
+    "slug": "zeit-ai",
+    "websiteUrl": "https://zeit-ai.com/",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "Zensors",
+    "slug": "zensors-inc",
+    "websiteUrl": "https://www.zensors.com",
+    "batch": "Summer 2021"
+  },
+  {
+    "name": "Zentail",
+    "slug": "zentail",
+    "websiteUrl": "https://zentail.com",
+    "batch": "Summer 2012"
+  },
+  {
+    "name": "Zenysis",
+    "slug": "zenysis",
+    "websiteUrl": "http://www.zenysis.com",
+    "batch": "Winter 2016"
+  },
+  {
+    "name": "Zep AI",
+    "slug": "zep-ai",
+    "websiteUrl": "https://www.getzep.com/",
+    "batch": "Winter 2024"
+  },
+  {
+    "name": "Zettascale",
+    "slug": "zettascale",
+    "websiteUrl": "https://zscc.ai",
+    "batch": "Summer 2024"
+  },
+  {
+    "name": "ZiffyHomes",
+    "slug": "ziffyhomes",
+    "websiteUrl": "https://www.ziffyhomes.com/",
+    "batch": "Summer 2018"
+  },
+  {
+    "name": "Ziina",
+    "slug": "ziina",
+    "websiteUrl": "https://www.ziina.com",
+    "batch": "Winter 2021"
+  },
+  {
+    "name": "Zip",
+    "slug": "zip",
+    "websiteUrl": "https://ziphq.com/",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "Zippi",
+    "slug": "zippi",
+    "websiteUrl": "https://www.zippi.com.br",
+    "batch": "Summer 2019"
+  },
+  {
+    "name": "Zuddl",
+    "slug": "zuddl",
+    "websiteUrl": "http://www.zuddl.com",
+    "batch": "Summer 2020"
+  },
+  {
+    "name": "zudo.work",
+    "slug": "zudowork",
+    "websiteUrl": "https://zudo.work/",
+    "batch": "Winter 2023"
+  },
+  {
+    "name": "Zymbly",
+    "slug": "zymbly",
+    "websiteUrl": "https://www.zymbly.com",
+    "batch": "Winter 2026"
+  }
+]

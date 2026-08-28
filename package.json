@@ -14,6 +14,7 @@
     "types": "supabase gen types typescript --linked --schema public > src/lib/supabase/types.ts",
     "seed:user": "NODE_OPTIONS=--experimental-websocket tsx scripts/seed-user.ts",
     "check:rls": "NODE_OPTIONS=--experimental-websocket tsx scripts/check-rls.ts",
+    "discover:yc": "NODE_OPTIONS=--experimental-websocket tsx scripts/discover-yc.ts",
     "resolve": "NODE_OPTIONS=--experimental-websocket tsx scripts/resolve.ts",
     "ingest": "NODE_OPTIONS=--experimental-websocket tsx scripts/ingest.ts",
     "backfill": "NODE_OPTIONS=--experimental-websocket tsx scripts/backfill.ts",
