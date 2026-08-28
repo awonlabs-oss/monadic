@@ -83,6 +83,42 @@ export const COLUMNS: Column[] = [
 /** Kept off the board by default. Never deleted — the timeline keeps every one. */
 export const CLOSED_STATUSES: Status[] = ["rejected", "withdrawn"];
 
+/**
+ * The statuses that can only be reached by having applied.
+ *
+ * Not simply "everything except shortlisted": rejected and withdrawn are
+ * reachable from Saved without ever applying — you can decide against a job you
+ * only bookmarked — so they are judged on applied_at instead.
+ */
+export const POST_APPLY_STATUSES: Status[] = [
+  "applied",
+  "recruiter_screen",
+  "technical",
+  "onsite",
+  "offer",
+];
+
+/**
+ * Has this application been sent?
+ *
+ * The question the job page asks before deciding whether to offer Apply. Two
+ * signals, because neither alone is complete: applied_at is only stamped when a
+ * status actually passes through Applied, so someone who jumped straight from
+ * Saved to Onsite has none — and a status of Rejected proves nothing on its own,
+ * since it may have been a job you rejected rather than one that rejected you.
+ *
+ * Wrong in the forgiving direction either way. Offering Apply on something
+ * already sent invites a duplicate application; hiding it is one status change
+ * away from being corrected.
+ */
+export function hasApplied(app: {
+  status: string;
+  applied_at?: string | null;
+}): boolean {
+  if (app.applied_at) return true;
+  return (POST_APPLY_STATUSES as string[]).includes(app.status);
+}
+
 export const ALL_STATUSES: Status[] = [
   ...COLUMNS.flatMap((c) => c.statuses),
   ...CLOSED_STATUSES,

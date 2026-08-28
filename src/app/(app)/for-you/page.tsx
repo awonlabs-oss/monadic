@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { recommendJobs } from "@/lib/data/jobs";
+import { appliedJobIds } from "@/lib/data/applications";
 import { getCriteria, getProfile } from "@/lib/data/profile";
 import { criteriaOrDraft } from "@/lib/data/criteria";
 import { JobCard } from "@/components/job-card";
@@ -36,9 +37,12 @@ export default async function ForYouPage({
   const showAll = params.all === "1";
   const editing = params.edit === "1";
 
-  const [saved, { profile, experiences }] = await Promise.all([
+  const [saved, { profile, experiences }, applied] = await Promise.all([
     getCriteria(),
     getProfile(),
+    // See /jobs: the recommendation RPC cannot distinguish applied from saved
+    // either, so the applied set is read once and handed to each card.
+    appliedJobIds(),
   ]);
   const { input: criteria, isDraft } = criteriaOrDraft(
     saved,
@@ -157,6 +161,7 @@ export default async function ForYouPage({
                 <li key={job.id}>
                   <JobCard
                     job={job}
+                    applied={applied.has(job.id)}
                     match={{
                       matched: job.matched,
                       applicable: job.applicable,

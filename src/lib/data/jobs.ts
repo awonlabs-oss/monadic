@@ -88,6 +88,10 @@ export interface JobDetail {
   };
   interaction_state: string;
   application_id: string | null;
+  /** The tracked application's status, when one exists. */
+  application_status: string | null;
+  /** When it first passed through Applied. Null if it never did. */
+  applied_at: string | null;
   other_open_roles: number;
 }
 
@@ -128,7 +132,11 @@ export async function getJob(id: string): Promise<JobDetail | null> {
 
   const [interaction, application, siblings] = await Promise.all([
     db.from("job_interactions").select("state").eq("job_id", id).maybeSingle(),
-    db.from("applications").select("id").eq("job_id", id).maybeSingle(),
+    db
+      .from("applications")
+      .select("id,status,applied_at")
+      .eq("job_id", id)
+      .maybeSingle(),
     db
       .from("jobs")
       .select("id", { count: "exact", head: true })
@@ -137,15 +145,27 @@ export async function getJob(id: string): Promise<JobDetail | null> {
       .neq("id", id),
   ]);
 
+  const tracked = application.data as
+    | { id: string; status: string; applied_at: string | null }
+    | null
+    | undefined;
+
   return {
     ...(row as unknown as Omit<
       JobDetail,
-      "company" | "interaction_state" | "application_id" | "other_open_roles"
+      | "company"
+      | "interaction_state"
+      | "application_id"
+      | "application_status"
+      | "applied_at"
+      | "other_open_roles"
     >),
     company,
     interaction_state:
       (interaction.data?.state as string | undefined) ?? "none",
-    application_id: (application.data?.id as string | undefined) ?? null,
+    application_id: tracked?.id ?? null,
+    application_status: tracked?.status ?? null,
+    applied_at: tracked?.applied_at ?? null,
     other_open_roles: siblings.count ?? 0,
   };
 }

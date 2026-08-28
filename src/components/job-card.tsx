@@ -4,6 +4,7 @@ import { formatComp, formatYears, postedLabel } from "@/lib/format";
 import { CompanyLogo } from "./company-logo";
 import { SaveButton } from "./save-button";
 import { ApplyButton } from "./apply-button";
+import { ViewPosting } from "./view-posting";
 
 /**
  * JobCard — the feed card. Figma component `JobCardWide`, node 12:140.
@@ -47,10 +48,20 @@ const CRITERION_LABELS: Record<string, string> = {
 export function JobCard({
   job,
   match,
+  applied = false,
 }: {
   job: JobListItem;
   /** Present only in the recommendation feed. */
   match?: { matched: number; applicable: number; keys: string[] } | null;
+  /**
+   * Whether this one has already been applied to.
+   *
+   * Passed in rather than read off the row: search_jobs returns
+   * interaction_state (none/saved/dismissed) and application_id, and neither
+   * distinguishes a job applied to from a job merely bookmarked. The feed page
+   * fetches the applied set once and hands each card its own answer.
+   */
+  applied?: boolean;
 }) {
   // Either write means it is saved. Save performs both, but a job tracked
   // before they were merged has only the application row.
@@ -203,15 +214,27 @@ export function JobCard({
           relying on the icon alone. A posting that arrived without a URL has
           nothing to link to, and renders nothing rather than a disabled-looking
           "No link" chip sitting where a button should be.
+
+          Once it has been applied to, the same slot holds the posting as
+          reference instead. Offering Apply on a job already sent is the feed
+          disagreeing with the board, and the way that resolves is a second
+          application to the same req.
         */}
-        {job.url && (
-          <ApplyButton
-            jobId={job.id}
-            jobTitle={job.title}
-            companyName={job.company_name}
-            url={job.url}
-          />
-        )}
+        {job.url &&
+          (applied ? (
+            <ViewPosting
+              url={job.url}
+              jobTitle={job.title}
+              companyName={job.company_name}
+            />
+          ) : (
+            <ApplyButton
+              jobId={job.id}
+              jobTitle={job.title}
+              companyName={job.company_name}
+              url={job.url}
+            />
+          ))}
       </div>
     </article>
   );

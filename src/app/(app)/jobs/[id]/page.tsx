@@ -12,6 +12,8 @@ import {
 import { CompanyLogo } from "@/components/company-logo";
 import { SaveButton } from "@/components/save-button";
 import { ApplyButton } from "@/components/apply-button";
+import { ViewPosting } from "@/components/view-posting";
+import { hasApplied } from "@/lib/applications/pipeline";
 
 /*
  * /jobs/[id] — one posting. Figma frame `Screen / Job detail`, node 50:348.
@@ -142,6 +144,15 @@ export default async function JobDetailPage({
   const posted = postedLabel(job.posted_at, job.first_seen_at);
   const saved =
     job.interaction_state === "saved" || job.application_id !== null;
+  /*
+   * Whether this one has already gone in. It decides which action the header
+   * offers, because Apply on a job you have applied to is the app contradicting
+   * its own board — and the cost of believing the button rather than the board
+   * is a second application to the same req.
+   */
+  const applied =
+    job.application_status !== null &&
+    hasApplied({ status: job.application_status, applied_at: job.applied_at });
   const blocks = parseDescription(job.description_html);
 
   const remote =
@@ -234,8 +245,38 @@ export default async function JobDetailPage({
               after the card's had stopped being one, so applying from the
               detail page opened the board and recorded nothing — the exact bug
               that was fixed on the card, still live one click away.
+
+              Once the application is in, the whole cluster changes meaning.
+              Apply is gone — there is nothing left to apply to — and what
+              replaces it is the posting as reference plus the surface where the
+              rest of the work happens. Outreach carries the emphasis Apply used
+              to, because following up *is* the next action now, and it is ink
+              rather than coral: it does not leave the app, and section 1 gives
+              coral to the one that does.
             */}
-            {job.url ? (
+            {applied ? (
+              <>
+                {job.url && (
+                  <ViewPosting
+                    url={job.url}
+                    jobTitle={job.title}
+                    companyName={job.company.name}
+                    size="page"
+                  />
+                )}
+                <Link
+                  href={`/applications/${job.application_id}`}
+                  className="inline-flex items-center gap-tight rounded-subtle bg-accent-default px-body py-compact text-small font-semibold leading-none text-content-inverse transition-colors hover:bg-accent-hover"
+                >
+                  Outreach
+                  <span className="sr-only">
+                    {" "}
+                    for {job.title} at {job.company.name} — contacts, drafts and
+                    follow-ups
+                  </span>
+                </Link>
+              </>
+            ) : job.url ? (
               <ApplyButton
                 jobId={job.id}
                 jobTitle={job.title}

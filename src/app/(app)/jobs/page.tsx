@@ -1,4 +1,5 @@
 import { searchJobs, feedStats, jobFacets } from "@/lib/data/jobs";
+import { appliedJobIds } from "@/lib/data/applications";
 import { parseFilters, activeCount, hrefFor } from "@/lib/filters";
 import { JobCard } from "@/components/job-card";
 import { FilterPanel } from "@/components/filter-panel";
@@ -35,10 +36,14 @@ export default async function JobsPage({
   const filtered = activeCount(filters) > 0;
   const offset = (filters.page - 1) * PAGE_SIZE;
 
-  const [{ jobs, total }, stats, facets] = await Promise.all([
+  const [{ jobs, total }, stats, facets, applied] = await Promise.all([
     searchJobs(filters, PAGE_SIZE, offset),
     feedStats(filters.usOnly),
     jobFacets(filters),
+    // Which of these have already gone in, so the card offers the posting
+    // rather than Apply. Fetched alongside the feed rather than per card:
+    // one keyed read for the page, not one per row.
+    appliedJobIds(),
   ]);
 
   // Cities, most-common first. Capped because the long tail is one-offs like
@@ -216,7 +221,7 @@ export default async function JobsPage({
             <ul className="flex flex-col gap-snug">
               {jobs.map((job) => (
                 <li key={job.id}>
-                  <JobCard job={job} />
+                  <JobCard job={job} applied={applied.has(job.id)} />
                 </li>
               ))}
             </ul>

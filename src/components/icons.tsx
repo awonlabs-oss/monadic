@@ -41,3 +41,19 @@ export function BookmarkIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+
+/**
+ * The arrow leaving a frame, for the posting link that replaces Apply once an
+ * application is in. Deliberately not the paper plane: that glyph is what the
+ * Applied status wears, and reusing it for "go and read it again" would make
+ * the two indistinguishable at the exact moment they mean different things.
+ */
+export function ExternalLinkIcon({ className }: { className?: string }) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M8.75 1.875h4.375V6.25" />
+      <path d="M6.25 8.75l6.875-6.875" />
+      <path d="M11.25 8.75v3.125c0 .69-.56 1.25-1.25 1.25H3.125c-.69 0-1.25-.56-1.25-1.25V5c0-.69.56-1.25 1.25-1.25H6.25" />
+    </svg>
+  );
+}

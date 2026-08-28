@@ -1,5 +1,5 @@
 import { getServerClient } from "@/lib/supabase/server";
-import { CLOSED_STATUSES, type Status } from "@/lib/applications/pipeline";
+import { CLOSED_STATUSES, hasApplied, type Status } from "@/lib/applications/pipeline";
 
 /**
  * The only place the app queries applications.
@@ -22,6 +22,8 @@ export interface ApplicationRow {
   company_name: string;
   company_slug: string;
   company_logo_url: string | null;
+  /** Only selected by getApplication — the hub needs it to find colleagues. */
+  company_id?: string | null;
   last_event_at: string | null;
   event_count: number | null;
   days_in_stage: number | null;
@@ -55,6 +57,63 @@ export async function listApplications(options: { includeClosed?: boolean } = {}
       : all.filter((a) => !(CLOSED_STATUSES as string[]).includes(a.status)),
     closedCount: closed.length,
   };
+}
+
+/**
+ * The jobs already applied to, as a set the feed can ask about cheaply.
+ *
+ * The feed's own query cannot answer this. search_jobs returns
+ * interaction_state, which is only ever none/saved/dismissed, and
+ * application_id, which says a row exists rather than what stage it is at — so
+ * a job applied to two weeks ago is indistinguishable there from one bookmarked
+ * this morning. Teaching the RPC about status would be a migration to every
+ * feed surface; one small keyed read per page render is the cheaper answer, and
+ * the table is per-user and bounded by how many jobs one person tracks.
+ */
+export async function appliedJobIds(): Promise<Set<string>> {
+  const db = await getServerClient();
+
+  const { data, error } = await db
+    .from("applications")
+    .select("job_id, status, applied_at");
+  if (error) throw new Error(`appliedJobIds: ${error.message}`);
+
+  const out = new Set<string>();
+  for (const row of (data ?? []) as Array<{
+    job_id: string;
+    status: string;
+    applied_at: string | null;
+  }>) {
+    if (hasApplied(row)) out.add(row.job_id);
+  }
+  return out;
+}
+
+/**
+ * One application, by its own id.
+ *
+ * Reads the same view the board does rather than the table, so a row here and a
+ * row on the board carry identical derived fields — days_in_stage,
+ * next_action_overdue — and the outreach hub cannot disagree with the list it
+ * was opened from about whether something needs attention.
+ */
+export async function getApplication(id: string): Promise<ApplicationRow | null> {
+  const db = await getServerClient();
+
+  const { data, error } = await db
+    .from("application_overview")
+    .select(`${COLUMNS},company_id`)
+    .eq("id", id)
+    .maybeSingle();
+
+  if (error) {
+    // A hand-edited URL gives a malformed uuid, which PostgREST returns as a
+    // 400 rather than an empty result. That is a 404, not a 500.
+    if (error.code === "22P02") return null;
+    throw new Error(`getApplication: ${error.message}`);
+  }
+  if (!data) return null;
+  return data as unknown as ApplicationRow;
 }
 
 /** The timeline for one application. Append-only, so this is the whole history. */
