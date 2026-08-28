@@ -2,9 +2,12 @@
 
 The web app runs on Vercel. Ingestion does not — it runs on a GitHub Actions
 cron. That split is not a preference; it is the only arrangement that works.
-A full sweep of 254 boards takes about fifteen minutes, and a Vercel function
-is capped at 300 seconds on Hobby and 800 on Pro. A GitHub runner has six
-hours.
+A sweep of 254 boards took about fifteen minutes, and a Vercel function is
+capped at 300 seconds on Hobby and 800 on Pro. A GitHub runner has six hours.
+
+The company list is no longer 254. Seeding from YC's public directory took it
+past 1,700, and boards are resolved a slice per night, so the sweep grows for
+about a week after the directory is first pulled in and then settles.
 
 ---
 
@@ -151,18 +154,29 @@ gitignored on purpose — the build makes it, so nothing needs doing.
    ```
    Expect `401`. Anything else means the middleware matcher is not covering it.
 4. **Ingestion runs.** GitHub → Actions → *Ingest job boards* → *Run workflow*.
-   It takes about fifteen minutes. Then check `/settings/runs` in the app.
+   The first run is the slow one and it will not collect everything: it
+   refreshes the YC seeds, resolves the first 200 unresolved companies, and
+   pulls whatever is resolved by then. Run it again — or wait for the nightly
+   cron — until `/settings/runs` stops reporting newly resolved companies. From
+   1,700 seeds that is roughly a week of nights.
 
 ---
 
 ## Running continuously
 
 The workflow is scheduled for 06:00 UTC daily and can be run by hand from the
-Actions tab. It resolves any newly seeded companies first, so adding a line to
+Actions tab. It refreshes the YC directory seeds, resolves a slice of whatever
+is still unresolved, then pulls every resolved board — so adding a line to
 `src/ingest/companies.config.ts` and pushing is enough to start ingesting a new
-board — no second step.
+board, and a new YC batch arrives without anyone doing anything at all.
 
-Two things worth knowing about how it reports:
+Three things worth knowing about how it reports:
+
+- **Resolution is capped at 200 companies per run.** Resolving one company costs
+  up to a dozen requests to an ATS, and an uncapped pass over a backlog of
+  thousands would not fit in any sane wall clock. The backlog drains a slice a
+  night. A run killed part-way is safe: companies it never reached are still
+  marked unresolved and are simply picked up next time.
 
 - **A company that fails does not fail the job.** That was deliberate: one bad
   board used to discard the whole sweep. The consequence is that a green tick
@@ -175,9 +189,15 @@ Two things worth knowing about how it reports:
 
 - Vercel Hobby: free, and this is well inside it.
 - GitHub Actions: free for 2,000 minutes a month on private repos. A daily
-  fifteen-minute run is roughly 450.
-- Supabase free tier: fine at 17,000 job rows, though the free tier pauses a
-  project after a week with no activity. The daily ingest counts as activity.
+  fifteen-minute run was roughly 450. With the wider company list expect a
+  longer run — budget for an hour a night, which is about 1,800, and watch the
+  first week where resolution is doing the most work. If it gets tight, lower
+  the `--limit` on the resolve step or move the schedule to every other day.
+- Supabase free tier: was fine at 17,000 job rows. A wider list means more —
+  the free tier's limit is 500MB of database, and jobs carry their description
+  and their raw payload, so this is the number to watch first. The free tier
+  also pauses a project after a week with no activity; the daily ingest counts
+  as activity.
 - Anthropic: only on a pasted link that is not on a known board. Effectively
   zero unless you use that feature a lot.
 

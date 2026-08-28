@@ -1,11 +1,16 @@
 name: Ingest job boards
 
 # Ingestion is a batch job, not a web request, and it is deliberately not on
-# Vercel. A full sweep of 254 boards takes about fifteen minutes; a Vercel
-# function on Hobby is capped at 300 seconds and on Pro at 800, so the only way
-# to run it there is to slice it across invocations and carry a cursor between
-# them — turning a simple loop into distributed state. A GitHub runner has six
-# hours and no such problem.
+# Vercel. A sweep of 254 boards took about fifteen minutes; a Vercel function on
+# Hobby is capped at 300 seconds and on Pro at 800, so the only way to run it
+# there is to slice it across invocations and carry a cursor between them —
+# turning a simple loop into distributed state. A GitHub runner has six hours
+# and no such problem.
+#
+# The board count is no longer 254. Seeding from the YC directory took the
+# company list past 1,700, and resolution runs a slice per night rather than all
+# at once, so the number of boards being pulled grows for a week or so after the
+# directory is first pulled in and then settles.
 
 on:
   schedule:
@@ -28,7 +33,10 @@ concurrency:
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # Was 45, for 254 boards and a company list that was already resolved. The
+    # pull grows with the board count and the resolve slice is real work of its
+    # own; this is headroom, not an estimate. The job still exits when done.
+    timeout-minutes: 120
 
     steps:
       - uses: actions/checkout@v4
@@ -40,6 +48,15 @@ jobs:
 
       - run: npm ci
 
+      # Regenerated in the runner rather than committed back, so a new YC batch
+      # reaches the feed without anyone opening a pull request. The file in git
+      # is the reproducible baseline: a checkout with no network still has a
+      # seed list, and the diff of a deliberate local regeneration is reviewable.
+      - name: Refresh the YC directory seeds
+        env:
+          INGEST_USER_AGENT: ${{ secrets.INGEST_USER_AGENT }}
+        run: npm run discover:yc
+
       - name: Resolve any newly seeded companies
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
@@ -50,7 +67,13 @@ jobs:
         # A company already resolved is cached and skipped, so this is a no-op
         # on a list that has not changed. It is here so that adding a line to
         # companies.config.ts is the only step needed to start ingesting one.
-        run: npm run resolve
+        #
+        # Capped per run. Resolving one company costs up to a dozen requests, and
+        # an uncapped first pass over the directory backlog would not fit in any
+        # sane wall clock. The cap makes the drain deliberate: a slice a night,
+        # no cursor to keep, and a run that is killed part-way leaves everything
+        # it never reached exactly as it found it.
+        run: npm run resolve -- --limit 200
 
       - name: Pull every board
         env:
