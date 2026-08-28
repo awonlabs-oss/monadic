@@ -64,27 +64,41 @@ const DRAFT_SCHEMA = {
   },
 } as const;
 
-const SYSTEM = `You write short outreach emails for one person's job search. You
-are given who they are, who they are writing to, and the role in question.
+/**
+ * What is true of a good outreach email regardless of who wrote it.
+ *
+ * Deliberately no style rules here. Length, structure and the size of the ask
+ * are judgements about whether a busy person reads to the end; whether you open
+ * with a greeting is not, and the two do not belong in the same list.
+ */
+const INVARIANTS = `You write short outreach emails for one person's job search.
+You are given who they are, who they are writing to, and the role in question.
 
-The email must be something a busy recruiter reads to the end. That means:
+The email must be something a busy recruiter reads to the end:
 
 - Under 150 words. Four short paragraphs at most, usually three.
-- Open with why this specific person, at this specific company. Never "I hope
-  this email finds you well" or "I came across your profile".
-- One concrete, checkable thing from the sender's own history that bears on the
-  role. Take it from the experience given to you; do not invent a project, a
-  metric, a company or a duration.
 - A single, small ask. An interview is not a small ask; fifteen minutes, or
   whether they are the right person to speak to, is.
-- Sign off with the sender's first name alone.
+- Never invent a project, a metric, an employer, a duration or a shared
+  connection. Everything specific must come from the context you are given.
+- If a fact is missing, write around it. An email that says less and is true is
+  the one that works.`;
 
-Write in plain English. No em dashes as connectors, no "I'd love to", no
-"passionate about", no "reach out". If a sentence could appear in any other
-candidate's email, cut it.
-
-If a fact is missing from the context, write around it rather than guessing at
-it. An email that says less and is true is the one that works.`;
+/**
+ * The fallback voice, used only when the sender has shown us nothing.
+ *
+ * These are prohibitions, and prohibitions are the right tool for exactly one
+ * situation: no examples, no stated rules, and a model that will otherwise
+ * reach for the phrases every other candidate uses. They are a floor, not a
+ * standard — and the moment there is a real example to match, they are worse
+ * than nothing, because a real person's actual habits will trip several of
+ * them. See voiceFor.
+ */
+const HOUSE_STYLE = `No house voice has been supplied, so write plainly and
+avoid the phrases that make an email look automated: no "I hope this email finds
+you well", no "I came across your profile", no "passionate about", no "I'd love
+to", no em dashes as connectors. Open with why this person and this company.
+Sign off with the sender's first name alone.`;
 
 function block(label: string, value: string | null | undefined): string {
   return value?.trim() ? `${label}: ${value.trim()}` : "";
@@ -176,21 +190,46 @@ export function renderContext(ctx: DraftContext): string {
 }
 
 /**
- * The system prompt, with the sender's own rules appended.
+ * The system prompt, assembled from what the sender has actually given us.
  *
- * Their rules go last and are framed as overriding, because that is what they
- * are: the defaults above are a reasonable house style, and a person who has
- * written out how they want their email to read has more authority on it than
- * a prompt written for everyone.
+ * The important case is the third one. When real examples exist, the house
+ * style is *dropped* rather than layered under them — and that is a correction,
+ * not a preference. Written for a generic sender, the fallback bans "I hope
+ * this email finds you well" and "I'd love to" and demands the email open with
+ * the company. Those are reasonable defaults against a model with nothing to
+ * imitate, and they are simply wrong about a specific person: real emails from
+ * this codebase's own user open "Hope you are doing well", say "would love to
+ * learn more", and lead with a greeting and a one-line self-introduction.
+ *
+ * Keeping both would put the prohibitions in direct conflict with the examples
+ * they are supposed to defer to, and a model handed a rule and a demonstration
+ * that disagree will split the difference — producing something in neither
+ * voice. Prohibitions guard against having nothing better; an example is
+ * something better.
+ *
+ * Guidelines always apply, and always last. Someone who wrote down how they
+ * want their email to read outranks any prompt written for everyone.
  */
-export function systemFor(guidelines: string): string {
-  if (!guidelines.trim()) return SYSTEM;
-  return `${SYSTEM}
+export function voiceFor(guidelines: string, hasExamples: boolean): string {
+  const parts = [INVARIANTS];
 
-The sender has stated how they want their email written. Where this conflicts
-with anything above, follow the sender:
+  if (hasExamples) {
+    parts.push(`Emails the sender actually wrote appear earlier in this
+conversation as your own prior replies. Match them: their greeting, their
+register, their sentence length, how they introduce themselves, how they sign
+off. Where those examples differ from anything you would otherwise write,
+the examples are right — they are how this person actually writes. Do not copy
+their specifics; the role, company and details come from the context below.`);
+  } else {
+    parts.push(HOUSE_STYLE);
+  }
 
-${guidelines.trim()}`;
+  if (guidelines.trim()) {
+    parts.push(`The sender has stated how they want their email written. This
+overrides everything above:\n\n${guidelines.trim()}`);
+  }
+
+  return parts.join("\n\n");
 }
 
 /**
@@ -232,7 +271,7 @@ export async function draftOutreach(
   const response = await client.messages.create({
     model: MODEL,
     max_tokens: 2000,
-    system: systemFor(ctx.guidelines),
+    system: voiceFor(ctx.guidelines, ctx.examples.length > 0),
     output_config: { format: { type: "json_schema", schema: DRAFT_SCHEMA } },
     messages: [...exampleTurns(ctx.examples), { role: "user", content: renderContext(ctx) }],
   });
@@ -276,7 +315,7 @@ export async function* streamOutreach(ctx: DraftContext): AsyncGenerator<string>
   const stream = client.messages.stream({
     model: MODEL,
     max_tokens: 4000,
-    system: `${systemFor(ctx.guidelines)}
+    system: `${voiceFor(ctx.guidelines, ctx.examples.length > 0)}
 
 Reply with exactly this shape and nothing else:
 
