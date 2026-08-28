@@ -178,3 +178,23 @@ export function postedLabel(
     elapsed,
   };
 }
+
+/**
+ * The size of the corpus, said the way a person would say it.
+ *
+ * Above a thousand the exact figure is noise wearing the clothes of
+ * information. "17,190 open roles" and "1000+ open roles" support precisely the
+ * same decision — there is more here than you will read — and the first one
+ * changes every night, so anything displaying it flickers between visits for no
+ * reason a reader could act on.
+ *
+ * This is for corpus totals only: how many postings exist, how many the nav
+ * badge is standing in for. It is deliberately not used for the size of a
+ * filtered result set, where the number is a promise about the list directly
+ * underneath it and rounding it would make the promise vague.
+ */
+export const COUNT_CAP = 1000;
+
+export function formatCount(n: number): string {
+  return n >= COUNT_CAP ? `${COUNT_CAP}+` : n.toLocaleString();
+}

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { IngestionHealth } from "@/lib/data/health";
-import { relativeShort } from "@/lib/format";
+import { formatCount, relativeShort } from "@/lib/format";
 
 /**
  * The application shell's left rail. DESIGN.md section 4, DECIDED.
@@ -51,7 +51,7 @@ const NAV = [
 function Badge({ count }: { count: number }) {
   return (
     <span className="bg-surface-sunken text-content-secondary text-caption font-medium rounded-full px-tight py-hair leading-none tabular-nums">
-      {count}
+      {formatCount(count)}
     </span>
   );
 }

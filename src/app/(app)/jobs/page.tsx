@@ -1,6 +1,7 @@
 import { searchJobs, feedStats, jobFacets } from "@/lib/data/jobs";
 import { appliedJobIds } from "@/lib/data/applications";
 import { parseFilters, activeCount, hrefFor } from "@/lib/filters";
+import { formatCount } from "@/lib/format";
 import { JobCard } from "@/components/job-card";
 import { FilterPanel } from "@/components/filter-panel";
 import { Pagination } from "@/components/pagination";
@@ -80,15 +81,27 @@ export default async function JobsPage({
               All jobs
             </h1>
             <p className="text-body text-content-secondary">
+              {/*
+                The corpus figure is capped, the match count is not. "How many
+                roles exist" is a sense of scale and reads better as 1000+; "how
+                many match what you asked for" is a promise about the list below
+                it, and a vague promise is worse than a precise one.
+
+                Which is why the filtered line no longer names the corpus at
+                all. "2,099 matching roles of 1000+" puts a precise number
+                against a capped one and reads as a contradiction — the larger
+                figure appearing to be a subset of the smaller. The comparator
+                was only ever there to say how much you had narrowed from, and
+                against a capped total it cannot say that, so it goes.
+              */}
               {filtered ? (
                 <>
                   {total.toLocaleString()} matching{" "}
-                  {total === 1 ? "role" : "roles"} of{" "}
-                  {stats.openJobs.toLocaleString()}
+                  {total === 1 ? "role" : "roles"}
                 </>
               ) : (
                 <>
-                  {stats.openJobs.toLocaleString()} open{" "}
+                  {formatCount(stats.openJobs)} open{" "}
                   {filters.usOnly ? "US " : ""}
                   roles from {stats.companies} companies
                 </>
