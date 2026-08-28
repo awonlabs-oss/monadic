@@ -238,9 +238,9 @@ Responsive:
 
 - [ ] `/` — **BLOCKED.** Frontpage is design-led. Do not build.
 - [x] `/jobs` — job feed with filters. Mocked in Figma.
-- [ ] `/jobs/[id]` — posting detail
+- [x] `/jobs/[id]` — posting detail. Apply becomes View original posting + Outreach once applied
 - [x] `/applications` — pipeline board. Mocked in Figma.
-- [ ] `/applications/[id]` — detail with timeline
+- [x] `/applications/[id]` — the outreach hub: next action, people, composer, messages, timeline
 - [ ] `/contacts` — recruiters and hiring managers
 - [ ] `/templates` — outreach templates
 - [ ] `/profile` — parsed resume and search criteria
@@ -339,3 +339,10 @@ constraint actually was.
 | 2026-08-25 | No AI chat pane in the main column                  | Competitor centers an assistant. Monadic centers the jobs; assistance is a side surface                                                |
 | 2026-08-25 | Ingestion health is permanent sidebar furniture     | Silent zero-row pipeline failure is the product's main failure mode and must never be buried in settings                               |
 | 2026-08-25 | Missing comp gets copy, not a dash                  | It is the common case, not an error state                                                                                              |
+| 2026-08-27 | Apply disappears once applied; the posting link takes its place | Offering Apply on a job already sent is the app contradicting its own board, and the way a user resolves that contradiction is a duplicate application to the same req |
+| 2026-08-27 | `/applications/[id]` is the post-apply surface | Up to the press the product is triage. After it the question is who to talk to, what was already said, and what is next — three places before, one now |
+| 2026-08-27 | Closed applications hidden by default again | The earlier reversal was really about the disappearance being unexplained; a permanent Closed heading carrying its count answers that, so the default can serve the board again |
+| 2026-08-27 | Seed the company list from YC's public directory | A hand-written list caps the corpus at however many companies someone was willing to type. Reach is the goal now, so the "no discovery from accelerators" rule was overturned deliberately |
+| 2026-08-27 | Work at a Startup is not a source | It answers non-browser requests with 406, and reading it anyway needs the headless browser http.ts names as the thing that makes a source the wrong source. The route to YC jobs is the directory, then the boards those companies already publish |
+| 2026-08-27 | No new ATS readers; more companies instead | Measured on a 60-company sample: Greenhouse, Ashby and Lever resolve 28%, and adding Workable, SmartRecruiters, Rippling, Recruitee, Breezy and Teamtailor found 2 more companies — 3% for six integrations. The misses are companies with no public JSON board at all |
+| 2026-08-27 | Nav badge caps at 1000+ | The badge is furniture read at a glance and answers "is there anything, and roughly how much". An exact four-figure count that changes nightly makes fixed chrome flicker; the feed still states its own exact total, where the number is a promise about the list below it |
