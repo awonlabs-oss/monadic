@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { CompanyLogo } from "./company-logo";
 import { ContactForm } from "./contact-form";
-import { deleteContactAction } from "@/app/contacts/actions";
+import { deleteContactAction } from "@/app/(app)/contacts/actions";
 import { ROLE_LABELS, type ContactRole } from "@/lib/contacts/roles";
 import type { ContactRow } from "@/lib/data/contacts";
 

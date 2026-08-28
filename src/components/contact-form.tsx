@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CONTACT_ROLES, ROLE_LABELS } from "@/lib/contacts/roles";
 import type { ContactRow } from "@/lib/data/contacts";
-import { createContactAction, updateContactAction } from "@/app/contacts/actions";
+import { createContactAction, updateContactAction } from "@/app/(app)/contacts/actions";
 
 /**
  * Add or edit a person.

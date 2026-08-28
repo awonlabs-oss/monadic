@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { uploadResumeAction, type UploadState } from "@/app/profile/actions";
+import { uploadResumeAction, type UploadState } from "@/app/(app)/profile/actions";
 
 /**
  * Resume upload form.
