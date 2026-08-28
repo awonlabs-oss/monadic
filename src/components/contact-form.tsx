@@ -17,11 +17,19 @@ import { createContactAction, updateContactAction } from "@/app/(app)/contacts/a
 export function ContactForm({
   companies,
   contact,
+  defaultCompanyId,
   onDone,
 }: {
   companies: Array<{ id: string; name: string }>;
   /** Present when editing. */
   contact?: ContactRow;
+  /**
+   * Preselects the company when the form is opened from somewhere that already
+   * knows it — the outreach hub, where every contact added is by definition at
+   * the company whose role you are tracking. Ignored when editing, because the
+   * contact's own company is the answer then.
+   */
+  defaultCompanyId?: string | null;
   onDone?: () => void;
 }) {
   const [busy, setBusy] = useState(false);
@@ -84,7 +92,8 @@ export function ContactForm({
             whose company is a free-text string cannot be shown next to that
             company's jobs, which is most of why the link exists.
           */}
-          <select id="companyId" name="companyId" defaultValue={contact?.company_id ?? ""} className={field}>
+          <select id="companyId" name="companyId"
+            defaultValue={contact?.company_id ?? defaultCompanyId ?? ""} className={field}>
             <option value="">Not set</option>
             {companies.map((c) => (
               <option key={c.id} value={c.id}>{c.name}</option>

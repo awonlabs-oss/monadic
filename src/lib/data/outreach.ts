@@ -33,6 +33,28 @@ export async function listMessagesForContact(contactId: string): Promise<Outreac
   return (data ?? []) as unknown as OutreachMessage[];
 }
 
+/**
+ * Everything written about one application, whoever it went to.
+ *
+ * The per-contact list answers "what have I said to this person"; this answers
+ * "what has been said about this role", which is the question the hub exists
+ * for — three emails to three people at the same company are one conversation
+ * from where you are standing, and reading them one contact at a time is how
+ * you repeat yourself.
+ */
+export async function listMessagesForApplication(
+  applicationId: string,
+): Promise<OutreachMessage[]> {
+  const db = await getServerClient();
+  const { data, error } = await db
+    .from("outreach_messages")
+    .select("id, contact_id, application_id, subject, body, sent_at, created_at, variables_snapshot")
+    .eq("application_id", applicationId)
+    .order("created_at", { ascending: false });
+  if (error) throw new Error(`listMessagesForApplication: ${error.message}`);
+  return (data ?? []) as unknown as OutreachMessage[];
+}
+
 export async function saveMessage(input: {
   contactId: string;
   applicationId: string | null;

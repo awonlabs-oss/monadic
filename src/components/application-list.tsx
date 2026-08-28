@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ApplicationRow } from "@/lib/data/applications";
-import { needsAction, type Status } from "@/lib/applications/pipeline";
+import { hasApplied, needsAction, type Status } from "@/lib/applications/pipeline";
 import { relativeShort } from "@/lib/format";
 import { CompanyLogo } from "./company-logo";
 import { StatusBadge } from "./status-badge";
@@ -160,6 +160,24 @@ export function ApplicationList({
 
               <Cell className="text-right">
                 <span className="inline-flex items-center gap-compact">
+                  {/*
+                    The frame's CONTACTS column, arrived at from the other side.
+                    A column would have shown a count per row and cost the width
+                    of one; a link goes to the place the count would have made
+                    you go anyway, and only appears once there is outreach to do.
+                  */}
+                  {hasApplied(app) && (
+                    <Link
+                      href={`/applications/${app.id}`}
+                      className="whitespace-nowrap text-caption font-medium text-content-secondary underline underline-offset-2 transition-colors hover:text-content-primary"
+                    >
+                      Outreach
+                      <span className="sr-only">
+                        {" "}
+                        for {app.job_title} at {app.company_name}
+                      </span>
+                    </Link>
+                  )}
                   <DeleteApplication
                     applicationId={app.id}
                     title={app.job_title}

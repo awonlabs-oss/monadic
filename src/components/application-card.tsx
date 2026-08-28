@@ -1,5 +1,11 @@
+import Link from "next/link";
 import type { ApplicationRow } from "@/lib/data/applications";
-import { needsAction, stageLine, statusTone } from "@/lib/applications/pipeline";
+import {
+  hasApplied,
+  needsAction,
+  stageLine,
+  statusTone,
+} from "@/lib/applications/pipeline";
 import { StatusBadge } from "./status-badge";
 import { StatusPicker } from "./status-picker";
 import { DeleteApplication } from "./delete-application";
@@ -28,6 +34,10 @@ import { setNextActionAction } from "@/app/actions";
 export function ApplicationCard({ app }: { app: ApplicationRow }) {
   const attention = needsAction(app);
   const initial = app.company_name.trim().charAt(0).toUpperCase();
+  // Outreach is only offered once the application is in. Before that the work
+  // is applying, and a link to a page about following up would be an invitation
+  // to email a recruiter about a job you have not sent yourself to.
+  const applied = hasApplied(app);
 
   return (
     <article className="flex flex-col gap-compact rounded-card border border-border-subtle bg-surface-base px-card-x py-card-y">
@@ -90,6 +100,19 @@ export function ApplicationCard({ app }: { app: ApplicationRow }) {
 
       {attention.needed && attention.reason && (
         <StatusBadge status="needs_action" label={attention.reason} />
+      )}
+
+      {applied && (
+        <Link
+          href={`/applications/${app.id}`}
+          className="w-fit text-caption font-medium text-content-secondary underline underline-offset-2 transition-colors hover:text-content-primary"
+        >
+          Outreach
+          <span className="sr-only">
+            {" "}
+            for {app.job_title} at {app.company_name}
+          </span>
+        </Link>
       )}
 
       <details className="group">

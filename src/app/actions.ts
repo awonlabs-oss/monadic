@@ -101,6 +101,9 @@ export async function setNextActionAction(formData: FormData) {
   }
 
   revalidatePath("/applications");
+  // The hub sets next actions too, and it is a dynamic child rather than a
+  // segment of the list, so the list's path does not cover it.
+  revalidatePath(`/applications/${applicationId}`);
 }
 
 /**

@@ -95,6 +95,89 @@ export async function getContact(id: string): Promise<ContactRow | null> {
   return { ...r, company: r.companies ?? null, application_count: 0, message_count: 0 };
 }
 
+/** A contact as the outreach hub sees them: plus whether they are attached here. */
+export interface ApplicationContact extends ContactRow {
+  /** True when application_contacts joins them to this application. */
+  linked: boolean;
+  /** The role they play in *this* process, which can differ from their usual one. */
+  role_in_process: string | null;
+  /** Messages written to them about this application specifically. */
+  messages_here: number;
+}
+
+/**
+ * Who you could talk to about one application.
+ *
+ * Two groups, deliberately merged rather than kept apart: the people already
+ * attached to this application, and everyone else at the same company. The
+ * second group is the point — a contact hangs off a company, so the recruiter
+ * you met on a previous role at this company is already in the database and
+ * nothing would ever surface them if this list only showed the join.
+ *
+ * Sorted attached-first, then by name. The ones you have already brought into
+ * this process are the ones you are most likely to write to again.
+ */
+export async function contactsForApplication(
+  applicationId: string,
+  companyId: string | null,
+): Promise<ApplicationContact[]> {
+  const db = await getServerClient();
+
+  const [company, links, messages] = await Promise.all([
+    companyId
+      ? db.from("contacts").select(COLUMNS).eq("company_id", companyId)
+      : Promise.resolve({ data: [], error: null }),
+    db
+      .from("application_contacts")
+      .select("contact_id, role_in_process")
+      .eq("application_id", applicationId),
+    db.from("outreach_messages").select("contact_id").eq("application_id", applicationId),
+  ]);
+  if (company.error) throw new Error(`contactsForApplication: ${company.error.message}`);
+
+  const linked = new Map<string, string | null>();
+  for (const row of links.data ?? []) linked.set(row.contact_id, row.role_in_process);
+
+  const written = new Map<string, number>();
+  for (const row of messages.data ?? []) {
+    written.set(row.contact_id, (written.get(row.contact_id) ?? 0) + 1);
+  }
+
+  // A contact linked to this application but sitting under a different company
+  // — a referral from outside, say — would be missed by the company query, so
+  // the join is read for its own rows too rather than only as a flag.
+  const found = new Set((company.data ?? []).map((r) => (r as { id: string }).id));
+  const strays = [...linked.keys()].filter((id) => !found.has(id));
+  const extra = strays.length
+    ? await db.from("contacts").select(COLUMNS).in("id", strays)
+    : { data: [], error: null };
+  if (extra.error) throw new Error(`contactsForApplication: ${extra.error.message}`);
+
+  return [...(company.data ?? []), ...(extra.data ?? [])]
+    .map((row) => {
+      const r = row as unknown as Omit<
+        ContactRow,
+        "company" | "application_count" | "message_count"
+      > & { companies: ContactRow["company"] };
+      return {
+        ...r,
+        company: r.companies ?? null,
+        application_count: 0,
+        message_count: 0,
+        linked: linked.has(r.id),
+        role_in_process: linked.get(r.id) ?? null,
+        messages_here: written.get(r.id) ?? 0,
+      };
+    })
+    .sort((a, b) =>
+      a.linked === b.linked
+        ? a.full_name.localeCompare(b.full_name)
+        : a.linked
+          ? -1
+          : 1,
+    );
+}
+
 export interface ContactInput {
   fullName: string;
   title: string | null;
