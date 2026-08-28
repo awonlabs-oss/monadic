@@ -40,6 +40,10 @@ export interface DraftContext {
   previous: { subject: string | null; body: string } | null;
   /** What the person asked for in their own words. May be empty. */
   instructions: string;
+  /** Rules the sender has stated about their own writing. */
+  guidelines: string;
+  /** Emails the sender actually wrote. Worth more than any description. */
+  examples: Array<{ name: string; subject: string | null; body: string }>;
 }
 
 const DRAFT_SCHEMA = {
@@ -171,6 +175,55 @@ export function renderContext(ctx: DraftContext): string {
   return parts.filter(Boolean).join("\n");
 }
 
+/**
+ * The system prompt, with the sender's own rules appended.
+ *
+ * Their rules go last and are framed as overriding, because that is what they
+ * are: the defaults above are a reasonable house style, and a person who has
+ * written out how they want their email to read has more authority on it than
+ * a prompt written for everyone.
+ */
+export function systemFor(guidelines: string): string {
+  if (!guidelines.trim()) return SYSTEM;
+  return `${SYSTEM}
+
+The sender has stated how they want their email written. Where this conflicts
+with anything above, follow the sender:
+
+${guidelines.trim()}`;
+}
+
+/**
+ * Worked examples, as conversation turns rather than as text in the prompt.
+ *
+ * This is the part that matters most and the part that is easiest to get
+ * wrong. Pasting an example into the system prompt describes it; replaying it
+ * as an assistant turn *demonstrates* it, and a model matches the register,
+ * length and shape of a demonstrated answer far more closely than one it was
+ * told about. Voice is mostly things a person cannot articulate about their own
+ * writing, so showing beats describing.
+ *
+ * Each example becomes a minimal user turn and the real reply. The user turn is
+ * deliberately vague — the example's value is the answer, and inventing a
+ * detailed brief for it would teach the model to expect briefs it will not get.
+ */
+export function exampleTurns(
+  examples: DraftContext["examples"],
+): Array<{ role: "user" | "assistant"; content: string }> {
+  return examples.slice(0, 4).flatMap((example) => [
+    {
+      role: "user" as const,
+      content: `Write an outreach email. (Reference: ${example.name})`,
+    },
+    {
+      role: "assistant" as const,
+      content: example.subject
+        ? `Subject: ${example.subject}\n\n${example.body}`
+        : example.body,
+    },
+  ]);
+}
+
 export async function draftOutreach(
   ctx: DraftContext,
 ): Promise<{ subject: string; body: string }> {
@@ -179,9 +232,9 @@ export async function draftOutreach(
   const response = await client.messages.create({
     model: MODEL,
     max_tokens: 2000,
-    system: SYSTEM,
+    system: systemFor(ctx.guidelines),
     output_config: { format: { type: "json_schema", schema: DRAFT_SCHEMA } },
-    messages: [{ role: "user", content: renderContext(ctx) }],
+    messages: [...exampleTurns(ctx.examples), { role: "user", content: renderContext(ctx) }],
   });
 
   if (response.stop_reason === "refusal") {
@@ -196,4 +249,49 @@ export async function draftOutreach(
 
   const parsed = JSON.parse(block.text) as { subject: string; body: string };
   return { subject: parsed.subject.trim(), body: parsed.body.trim() };
+}
+
+
+/**
+ * The same draft, streamed as it is written.
+ *
+ * Structured outputs are deliberately not used here, and that is the whole
+ * design decision. They stream too — but what arrives is partial JSON, so the
+ * body reaches the client escaped and in fragments that only become text once
+ * the object closes. Rendering paragraphs as they are written means the text
+ * has to arrive *as text*.
+ *
+ * So the format is a header line and a blank line, which the client splits on.
+ * It costs the schema guarantee and buys a body that can be appended to a DOM
+ * node the moment each token lands.
+ *
+ * Effort is low. This is a 120-word email, not a reasoning problem: adaptive
+ * thinking is left on (disabling it on this model risks tag leakage into the
+ * visible response), but at low effort it finishes quickly, so the first
+ * sentence appears in about a second rather than after a long silent pause.
+ */
+export async function* streamOutreach(ctx: DraftContext): AsyncGenerator<string> {
+  const client = new Anthropic({ apiKey: anthropicApiKey() });
+
+  const stream = client.messages.stream({
+    model: MODEL,
+    max_tokens: 4000,
+    system: `${systemFor(ctx.guidelines)}
+
+Reply with exactly this shape and nothing else:
+
+Subject: <the subject line>
+
+<the body>
+
+No preamble, no explanation, no markdown fences.`,
+    output_config: { effort: "low" },
+    messages: [...exampleTurns(ctx.examples), { role: "user", content: renderContext(ctx) }],
+  });
+
+  for await (const event of stream) {
+    if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
+      yield event.delta.text;
+    }
+  }
 }

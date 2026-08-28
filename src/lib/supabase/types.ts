@@ -912,6 +912,30 @@ export type Database = {
         }
         Relationships: []
       }
+      outreach_voice: {
+        Row: {
+          created_at: string
+          guidelines: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          guidelines?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          guidelines?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profile_education: {
         Row: {
           created_at: string

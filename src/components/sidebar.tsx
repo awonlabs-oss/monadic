@@ -24,11 +24,14 @@ const NAV = [
   { href: "/jobs", label: "All jobs", badge: "openJobs" as const },
   { href: "/applications", label: "Tracked", badge: "tracked" as const },
   { href: "/contacts", label: "Contacts", badge: null },
+  { href: "/voice", label: "Voice", badge: null },
   // /templates is in DESIGN.md section 6 and the outreach_templates table
   // exists, but nothing renders it — the link was 404ing. It comes back when
   // there is a page behind it. A contact's own history already covers reusing
   // an earlier email, which was the part that mattered.
-  { href: "/profile", label: "Profile", badge: null },
+  // Profile is not a nav entry. It is docked on the right of every page — the
+  // thing you check against while reading a posting, not a place you navigate
+  // to and come back from. The dock links through for editing.
 ];
 
 function Badge({ count }: { count: number }) {

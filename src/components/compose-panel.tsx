@@ -45,6 +45,7 @@ export function ComposePanel({
   const [body, setBody] = useState("");
   const [context, setContext] = useState("");
   const [busy, setBusy] = useState(false);
+  const [streaming, setStreaming] = useState(false);
   const [saved, setSaved] = useState(false);
   const [inGmail, setInGmail] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -56,6 +57,11 @@ export function ComposePanel({
     setBusy(true);
     setError(null);
     setSaved(false);
+    setInGmail(false);
+    setSubject("");
+    setBody("");
+    setStreaming(true);
+
     try {
       const response = await fetch("/api/outreach/draft", {
         method: "POST",
@@ -67,22 +73,54 @@ export function ComposePanel({
           instructions,
         }),
       });
-      const data = (await response.json()) as {
-        subject?: string;
-        body?: string;
-        context?: string;
-        error?: string;
-      };
-      if (!response.ok) {
+
+      if (!response.ok || !response.body) {
+        // Failures before the stream opens still arrive as JSON.
+        const data = (await response.json().catch(() => ({}))) as { error?: string };
         setError(data.error ?? "Could not draft that.");
         return;
       }
-      setSubject(data.subject ?? "");
-      setBody(data.body ?? "");
-      setContext(data.context ?? "");
+
+      // The context the model was given, for storing alongside a kept draft.
+      const header = response.headers.get("x-draft-context");
+      if (header) setContext(atob(header));
+
+      /*
+       * Read the stream and split on the first blank line.
+       *
+       * Everything before it is the subject, everything after is the body, and
+       * until that line arrives the whole accumulation is still subject. That
+       * ordering is why the header comes first in the format: the subject
+       * settles in the first few tokens and stops moving, so the body can grow
+       * underneath it without the layout jumping.
+       */
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let text = "";
+
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        text += decoder.decode(value, { stream: true });
+
+        const error = text.indexOf("[[error]]");
+        if (error !== -1) {
+          setError(text.slice(error + "[[error]]".length).trim());
+          text = text.slice(0, error);
+        }
+
+        const split = text.indexOf("\n\n");
+        if (split === -1) {
+          setSubject(text.replace(/^Subject:\s*/i, "").trim());
+        } else {
+          setSubject(text.slice(0, split).replace(/^Subject:\s*/i, "").trim());
+          setBody(text.slice(split + 2).replace(/^\s+/, ""));
+        }
+      }
     } catch {
       setError("Could not reach the server.");
     } finally {
+      setStreaming(false);
       setBusy(false);
     }
   }
@@ -220,9 +258,9 @@ export function ComposePanel({
           disabled={busy}
           className="rounded-subtle bg-accent-default px-body py-compact text-small font-medium leading-none text-content-inverse transition-colors hover:bg-accent-hover disabled:opacity-50"
         >
-          {busy ? "Writing…" : body ? "Regenerate" : "Draft"}
+          {streaming ? "Writing…" : busy ? "Working…" : body ? "Regenerate" : "Draft"}
         </button>
-        {body && (
+        {body && !streaming && (
           <span className="text-caption text-content-tertiary">
             {body.split(/\s+/).filter(Boolean).length} words
           </span>
@@ -235,12 +273,13 @@ export function ComposePanel({
         </p>
       )}
 
-      {body && (
+      {(body || subject || streaming) && (
         <div className="flex flex-col gap-compact border-t border-border-subtle pt-compact">
           <label className="flex flex-col gap-tight text-caption text-content-tertiary">
             Subject
             <input
               value={subject}
+              readOnly={streaming}
               onChange={(e) => {
                 setSubject(e.target.value);
                 setSaved(false);
@@ -250,20 +289,47 @@ export function ComposePanel({
             />
           </label>
 
+          {/*
+            Two renderings of the same text, and the swap is the point.
+
+            While streaming it is prose in a div, so paragraphs land as they are
+            written and the whole thing reads as it arrives. A textarea would
+            technically work and would feel wrong: a caret parked in front of
+            text that keeps appearing, in a control that invites typing into
+            something not finished being written.
+
+            Once the stream closes it becomes the textarea, because now the job
+            is editing. aria-live announces the finished draft rather than every
+            token — polite on a value that changes forty times a second is noise.
+          */}
           <label className="flex flex-col gap-tight text-caption text-content-tertiary">
             Body
-            <textarea
-              rows={12}
-              value={body}
-              onChange={(e) => {
-                setBody(e.target.value);
-                setSaved(false);
-                setInGmail(false);
-              }}
-              className={`${field} resize-y leading-relaxed`}
-            />
+            {streaming ? (
+              <div
+                aria-busy="true"
+                className={`${field} min-h-56 whitespace-pre-wrap leading-relaxed`}
+              >
+                {body}
+                <span
+                  aria-hidden="true"
+                  className="ml-px inline-block h-4 w-px translate-y-0.5 animate-pulse bg-content-primary"
+                />
+              </div>
+            ) : (
+              <textarea
+                rows={12}
+                value={body}
+                onChange={(e) => {
+                  setBody(e.target.value);
+                  setSaved(false);
+                  setInGmail(false);
+                }}
+                className={`${field} resize-y leading-relaxed`}
+              />
+            )}
           </label>
 
+          {!streaming && (
           <div className="flex flex-wrap items-center gap-compact">
             <button
               type="button"
@@ -310,6 +376,7 @@ export function ComposePanel({
               Copy
             </button>
           </div>
+          )}
         </div>
       )}
     </section>

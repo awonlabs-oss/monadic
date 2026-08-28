@@ -4,7 +4,6 @@ import { getCriteria, getProfile } from "@/lib/data/profile";
 import { criteriaOrDraft } from "@/lib/data/criteria";
 import { JobCard } from "@/components/job-card";
 import { CriteriaEditor } from "@/components/criteria-editor";
-import { ProfileDock } from "@/components/profile-dock";
 
 /*
  * /for-you — the recommendation feed.
@@ -196,7 +195,6 @@ export default async function ForYouPage({
         )}
       </div>
 
-      <ProfileDock />
     </div>
   );
 }

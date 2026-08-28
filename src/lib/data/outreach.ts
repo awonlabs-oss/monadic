@@ -144,8 +144,28 @@ export async function buildDraftContext(args: {
     if (data) previous = { subject: data.subject, body: data.body };
   }
 
+  // The sender's own voice: stated rules, and emails they actually wrote.
+  // Fetched alongside everything else rather than lazily, because a draft
+  // without them is a draft in nobody's voice and there is no cheaper moment
+  // to decide that.
+  const [voice, examples] = await Promise.all([
+    db.from("outreach_voice").select("guidelines").maybeSingle(),
+    db
+      .from("outreach_templates")
+      .select("name, subject, body")
+      .eq("is_archived", false)
+      .order("created_at", { ascending: false })
+      .limit(4),
+  ]);
+
   const p = profileResult.profile;
   return {
+    guidelines: voice.data?.guidelines ?? "",
+    examples: (examples.data ?? []).map((e) => ({
+      name: e.name,
+      subject: e.subject,
+      body: e.body,
+    })),
     contact: { fullName: contact.full_name, title: contact.title, role: contact.role },
     company: contact.companies ? { name: contact.companies.name } : null,
     job,

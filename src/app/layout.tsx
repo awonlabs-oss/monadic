@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree, EB_Garamond } from "next/font/google";
 import { Sidebar } from "@/components/sidebar";
+import { ProfileDock } from "@/components/profile-dock";
 import { ingestionHealth, navCounts } from "@/lib/data/health";
 import "./globals.css";
 
@@ -82,6 +83,18 @@ export default async function RootLayout({
           <main id="main" className="min-w-0 flex-1">
             {children}
           </main>
+
+          {/*
+            The profile docks here, on every route, rather than being rendered
+            by one page and reachable from a nav item on the others.
+
+            It is reference material — the thing you read a posting against —
+            so it belongs beside whatever you are reading, not behind a
+            navigation that costs you your place in the feed. Rendered in the
+            layout, it also survives navigation instead of unmounting and
+            refetching on each route change.
+          */}
+          <ProfileDock />
         </div>
       </body>
     </html>

@@ -70,7 +70,14 @@ export default async function ContactPage({
             size="card"
           />
           <div className="flex min-w-0 flex-col gap-tight">
-            <h1 className="font-display text-display font-semibold italic leading-tight tracking-tight text-content-primary">
+            {/*
+              Not the display serif. Every other h1 in the app names a *page* —
+              "Tracked", "For You" — and the serif marks that. This one is a
+              person's name, which is data, and the rule DESIGN.md section 1
+              states is that the serif never touches data. It read as a page
+              called "Dana Wu".
+            */}
+            <h1 className="text-title font-semibold leading-tight tracking-tight text-content-primary">
               {contact.full_name}
             </h1>
             <p className="text-body text-content-secondary">
