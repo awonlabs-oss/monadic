@@ -25,6 +25,23 @@ import { ApplicationCard } from "@/components/application-card";
 
 export const dynamic = "force-dynamic";
 
+/**
+ * Build the query string from the two things this page keeps in the URL.
+ *
+ * Both view and closed have to survive changing the other, and doing that by
+ * concatenating fragments is how the old version ended up appending "&closed=0"
+ * to a URL that had no "?" in it yet. Nulls drop out, so "the default" is
+ * spelled as the absence of a parameter in exactly one place.
+ */
+function query(params: Record<string, string | null>): string {
+  const search = new URLSearchParams();
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== null) search.set(key, value);
+  }
+  const out = search.toString();
+  return out ? `?${out}` : "";
+}
+
 export default async function ApplicationsPage({
   searchParams,
 }: {
@@ -34,20 +51,26 @@ export default async function ApplicationsPage({
   const one = (v: string | string[] | undefined) =>
     Array.isArray(v) ? v[0] : v;
   /*
-   * Closed applications are shown by default now.
+   * Closed applications are hidden by default, and opted into with ?closed=1.
    *
-   * They were hidden, and the "Show N closed" link at the foot of the page was
-   * the only route to them. That reads as data loss rather than as a filter:
-   * setting a status to Rejected made the row vanish from the board, and it was
-   * still gone on the next visit — indistinguishable from the change never
-   * having saved. It always had saved; it had simply moved somewhere with no
-   * signpost from where it left.
+   * They were shown by default for a while, because hiding them had once read
+   * as data loss: setting a status to Rejected made the row vanish, it was
+   * still gone on the next visit, and nothing on the page said where it went.
+   * That was the real complaint, and it was never really about the default —
+   * it was about the disappearance being unexplained.
    *
-   * A rejection is part of what happened, and a tracker that quietly stops
-   * showing outcomes it considers finished is not a record. Hiding stays
-   * available, one link away, for when the closed list gets long.
+   * What answers it is the Closed section below, which renders its heading and
+   * its count whether or not the list is expanded. Nothing vanishes: a
+   * rejection moves to a labelled section that says how many are in it and
+   * offers to open it. With that in place the default can go back to hiding
+   * them, which is what the board actually needs — over a real search the
+   * closed ones become the majority, and a page whose fastest-growing section
+   * is the one you least want to look at stops being useful.
+   *
+   * Still nothing is deleted. The timeline keeps every one, which is what
+   * stage-duration analysis needs later.
    */
-  const showClosed = one(params.closed) !== "0";
+  const showClosed = one(params.closed) === "1";
   // List is the default. The board answers "where does everything stand"; the
   // list answers "what is happening", which is the question you have more often
   // once there is more than a handful in flight.
@@ -87,9 +110,10 @@ export default async function ApplicationsPage({
         >
           {(["board", "list"] as const).map((key) => {
             const on = view === key;
-            const href = `/applications${key === "board" ? "?view=board" : ""}${
-              showClosed ? "" : key === "board" ? "&closed=0" : "?closed=0"
-            }`;
+            const href = `/applications${query({
+              view: key === "board" ? "board" : null,
+              closed: showClosed ? "1" : null,
+            })}`;
             return on ? (
               <span
                 key={key}
@@ -112,7 +136,12 @@ export default async function ApplicationsPage({
         </div>
       </header>
 
-      {live.length === 0 && closed.length === 0 ? (
+      {/*
+        closedCount rather than closed.length: with closed hidden, `closed` is
+        empty even when there are twenty of them, and this would tell someone
+        with a page full of rejections that they had never saved anything.
+      */}
+      {live.length === 0 && closedCount === 0 ? (
         <p className="text-body text-content-secondary">
           Nothing saved yet. Press <strong>Save</strong> on a job in{" "}
           <Link href="/for-you" className="underline underline-offset-2">
@@ -183,7 +212,10 @@ export default async function ApplicationsPage({
           {showClosed ? (
             <>
               <Link
-                href="/applications?closed=0"
+                href={`/applications${query({
+                  view: view === "board" ? "board" : null,
+                  closed: null,
+                })}`}
                 className="w-fit text-small text-content-secondary underline underline-offset-2"
               >
                 Hide closed
@@ -198,7 +230,10 @@ export default async function ApplicationsPage({
             </>
           ) : (
             <Link
-              href="/applications"
+              href={`/applications${query({
+                view: view === "board" ? "board" : null,
+                closed: "1",
+              })}`}
               className="w-fit text-small text-content-secondary underline underline-offset-2"
             >
               Show {closedCount} closed{" "}
